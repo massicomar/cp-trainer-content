@@ -45,7 +45,7 @@ To retire a problem, set `"deprecated": true`. CI fails if a file that exists on
 - **Layer 1, subject.** The options are the six subjects plus "None of these". It's only asked when the session includes more than one subject.
 - **Layer 2, technique.** The options are the intended technique, then your `distractors`, then the taxonomy's `confusableWith`, then other techniques of the same subject, up to four in total. `accepted` and `overkill` techniques are never marked wrong.
 - **Layers 3+** come from `extraLayers`. Each layer has:
-  - `key`: unique within the file, e.g. `dp-state`.
+  - `key`: unique within the file, e.g. `dp-state`. `subject` and `technique` are reserved for layers 1 and 2.
   - `kind`: one of `dp-state`, `dp-transition`, `complexity`, `observation`, `node-stores`, `trap`, `custom`.
   - `prompt`: the question shown to the player.
   - `options`: 2–6 entries, each with an `id` (a single letter), a `text`, and an optional `why`. The player sees `why` when they pick that option, so write it for the wrong options.

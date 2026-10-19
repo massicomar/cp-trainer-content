@@ -96,6 +96,7 @@ if (!validateTaxonomy(taxonomy)) {
   for (const e of validateTaxonomy.errors ?? []) err('taxonomy.json', `${e.instancePath} ${e.message}`)
 }
 const subjectIds = new Set(taxonomy.subjects.map((s) => s.id))
+if (subjectIds.size !== taxonomy.subjects.length) err('taxonomy.json', 'duplicate subject id')
 const techniqueSubject = new Map<string, string>()
 for (const s of taxonomy.subjects) {
   for (const t of s.techniques) {
@@ -171,6 +172,8 @@ for (const path of files) {
     if (new Set(optIds).size !== optIds.length) err(file, `layer ${l.key}: duplicate option ids`)
     for (const a of l.accepted) if (!optIds.includes(a)) err(file, `layer ${l.key}: accepted "${a}" is not an option`)
     if (l.accepted.length === l.options.length) err(file, `layer ${l.key}: every option is accepted`)
+    // the app generates layers with these keys (<id>:subject, <id>:technique)
+    if (l.key === 'subject' || l.key === 'technique') err(file, `layer key "${l.key}" is reserved`)
   }
 
   // url

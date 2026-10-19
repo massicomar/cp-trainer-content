@@ -115,7 +115,7 @@
     }
   },
   "if": { "properties": { "status": { "const": "ready" } } },
-  "then": { "properties": { "summary": { "minLength": 20 } } },
+  "then": { "properties": { "summary": { "type": "string", "minLength": 20 } } },
   "$defs": {
     "roleList": {
       "type": "array",
