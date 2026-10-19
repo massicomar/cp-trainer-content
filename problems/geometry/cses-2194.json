@@ -1,0 +1,52 @@
+{
+  "$schema": "../../schema/problem.schema.json",
+  "schemaVersion": 1,
+  "id": "cses-2194",
+  "status": "draft",
+  "title": "Minimum Euclidean Distance",
+  "source": "CSES",
+  "url": "https://cses.fi/problemset/task/2194",
+  "difficulty": {
+    "tier": "medium",
+    "scale": "estimate",
+    "value": "M"
+  },
+  "summary": "",
+  "constraints": {
+    "text": "n ≤ 2e5, |coordinates| ≤ 1e9",
+    "verified": true
+  },
+  "answers": {
+    "subjects": [
+      {
+        "id": "geometry",
+        "role": "intended"
+      },
+      {
+        "id": "bsearch-dnc",
+        "role": "accepted"
+      }
+    ],
+    "techniques": [
+      {
+        "id": "geometry.closest-pair",
+        "role": "intended"
+      },
+      {
+        "id": "bsearch-dnc.classic-dnc",
+        "role": "accepted"
+      }
+    ]
+  },
+  "distractors": [
+    "geometry.rotating-calipers",
+    "geometry.manhattan-rotation"
+  ],
+  "explanation": "Closest pair: divide & conquer or a sorted strip sweep, O(n log n). Print d² in integers.",
+  "traps": [
+    "d² can reach ~8e18, so an INF of 1e18 is too small."
+  ],
+  "pairWith": [],
+  "extraLayers": [],
+  "deprecated": false
+}

@@ -1,0 +1,52 @@
+{
+  "$schema": "../../schema/problem.schema.json",
+  "schemaVersion": 1,
+  "id": "cf-817f",
+  "status": "draft",
+  "title": "MEX Queries",
+  "source": "Codeforces",
+  "url": "https://codeforces.com/problemset/problem/817/F",
+  "difficulty": {
+    "tier": "hard",
+    "scale": "cf",
+    "value": "2300"
+  },
+  "summary": "",
+  "constraints": {
+    "text": "query endpoints up to 1e18",
+    "verified": true
+  },
+  "answers": {
+    "subjects": [
+      {
+        "id": "segtree",
+        "role": "intended"
+      }
+    ],
+    "techniques": [
+      {
+        "id": "segtree.dynamic",
+        "role": "intended"
+      },
+      {
+        "id": "segtree.segtree-lazy",
+        "role": "accepted"
+      },
+      {
+        "id": "segtree.segtree-descent",
+        "role": "accepted"
+      }
+    ]
+  },
+  "distractors": [
+    "segtree.fenwick",
+    "segtree.persistent"
+  ],
+  "explanation": "Compress endpoints (l, r + 1 and 1); lazy assign + flip; descend to the first zero for the MEX.",
+  "traps": [
+    "Forgetting to add r + 1 and 1 to the compressed coordinates."
+  ],
+  "pairWith": [],
+  "extraLayers": [],
+  "deprecated": false
+}

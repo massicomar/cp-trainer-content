@@ -1,0 +1,45 @@
+{
+  "$schema": "../../schema/problem.schema.json",
+  "schemaVersion": 1,
+  "id": "cf-877d",
+  "status": "draft",
+  "title": "Olya and Energy Drinks",
+  "source": "Codeforces",
+  "url": "https://codeforces.com/problemset/problem/877/D",
+  "difficulty": {
+    "tier": "hard",
+    "scale": "cf",
+    "value": "2100"
+  },
+  "summary": "",
+  "constraints": {
+    "text": "n, m, k ≤ 1000",
+    "verified": true
+  },
+  "answers": {
+    "subjects": [
+      {
+        "id": "graphs",
+        "role": "intended"
+      }
+    ],
+    "techniques": [
+      {
+        "id": "graphs.bfs",
+        "role": "intended"
+      }
+    ]
+  },
+  "distractors": [
+    "graphs.dijkstra",
+    "graphs.01-bfs"
+  ],
+  "explanation": "Each second you may move up to k cells: still unit-time BFS. Stop scanning a direction when you hit a wall or a cell already reached sooner.",
+  "traps": [
+    "Treating it as weighted and using Dijkstra.",
+    "Scanning all k cells per direction without pruning is O(n·m·k)."
+  ],
+  "pairWith": [],
+  "extraLayers": [],
+  "deprecated": false
+}

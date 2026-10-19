@@ -1,0 +1,46 @@
+{
+  "$schema": "../../schema/problem.schema.json",
+  "schemaVersion": 1,
+  "id": "cses-1712",
+  "status": "draft",
+  "title": "Exponentiation II",
+  "source": "CSES",
+  "url": "https://cses.fi/problemset/task/1712",
+  "difficulty": {
+    "tier": "medium",
+    "scale": "estimate",
+    "value": "E/M"
+  },
+  "summary": "",
+  "constraints": {
+    "text": "a, b, c ≤ 1e9, compute a^(b^c) mod 1e9+7",
+    "verified": true
+  },
+  "answers": {
+    "subjects": [
+      {
+        "id": "number-theory",
+        "role": "intended"
+      }
+    ],
+    "techniques": [
+      {
+        "id": "number-theory.fast-pow",
+        "role": "intended"
+      }
+    ]
+  },
+  "distractors": [
+    "number-theory.totient",
+    "number-theory.mod-inverse"
+  ],
+  "explanation": "By Fermat, reduce the inner exponent b^c modulo p − 1 = 1e9+6, then fast power.",
+  "traps": [
+    "Reducing the exponent mod 1e9+7 instead of 1e9+6."
+  ],
+  "pairWith": [
+    "cses-1095"
+  ],
+  "extraLayers": [],
+  "deprecated": false
+}

@@ -1,0 +1,44 @@
+{
+  "$schema": "../../schema/problem.schema.json",
+  "schemaVersion": 1,
+  "id": "cf-1294c",
+  "status": "draft",
+  "title": "Product of Three Numbers",
+  "source": "Codeforces",
+  "url": "https://codeforces.com/problemset/problem/1294/C",
+  "difficulty": {
+    "tier": "easy",
+    "scale": "cf",
+    "value": "1300"
+  },
+  "summary": "",
+  "constraints": {
+    "text": "n ≤ 1e9, t ≤ 100",
+    "verified": true
+  },
+  "answers": {
+    "subjects": [
+      {
+        "id": "number-theory",
+        "role": "intended"
+      }
+    ],
+    "techniques": [
+      {
+        "id": "number-theory.trial-division",
+        "role": "intended"
+      }
+    ]
+  },
+  "distractors": [
+    "number-theory.sieve",
+    "number-theory.pollard-rho"
+  ],
+  "explanation": "Trial division up to √n finds the two smallest distinct divisors; the third is what's left.",
+  "traps": [
+    "The third factor must differ from the first two and be ≥ 2."
+  ],
+  "pairWith": [],
+  "extraLayers": [],
+  "deprecated": false
+}

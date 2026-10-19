@@ -1,0 +1,44 @@
+{
+  "$schema": "../../schema/problem.schema.json",
+  "schemaVersion": 1,
+  "id": "cses-1194",
+  "status": "draft",
+  "title": "Monsters",
+  "source": "CSES",
+  "url": "https://cses.fi/problemset/task/1194",
+  "difficulty": {
+    "tier": "medium",
+    "scale": "estimate",
+    "value": "M"
+  },
+  "summary": "",
+  "constraints": {
+    "text": "grid n, m ≤ 1000",
+    "verified": true
+  },
+  "answers": {
+    "subjects": [
+      {
+        "id": "graphs",
+        "role": "intended"
+      }
+    ],
+    "techniques": [
+      {
+        "id": "graphs.multi-source-bfs",
+        "role": "intended"
+      }
+    ]
+  },
+  "distractors": [
+    "graphs.bfs",
+    "graphs.dijkstra"
+  ],
+  "explanation": "BFS from all monsters at once gives the earliest time each cell is dangerous; then BFS the hero through cells reached strictly earlier.",
+  "traps": [
+    "Running one BFS per monster is O(k·n·m)."
+  ],
+  "pairWith": [],
+  "extraLayers": [],
+  "deprecated": false
+}

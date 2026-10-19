@@ -1,0 +1,53 @@
+{
+  "$schema": "../../schema/problem.schema.json",
+  "schemaVersion": 1,
+  "id": "cses-1646",
+  "status": "draft",
+  "title": "Static Range Sum Queries",
+  "source": "CSES",
+  "url": "https://cses.fi/problemset/task/1646",
+  "difficulty": {
+    "tier": "easy",
+    "scale": "usaco",
+    "value": "E"
+  },
+  "summary": "",
+  "constraints": {
+    "text": "n, q ≤ 2e5, no updates",
+    "verified": false
+  },
+  "answers": {
+    "subjects": [
+      {
+        "id": "segtree",
+        "role": "intended"
+      }
+    ],
+    "techniques": [
+      {
+        "id": "segtree.prefix-sums",
+        "role": "intended"
+      },
+      {
+        "id": "segtree.fenwick",
+        "role": "overkill"
+      },
+      {
+        "id": "segtree.segtree-point",
+        "role": "overkill"
+      }
+    ]
+  },
+  "distractors": [
+    "segtree.sparse-table"
+  ],
+  "explanation": "No updates and sum is invertible: prefix sums, O(1) per query.",
+  "traps": [
+    "Sums exceed 32-bit."
+  ],
+  "pairWith": [
+    "cses-1648"
+  ],
+  "extraLayers": [],
+  "deprecated": false
+}

@@ -1,0 +1,44 @@
+{
+  "$schema": "../../schema/problem.schema.json",
+  "schemaVersion": 1,
+  "id": "cses-1735",
+  "status": "draft",
+  "title": "Range Updates and Sums",
+  "source": "CSES",
+  "url": "https://cses.fi/problemset/task/1735",
+  "difficulty": {
+    "tier": "medium",
+    "scale": "estimate",
+    "value": "M"
+  },
+  "summary": "",
+  "constraints": {
+    "text": "n, q ≤ 2e5, range add, range assign, range sum",
+    "verified": true
+  },
+  "answers": {
+    "subjects": [
+      {
+        "id": "segtree",
+        "role": "intended"
+      }
+    ],
+    "techniques": [
+      {
+        "id": "segtree.segtree-lazy",
+        "role": "intended"
+      }
+    ]
+  },
+  "distractors": [
+    "segtree.fenwick-difference",
+    "segtree.beats"
+  ],
+  "explanation": "Lazy segment tree with two composed tags; an assign must clear pending adds.",
+  "traps": [
+    "Composing tags in the wrong order."
+  ],
+  "pairWith": [],
+  "extraLayers": [],
+  "deprecated": false
+}

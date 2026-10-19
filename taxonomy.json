@@ -1,0 +1,880 @@
+{
+  "$schema": "./schema/taxonomy.schema.json",
+  "schemaVersion": 1,
+  "subjects": [
+    {
+      "id": "dp",
+      "name": "Dynamic Programming",
+      "techniques": [
+        {
+          "id": "dp.linear",
+          "name": "Linear / 1D DP",
+          "confusableWith": [
+            "dp.coin-change",
+            "other.greedy"
+          ]
+        },
+        {
+          "id": "dp.coin-change",
+          "name": "Coin change (unbounded, min or count)",
+          "confusableWith": [
+            "dp.knapsack-01",
+            "other.greedy"
+          ]
+        },
+        {
+          "id": "dp.knapsack-01",
+          "name": "0/1 knapsack",
+          "confusableWith": [
+            "dp.coin-change",
+            "dp.bitmask",
+            "other.greedy"
+          ]
+        },
+        {
+          "id": "dp.grid",
+          "name": "Grid / 2D DP",
+          "confusableWith": [
+            "dp.sorted-events",
+            "graphs.bfs"
+          ]
+        },
+        {
+          "id": "dp.lcs-edit",
+          "name": "Two sequences (LCS / edit distance)",
+          "confusableWith": [
+            "dp.interval",
+            "dp.lis"
+          ]
+        },
+        {
+          "id": "dp.lis",
+          "name": "Longest increasing subsequence",
+          "confusableWith": [
+            "dp.lcs-edit",
+            "other.greedy"
+          ]
+        },
+        {
+          "id": "dp.interval",
+          "name": "Interval DP (dp[l][r])",
+          "confusableWith": [
+            "dp.lcs-edit",
+            "dp.opt-knuth"
+          ]
+        },
+        {
+          "id": "dp.bitmask",
+          "name": "Bitmask DP (n·2^n)",
+          "confusableWith": [
+            "dp.submask",
+            "dp.broken-profile",
+            "bsearch-dnc.meet-in-middle"
+          ]
+        },
+        {
+          "id": "dp.submask",
+          "name": "Submask enumeration (3^n)",
+          "confusableWith": [
+            "dp.bitmask",
+            "dp.sos"
+          ]
+        },
+        {
+          "id": "dp.broken-profile",
+          "name": "Profile / broken-profile DP",
+          "confusableWith": [
+            "dp.bitmask",
+            "dp.matrix-power"
+          ]
+        },
+        {
+          "id": "dp.digit",
+          "name": "Digit DP",
+          "confusableWith": [
+            "dp.matrix-power",
+            "number-theory.inclusion-exclusion"
+          ]
+        },
+        {
+          "id": "dp.tree",
+          "name": "DP on trees",
+          "confusableWith": [
+            "dp.rerooting",
+            "graphs.tree-diameter"
+          ]
+        },
+        {
+          "id": "dp.rerooting",
+          "name": "Rerooting (answer for every root)",
+          "confusableWith": [
+            "dp.tree"
+          ]
+        },
+        {
+          "id": "dp.dag",
+          "name": "DP on a DAG (topological order)",
+          "confusableWith": [
+            "graphs.toposort",
+            "graphs.dijkstra"
+          ]
+        },
+        {
+          "id": "dp.probability",
+          "name": "Probability / expected-value DP",
+          "confusableWith": [
+            "dp.linear"
+          ]
+        },
+        {
+          "id": "dp.sorted-events",
+          "name": "DP over sorted special points (+ combinatorics)",
+          "confusableWith": [
+            "dp.grid"
+          ]
+        },
+        {
+          "id": "dp.opt-deque",
+          "name": "Optimization: monotonic deque",
+          "confusableWith": [
+            "dp.opt-cht",
+            "segtree.sparse-table"
+          ]
+        },
+        {
+          "id": "dp.opt-cht",
+          "name": "Optimization: convex hull trick",
+          "confusableWith": [
+            "dp.opt-dnc",
+            "dp.opt-deque"
+          ]
+        },
+        {
+          "id": "dp.opt-dnc",
+          "name": "Optimization: divide & conquer DP",
+          "confusableWith": [
+            "dp.opt-cht",
+            "dp.opt-knuth"
+          ]
+        },
+        {
+          "id": "dp.opt-knuth",
+          "name": "Optimization: Knuth",
+          "confusableWith": [
+            "dp.opt-dnc",
+            "dp.interval"
+          ]
+        },
+        {
+          "id": "dp.sos",
+          "name": "Sum over subsets (SOS) DP",
+          "confusableWith": [
+            "dp.submask"
+          ]
+        },
+        {
+          "id": "dp.matrix-power",
+          "name": "Matrix exponentiation of a recurrence",
+          "confusableWith": [
+            "dp.linear",
+            "number-theory.fast-pow"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "graphs",
+      "name": "Graphs",
+      "techniques": [
+        {
+          "id": "graphs.bfs",
+          "name": "BFS (unweighted shortest path)",
+          "confusableWith": [
+            "graphs.dijkstra",
+            "graphs.dfs-components"
+          ]
+        },
+        {
+          "id": "graphs.multi-source-bfs",
+          "name": "Multi-source BFS",
+          "confusableWith": [
+            "graphs.bfs",
+            "graphs.dijkstra"
+          ]
+        },
+        {
+          "id": "graphs.01-bfs",
+          "name": "0-1 BFS",
+          "confusableWith": [
+            "graphs.bfs",
+            "graphs.dijkstra"
+          ]
+        },
+        {
+          "id": "graphs.dfs-components",
+          "name": "DFS / flood fill / components",
+          "confusableWith": [
+            "graphs.dsu",
+            "graphs.bfs"
+          ]
+        },
+        {
+          "id": "graphs.cycle-detection",
+          "name": "Cycle detection",
+          "confusableWith": [
+            "graphs.toposort",
+            "graphs.scc"
+          ]
+        },
+        {
+          "id": "graphs.bipartite",
+          "name": "Bipartite check (2-colouring)",
+          "confusableWith": [
+            "graphs.dfs-components",
+            "graphs.2-sat"
+          ]
+        },
+        {
+          "id": "graphs.toposort",
+          "name": "Topological sort",
+          "confusableWith": [
+            "graphs.dfs-components",
+            "dp.dag"
+          ]
+        },
+        {
+          "id": "graphs.dijkstra",
+          "name": "Dijkstra",
+          "confusableWith": [
+            "graphs.bfs",
+            "graphs.bellman-ford"
+          ]
+        },
+        {
+          "id": "graphs.bellman-ford",
+          "name": "Bellman-Ford (negative edges / cycles)",
+          "confusableWith": [
+            "graphs.dijkstra",
+            "graphs.floyd-warshall"
+          ]
+        },
+        {
+          "id": "graphs.floyd-warshall",
+          "name": "Floyd-Warshall (all pairs)",
+          "confusableWith": [
+            "graphs.dijkstra",
+            "graphs.bellman-ford"
+          ]
+        },
+        {
+          "id": "graphs.mst",
+          "name": "Minimum spanning tree (Kruskal / Prim)",
+          "confusableWith": [
+            "graphs.dijkstra",
+            "graphs.dsu"
+          ]
+        },
+        {
+          "id": "graphs.dsu",
+          "name": "Disjoint set union",
+          "confusableWith": [
+            "graphs.dfs-components",
+            "graphs.mst"
+          ]
+        },
+        {
+          "id": "graphs.lca",
+          "name": "LCA / binary lifting",
+          "confusableWith": [
+            "graphs.tree-diameter",
+            "segtree.segtree-point"
+          ]
+        },
+        {
+          "id": "graphs.tree-diameter",
+          "name": "Tree diameter / centers",
+          "confusableWith": [
+            "graphs.lca",
+            "dp.tree"
+          ]
+        },
+        {
+          "id": "graphs.bridges-articulation",
+          "name": "Bridges / articulation points",
+          "confusableWith": [
+            "graphs.scc",
+            "graphs.dfs-components"
+          ]
+        },
+        {
+          "id": "graphs.scc",
+          "name": "Strongly connected components",
+          "confusableWith": [
+            "graphs.bridges-articulation",
+            "graphs.toposort"
+          ]
+        },
+        {
+          "id": "graphs.2-sat",
+          "name": "2-SAT",
+          "confusableWith": [
+            "graphs.scc",
+            "graphs.bipartite"
+          ]
+        },
+        {
+          "id": "graphs.euler",
+          "name": "Euler path / circuit",
+          "confusableWith": [
+            "graphs.dfs-components",
+            "dp.bitmask"
+          ]
+        },
+        {
+          "id": "graphs.max-flow",
+          "name": "Max flow / min cut",
+          "confusableWith": [
+            "graphs.bipartite-matching",
+            "graphs.mst"
+          ]
+        },
+        {
+          "id": "graphs.bipartite-matching",
+          "name": "Bipartite matching",
+          "confusableWith": [
+            "graphs.max-flow",
+            "graphs.bipartite"
+          ]
+        },
+        {
+          "id": "graphs.functional-graph",
+          "name": "Functional graph (out-degree 1)",
+          "confusableWith": [
+            "graphs.scc",
+            "graphs.lca"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "geometry",
+      "name": "Computational Geometry",
+      "techniques": [
+        {
+          "id": "geometry.orientation",
+          "name": "Cross product / orientation test",
+          "confusableWith": [
+            "geometry.segment-intersection"
+          ]
+        },
+        {
+          "id": "geometry.segment-intersection",
+          "name": "Segment intersection",
+          "confusableWith": [
+            "geometry.orientation",
+            "geometry.line-sweep"
+          ]
+        },
+        {
+          "id": "geometry.point-in-polygon",
+          "name": "Point in polygon (ray casting / winding)",
+          "confusableWith": [
+            "geometry.point-in-convex-polygon",
+            "geometry.shoelace-pick"
+          ]
+        },
+        {
+          "id": "geometry.point-in-convex-polygon",
+          "name": "Point in convex polygon, O(log n)",
+          "confusableWith": [
+            "geometry.point-in-polygon"
+          ]
+        },
+        {
+          "id": "geometry.shoelace-pick",
+          "name": "Shoelace area / Pick's theorem",
+          "confusableWith": [
+            "geometry.point-in-polygon",
+            "geometry.convex-hull"
+          ]
+        },
+        {
+          "id": "geometry.convex-hull",
+          "name": "Convex hull",
+          "confusableWith": [
+            "geometry.rotating-calipers",
+            "geometry.polar-sort"
+          ]
+        },
+        {
+          "id": "geometry.rotating-calipers",
+          "name": "Rotating calipers",
+          "confusableWith": [
+            "geometry.convex-hull",
+            "geometry.closest-pair"
+          ]
+        },
+        {
+          "id": "geometry.closest-pair",
+          "name": "Closest pair of points",
+          "confusableWith": [
+            "geometry.rotating-calipers",
+            "geometry.manhattan-rotation"
+          ]
+        },
+        {
+          "id": "geometry.line-sweep",
+          "name": "Line sweep",
+          "confusableWith": [
+            "geometry.segment-intersection",
+            "geometry.closest-pair"
+          ]
+        },
+        {
+          "id": "geometry.polar-sort",
+          "name": "Angular / polar sort",
+          "confusableWith": [
+            "geometry.convex-hull",
+            "geometry.orientation"
+          ]
+        },
+        {
+          "id": "geometry.manhattan-rotation",
+          "name": "Manhattan distance via 45° rotation",
+          "confusableWith": [
+            "geometry.closest-pair",
+            "geometry.rotating-calipers"
+          ]
+        },
+        {
+          "id": "geometry.circles",
+          "name": "Circles (intersection, enclosing circle)",
+          "confusableWith": [
+            "geometry.half-plane"
+          ]
+        },
+        {
+          "id": "geometry.half-plane",
+          "name": "Half-plane intersection",
+          "confusableWith": [
+            "geometry.convex-hull",
+            "geometry.circles"
+          ]
+        },
+        {
+          "id": "geometry.minkowski",
+          "name": "Minkowski sum",
+          "confusableWith": [
+            "geometry.convex-hull"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "number-theory",
+      "name": "Number Theory",
+      "techniques": [
+        {
+          "id": "number-theory.gcd-lcm",
+          "name": "GCD / LCM",
+          "confusableWith": [
+            "number-theory.ext-euclid",
+            "number-theory.crt"
+          ]
+        },
+        {
+          "id": "number-theory.ext-euclid",
+          "name": "Extended Euclid / linear Diophantine",
+          "confusableWith": [
+            "number-theory.gcd-lcm",
+            "number-theory.mod-inverse"
+          ]
+        },
+        {
+          "id": "number-theory.fast-pow",
+          "name": "Binary (fast) exponentiation",
+          "confusableWith": [
+            "number-theory.mod-inverse",
+            "dp.matrix-power"
+          ]
+        },
+        {
+          "id": "number-theory.mod-inverse",
+          "name": "Modular inverse",
+          "confusableWith": [
+            "number-theory.fast-pow",
+            "number-theory.ext-euclid"
+          ]
+        },
+        {
+          "id": "number-theory.sieve",
+          "name": "Sieve of Eratosthenes",
+          "confusableWith": [
+            "number-theory.spf-sieve",
+            "number-theory.trial-division"
+          ]
+        },
+        {
+          "id": "number-theory.spf-sieve",
+          "name": "Smallest-prime-factor / linear sieve",
+          "confusableWith": [
+            "number-theory.sieve",
+            "number-theory.trial-division"
+          ]
+        },
+        {
+          "id": "number-theory.trial-division",
+          "name": "Trial division up to √n",
+          "confusableWith": [
+            "number-theory.sieve",
+            "number-theory.miller-rabin"
+          ]
+        },
+        {
+          "id": "number-theory.segmented-sieve",
+          "name": "Segmented sieve",
+          "confusableWith": [
+            "number-theory.sieve",
+            "number-theory.miller-rabin"
+          ]
+        },
+        {
+          "id": "number-theory.divisor-functions",
+          "name": "Divisor count / sum",
+          "confusableWith": [
+            "number-theory.harmonic-loop",
+            "number-theory.floor-blocks"
+          ]
+        },
+        {
+          "id": "number-theory.harmonic-loop",
+          "name": "Harmonic loop over multiples (n log n)",
+          "confusableWith": [
+            "number-theory.sieve",
+            "number-theory.divisor-functions"
+          ]
+        },
+        {
+          "id": "number-theory.totient",
+          "name": "Euler's totient",
+          "confusableWith": [
+            "number-theory.mobius",
+            "number-theory.gcd-lcm"
+          ]
+        },
+        {
+          "id": "number-theory.crt",
+          "name": "Chinese remainder theorem",
+          "confusableWith": [
+            "number-theory.ext-euclid",
+            "number-theory.gcd-lcm"
+          ]
+        },
+        {
+          "id": "number-theory.binomial-mod",
+          "name": "Binomials mod p (factorials + inverses)",
+          "confusableWith": [
+            "number-theory.lucas",
+            "dp.linear"
+          ]
+        },
+        {
+          "id": "number-theory.lucas",
+          "name": "Lucas' theorem",
+          "confusableWith": [
+            "number-theory.binomial-mod"
+          ]
+        },
+        {
+          "id": "number-theory.inclusion-exclusion",
+          "name": "Inclusion–exclusion",
+          "confusableWith": [
+            "number-theory.mobius",
+            "number-theory.sieve"
+          ]
+        },
+        {
+          "id": "number-theory.mobius",
+          "name": "Möbius function",
+          "confusableWith": [
+            "number-theory.inclusion-exclusion",
+            "number-theory.totient"
+          ]
+        },
+        {
+          "id": "number-theory.miller-rabin",
+          "name": "Miller–Rabin primality",
+          "confusableWith": [
+            "number-theory.trial-division",
+            "number-theory.pollard-rho"
+          ]
+        },
+        {
+          "id": "number-theory.pollard-rho",
+          "name": "Pollard's rho factorization",
+          "confusableWith": [
+            "number-theory.miller-rabin",
+            "number-theory.trial-division"
+          ]
+        },
+        {
+          "id": "number-theory.discrete-log",
+          "name": "Discrete log (baby-step giant-step)",
+          "confusableWith": [
+            "number-theory.fast-pow"
+          ]
+        },
+        {
+          "id": "number-theory.floor-blocks",
+          "name": "floor(n/i) blocks, O(√n)",
+          "confusableWith": [
+            "number-theory.harmonic-loop",
+            "number-theory.trial-division"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "bsearch-dnc",
+      "name": "Binary Search / Divide & Conquer",
+      "techniques": [
+        {
+          "id": "bsearch-dnc.sorted-array",
+          "name": "Binary search on a sorted array (lower/upper bound)",
+          "confusableWith": [
+            "bsearch-dnc.two-pointers",
+            "bsearch-dnc.on-answer"
+          ]
+        },
+        {
+          "id": "bsearch-dnc.on-answer",
+          "name": "Binary search on the answer",
+          "confusableWith": [
+            "bsearch-dnc.ternary",
+            "bsearch-dnc.two-pointers",
+            "other.greedy"
+          ]
+        },
+        {
+          "id": "bsearch-dnc.on-reals",
+          "name": "Binary search on real numbers",
+          "confusableWith": [
+            "bsearch-dnc.ternary",
+            "bsearch-dnc.on-answer"
+          ]
+        },
+        {
+          "id": "bsearch-dnc.ternary",
+          "name": "Ternary search (unimodal)",
+          "confusableWith": [
+            "bsearch-dnc.on-reals",
+            "bsearch-dnc.on-answer"
+          ]
+        },
+        {
+          "id": "bsearch-dnc.kth-by-counting",
+          "name": "k-th element via binary search on value",
+          "confusableWith": [
+            "bsearch-dnc.sorted-array",
+            "segtree.persistent"
+          ]
+        },
+        {
+          "id": "bsearch-dnc.meet-in-middle",
+          "name": "Meet in the middle",
+          "confusableWith": [
+            "dp.bitmask",
+            "dp.knapsack-01"
+          ]
+        },
+        {
+          "id": "bsearch-dnc.merge-sort-inversions",
+          "name": "Merge sort / inversion counting",
+          "confusableWith": [
+            "segtree.fenwick",
+            "bsearch-dnc.classic-dnc"
+          ]
+        },
+        {
+          "id": "bsearch-dnc.classic-dnc",
+          "name": "Classic divide & conquer",
+          "confusableWith": [
+            "bsearch-dnc.merge-sort-inversions",
+            "dp.interval"
+          ]
+        },
+        {
+          "id": "bsearch-dnc.cdq",
+          "name": "CDQ / offline divide & conquer",
+          "confusableWith": [
+            "segtree.fenwick",
+            "bsearch-dnc.parallel-bs"
+          ]
+        },
+        {
+          "id": "bsearch-dnc.parallel-bs",
+          "name": "Parallel binary search",
+          "confusableWith": [
+            "bsearch-dnc.on-answer",
+            "graphs.dsu"
+          ]
+        },
+        {
+          "id": "bsearch-dnc.two-pointers",
+          "name": "Two pointers / sliding window",
+          "confusableWith": [
+            "bsearch-dnc.sorted-array",
+            "bsearch-dnc.on-answer"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "segtree",
+      "name": "Segment Tree / Range Queries",
+      "techniques": [
+        {
+          "id": "segtree.prefix-sums",
+          "name": "Prefix sums (static)",
+          "confusableWith": [
+            "segtree.fenwick",
+            "segtree.sparse-table"
+          ]
+        },
+        {
+          "id": "segtree.sparse-table",
+          "name": "Sparse table (static RMQ)",
+          "confusableWith": [
+            "segtree.segtree-point",
+            "segtree.prefix-sums"
+          ]
+        },
+        {
+          "id": "segtree.fenwick",
+          "name": "Fenwick tree (BIT)",
+          "confusableWith": [
+            "segtree.segtree-point",
+            "segtree.prefix-sums"
+          ]
+        },
+        {
+          "id": "segtree.fenwick-difference",
+          "name": "BIT on a difference array (range add, point query)",
+          "confusableWith": [
+            "segtree.segtree-lazy",
+            "segtree.fenwick"
+          ]
+        },
+        {
+          "id": "segtree.segtree-point",
+          "name": "Segment tree: point update, range query",
+          "confusableWith": [
+            "segtree.fenwick",
+            "segtree.sparse-table"
+          ]
+        },
+        {
+          "id": "segtree.segtree-merged-node",
+          "name": "Segment tree with a custom merged node",
+          "confusableWith": [
+            "segtree.segtree-point",
+            "segtree.segtree-lazy"
+          ]
+        },
+        {
+          "id": "segtree.segtree-lazy",
+          "name": "Lazy propagation (range update, range query)",
+          "confusableWith": [
+            "segtree.fenwick-difference",
+            "segtree.beats"
+          ]
+        },
+        {
+          "id": "segtree.segtree-descent",
+          "name": "Segment tree descent (first ≥ x / k-th)",
+          "confusableWith": [
+            "bsearch-dnc.sorted-array",
+            "segtree.segtree-point"
+          ]
+        },
+        {
+          "id": "segtree.offline-sweep-bit",
+          "name": "Offline sort + BIT sweep",
+          "confusableWith": [
+            "segtree.mo",
+            "segtree.persistent"
+          ]
+        },
+        {
+          "id": "segtree.merge-sort-tree",
+          "name": "Merge sort tree",
+          "confusableWith": [
+            "segtree.persistent",
+            "segtree.offline-sweep-bit"
+          ]
+        },
+        {
+          "id": "segtree.persistent",
+          "name": "Persistent segment tree",
+          "confusableWith": [
+            "segtree.merge-sort-tree",
+            "segtree.offline-sweep-bit"
+          ]
+        },
+        {
+          "id": "segtree.beats",
+          "name": "Segment tree beats / amortized range ops",
+          "confusableWith": [
+            "segtree.segtree-lazy"
+          ]
+        },
+        {
+          "id": "segtree.2d",
+          "name": "2D BIT / segment tree",
+          "confusableWith": [
+            "segtree.prefix-sums",
+            "segtree.fenwick"
+          ]
+        },
+        {
+          "id": "segtree.dynamic",
+          "name": "Dynamic (implicit) segment tree / compression",
+          "confusableWith": [
+            "segtree.segtree-lazy",
+            "segtree.persistent"
+          ]
+        },
+        {
+          "id": "segtree.mo",
+          "name": "Mo's algorithm (offline sqrt)",
+          "confusableWith": [
+            "segtree.offline-sweep-bit",
+            "segtree.segtree-merged-node"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "other",
+      "name": "None of these (greedy / ad hoc)",
+      "hidden": true,
+      "techniques": [
+        {
+          "id": "other.greedy",
+          "name": "Greedy",
+          "confusableWith": [
+            "dp.linear",
+            "dp.coin-change"
+          ]
+        },
+        {
+          "id": "other.ad-hoc",
+          "name": "Ad hoc / math formula",
+          "confusableWith": [
+            "other.greedy"
+          ]
+        }
+      ]
+    }
+  ]
+}

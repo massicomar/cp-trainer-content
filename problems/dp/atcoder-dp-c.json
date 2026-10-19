@@ -1,0 +1,105 @@
+{
+  "$schema": "../../schema/problem.schema.json",
+  "schemaVersion": 1,
+  "id": "atcoder-dp-c",
+  "status": "draft",
+  "title": "Vacation",
+  "source": "AtCoder",
+  "url": "https://atcoder.jp/contests/dp/tasks/dp_c",
+  "difficulty": {
+    "tier": "easy",
+    "scale": "estimate",
+    "value": "E"
+  },
+  "summary": "",
+  "constraints": {
+    "text": "N ≤ 1e5, three activities per day, no activity two days in a row",
+    "verified": false
+  },
+  "answers": {
+    "subjects": [
+      {
+        "id": "dp",
+        "role": "intended"
+      }
+    ],
+    "techniques": [
+      {
+        "id": "dp.linear",
+        "role": "intended"
+      }
+    ]
+  },
+  "distractors": [
+    "other.greedy",
+    "dp.bitmask"
+  ],
+  "explanation": "Add yesterday's activity to the state: dp over days with 3 columns, one per activity.",
+  "traps": [
+    "Picking the best activity each day greedily breaks the 'no repeat' rule in later days."
+  ],
+  "pairWith": [],
+  "extraLayers": [
+    {
+      "key": "dp-state",
+      "kind": "dp-state",
+      "prompt": "What should the DP state represent?",
+      "options": [
+        {
+          "id": "a",
+          "text": "dp[i][a] = max happiness over days 1..i if day i's activity is a"
+        },
+        {
+          "id": "b",
+          "text": "dp[i] = max happiness over days 1..i",
+          "why": "Loses which activity was done on day i, so you can't forbid repeating it."
+        },
+        {
+          "id": "c",
+          "text": "dp[i][mask] = max happiness where mask is the set of activities used so far",
+          "why": "The rule is about consecutive days, not about which activities were ever used."
+        },
+        {
+          "id": "d",
+          "text": "dp[a][b][c] = max happiness having done each activity a, b, c times",
+          "why": "Counts don't matter; only yesterday's choice does."
+        }
+      ],
+      "accepted": [
+        "a"
+      ],
+      "explanation": "The constraint only looks one day back, so remembering the last activity (3 options) is enough."
+    },
+    {
+      "key": "dp-transition",
+      "kind": "dp-transition",
+      "prompt": "Given that state, which transition is right?",
+      "options": [
+        {
+          "id": "a",
+          "text": "dp[i][a] = gain(i, a) + max over b ≠ a of dp[i−1][b]"
+        },
+        {
+          "id": "b",
+          "text": "dp[i][a] = gain(i, a) + max over all b of dp[i−1][b]",
+          "why": "Allows b = a, i.e. the same activity two days in a row."
+        },
+        {
+          "id": "c",
+          "text": "dp[i][a] = max(dp[i−1][a], gain(i, a))",
+          "why": "Never adds the gains up across days."
+        },
+        {
+          "id": "d",
+          "text": "dp[i][a] = gain(i, a) + dp[i−1][a]",
+          "why": "That forces the same activity every day, which is exactly what's forbidden."
+        }
+      ],
+      "accepted": [
+        "a"
+      ],
+      "explanation": "Today's best with activity a = today's gain + yesterday's best with any different activity."
+    }
+  ],
+  "deprecated": false
+}

@@ -1,0 +1,52 @@
+{
+  "$schema": "../../schema/problem.schema.json",
+  "schemaVersion": 1,
+  "id": "cses-2193",
+  "status": "draft",
+  "title": "Polygon Lattice Points",
+  "source": "CSES",
+  "url": "https://cses.fi/problemset/task/2193",
+  "difficulty": {
+    "tier": "medium",
+    "scale": "estimate",
+    "value": "M"
+  },
+  "summary": "",
+  "constraints": {
+    "text": "n ≤ 1e5, |coordinates| ≤ 1e9",
+    "verified": true
+  },
+  "answers": {
+    "subjects": [
+      {
+        "id": "geometry",
+        "role": "intended"
+      },
+      {
+        "id": "number-theory",
+        "role": "accepted"
+      }
+    ],
+    "techniques": [
+      {
+        "id": "geometry.shoelace-pick",
+        "role": "intended"
+      },
+      {
+        "id": "number-theory.gcd-lcm",
+        "role": "accepted"
+      }
+    ]
+  },
+  "distractors": [
+    "geometry.point-in-polygon",
+    "geometry.convex-hull"
+  ],
+  "explanation": "Boundary points = Σ gcd(|dx|, |dy|); interior points from Pick's theorem with the integer 2·Area.",
+  "traps": [
+    "Computing Pick's formula in floating point."
+  ],
+  "pairWith": [],
+  "extraLayers": [],
+  "deprecated": false
+}

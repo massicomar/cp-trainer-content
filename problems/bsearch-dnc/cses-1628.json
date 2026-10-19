@@ -1,0 +1,44 @@
+{
+  "$schema": "../../schema/problem.schema.json",
+  "schemaVersion": 1,
+  "id": "cses-1628",
+  "status": "draft",
+  "title": "Meet in the Middle",
+  "source": "CSES",
+  "url": "https://cses.fi/problemset/task/1628",
+  "difficulty": {
+    "tier": "easy",
+    "scale": "usaco",
+    "value": "E"
+  },
+  "summary": "",
+  "constraints": {
+    "text": "n ≤ 40, target x ≤ 1e9",
+    "verified": true
+  },
+  "answers": {
+    "subjects": [
+      {
+        "id": "bsearch-dnc",
+        "role": "intended"
+      }
+    ],
+    "techniques": [
+      {
+        "id": "bsearch-dnc.meet-in-middle",
+        "role": "intended"
+      }
+    ]
+  },
+  "distractors": [
+    "dp.knapsack-01",
+    "dp.bitmask"
+  ],
+  "explanation": "2^40 subsets is too many, values are too large for knapsack: enumerate 2^20 sums per half and count complements.",
+  "traps": [
+    "Hash maps can be slow; sort + two pointers or binary search instead."
+  ],
+  "pairWith": [],
+  "extraLayers": [],
+  "deprecated": false
+}

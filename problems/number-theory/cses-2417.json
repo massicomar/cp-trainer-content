@@ -1,0 +1,48 @@
+{
+  "$schema": "../../schema/problem.schema.json",
+  "schemaVersion": 1,
+  "id": "cses-2417",
+  "status": "draft",
+  "title": "Counting Coprime Pairs",
+  "source": "CSES",
+  "url": "https://cses.fi/problemset/task/2417",
+  "difficulty": {
+    "tier": "hard",
+    "scale": "estimate",
+    "value": "M/H"
+  },
+  "summary": "",
+  "constraints": {
+    "text": "n ≤ 1e5, x ≤ 1e6",
+    "verified": true
+  },
+  "answers": {
+    "subjects": [
+      {
+        "id": "number-theory",
+        "role": "intended"
+      }
+    ],
+    "techniques": [
+      {
+        "id": "number-theory.mobius",
+        "role": "intended"
+      },
+      {
+        "id": "number-theory.harmonic-loop",
+        "role": "accepted"
+      }
+    ]
+  },
+  "distractors": [
+    "number-theory.inclusion-exclusion",
+    "number-theory.gcd-lcm"
+  ],
+  "explanation": "Coprime pairs = Σ_d μ(d) · C(cnt_d, 2), where cnt_d counts values divisible by d (harmonic loop).",
+  "traps": [
+    "n² gcds is 1e10."
+  ],
+  "pairWith": [],
+  "extraLayers": [],
+  "deprecated": false
+}

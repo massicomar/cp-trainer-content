@@ -1,0 +1,45 @@
+{
+  "$schema": "../../schema/problem.schema.json",
+  "schemaVersion": 1,
+  "id": "cses-1673",
+  "status": "draft",
+  "title": "High Score",
+  "source": "CSES",
+  "url": "https://cses.fi/problemset/task/1673",
+  "difficulty": {
+    "tier": "medium",
+    "scale": "estimate",
+    "value": "M"
+  },
+  "summary": "",
+  "constraints": {
+    "text": "n ≤ 2500, m ≤ 5000, weights in [−1e9, 1e9]",
+    "verified": true
+  },
+  "answers": {
+    "subjects": [
+      {
+        "id": "graphs",
+        "role": "intended"
+      }
+    ],
+    "techniques": [
+      {
+        "id": "graphs.bellman-ford",
+        "role": "intended"
+      }
+    ]
+  },
+  "distractors": [
+    "graphs.dijkstra",
+    "dp.dag",
+    "graphs.floyd-warshall"
+  ],
+  "explanation": "Longest path with possible positive cycles = shortest path on negated weights: Bellman-Ford. A cycle only matters if it's reachable from 1 and can reach n.",
+  "traps": [
+    "Reporting −1 for any negative cycle, even one that can't reach n."
+  ],
+  "pairWith": [],
+  "extraLayers": [],
+  "deprecated": false
+}

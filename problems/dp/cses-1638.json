@@ -1,0 +1,105 @@
+{
+  "$schema": "../../schema/problem.schema.json",
+  "schemaVersion": 1,
+  "id": "cses-1638",
+  "status": "draft",
+  "title": "Grid Paths",
+  "source": "CSES",
+  "url": "https://cses.fi/problemset/task/1638",
+  "difficulty": {
+    "tier": "easy",
+    "scale": "estimate",
+    "value": "E"
+  },
+  "summary": "",
+  "constraints": {
+    "text": "n ≤ 1000 (n × n grid), traps, moves right/down only",
+    "verified": true
+  },
+  "answers": {
+    "subjects": [
+      {
+        "id": "dp",
+        "role": "intended"
+      }
+    ],
+    "techniques": [
+      {
+        "id": "dp.grid",
+        "role": "intended"
+      }
+    ]
+  },
+  "distractors": [
+    "graphs.bfs",
+    "number-theory.binomial-mod"
+  ],
+  "explanation": "Paths to a cell come from the cell above or the cell to the left; trap cells hold 0.",
+  "traps": [
+    "If the start cell is a trap, the answer is 0."
+  ],
+  "pairWith": [],
+  "extraLayers": [
+    {
+      "key": "dp-state",
+      "kind": "dp-state",
+      "prompt": "What should the DP state represent?",
+      "options": [
+        {
+          "id": "a",
+          "text": "dp[i][j] = number of paths from (1,1) to (i,j) avoiding traps"
+        },
+        {
+          "id": "b",
+          "text": "dp[i][j] = shortest distance from (1,1) to (i,j)",
+          "why": "Every right/down path has the same length; you need a count."
+        },
+        {
+          "id": "c",
+          "text": "dp[k] = number of paths of length k",
+          "why": "All paths have length 2n−2; the cell matters, not the length."
+        },
+        {
+          "id": "d",
+          "text": "dp[i] = number of paths reaching row i",
+          "why": "Loses the column, which decides where traps are."
+        }
+      ],
+      "accepted": [
+        "a"
+      ],
+      "explanation": "Each cell is a subproblem: how many ways can you get here?"
+    },
+    {
+      "key": "dp-transition",
+      "kind": "dp-transition",
+      "prompt": "Given that state, which transition is right?",
+      "options": [
+        {
+          "id": "a",
+          "text": "dp[i][j] = dp[i−1][j] + dp[i][j−1] (0 on traps)"
+        },
+        {
+          "id": "b",
+          "text": "dp[i][j] = max(dp[i−1][j], dp[i][j−1]) + 1",
+          "why": "That maximizes length; you need a count."
+        },
+        {
+          "id": "c",
+          "text": "dp[i][j] = C(i + j − 2, i − 1)",
+          "why": "The binomial ignores traps."
+        },
+        {
+          "id": "d",
+          "text": "dp[i][j] = dp[i−1][j−1] + 1",
+          "why": "Diagonal moves aren't allowed."
+        }
+      ],
+      "accepted": [
+        "a"
+      ],
+      "explanation": "The last move into (i,j) was either down from above or right from the left."
+    }
+  ],
+  "deprecated": false
+}

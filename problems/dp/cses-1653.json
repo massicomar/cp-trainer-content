@@ -1,0 +1,106 @@
+{
+  "$schema": "../../schema/problem.schema.json",
+  "schemaVersion": 1,
+  "id": "cses-1653",
+  "status": "draft",
+  "title": "Elevator Rides",
+  "source": "CSES",
+  "url": "https://cses.fi/problemset/task/1653",
+  "difficulty": {
+    "tier": "hard",
+    "scale": "estimate",
+    "value": "M"
+  },
+  "summary": "",
+  "constraints": {
+    "text": "n ≤ 20 people, weights and capacity x ≤ 1e9",
+    "verified": true
+  },
+  "answers": {
+    "subjects": [
+      {
+        "id": "dp",
+        "role": "intended"
+      }
+    ],
+    "techniques": [
+      {
+        "id": "dp.bitmask",
+        "role": "intended"
+      }
+    ]
+  },
+  "distractors": [
+    "other.greedy",
+    "dp.knapsack-01",
+    "bsearch-dnc.meet-in-middle"
+  ],
+  "explanation": "n ≤ 20 → bitmask. Weights are too large for knapsack. Store a pair per mask: (rides used, weight in the last ride), minimized lexicographically.",
+  "traps": [
+    "Storing only the number of rides loses whether the next person fits in the current ride."
+  ],
+  "pairWith": [],
+  "extraLayers": [
+    {
+      "key": "dp-state",
+      "kind": "dp-state",
+      "prompt": "What should the DP state represent?",
+      "options": [
+        {
+          "id": "a",
+          "text": "dp[mask] = lexicographically smallest (rides, load of the last ride) for carrying exactly the people in mask"
+        },
+        {
+          "id": "b",
+          "text": "dp[mask] = minimum number of rides for the people in mask",
+          "why": "Not enough: two ways with equal rides differ in how full the last ride is."
+        },
+        {
+          "id": "c",
+          "text": "dp[w] = minimum rides with total weight w",
+          "why": "Weights up to 1e9; and it ignores who has been carried."
+        },
+        {
+          "id": "d",
+          "text": "dp[i][mask] = rides when person i is the last one",
+          "why": "Order within a ride doesn't matter; the extra dimension doesn't capture the load."
+        }
+      ],
+      "accepted": [
+        "a"
+      ],
+      "explanation": "Fewest rides first, then the emptiest last ride — that pair is all the future needs."
+    },
+    {
+      "key": "dp-transition",
+      "kind": "dp-transition",
+      "prompt": "Given that state, which transition is right?",
+      "options": [
+        {
+          "id": "a",
+          "text": "For each p ∉ mask: if load + w_p ≤ x → (rides, load + w_p), else (rides + 1, w_p); keep the min pair at mask ∪ {p}"
+        },
+        {
+          "id": "b",
+          "text": "dp[mask ∪ {p}] = dp[mask] + 1",
+          "why": "Opens a new ride for every person."
+        },
+        {
+          "id": "c",
+          "text": "Sort by weight and pack greedily (first fit decreasing)",
+          "why": "Bin packing greedy isn't optimal."
+        },
+        {
+          "id": "d",
+          "text": "dp[mask] = min over submasks s that fit in one ride of dp[mask \\ s] + 1",
+          "why": "Correct, but O(3^20) ≈ 3.5e9 — too slow."
+        }
+      ],
+      "accepted": [
+        "a"
+      ],
+      "explanation": "Add one person at a time to the last ride, or start a new ride. O(n · 2^n)."
+    }
+  ],
+  "deprecated": false
+}

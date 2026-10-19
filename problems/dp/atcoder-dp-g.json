@@ -1,0 +1,119 @@
+{
+  "$schema": "../../schema/problem.schema.json",
+  "schemaVersion": 1,
+  "id": "atcoder-dp-g",
+  "status": "draft",
+  "title": "Longest Path",
+  "source": "AtCoder",
+  "url": "https://atcoder.jp/contests/dp/tasks/dp_g",
+  "difficulty": {
+    "tier": "easy",
+    "scale": "estimate",
+    "value": "E"
+  },
+  "summary": "",
+  "constraints": {
+    "text": "N, M ≤ 1e5, directed acyclic graph",
+    "verified": true
+  },
+  "answers": {
+    "subjects": [
+      {
+        "id": "dp",
+        "role": "intended"
+      },
+      {
+        "id": "graphs",
+        "role": "accepted"
+      }
+    ],
+    "techniques": [
+      {
+        "id": "dp.dag",
+        "role": "intended"
+      },
+      {
+        "id": "graphs.toposort",
+        "role": "accepted"
+      }
+    ]
+  },
+  "distractors": [
+    "graphs.dijkstra",
+    "graphs.bellman-ford",
+    "graphs.bfs"
+  ],
+  "explanation": "Longest path is NP-hard in general but easy on a DAG: process vertices in topological order (or memoized DFS).",
+  "traps": [
+    "Running Dijkstra with negated weights is wrong (negative edges)."
+  ],
+  "pairWith": [],
+  "extraLayers": [
+    {
+      "key": "dp-state",
+      "kind": "dp-state",
+      "prompt": "What should the DP state represent?",
+      "options": [
+        {
+          "id": "a",
+          "text": "dp[v] = length of the longest path starting at v"
+        },
+        {
+          "id": "b",
+          "text": "dp[mask][v] = longest path visiting exactly the set mask ending at v",
+          "why": "That's for general graphs (Hamiltonian-style); a DAG doesn't need it, and N = 1e5."
+        },
+        {
+          "id": "c",
+          "text": "dp[k] = whether a path of length k exists",
+          "why": "Loses where the path is."
+        },
+        {
+          "id": "d",
+          "text": "dist[v] = shortest path from vertex 1",
+          "why": "Asks for the longest path over all starts, not a shortest path."
+        },
+        {
+          "id": "e",
+          "text": "dp[v] = length of the longest path ending at v"
+        }
+      ],
+      "accepted": [
+        "a",
+        "e"
+      ],
+      "explanation": "Because there are no cycles, the best path from v only depends on the best paths from its out-neighbours. (Ending at v works too.)"
+    },
+    {
+      "key": "dp-transition",
+      "kind": "dp-transition",
+      "prompt": "Given that state, which transition is right?",
+      "options": [
+        {
+          "id": "a",
+          "text": "dp[v] = max over edges v→u of dp[u] + 1, computed in reverse topological order (or memoized DFS)"
+        },
+        {
+          "id": "b",
+          "text": "dp[v] = max over edges v→u of dp[u] + 1, computed in increasing vertex index",
+          "why": "Vertex numbers aren't a topological order."
+        },
+        {
+          "id": "c",
+          "text": "Relax edges with a priority queue keyed by −length",
+          "why": "Dijkstra's invariant breaks with 'longest' (negative) weights."
+        },
+        {
+          "id": "d",
+          "text": "dp[v] = (number of out-edges of v) + 1",
+          "why": "Counts degree, not path length."
+        }
+      ],
+      "accepted": [
+        "a"
+      ],
+      "explanation": "Evaluate a vertex only after all its successors — exactly what topological order guarantees."
+    }
+  ],
+  "deprecated": false
+}

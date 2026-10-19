@@ -1,0 +1,107 @@
+{
+  "$schema": "../../schema/problem.schema.json",
+  "schemaVersion": 1,
+  "id": "cses-2220",
+  "status": "draft",
+  "title": "Counting Numbers",
+  "source": "CSES",
+  "url": "https://cses.fi/problemset/task/2220",
+  "difficulty": {
+    "tier": "medium",
+    "scale": "estimate",
+    "value": "M"
+  },
+  "summary": "",
+  "constraints": {
+    "text": "0 ≤ a ≤ b ≤ 1e18",
+    "verified": true
+  },
+  "answers": {
+    "subjects": [
+      {
+        "id": "dp",
+        "role": "intended"
+      }
+    ],
+    "techniques": [
+      {
+        "id": "dp.digit",
+        "role": "intended"
+      }
+    ]
+  },
+  "distractors": [
+    "number-theory.inclusion-exclusion",
+    "dp.matrix-power",
+    "bsearch-dnc.on-answer"
+  ],
+  "explanation": "Count numbers with no two equal adjacent digits in [0, b] minus [0, a−1]. Digit DP over (position, previous digit, tight, started).",
+  "traps": [
+    "Leading zeros are not 'adjacent equal digits' (00 at the start).",
+    "f(a − 1) with a = 0."
+  ],
+  "pairWith": [],
+  "extraLayers": [
+    {
+      "key": "dp-state",
+      "kind": "dp-state",
+      "prompt": "What should the DP state represent?",
+      "options": [
+        {
+          "id": "a",
+          "text": "dp[pos][prev digit][tight][started] = count of ways to fill the remaining digits"
+        },
+        {
+          "id": "b",
+          "text": "dp[x] = 1 if x is valid, for every x ≤ b",
+          "why": "b ≤ 1e18."
+        },
+        {
+          "id": "c",
+          "text": "dp[pos][prev digit]",
+          "why": "Without 'tight' you count numbers bigger than b; without 'started' leading zeros break the rule."
+        },
+        {
+          "id": "d",
+          "text": "dp[pos][sum of digits]",
+          "why": "The rule is about adjacent digits, not their sum."
+        }
+      ],
+      "accepted": [
+        "a"
+      ],
+      "explanation": "Build the number digit by digit from the top; the rule needs the previous digit, the bound needs 'tight', leading zeros need 'started'."
+    },
+    {
+      "key": "dp-transition",
+      "kind": "dp-transition",
+      "prompt": "Given that state, which transition is right?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Try each digit d ≤ (tight ? bound digit : 9); skip d == prev if started; tight' = tight ∧ d == bound digit; started' = started ∨ d ≠ 0"
+        },
+        {
+          "id": "b",
+          "text": "Try every digit 0..9 at every position",
+          "why": "Ignores the upper bound b."
+        },
+        {
+          "id": "c",
+          "text": "count = 9 · 9^(len−1) for each length",
+          "why": "Correct for full lengths, but the bound b cuts the last length — that's what the digit DP handles."
+        },
+        {
+          "id": "d",
+          "text": "Iterate x from a to b",
+          "why": "Up to 1e18 iterations."
+        }
+      ],
+      "accepted": [
+        "a"
+      ],
+      "explanation": "Answer = f(b) − f(a − 1), where f is the digit DP over the decimal string of the bound."
+    }
+  ],
+  "deprecated": false
+}

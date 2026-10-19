@@ -1,0 +1,109 @@
+{
+  "$schema": "../../schema/problem.schema.json",
+  "schemaVersion": 1,
+  "id": "atcoder-dp-v",
+  "status": "draft",
+  "title": "Subtree",
+  "source": "AtCoder",
+  "url": "https://atcoder.jp/contests/dp/tasks/dp_v",
+  "difficulty": {
+    "tier": "hard",
+    "scale": "estimate",
+    "value": "H"
+  },
+  "summary": "",
+  "constraints": {
+    "text": "N ≤ 1e5, answers modulo any M ≤ 1e9 (not necessarily prime)",
+    "verified": true
+  },
+  "answers": {
+    "subjects": [
+      {
+        "id": "dp",
+        "role": "intended"
+      }
+    ],
+    "techniques": [
+      {
+        "id": "dp.rerooting",
+        "role": "intended"
+      },
+      {
+        "id": "dp.tree",
+        "role": "accepted"
+      }
+    ]
+  },
+  "distractors": [
+    "graphs.lca",
+    "dp.bitmask"
+  ],
+  "explanation": "For every vertex v, count connected black sets containing v. Rerooting: a downward pass for subtrees, an upward pass for 'everything outside', using prefix/suffix products because M may not be prime.",
+  "traps": [
+    "You can't divide by (down[c] + 1) to exclude a child: M isn't prime and the value may be 0 mod M."
+  ],
+  "pairWith": [],
+  "extraLayers": [
+    {
+      "key": "dp-state",
+      "kind": "dp-state",
+      "prompt": "What should the DP state represent?",
+      "options": [
+        {
+          "id": "a",
+          "text": "down[v] = # connected black sets inside v's subtree that contain v; up[v] = the same for the part outside v's subtree, hanging from v's parent"
+        },
+        {
+          "id": "b",
+          "text": "dp[v] = # connected black sets in v's subtree containing v, recomputed with every vertex as root",
+          "why": "Right DP, but N roots × O(N) = 1e10."
+        },
+        {
+          "id": "c",
+          "text": "dp[mask] = whether black set mask is connected",
+          "why": "2^N."
+        },
+        {
+          "id": "d",
+          "text": "dp[v][c] = colourings of v's subtree with v coloured c",
+          "why": "That's Independent Set's state; this problem needs connectivity to v."
+        }
+      ],
+      "accepted": [
+        "a"
+      ],
+      "explanation": "'Answer for every root' is the rerooting signal: one DP for inside the subtree, one for outside."
+    },
+    {
+      "key": "dp-transition",
+      "kind": "dp-transition",
+      "prompt": "Given that state, which transition is right?",
+      "options": [
+        {
+          "id": "a",
+          "text": "down[v] = Π (down[c] + 1); ans[v] = down[v] · (up[v] + 1); up[c] = (up[v] + 1) · Π over siblings s ≠ c of (down[s] + 1) via prefix/suffix products"
+        },
+        {
+          "id": "b",
+          "text": "Same, but up[c] = (up[v] + 1) · down[v] / (down[c] + 1)",
+          "why": "Division is unsafe: M isn't prime."
+        },
+        {
+          "id": "c",
+          "text": "down[v] = Σ (down[c] + 1)",
+          "why": "Choices in different child subtrees multiply."
+        },
+        {
+          "id": "d",
+          "text": "ans[v] = down[root]",
+          "why": "Same answer for every vertex — ignores the 'must contain v' part."
+        }
+      ],
+      "accepted": [
+        "a"
+      ],
+      "explanation": "Each child is either cut off (1) or connected (down[c] ways); the outside part works the same way through the parent."
+    }
+  ],
+  "deprecated": false
+}

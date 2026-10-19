@@ -1,0 +1,107 @@
+{
+  "$schema": "../../schema/problem.schema.json",
+  "schemaVersion": 1,
+  "id": "cses-1097",
+  "status": "draft",
+  "title": "Removal Game",
+  "source": "CSES",
+  "url": "https://cses.fi/problemset/task/1097",
+  "difficulty": {
+    "tier": "medium",
+    "scale": "estimate",
+    "value": "E/M"
+  },
+  "summary": "",
+  "constraints": {
+    "text": "n ≤ 5000 numbers; players alternately take the first or last",
+    "verified": true
+  },
+  "answers": {
+    "subjects": [
+      {
+        "id": "dp",
+        "role": "intended"
+      }
+    ],
+    "techniques": [
+      {
+        "id": "dp.interval",
+        "role": "intended"
+      }
+    ]
+  },
+  "distractors": [
+    "other.greedy",
+    "dp.lcs-edit"
+  ],
+  "explanation": "The remaining list is always a contiguous interval. Store the best (current player − opponent) difference per interval: O(n²).",
+  "traps": [
+    "Greedily taking the larger end is not optimal.",
+    "Use 64-bit sums."
+  ],
+  "pairWith": [],
+  "extraLayers": [
+    {
+      "key": "dp-state",
+      "kind": "dp-state",
+      "prompt": "What should the DP state represent?",
+      "options": [
+        {
+          "id": "a",
+          "text": "dp[l][r] = best (my score − opponent's score) when the remaining list is l..r and it's my turn"
+        },
+        {
+          "id": "b",
+          "text": "dp[i] = best score for player 1 after i moves",
+          "why": "After i moves you don't know which ends were taken."
+        },
+        {
+          "id": "c",
+          "text": "dp[l][r][turn] = player 1's score",
+          "why": "Works, but the 'difference' formulation drops the turn dimension."
+        },
+        {
+          "id": "d",
+          "text": "dp[mask] = best score with mask of taken numbers",
+          "why": "2^5000; also the taken set is always a prefix + suffix."
+        }
+      ],
+      "accepted": [
+        "a",
+        "c"
+      ],
+      "explanation": "Whatever was taken, the rest is an interval; the difference trick makes the state symmetric for both players."
+    },
+    {
+      "key": "dp-transition",
+      "kind": "dp-transition",
+      "prompt": "Given that state, which transition is right?",
+      "options": [
+        {
+          "id": "a",
+          "text": "dp[l][r] = max(x_l − dp[l+1][r], x_r − dp[l][r−1]); answer = (total + dp[1][n]) / 2"
+        },
+        {
+          "id": "b",
+          "text": "dp[l][r] = max(x_l + dp[l+1][r], x_r + dp[l][r−1])",
+          "why": "Treats the opponent as if they help you; it ignores their moves."
+        },
+        {
+          "id": "c",
+          "text": "dp[l][r] = max(x_l, x_r) + dp of the remaining interval",
+          "why": "That's the greedy choice."
+        },
+        {
+          "id": "d",
+          "text": "dp[l][r] = max over k of dp[l][k] + dp[k+1][r]",
+          "why": "Moves only remove an end; there's no split point."
+        }
+      ],
+      "accepted": [
+        "a"
+      ],
+      "explanation": "Take an end, then the opponent faces the smaller interval and maximizes their own difference — subtract it."
+    }
+  ],
+  "deprecated": false
+}

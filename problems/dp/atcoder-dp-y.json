@@ -1,0 +1,113 @@
+{
+  "$schema": "../../schema/problem.schema.json",
+  "schemaVersion": 1,
+  "id": "atcoder-dp-y",
+  "status": "draft",
+  "title": "Grid 2",
+  "source": "AtCoder",
+  "url": "https://atcoder.jp/contests/dp/tasks/dp_y",
+  "difficulty": {
+    "tier": "hard",
+    "scale": "estimate",
+    "value": "M/H"
+  },
+  "summary": "",
+  "constraints": {
+    "text": "H, W ≤ 1e5, N ≤ 3000 walls",
+    "verified": true
+  },
+  "answers": {
+    "subjects": [
+      {
+        "id": "dp",
+        "role": "intended"
+      },
+      {
+        "id": "number-theory",
+        "role": "accepted"
+      }
+    ],
+    "techniques": [
+      {
+        "id": "dp.sorted-events",
+        "role": "intended"
+      },
+      {
+        "id": "number-theory.binomial-mod",
+        "role": "accepted"
+      }
+    ]
+  },
+  "distractors": [
+    "dp.grid",
+    "graphs.bfs"
+  ],
+  "explanation": "The grid has 1e10 cells, but only 3000 walls. Sort walls; dp[i] = paths to wall i that touch no earlier wall = all paths minus those through an earlier first wall.",
+  "traps": [
+    "Precompute factorials up to H + W for C(a + b, a) mod p."
+  ],
+  "pairWith": [],
+  "extraLayers": [
+    {
+      "key": "dp-state",
+      "kind": "dp-state",
+      "prompt": "What should the DP state represent?",
+      "options": [
+        {
+          "id": "a",
+          "text": "dp[i] = number of paths from the start to wall i (in sorted order) that hit no other wall before it"
+        },
+        {
+          "id": "b",
+          "text": "dp[r][c] = paths to cell (r, c)",
+          "why": "1e10 cells — that's Grid 1's state."
+        },
+        {
+          "id": "c",
+          "text": "dp[i] = number of paths through wall i",
+          "why": "Paths through several walls get counted multiple times."
+        },
+        {
+          "id": "d",
+          "text": "dp[mask] = paths avoiding the walls in mask",
+          "why": "2^3000."
+        }
+      ],
+      "accepted": [
+        "a"
+      ],
+      "explanation": "When the grid is huge but special points are few, make the special points the states and count free paths between them with binomials."
+    },
+    {
+      "key": "dp-transition",
+      "kind": "dp-transition",
+      "prompt": "Given that state, which transition is right?",
+      "options": [
+        {
+          "id": "a",
+          "text": "dp[i] = C(r_i + c_i − 2, r_i − 1) − Σ over walls j before i (r_j ≤ r_i, c_j ≤ c_i) of dp[j] · C(r_i − r_j + c_i − c_j, r_i − r_j); treat the target as wall N+1"
+        },
+        {
+          "id": "b",
+          "text": "dp[i] = C(r_i + c_i − 2, r_i − 1) − Σ C(paths through j)",
+          "why": "Subtracts paths through every earlier wall, double-subtracting paths that hit several."
+        },
+        {
+          "id": "c",
+          "text": "dp[r][c] = dp[r−1][c] + dp[r][c−1]",
+          "why": "Grid DP over 1e10 cells."
+        },
+        {
+          "id": "d",
+          "text": "answer = C(H + W − 2, H − 1) − N",
+          "why": "Each wall blocks many paths, not one."
+        }
+      ],
+      "accepted": [
+        "a"
+      ],
+      "explanation": "Classify bad paths by the first wall they hit — each bad path is subtracted exactly once."
+    }
+  ],
+  "deprecated": false
+}

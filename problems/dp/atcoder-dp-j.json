@@ -1,0 +1,105 @@
+{
+  "$schema": "../../schema/problem.schema.json",
+  "schemaVersion": 1,
+  "id": "atcoder-dp-j",
+  "status": "draft",
+  "title": "Sushi",
+  "source": "AtCoder",
+  "url": "https://atcoder.jp/contests/dp/tasks/dp_j",
+  "difficulty": {
+    "tier": "hard",
+    "scale": "estimate",
+    "value": "M/H"
+  },
+  "summary": "",
+  "constraints": {
+    "text": "N ≤ 300 dishes, each with 1, 2 or 3 pieces",
+    "verified": true
+  },
+  "answers": {
+    "subjects": [
+      {
+        "id": "dp",
+        "role": "intended"
+      }
+    ],
+    "techniques": [
+      {
+        "id": "dp.probability",
+        "role": "intended"
+      }
+    ]
+  },
+  "distractors": [
+    "dp.bitmask",
+    "dp.linear"
+  ],
+  "explanation": "Which dish has which count doesn't matter — only how many dishes have 1, 2 or 3 pieces. Solve the self-loop (empty dish chosen) algebraically.",
+  "traps": [
+    "The state can stay the same when an empty dish is picked; solve for E instead of recursing forever."
+  ],
+  "pairWith": [],
+  "extraLayers": [
+    {
+      "key": "dp-state",
+      "kind": "dp-state",
+      "prompt": "What should the DP state represent?",
+      "options": [
+        {
+          "id": "a",
+          "text": "dp[c1][c2][c3] = expected remaining operations with c1, c2, c3 dishes having 1, 2, 3 pieces"
+        },
+        {
+          "id": "b",
+          "text": "dp[mask] = expected operations given which dishes are empty",
+          "why": "2^300; dishes with the same count are interchangeable."
+        },
+        {
+          "id": "c",
+          "text": "dp[k] = expected operations with k pieces left in total",
+          "why": "Different distributions of the same total behave differently."
+        },
+        {
+          "id": "d",
+          "text": "dp[i] = probability that all sushi is gone after i operations",
+          "why": "Unbounded number of steps; you want an expectation."
+        }
+      ],
+      "accepted": [
+        "a"
+      ],
+      "explanation": "By symmetry only the counts per piece-number matter: 301³ / 6 states."
+    },
+    {
+      "key": "dp-transition",
+      "kind": "dp-transition",
+      "prompt": "Given that state, which transition is right?",
+      "options": [
+        {
+          "id": "a",
+          "text": "dp[c1][c2][c3] = (N + c1·dp[c1−1][c2][c3] + c2·dp[c1+1][c2−1][c3] + c3·dp[c1][c2+1][c3−1]) / (c1 + c2 + c3)"
+        },
+        {
+          "id": "b",
+          "text": "dp = 1 + (c1·dp[c1−1][c2][c3] + c2·dp[c1+1][c2−1][c3] + c3·dp[c1][c2+1][c3−1]) / N",
+          "why": "Ignores the chance of picking an empty dish (the self-loop)."
+        },
+        {
+          "id": "c",
+          "text": "dp = 1 + dp[c1−1][c2][c3] + dp[c1][c2−1][c3] + dp[c1][c2][c3−1]",
+          "why": "Adds expectations without probabilities."
+        },
+        {
+          "id": "d",
+          "text": "dp = N / (c1 + c2 + c3) + dp with one piece fewer",
+          "why": "Right first term, but the next state depends on which kind of dish was hit."
+        }
+      ],
+      "accepted": [
+        "a"
+      ],
+      "explanation": "Write E = 1 + (c0/N)·E + Σ (c_k/N)·E', then solve for E. Iterate c3, then c2, then c1 in increasing order."
+    }
+  ],
+  "deprecated": false
+}

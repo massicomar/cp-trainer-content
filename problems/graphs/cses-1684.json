@@ -1,0 +1,45 @@
+{
+  "$schema": "../../schema/problem.schema.json",
+  "schemaVersion": 1,
+  "id": "cses-1684",
+  "status": "draft",
+  "title": "Giant Pizza",
+  "source": "CSES",
+  "url": "https://cses.fi/problemset/task/1684",
+  "difficulty": {
+    "tier": "hard",
+    "scale": "estimate",
+    "value": "M/H"
+  },
+  "summary": "",
+  "constraints": {
+    "text": "n, m ≤ 1e5",
+    "verified": true
+  },
+  "answers": {
+    "subjects": [
+      {
+        "id": "graphs",
+        "role": "intended"
+      }
+    ],
+    "techniques": [
+      {
+        "id": "graphs.2-sat",
+        "role": "intended"
+      }
+    ]
+  },
+  "distractors": [
+    "graphs.bipartite",
+    "dp.bitmask",
+    "other.greedy"
+  ],
+  "explanation": "Each wish is 'a or b': implications ¬a→b and ¬b→a, then SCCs; x and ¬x in one SCC is impossible.",
+  "traps": [
+    "Assign values from the SCC topological order, not arbitrarily."
+  ],
+  "pairWith": [],
+  "extraLayers": [],
+  "deprecated": false
+}

@@ -1,0 +1,44 @@
+{
+  "$schema": "../../schema/problem.schema.json",
+  "schemaVersion": 1,
+  "id": "atcoder-abc178-e",
+  "status": "draft",
+  "title": "Dist Max",
+  "source": "AtCoder",
+  "url": "https://atcoder.jp/contests/abc178/tasks/abc178_e",
+  "difficulty": {
+    "tier": "easy",
+    "scale": "estimate",
+    "value": "E"
+  },
+  "summary": "",
+  "constraints": {
+    "text": "N ≤ 2e5, coordinates ≤ 1e9",
+    "verified": true
+  },
+  "answers": {
+    "subjects": [
+      {
+        "id": "geometry",
+        "role": "intended"
+      }
+    ],
+    "techniques": [
+      {
+        "id": "geometry.manhattan-rotation",
+        "role": "intended"
+      }
+    ]
+  },
+  "distractors": [
+    "geometry.closest-pair",
+    "geometry.rotating-calipers"
+  ],
+  "explanation": "Max Manhattan distance = max of (max − min) over x + y and x − y: rotate 45°, O(N).",
+  "traps": [
+    "O(N²) pairs is 4e10."
+  ],
+  "pairWith": [],
+  "extraLayers": [],
+  "deprecated": false
+}

@@ -1,0 +1,56 @@
+{
+  "$schema": "../../schema/problem.schema.json",
+  "schemaVersion": 1,
+  "id": "cses-2101",
+  "status": "draft",
+  "title": "New Roads Queries",
+  "source": "CSES",
+  "url": "https://cses.fi/problemset/task/2101",
+  "difficulty": {
+    "tier": "hard",
+    "scale": "estimate",
+    "value": "H"
+  },
+  "summary": "",
+  "constraints": {
+    "text": "n, m, q ≤ 2e5",
+    "verified": true
+  },
+  "answers": {
+    "subjects": [
+      {
+        "id": "bsearch-dnc",
+        "role": "intended"
+      },
+      {
+        "id": "graphs",
+        "role": "accepted"
+      }
+    ],
+    "techniques": [
+      {
+        "id": "bsearch-dnc.parallel-bs",
+        "role": "intended"
+      },
+      {
+        "id": "graphs.dsu",
+        "role": "accepted"
+      },
+      {
+        "id": "graphs.lca",
+        "role": "accepted"
+      }
+    ]
+  },
+  "distractors": [
+    "graphs.bfs",
+    "bsearch-dnc.on-answer"
+  ],
+  "explanation": "For each query, the first day when two cities become connected: parallel binary search with DSU rebuilds (or the MST path maximum via LCA).",
+  "traps": [
+    "Binary searching each query separately rebuilds the DSU O(q log m) times."
+  ],
+  "pairWith": [],
+  "extraLayers": [],
+  "deprecated": false
+}

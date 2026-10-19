@@ -1,0 +1,44 @@
+{
+  "$schema": "../../schema/problem.schema.json",
+  "schemaVersion": 1,
+  "id": "cf-1295d",
+  "status": "draft",
+  "title": "Same GCDs",
+  "source": "Codeforces",
+  "url": "https://codeforces.com/problemset/problem/1295/D",
+  "difficulty": {
+    "tier": "medium",
+    "scale": "cf",
+    "value": "1800"
+  },
+  "summary": "",
+  "constraints": {
+    "text": "m ≤ 1e10",
+    "verified": true
+  },
+  "answers": {
+    "subjects": [
+      {
+        "id": "number-theory",
+        "role": "intended"
+      }
+    ],
+    "techniques": [
+      {
+        "id": "number-theory.totient",
+        "role": "intended"
+      }
+    ]
+  },
+  "distractors": [
+    "number-theory.gcd-lcm",
+    "number-theory.inclusion-exclusion"
+  ],
+  "explanation": "gcd(a + x, m) = gcd(a, m) = g means (a + x)/g is coprime to m/g over a full period: the answer is φ(m/g), by trial division.",
+  "traps": [
+    "Iterating over x up to 1e10."
+  ],
+  "pairWith": [],
+  "extraLayers": [],
+  "deprecated": false
+}

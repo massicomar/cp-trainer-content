@@ -1,0 +1,44 @@
+{
+  "$schema": "../../schema/problem.schema.json",
+  "schemaVersion": 1,
+  "id": "cses-1737",
+  "status": "draft",
+  "title": "Range Queries and Copies",
+  "source": "CSES",
+  "url": "https://cses.fi/problemset/task/1737",
+  "difficulty": {
+    "tier": "hard",
+    "scale": "estimate",
+    "value": "H"
+  },
+  "summary": "",
+  "constraints": {
+    "text": "n, q ≤ 2e5",
+    "verified": true
+  },
+  "answers": {
+    "subjects": [
+      {
+        "id": "segtree",
+        "role": "intended"
+      }
+    ],
+    "techniques": [
+      {
+        "id": "segtree.persistent",
+        "role": "intended"
+      }
+    ]
+  },
+  "distractors": [
+    "segtree.segtree-point",
+    "segtree.2d"
+  ],
+  "explanation": "'Make a copy of array k' → persistent segment tree: each update creates O(log n) new nodes, each copy is a root pointer.",
+  "traps": [
+    "Copying the array per query is O(n·q)."
+  ],
+  "pairWith": [],
+  "extraLayers": [],
+  "deprecated": false
+}

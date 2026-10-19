@@ -1,0 +1,45 @@
+{
+  "$schema": "../../schema/problem.schema.json",
+  "schemaVersion": 1,
+  "id": "kattis-pointinpolygon",
+  "status": "draft",
+  "title": "Point in Polygon",
+  "source": "Kattis",
+  "url": "https://open.kattis.com/problems/pointinpolygon",
+  "difficulty": {
+    "tier": "easy",
+    "scale": "kattis",
+    "value": "3.6"
+  },
+  "summary": "",
+  "constraints": {
+    "text": "n ≤ 1000 vertices, m ≤ 100 queries",
+    "verified": true
+  },
+  "answers": {
+    "subjects": [
+      {
+        "id": "geometry",
+        "role": "intended"
+      }
+    ],
+    "techniques": [
+      {
+        "id": "geometry.point-in-polygon",
+        "role": "intended"
+      }
+    ]
+  },
+  "distractors": [
+    "geometry.point-in-convex-polygon",
+    "geometry.shoelace-pick"
+  ],
+  "explanation": "n · m is tiny: ray casting (or winding number) per query, checking 'on the boundary' first.",
+  "traps": [
+    "The polygon need not be convex.",
+    "Rays through a vertex need a half-open rule."
+  ],
+  "pairWith": [],
+  "extraLayers": [],
+  "deprecated": false
+}

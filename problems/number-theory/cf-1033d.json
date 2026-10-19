@@ -1,0 +1,48 @@
+{
+  "$schema": "../../schema/problem.schema.json",
+  "schemaVersion": 1,
+  "id": "cf-1033d",
+  "status": "draft",
+  "title": "Divisors",
+  "source": "Codeforces",
+  "url": "https://codeforces.com/problemset/problem/1033/D",
+  "difficulty": {
+    "tier": "hard",
+    "scale": "cf",
+    "value": "2000"
+  },
+  "summary": "",
+  "constraints": {
+    "text": "a_i ≤ 2e18, each with 3 to 5 divisors",
+    "verified": true
+  },
+  "answers": {
+    "subjects": [
+      {
+        "id": "number-theory",
+        "role": "intended"
+      }
+    ],
+    "techniques": [
+      {
+        "id": "number-theory.gcd-lcm",
+        "role": "intended"
+      },
+      {
+        "id": "number-theory.pollard-rho",
+        "role": "overkill"
+      }
+    ]
+  },
+  "distractors": [
+    "number-theory.trial-division",
+    "number-theory.sieve"
+  ],
+  "explanation": "3–5 divisors means p², p³, p⁴ or p·q. Detect exact roots; for p·q, pairwise gcds with the other numbers reveal shared primes. Pollard works but is overkill.",
+  "traps": [
+    "Floating-point roots near 2e18 are off by one; correct them with integer checks."
+  ],
+  "pairWith": [],
+  "extraLayers": [],
+  "deprecated": false
+}

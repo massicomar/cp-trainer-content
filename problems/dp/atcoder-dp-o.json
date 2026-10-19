@@ -1,0 +1,106 @@
+{
+  "$schema": "../../schema/problem.schema.json",
+  "schemaVersion": 1,
+  "id": "atcoder-dp-o",
+  "status": "draft",
+  "title": "Matching",
+  "source": "AtCoder",
+  "url": "https://atcoder.jp/contests/dp/tasks/dp_o",
+  "difficulty": {
+    "tier": "medium",
+    "scale": "estimate",
+    "value": "M"
+  },
+  "summary": "",
+  "constraints": {
+    "text": "N ≤ 21 men and women, compatibility matrix",
+    "verified": true
+  },
+  "answers": {
+    "subjects": [
+      {
+        "id": "dp",
+        "role": "intended"
+      }
+    ],
+    "techniques": [
+      {
+        "id": "dp.bitmask",
+        "role": "intended"
+      }
+    ]
+  },
+  "distractors": [
+    "graphs.bipartite-matching",
+    "graphs.max-flow",
+    "bsearch-dnc.meet-in-middle"
+  ],
+  "explanation": "N ≤ 21 screams bitmask. Match men in order; the set of used women determines which man is next (popcount).",
+  "traps": [
+    "Adding the man index as an extra dimension multiplies the work by 21 for nothing."
+  ],
+  "pairWith": [],
+  "extraLayers": [
+    {
+      "key": "dp-state",
+      "kind": "dp-state",
+      "prompt": "What should the DP state represent?",
+      "options": [
+        {
+          "id": "a",
+          "text": "dp[mask] = number of ways to pair the first popcount(mask) men with exactly the women in mask"
+        },
+        {
+          "id": "b",
+          "text": "dp[i][mask] = ways to pair the first i men with women mask",
+          "why": "Correct but redundant: i = popcount(mask), and N·2^N·N ≈ 9e8 is too slow."
+        },
+        {
+          "id": "c",
+          "text": "dp[i][j] = ways man i is paired with woman j",
+          "why": "Pairs aren't independent; women can't be reused."
+        },
+        {
+          "id": "d",
+          "text": "Run bipartite matching",
+          "why": "Matching finds one perfect matching; this asks how many there are."
+        }
+      ],
+      "accepted": [
+        "a"
+      ],
+      "explanation": "Process men in a fixed order; the used-women set is all you need, and it tells you the next man."
+    },
+    {
+      "key": "dp-transition",
+      "kind": "dp-transition",
+      "prompt": "Given that state, which transition is right?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Let i = popcount(mask) − 1 (the man being placed); dp[mask] = Σ over women w ∈ mask with compat[i][w] of dp[mask \\ {w}]"
+        },
+        {
+          "id": "b",
+          "text": "dp[mask] = Σ over all w ∈ mask of dp[mask \\ {w}]",
+          "why": "Forgets to check compatibility."
+        },
+        {
+          "id": "c",
+          "text": "dp[mask] = max over w of dp[mask \\ {w}] + 1",
+          "why": "Counting, not maximizing."
+        },
+        {
+          "id": "d",
+          "text": "dp[mask] = Π over w ∈ mask of compat[popcount][w]",
+          "why": "Products don't count assignments."
+        }
+      ],
+      "accepted": [
+        "a"
+      ],
+      "explanation": "The last man placed took some compatible woman w; remove her and count the rest."
+    }
+  ],
+  "deprecated": false
+}

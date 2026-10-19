@@ -1,0 +1,44 @@
+{
+  "$schema": "../../schema/problem.schema.json",
+  "schemaVersion": 1,
+  "id": "cses-1675",
+  "status": "draft",
+  "title": "Road Reparation",
+  "source": "CSES",
+  "url": "https://cses.fi/problemset/task/1675",
+  "difficulty": {
+    "tier": "easy",
+    "scale": "estimate",
+    "value": "E"
+  },
+  "summary": "",
+  "constraints": {
+    "text": "n ≤ 1e5, m ≤ 2e5",
+    "verified": true
+  },
+  "answers": {
+    "subjects": [
+      {
+        "id": "graphs",
+        "role": "intended"
+      }
+    ],
+    "techniques": [
+      {
+        "id": "graphs.mst",
+        "role": "intended"
+      }
+    ]
+  },
+  "distractors": [
+    "graphs.dijkstra",
+    "graphs.dsu"
+  ],
+  "explanation": "Connect all cities at minimum total cost: Kruskal with DSU; fewer than n − 1 accepted edges means impossible.",
+  "traps": [
+    "Shortest-path tree ≠ minimum spanning tree."
+  ],
+  "pairWith": [],
+  "extraLayers": [],
+  "deprecated": false
+}

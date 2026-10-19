@@ -1,0 +1,110 @@
+{
+  "$schema": "../../schema/problem.schema.json",
+  "schemaVersion": 1,
+  "id": "cses-2181",
+  "status": "draft",
+  "title": "Counting Tilings",
+  "source": "CSES",
+  "url": "https://cses.fi/problemset/task/2181",
+  "difficulty": {
+    "tier": "hard",
+    "scale": "estimate",
+    "value": "H"
+  },
+  "summary": "",
+  "constraints": {
+    "text": "n ≤ 10 rows, m ≤ 1000 columns, 1×2 and 2×1 tiles",
+    "verified": true
+  },
+  "answers": {
+    "subjects": [
+      {
+        "id": "dp",
+        "role": "intended"
+      }
+    ],
+    "techniques": [
+      {
+        "id": "dp.broken-profile",
+        "role": "intended"
+      },
+      {
+        "id": "dp.bitmask",
+        "role": "accepted"
+      }
+    ]
+  },
+  "distractors": [
+    "dp.grid",
+    "dp.matrix-power",
+    "number-theory.binomial-mod"
+  ],
+  "explanation": "One side is ≤ 10: sweep the long side and keep a bitmask of which cells in the current column are already covered by tiles sticking out from the previous column.",
+  "traps": [
+    "2^10 masks × 2^10 transitions per column × 1000 is ~1e9 if done naively; generate transitions by DFS over the column (or go cell by cell)."
+  ],
+  "pairWith": [],
+  "extraLayers": [
+    {
+      "key": "dp-state",
+      "kind": "dp-state",
+      "prompt": "What should the DP state represent?",
+      "options": [
+        {
+          "id": "a",
+          "text": "dp[col][mask] = ways to fully cover columns < col, where mask marks cells of column col already covered by horizontal tiles"
+        },
+        {
+          "id": "b",
+          "text": "dp[i][j] = ways to tile an i × j rectangle",
+          "why": "Sub-rectangles don't combine: tiles cross any cut you choose."
+        },
+        {
+          "id": "c",
+          "text": "dp[mask] over all n·m cells",
+          "why": "2^10000."
+        },
+        {
+          "id": "d",
+          "text": "dp[col] = ways to tile the first col columns completely",
+          "why": "Horizontal tiles stick out across the column boundary; you must remember which cells they cover."
+        }
+      ],
+      "accepted": [
+        "a"
+      ],
+      "explanation": "Short side ≤ 10 → the 'frontier' between columns fits in a bitmask: that's profile DP."
+    },
+    {
+      "key": "dp-transition",
+      "kind": "dp-transition",
+      "prompt": "Given that state, which transition is right?",
+      "options": [
+        {
+          "id": "a",
+          "text": "From (col, mask): fill column col's free cells with vertical pairs or horizontal tiles starting here; the horizontal ones form next_mask; dp[col+1][next_mask] += dp[col][mask]"
+        },
+        {
+          "id": "b",
+          "text": "dp[col+1][mask] = dp[col][mask] · 2",
+          "why": "Tile choices depend on which cells are free."
+        },
+        {
+          "id": "c",
+          "text": "dp[col+1][next] += dp[col][mask] for every pair of masks",
+          "why": "Most pairs aren't compatible; you must check the column can be filled."
+        },
+        {
+          "id": "d",
+          "text": "Raise the 2^n × 2^n transition matrix to the m-th power",
+          "why": "Valid in principle but 1024³ per multiplication is far slower than the direct sweep for m ≤ 1000."
+        }
+      ],
+      "accepted": [
+        "a"
+      ],
+      "explanation": "Answer = dp[m][0]: everything covered and nothing sticking out of the grid."
+    }
+  ],
+  "deprecated": false
+}

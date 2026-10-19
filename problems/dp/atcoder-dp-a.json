@@ -1,0 +1,105 @@
+{
+  "$schema": "../../schema/problem.schema.json",
+  "schemaVersion": 1,
+  "id": "atcoder-dp-a",
+  "status": "draft",
+  "title": "Frog 1",
+  "source": "AtCoder",
+  "url": "https://atcoder.jp/contests/dp/tasks/dp_a",
+  "difficulty": {
+    "tier": "easy",
+    "scale": "estimate",
+    "value": "E"
+  },
+  "summary": "",
+  "constraints": {
+    "text": "N ≤ 1e5, heights ≤ 1e4, jumps of +1 or +2",
+    "verified": false
+  },
+  "answers": {
+    "subjects": [
+      {
+        "id": "dp",
+        "role": "intended"
+      }
+    ],
+    "techniques": [
+      {
+        "id": "dp.linear",
+        "role": "intended"
+      }
+    ]
+  },
+  "distractors": [
+    "other.greedy",
+    "graphs.dijkstra"
+  ],
+  "explanation": "The cost to reach stone i only depends on how you reached stone i−1 or i−2, so a 1D table over stones is enough.",
+  "traps": [
+    "Greedily taking the cheaper next jump is not optimal."
+  ],
+  "pairWith": [],
+  "extraLayers": [
+    {
+      "key": "dp-state",
+      "kind": "dp-state",
+      "prompt": "What should the DP state represent?",
+      "options": [
+        {
+          "id": "a",
+          "text": "dp[i] = minimum total cost to reach stone i"
+        },
+        {
+          "id": "b",
+          "text": "dp[i][j] = minimum cost to go from stone i to stone j",
+          "why": "N² states (1e10) and you only ever start from stone 1."
+        },
+        {
+          "id": "c",
+          "text": "dp[h] = minimum cost to reach a stone of height h",
+          "why": "Heights don't identify stones, and the order of stones matters."
+        },
+        {
+          "id": "d",
+          "text": "dp[i] = number of ways to reach stone i",
+          "why": "That counts paths; the problem asks for a minimum cost."
+        }
+      ],
+      "accepted": [
+        "a"
+      ],
+      "explanation": "The only thing the future needs to know is the best cost to stand on stone i."
+    },
+    {
+      "key": "dp-transition",
+      "kind": "dp-transition",
+      "prompt": "Given that state, which transition is right?",
+      "options": [
+        {
+          "id": "a",
+          "text": "dp[i] = min(dp[i−1] + |h_i − h_{i−1}|, dp[i−2] + |h_i − h_{i−2}|)"
+        },
+        {
+          "id": "b",
+          "text": "dp[i] = dp[i−1] + dp[i−2]",
+          "why": "That's the counting recurrence (Fibonacci), not a minimum cost."
+        },
+        {
+          "id": "c",
+          "text": "dp[i] = min over all j < i of dp[j] + |h_i − h_j|",
+          "why": "That allows jumps of any length (that's Frog 2 with K = N); here only +1 and +2 are allowed."
+        },
+        {
+          "id": "d",
+          "text": "dp[i] = dp[i−1] + min(|h_i − h_{i−1}|, |h_i − h_{i−2}|)",
+          "why": "Mixes two different predecessors: the +2 jump doesn't start from stone i−1."
+        }
+      ],
+      "accepted": [
+        "a"
+      ],
+      "explanation": "You arrive at i from i−1 or i−2; take the cheaper of the two."
+    }
+  ],
+  "deprecated": false
+}

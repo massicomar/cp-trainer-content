@@ -1,0 +1,45 @@
+{
+  "$schema": "../../schema/problem.schema.json",
+  "schemaVersion": 1,
+  "id": "cf-86d",
+  "status": "draft",
+  "title": "Powerful array",
+  "source": "Codeforces",
+  "url": "https://codeforces.com/problemset/problem/86/D",
+  "difficulty": {
+    "tier": "hard",
+    "scale": "cf",
+    "value": "2200"
+  },
+  "summary": "",
+  "constraints": {
+    "text": "n, t ≤ 2e5, values ≤ 1e6",
+    "verified": false
+  },
+  "answers": {
+    "subjects": [
+      {
+        "id": "segtree",
+        "role": "intended"
+      }
+    ],
+    "techniques": [
+      {
+        "id": "segtree.mo",
+        "role": "intended"
+      }
+    ]
+  },
+  "distractors": [
+    "segtree.segtree-merged-node",
+    "segtree.offline-sweep-bit"
+  ],
+  "explanation": "Offline queries of Σ cnt_s² · s: easy to update when adding/removing one element, impossible to merge halves → Mo's algorithm.",
+  "traps": [
+    "Answers need 64-bit.",
+    "Block order matters for speed."
+  ],
+  "pairWith": [],
+  "extraLayers": [],
+  "deprecated": false
+}

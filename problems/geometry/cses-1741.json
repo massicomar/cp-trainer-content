@@ -1,0 +1,53 @@
+{
+  "$schema": "../../schema/problem.schema.json",
+  "schemaVersion": 1,
+  "id": "cses-1741",
+  "status": "draft",
+  "title": "Area of Rectangles",
+  "source": "CSES",
+  "url": "https://cses.fi/problemset/task/1741",
+  "difficulty": {
+    "tier": "hard",
+    "scale": "estimate",
+    "value": "M/H"
+  },
+  "summary": "",
+  "constraints": {
+    "text": "n ≤ 1e5 rectangles, |coordinates| ≤ 1e6",
+    "verified": true
+  },
+  "answers": {
+    "subjects": [
+      {
+        "id": "geometry",
+        "role": "intended"
+      },
+      {
+        "id": "segtree",
+        "role": "accepted"
+      }
+    ],
+    "techniques": [
+      {
+        "id": "geometry.line-sweep",
+        "role": "intended"
+      },
+      {
+        "id": "segtree.segtree-lazy",
+        "role": "accepted"
+      }
+    ]
+  },
+  "distractors": [
+    "geometry.shoelace-pick",
+    "segtree.prefix-sums"
+  ],
+  "explanation": "Sweep along x; a segment tree over y keeps cover counts and covered length.",
+  "traps": [
+    "A 2e6 × 2e6 grid is impossible.",
+    "Area needs 64-bit."
+  ],
+  "pairWith": [],
+  "extraLayers": [],
+  "deprecated": false
+}

@@ -1,0 +1,44 @@
+{
+  "$schema": "../../schema/problem.schema.json",
+  "schemaVersion": 1,
+  "id": "cf-1117c",
+  "status": "draft",
+  "title": "Magic Ship",
+  "source": "Codeforces",
+  "url": "https://codeforces.com/problemset/problem/1117/C",
+  "difficulty": {
+    "tier": "medium",
+    "scale": "cf",
+    "value": "1900"
+  },
+  "summary": "",
+  "constraints": {
+    "text": "n ≤ 1e5, coordinates ≤ 1e9",
+    "verified": true
+  },
+  "answers": {
+    "subjects": [
+      {
+        "id": "bsearch-dnc",
+        "role": "intended"
+      }
+    ],
+    "techniques": [
+      {
+        "id": "bsearch-dnc.on-answer",
+        "role": "intended"
+      }
+    ]
+  },
+  "distractors": [
+    "graphs.bfs",
+    "other.greedy"
+  ],
+  "explanation": "After d days the wind shifts you by a computable amount; you can reach the target iff the Manhattan distance ≤ d. Monotone in d → binary search (d up to ~2e14).",
+  "traps": [
+    "Upper bound too small; the answer can exceed 1e9."
+  ],
+  "pairWith": [],
+  "extraLayers": [],
+  "deprecated": false
+}

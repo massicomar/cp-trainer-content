@@ -1,0 +1,48 @@
+{
+  "$schema": "../../schema/problem.schema.json",
+  "schemaVersion": 1,
+  "id": "cf-279b",
+  "status": "draft",
+  "title": "Books",
+  "source": "Codeforces",
+  "url": "https://codeforces.com/problemset/problem/279/B",
+  "difficulty": {
+    "tier": "easy",
+    "scale": "cf",
+    "value": "1400"
+  },
+  "summary": "",
+  "constraints": {
+    "text": "n ≤ 1e5, a_i ≥ 1, t ≤ 1e9",
+    "verified": false
+  },
+  "answers": {
+    "subjects": [
+      {
+        "id": "bsearch-dnc",
+        "role": "intended"
+      }
+    ],
+    "techniques": [
+      {
+        "id": "bsearch-dnc.two-pointers",
+        "role": "intended"
+      },
+      {
+        "id": "bsearch-dnc.sorted-array",
+        "role": "accepted"
+      }
+    ]
+  },
+  "distractors": [
+    "bsearch-dnc.on-answer",
+    "dp.linear"
+  ],
+  "explanation": "Longest window with sum ≤ t and all times positive: a sliding window. Binary search on prefix sums also works but isn't needed.",
+  "traps": [
+    "With negative values the window wouldn't be monotone."
+  ],
+  "pairWith": [],
+  "extraLayers": [],
+  "deprecated": false
+}

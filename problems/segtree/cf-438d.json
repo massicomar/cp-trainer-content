@@ -1,0 +1,44 @@
+{
+  "$schema": "../../schema/problem.schema.json",
+  "schemaVersion": 1,
+  "id": "cf-438d",
+  "status": "draft",
+  "title": "The Child and Sequence",
+  "source": "Codeforces",
+  "url": "https://codeforces.com/problemset/problem/438/D",
+  "difficulty": {
+    "tier": "hard",
+    "scale": "cf",
+    "value": "2300"
+  },
+  "summary": "",
+  "constraints": {
+    "text": "n, m ≤ 1e5, range mod, point assign, range sum",
+    "verified": true
+  },
+  "answers": {
+    "subjects": [
+      {
+        "id": "segtree",
+        "role": "intended"
+      }
+    ],
+    "techniques": [
+      {
+        "id": "segtree.beats",
+        "role": "intended"
+      }
+    ]
+  },
+  "distractors": [
+    "segtree.segtree-lazy",
+    "segtree.mo"
+  ],
+  "explanation": "Range a_i mod x: skip a node if its max < x; otherwise recurse. Each effective mod at least halves a value, so it amortizes.",
+  "traps": [
+    "Trying to make 'mod' a lazy tag."
+  ],
+  "pairWith": [],
+  "extraLayers": [],
+  "deprecated": false
+}

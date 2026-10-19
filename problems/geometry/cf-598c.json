@@ -1,0 +1,45 @@
+{
+  "$schema": "../../schema/problem.schema.json",
+  "schemaVersion": 1,
+  "id": "cf-598c",
+  "status": "draft",
+  "title": "Nearest vectors",
+  "source": "Codeforces",
+  "url": "https://codeforces.com/problemset/problem/598/C",
+  "difficulty": {
+    "tier": "hard",
+    "scale": "cf",
+    "value": "2300"
+  },
+  "summary": "",
+  "constraints": {
+    "text": "n ≤ 1e5, |coordinates| ≤ 1e4",
+    "verified": true
+  },
+  "answers": {
+    "subjects": [
+      {
+        "id": "geometry",
+        "role": "intended"
+      }
+    ],
+    "techniques": [
+      {
+        "id": "geometry.polar-sort",
+        "role": "intended"
+      }
+    ]
+  },
+  "distractors": [
+    "geometry.convex-hull",
+    "geometry.closest-pair"
+  ],
+  "explanation": "Sort by angle; the smallest angle is between neighbours, including the last–first pair.",
+  "traps": [
+    "Precision: plain double atan2 can fail; use long double or exact comparisons.",
+    "Forgetting the wrap-around pair."
+  ],
+  "pairWith": [],
+  "extraLayers": [],
+  "deprecated": false
+}

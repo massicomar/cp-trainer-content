@@ -1,0 +1,44 @@
+{
+  "$schema": "../../schema/problem.schema.json",
+  "schemaVersion": 1,
+  "id": "cses-2422",
+  "status": "draft",
+  "title": "Multiplication Table",
+  "source": "CSES",
+  "url": "https://cses.fi/problemset/task/2422",
+  "difficulty": {
+    "tier": "medium",
+    "scale": "usaco",
+    "value": "M"
+  },
+  "summary": "",
+  "constraints": {
+    "text": "n < 1e6 (n × n table, n odd)",
+    "verified": true
+  },
+  "answers": {
+    "subjects": [
+      {
+        "id": "bsearch-dnc",
+        "role": "intended"
+      }
+    ],
+    "techniques": [
+      {
+        "id": "bsearch-dnc.kth-by-counting",
+        "role": "intended"
+      }
+    ]
+  },
+  "distractors": [
+    "bsearch-dnc.sorted-array",
+    "segtree.persistent"
+  ],
+  "explanation": "Median of an implicit n² table: binary search the value v and count entries ≤ v with Σ min(n, ⌊v/i⌋).",
+  "traps": [
+    "Building the table is 1e12 entries."
+  ],
+  "pairWith": [],
+  "extraLayers": [],
+  "deprecated": false
+}

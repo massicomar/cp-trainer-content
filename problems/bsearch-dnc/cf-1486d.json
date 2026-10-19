@@ -1,0 +1,44 @@
+{
+  "$schema": "../../schema/problem.schema.json",
+  "schemaVersion": 1,
+  "id": "cf-1486d",
+  "status": "draft",
+  "title": "Max Median",
+  "source": "Codeforces",
+  "url": "https://codeforces.com/problemset/problem/1486/D",
+  "difficulty": {
+    "tier": "hard",
+    "scale": "cf",
+    "value": "2100"
+  },
+  "summary": "",
+  "constraints": {
+    "text": "n ≤ 2e5",
+    "verified": true
+  },
+  "answers": {
+    "subjects": [
+      {
+        "id": "bsearch-dnc",
+        "role": "intended"
+      }
+    ],
+    "techniques": [
+      {
+        "id": "bsearch-dnc.on-answer",
+        "role": "intended"
+      }
+    ]
+  },
+  "distractors": [
+    "segtree.persistent",
+    "bsearch-dnc.two-pointers"
+  ],
+  "explanation": "Binary search x: map values to +1 (≥ x) / −1 (< x); a subarray of length ≥ k with positive sum exists iff the median can be ≥ x.",
+  "traps": [
+    "Even-length medians: check which element the problem calls the median."
+  ],
+  "pairWith": [],
+  "extraLayers": [],
+  "deprecated": false
+}

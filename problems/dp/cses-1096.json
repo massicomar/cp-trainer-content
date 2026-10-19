@@ -1,0 +1,108 @@
+{
+  "$schema": "../../schema/problem.schema.json",
+  "schemaVersion": 1,
+  "id": "cses-1096",
+  "status": "draft",
+  "title": "Throwing Dice",
+  "source": "CSES",
+  "url": "https://cses.fi/problemset/task/1096",
+  "difficulty": {
+    "tier": "medium",
+    "scale": "estimate",
+    "value": "M"
+  },
+  "summary": "",
+  "constraints": {
+    "text": "n ≤ 1e18",
+    "verified": true
+  },
+  "answers": {
+    "subjects": [
+      {
+        "id": "dp",
+        "role": "intended"
+      }
+    ],
+    "techniques": [
+      {
+        "id": "dp.matrix-power",
+        "role": "intended"
+      }
+    ]
+  },
+  "distractors": [
+    "dp.linear",
+    "number-theory.fast-pow",
+    "number-theory.binomial-mod"
+  ],
+  "explanation": "Same recurrence as Dice Combinations, but n ≤ 1e18 rules out a table: raise the 6×6 companion matrix to the n-th power, O(6³ log n).",
+  "traps": [
+    "The table version needs 1e18 cells."
+  ],
+  "pairWith": [
+    "cses-1633"
+  ],
+  "extraLayers": [
+    {
+      "key": "dp-state",
+      "kind": "dp-state",
+      "prompt": "What should the DP state represent?",
+      "options": [
+        {
+          "id": "a",
+          "text": "A vector of the last six values (dp[s], dp[s−1], …, dp[s−5]), advanced by a 6×6 matrix"
+        },
+        {
+          "id": "b",
+          "text": "dp[s] for every s ≤ n",
+          "why": "That's 1e18 entries."
+        },
+        {
+          "id": "c",
+          "text": "dp[s mod 6]",
+          "why": "The recurrence needs six different previous sums, not residues."
+        },
+        {
+          "id": "d",
+          "text": "dp[k] = ways with k dice, via binomials",
+          "why": "Counting compositions with parts 1..6 has no simple closed form."
+        }
+      ],
+      "accepted": [
+        "a"
+      ],
+      "explanation": "A linear recurrence of order 6 only needs a window of 6 values — and moving that window is a matrix multiplication."
+    },
+    {
+      "key": "dp-transition",
+      "kind": "dp-transition",
+      "prompt": "Given that state, which transition is right?",
+      "options": [
+        {
+          "id": "a",
+          "text": "v_{s+1} = M · v_s with M's first row all ones; compute M^n by repeated squaring"
+        },
+        {
+          "id": "b",
+          "text": "Loop s from 1 to n with a rolling window of 6",
+          "why": "Correct but 1e18 iterations."
+        },
+        {
+          "id": "c",
+          "text": "dp[n] = 6^n",
+          "why": "Counts all sequences of n throws, not sequences summing to n."
+        },
+        {
+          "id": "d",
+          "text": "dp[n] = dp[n/2]²",
+          "why": "Recurrences don't split like that; the matrix power does it properly."
+        }
+      ],
+      "accepted": [
+        "a"
+      ],
+      "explanation": "Binary exponentiation of the companion matrix: 6³ · 60 multiplications."
+    }
+  ],
+  "deprecated": false
+}

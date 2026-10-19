@@ -1,0 +1,52 @@
+{
+  "$schema": "../../schema/problem.schema.json",
+  "schemaVersion": 1,
+  "id": "cf-429d",
+  "status": "draft",
+  "title": "Tricky Function",
+  "source": "Codeforces",
+  "url": "https://codeforces.com/problemset/problem/429/D",
+  "difficulty": {
+    "tier": "hard",
+    "scale": "cf",
+    "value": "2200"
+  },
+  "summary": "",
+  "constraints": {
+    "text": "n ≤ 1e5",
+    "verified": true
+  },
+  "answers": {
+    "subjects": [
+      {
+        "id": "bsearch-dnc",
+        "role": "intended"
+      },
+      {
+        "id": "geometry",
+        "role": "accepted"
+      }
+    ],
+    "techniques": [
+      {
+        "id": "bsearch-dnc.classic-dnc",
+        "role": "intended"
+      },
+      {
+        "id": "geometry.closest-pair",
+        "role": "accepted"
+      }
+    ]
+  },
+  "distractors": [
+    "dp.linear",
+    "bsearch-dnc.two-pointers"
+  ],
+  "explanation": "f(i, j) = (i − j)² + (prefix_i − prefix_j)² is a squared distance between points (i, prefix_i): closest pair by divide & conquer.",
+  "traps": [
+    "O(n²) is 1e10."
+  ],
+  "pairWith": [],
+  "extraLayers": [],
+  "deprecated": false
+}

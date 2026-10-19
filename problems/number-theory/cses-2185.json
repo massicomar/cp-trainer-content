@@ -1,0 +1,44 @@
+{
+  "$schema": "../../schema/problem.schema.json",
+  "schemaVersion": 1,
+  "id": "cses-2185",
+  "status": "draft",
+  "title": "Prime Multiples",
+  "source": "CSES",
+  "url": "https://cses.fi/problemset/task/2185",
+  "difficulty": {
+    "tier": "medium",
+    "scale": "estimate",
+    "value": "M"
+  },
+  "summary": "",
+  "constraints": {
+    "text": "n ≤ 1e18, k ≤ 20 primes",
+    "verified": true
+  },
+  "answers": {
+    "subjects": [
+      {
+        "id": "number-theory",
+        "role": "intended"
+      }
+    ],
+    "techniques": [
+      {
+        "id": "number-theory.inclusion-exclusion",
+        "role": "intended"
+      }
+    ]
+  },
+  "distractors": [
+    "number-theory.sieve",
+    "number-theory.mobius"
+  ],
+  "explanation": "Count numbers ≤ n divisible by at least one prime: inclusion–exclusion over 2^k subsets of the primes.",
+  "traps": [
+    "Products of primes overflow past 1e18: stop when the product exceeds n."
+  ],
+  "pairWith": [],
+  "extraLayers": [],
+  "deprecated": false
+}

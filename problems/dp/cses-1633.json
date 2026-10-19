@@ -1,0 +1,109 @@
+{
+  "$schema": "../../schema/problem.schema.json",
+  "schemaVersion": 1,
+  "id": "cses-1633",
+  "status": "draft",
+  "title": "Dice Combinations",
+  "source": "CSES",
+  "url": "https://cses.fi/problemset/task/1633",
+  "difficulty": {
+    "tier": "easy",
+    "scale": "estimate",
+    "value": "E"
+  },
+  "summary": "",
+  "constraints": {
+    "text": "n ≤ 1e6, count ordered dice sequences, mod 1e9+7",
+    "verified": false
+  },
+  "answers": {
+    "subjects": [
+      {
+        "id": "dp",
+        "role": "intended"
+      }
+    ],
+    "techniques": [
+      {
+        "id": "dp.linear",
+        "role": "intended"
+      },
+      {
+        "id": "dp.coin-change",
+        "role": "accepted"
+      }
+    ]
+  },
+  "distractors": [
+    "dp.matrix-power",
+    "number-theory.binomial-mod"
+  ],
+  "explanation": "Condition on the last die face: ways(s) = Σ ways(s − f) for f = 1..6. Order matters, so this is the 'ordered' counting recurrence.",
+  "traps": [],
+  "pairWith": [
+    "cses-1096"
+  ],
+  "extraLayers": [
+    {
+      "key": "dp-state",
+      "kind": "dp-state",
+      "prompt": "What should the DP state represent?",
+      "options": [
+        {
+          "id": "a",
+          "text": "dp[s] = number of ordered dice sequences with sum s"
+        },
+        {
+          "id": "b",
+          "text": "dp[k][s] = ways to get sum s with exactly k throws",
+          "why": "Correct but useless extra dimension: n × n = 1e12 states."
+        },
+        {
+          "id": "c",
+          "text": "dp[s] = number of multisets of faces summing to s",
+          "why": "Here 1+2 and 2+1 are different sequences, so order matters."
+        },
+        {
+          "id": "d",
+          "text": "dp[f] = ways for the last face to be f",
+          "why": "Doesn't track the sum at all."
+        }
+      ],
+      "accepted": [
+        "a"
+      ],
+      "explanation": "Only the remaining sum matters for the future; how many dice you've thrown doesn't."
+    },
+    {
+      "key": "dp-transition",
+      "kind": "dp-transition",
+      "prompt": "Given that state, which transition is right?",
+      "options": [
+        {
+          "id": "a",
+          "text": "dp[s] = dp[s−1] + dp[s−2] + … + dp[s−6], with dp[0] = 1"
+        },
+        {
+          "id": "b",
+          "text": "dp[s] = 6 · dp[s−1]",
+          "why": "Every throw multiplies the count by 6 only if the sum didn't matter."
+        },
+        {
+          "id": "c",
+          "text": "dp[s] = max over f of dp[s−f] + 1",
+          "why": "That's the minimum/maximum number of dice, not the number of ways."
+        },
+        {
+          "id": "d",
+          "text": "for each face f (outer loop): for s: dp[s] += dp[s−f]",
+          "why": "With faces in the outer loop you count each multiset once — that's the unordered version."
+        }
+      ],
+      "accepted": [
+        "a"
+      ],
+      "explanation": "The last die shows some face f in 1..6; the rest of the sequence sums to s − f."
+    }
+  ],
+  "deprecated": false
+}

@@ -1,0 +1,108 @@
+{
+  "$schema": "../../schema/problem.schema.json",
+  "schemaVersion": 1,
+  "id": "cses-1158",
+  "status": "draft",
+  "title": "Book Shop",
+  "source": "CSES",
+  "url": "https://cses.fi/problemset/task/1158",
+  "difficulty": {
+    "tier": "easy",
+    "scale": "estimate",
+    "value": "E"
+  },
+  "summary": "",
+  "constraints": {
+    "text": "n ≤ 1000 books, budget x ≤ 1e5",
+    "verified": true
+  },
+  "answers": {
+    "subjects": [
+      {
+        "id": "dp",
+        "role": "intended"
+      }
+    ],
+    "techniques": [
+      {
+        "id": "dp.knapsack-01",
+        "role": "intended"
+      }
+    ]
+  },
+  "distractors": [
+    "dp.coin-change",
+    "other.greedy",
+    "dp.bitmask"
+  ],
+  "explanation": "Each book once, small budget: 0/1 knapsack over capacity. n·x = 1e8 fits with a rolled 1D array iterated downward.",
+  "traps": [
+    "Iterating capacity upward in the rolled array turns it into unbounded knapsack (books reused)."
+  ],
+  "pairWith": [
+    "atcoder-dp-e"
+  ],
+  "extraLayers": [
+    {
+      "key": "dp-state",
+      "kind": "dp-state",
+      "prompt": "What should the DP state represent?",
+      "options": [
+        {
+          "id": "a",
+          "text": "dp[i][c] = max pages using a subset of the first i books with total price ≤ c"
+        },
+        {
+          "id": "b",
+          "text": "dp[c] = max pages with total price ≤ c, books reusable",
+          "why": "Books can't be bought twice; that's unbounded knapsack."
+        },
+        {
+          "id": "c",
+          "text": "dp[mask] = pages of the chosen subset",
+          "why": "2^1000 subsets."
+        },
+        {
+          "id": "d",
+          "text": "dp[p] = minimum price to get exactly p pages",
+          "why": "Valid idea only when total pages is small; here pages total up to 1e6 and price is the small dimension."
+        }
+      ],
+      "accepted": [
+        "a"
+      ],
+      "explanation": "Index by the small dimension (budget ≤ 1e5) and remember which books are still available (prefix i)."
+    },
+    {
+      "key": "dp-transition",
+      "kind": "dp-transition",
+      "prompt": "Given that state, which transition is right?",
+      "options": [
+        {
+          "id": "a",
+          "text": "dp[i][c] = max(dp[i−1][c], dp[i−1][c − price_i] + pages_i)"
+        },
+        {
+          "id": "b",
+          "text": "dp[i][c] = max(dp[i−1][c], dp[i][c − price_i] + pages_i)",
+          "why": "Using dp[i] on the right lets book i be bought again (unbounded)."
+        },
+        {
+          "id": "c",
+          "text": "dp[c] = max over books of dp[c − price] + pages, c upward",
+          "why": "Allows reusing the same book."
+        },
+        {
+          "id": "d",
+          "text": "Sort by pages/price and take greedily",
+          "why": "Fractional-knapsack greedy is wrong for 0/1 items."
+        }
+      ],
+      "accepted": [
+        "a"
+      ],
+      "explanation": "Book i is either skipped or bought once, using the previous row so it can't be reused."
+    }
+  ],
+  "deprecated": false
+}

@@ -1,0 +1,47 @@
+{
+  "$schema": "../../schema/problem.schema.json",
+  "schemaVersion": 1,
+  "id": "cses-1095",
+  "status": "draft",
+  "title": "Exponentiation",
+  "source": "CSES",
+  "url": "https://cses.fi/problemset/task/1095",
+  "difficulty": {
+    "tier": "easy",
+    "scale": "estimate",
+    "value": "E"
+  },
+  "summary": "",
+  "constraints": {
+    "text": "n ≤ 2e5 queries, a, b ≤ 1e9",
+    "verified": true
+  },
+  "answers": {
+    "subjects": [
+      {
+        "id": "number-theory",
+        "role": "intended"
+      }
+    ],
+    "techniques": [
+      {
+        "id": "number-theory.fast-pow",
+        "role": "intended"
+      }
+    ]
+  },
+  "distractors": [
+    "number-theory.mod-inverse",
+    "dp.matrix-power"
+  ],
+  "explanation": "a^b mod p with b up to 1e9: binary exponentiation, O(log b) per query.",
+  "traps": [
+    "0^0 = 1 here.",
+    "Multiply in 64-bit before taking mod."
+  ],
+  "pairWith": [
+    "cses-1712"
+  ],
+  "extraLayers": [],
+  "deprecated": false
+}

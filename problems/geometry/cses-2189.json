@@ -1,0 +1,43 @@
+{
+  "$schema": "../../schema/problem.schema.json",
+  "schemaVersion": 1,
+  "id": "cses-2189",
+  "status": "draft",
+  "title": "Point Location Test",
+  "source": "CSES",
+  "url": "https://cses.fi/problemset/task/2189",
+  "difficulty": {
+    "tier": "easy",
+    "scale": "usaco",
+    "value": "E"
+  },
+  "summary": "",
+  "constraints": {
+    "text": "t ≤ 1e5 tests, |coordinates| ≤ 1e9",
+    "verified": true
+  },
+  "answers": {
+    "subjects": [
+      {
+        "id": "geometry",
+        "role": "intended"
+      }
+    ],
+    "techniques": [
+      {
+        "id": "geometry.orientation",
+        "role": "intended"
+      }
+    ]
+  },
+  "distractors": [
+    "geometry.segment-intersection"
+  ],
+  "explanation": "Left, right or on the line is the sign of one cross product.",
+  "traps": [
+    "Cross products reach ~8e18: 64-bit needed; doubles lose precision."
+  ],
+  "pairWith": [],
+  "extraLayers": [],
+  "deprecated": false
+}

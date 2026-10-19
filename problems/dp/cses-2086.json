@@ -1,0 +1,110 @@
+{
+  "$schema": "../../schema/problem.schema.json",
+  "schemaVersion": 1,
+  "id": "cses-2086",
+  "status": "draft",
+  "title": "Subarray Squares",
+  "source": "CSES",
+  "url": "https://cses.fi/problemset/task/2086",
+  "difficulty": {
+    "tier": "hard",
+    "scale": "estimate",
+    "value": "M/H"
+  },
+  "summary": "",
+  "constraints": {
+    "text": "k ≤ n ≤ 3000",
+    "verified": true
+  },
+  "answers": {
+    "subjects": [
+      {
+        "id": "dp",
+        "role": "intended"
+      }
+    ],
+    "techniques": [
+      {
+        "id": "dp.opt-dnc",
+        "role": "intended"
+      },
+      {
+        "id": "dp.opt-cht",
+        "role": "accepted"
+      }
+    ]
+  },
+  "distractors": [
+    "dp.interval",
+    "bsearch-dnc.on-answer",
+    "dp.opt-knuth"
+  ],
+  "explanation": "Split into k parts minimizing Σ(part sum)². dp[j][i] with an O(n) min per state is O(k·n²) = 2.7e10. The best split point is monotone in i → divide & conquer DP (or CHT).",
+  "traps": [
+    "Squared part sums get large; use 64-bit integers."
+  ],
+  "pairWith": [],
+  "extraLayers": [
+    {
+      "key": "dp-state",
+      "kind": "dp-state",
+      "prompt": "What should the DP state represent?",
+      "options": [
+        {
+          "id": "a",
+          "text": "dp[j][i] = minimum cost to split the first i elements into j subarrays"
+        },
+        {
+          "id": "b",
+          "text": "dp[l][r] = minimum cost to split a[l..r]",
+          "why": "You also need how many parts are used; and O(n³) is too slow."
+        },
+        {
+          "id": "c",
+          "text": "dp[i] = minimum cost for the first i elements",
+          "why": "Loses the number of parts used (must be exactly k)."
+        },
+        {
+          "id": "d",
+          "text": "dp[s] = minimum parts with total square s",
+          "why": "Square sums are huge and that isn't the question."
+        }
+      ],
+      "accepted": [
+        "a"
+      ],
+      "explanation": "Partition into exactly k contiguous groups → (groups used, prefix length)."
+    },
+    {
+      "key": "dp-transition",
+      "kind": "dp-transition",
+      "prompt": "Given that state, which transition is right?",
+      "options": [
+        {
+          "id": "a",
+          "text": "dp[j][i] = min over p < i of dp[j−1][p] + (pre_i − pre_p)²; opt(i) is monotone, so compute each layer with divide & conquer in O(n log n)"
+        },
+        {
+          "id": "b",
+          "text": "Same recurrence with a direct loop over p",
+          "why": "Correct but O(k·n²) = 2.7e10."
+        },
+        {
+          "id": "c",
+          "text": "Binary search on the maximum part sum",
+          "why": "That solves 'minimize the largest part', a different objective."
+        },
+        {
+          "id": "d",
+          "text": "dp[j][i] = dp[j−1][i−1] + a_i²",
+          "why": "Only allows parts of length 1."
+        }
+      ],
+      "accepted": [
+        "a"
+      ],
+      "explanation": "The split point for i+1 is never left of the split point for i, so solve the middle i first and recurse on halves with a narrowed range."
+    }
+  ],
+  "deprecated": false
+}

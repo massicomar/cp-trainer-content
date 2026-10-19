@@ -1,0 +1,44 @@
+{
+  "$schema": "../../schema/problem.schema.json",
+  "schemaVersion": 1,
+  "id": "cses-2190",
+  "status": "draft",
+  "title": "Line Segment Intersection",
+  "source": "CSES",
+  "url": "https://cses.fi/problemset/task/2190",
+  "difficulty": {
+    "tier": "medium",
+    "scale": "usaco",
+    "value": "M"
+  },
+  "summary": "",
+  "constraints": {
+    "text": "t ≤ 1e5 tests, |coordinates| ≤ 1e9",
+    "verified": true
+  },
+  "answers": {
+    "subjects": [
+      {
+        "id": "geometry",
+        "role": "intended"
+      }
+    ],
+    "techniques": [
+      {
+        "id": "geometry.segment-intersection",
+        "role": "intended"
+      }
+    ]
+  },
+  "distractors": [
+    "geometry.orientation",
+    "geometry.line-sweep"
+  ],
+  "explanation": "Four orientation signs decide it; if everything is collinear, check that the projections overlap.",
+  "traps": [
+    "Collinear but disjoint segments pass the sign test."
+  ],
+  "pairWith": [],
+  "extraLayers": [],
+  "deprecated": false
+}

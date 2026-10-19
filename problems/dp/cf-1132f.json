@@ -1,0 +1,104 @@
+{
+  "$schema": "../../schema/problem.schema.json",
+  "schemaVersion": 1,
+  "id": "cf-1132f",
+  "status": "draft",
+  "title": "Clear the String",
+  "source": "Codeforces",
+  "url": "https://codeforces.com/problemset/problem/1132/F",
+  "difficulty": {
+    "tier": "hard",
+    "scale": "cf",
+    "value": "2000"
+  },
+  "summary": "",
+  "constraints": {
+    "text": "n ≤ 500",
+    "verified": true
+  },
+  "answers": {
+    "subjects": [
+      {
+        "id": "dp",
+        "role": "intended"
+      }
+    ],
+    "techniques": [
+      {
+        "id": "dp.interval",
+        "role": "intended"
+      }
+    ]
+  },
+  "distractors": [
+    "other.greedy",
+    "dp.lcs-edit",
+    "graphs.bfs"
+  ],
+  "explanation": "Interval DP: s[l] is either deleted alone, or deleted together with a later equal character s[k] after clearing everything between them.",
+  "traps": [],
+  "pairWith": [],
+  "extraLayers": [
+    {
+      "key": "dp-state",
+      "kind": "dp-state",
+      "prompt": "What should the DP state represent?",
+      "options": [
+        {
+          "id": "a",
+          "text": "dp[l][r] = minimum operations to delete the whole substring s[l..r]"
+        },
+        {
+          "id": "b",
+          "text": "dp[i] = minimum operations to delete the prefix s[1..i]",
+          "why": "Deleting the middle can merge characters from far apart; prefixes can't express that."
+        },
+        {
+          "id": "c",
+          "text": "dp[l][r][c] = operations to delete s[l..r] leaving letter c",
+          "why": "Unnecessary extra dimension; it can be done with plain dp[l][r]."
+        },
+        {
+          "id": "d",
+          "text": "Count maximal blocks of equal letters",
+          "why": "That's an upper bound; merging blocks after removing the middle can do better."
+        }
+      ],
+      "accepted": [
+        "a"
+      ],
+      "explanation": "Removals happen inside contiguous pieces, and n ≤ 500 allows O(n³): classic interval DP."
+    },
+    {
+      "key": "dp-transition",
+      "kind": "dp-transition",
+      "prompt": "Given that state, which transition is right?",
+      "options": [
+        {
+          "id": "a",
+          "text": "dp[l][r] = min(1 + dp[l+1][r], min over k ∈ (l, r] with s_k = s_l of dp[l+1][k−1] + dp[k][r])"
+        },
+        {
+          "id": "b",
+          "text": "dp[l][r] = min over k of dp[l][k] + dp[k+1][r]",
+          "why": "Plain splitting never lets s[l] and s[k] disappear in the same operation."
+        },
+        {
+          "id": "c",
+          "text": "dp[l][r] = dp[l+1][r−1] + [s_l ≠ s_r]",
+          "why": "Only works for palindromes-style matching; this problem allows any equal letter to join."
+        },
+        {
+          "id": "d",
+          "text": "dp[l][r] = dp[l+1][r] + 1",
+          "why": "Always deletes s[l] alone; never merges."
+        }
+      ],
+      "accepted": [
+        "a"
+      ],
+      "explanation": "Either s[l] is deleted on its own, or it rides along with the next copy of the same letter once the gap is cleared."
+    }
+  ],
+  "deprecated": false
+}

@@ -1,0 +1,107 @@
+{
+  "$schema": "../../schema/problem.schema.json",
+  "schemaVersion": 1,
+  "id": "cses-1636",
+  "status": "draft",
+  "title": "Coin Combinations II",
+  "source": "CSES",
+  "url": "https://cses.fi/problemset/task/1636",
+  "difficulty": {
+    "tier": "easy",
+    "scale": "estimate",
+    "value": "E"
+  },
+  "summary": "",
+  "constraints": {
+    "text": "n ≤ 100 coins, x ≤ 1e6, unordered ways, mod 1e9+7",
+    "verified": true
+  },
+  "answers": {
+    "subjects": [
+      {
+        "id": "dp",
+        "role": "intended"
+      }
+    ],
+    "techniques": [
+      {
+        "id": "dp.coin-change",
+        "role": "intended"
+      }
+    ]
+  },
+  "distractors": [
+    "dp.knapsack-01",
+    "number-theory.binomial-mod"
+  ],
+  "explanation": "Unordered ways: process coin types one at a time, so each multiset is built in a fixed order and counted once.",
+  "traps": [
+    "Using sum-outer loops counts permutations instead (Coin Combinations I)."
+  ],
+  "pairWith": [
+    "cses-1635"
+  ],
+  "extraLayers": [
+    {
+      "key": "dp-state",
+      "kind": "dp-state",
+      "prompt": "What should the DP state represent?",
+      "options": [
+        {
+          "id": "a",
+          "text": "dp[i][s] = number of ways to make s using only the first i coin types (rolled into dp[s])"
+        },
+        {
+          "id": "b",
+          "text": "dp[s] = number of ordered sequences summing to s",
+          "why": "Counts 2+3 and 3+2 separately — that's Coin Combinations I."
+        },
+        {
+          "id": "c",
+          "text": "dp[s][last] = ways ending with coin 'last'",
+          "why": "Works only if you also force non-decreasing order; much bigger than needed."
+        },
+        {
+          "id": "d",
+          "text": "dp[i][s] = 1 if coin i is used in sum s",
+          "why": "Not a count of combinations."
+        }
+      ],
+      "accepted": [
+        "a"
+      ],
+      "explanation": "Fixing the order in which coin types are considered makes each multiset appear exactly once."
+    },
+    {
+      "key": "dp-transition",
+      "kind": "dp-transition",
+      "prompt": "Given that state, which transition is right?",
+      "options": [
+        {
+          "id": "a",
+          "text": "for each coin c (outer): for s in c..x: dp[s] += dp[s − c]"
+        },
+        {
+          "id": "b",
+          "text": "for s in 1..x (outer): for each coin c: dp[s] += dp[s − c]",
+          "why": "Sum-outer counts orderings separately."
+        },
+        {
+          "id": "c",
+          "text": "for each coin c: for s from x down to c: dp[s] += dp[s − c]",
+          "why": "Downward iteration allows each coin type at most once."
+        },
+        {
+          "id": "d",
+          "text": "dp[s] = Σ dp[s − c] / (number of coins)",
+          "why": "Dividing doesn't remove duplicate orderings correctly."
+        }
+      ],
+      "accepted": [
+        "a"
+      ],
+      "explanation": "dp[i][s] = dp[i−1][s] + dp[i][s − c_i]: either never use coin i, or use it at least once more."
+    }
+  ],
+  "deprecated": false
+}

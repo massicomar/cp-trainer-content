@@ -1,0 +1,44 @@
+{
+  "$schema": "../../schema/problem.schema.json",
+  "schemaVersion": 1,
+  "id": "cses-1668",
+  "status": "draft",
+  "title": "Building Teams",
+  "source": "CSES",
+  "url": "https://cses.fi/problemset/task/1668",
+  "difficulty": {
+    "tier": "easy",
+    "scale": "estimate",
+    "value": "E"
+  },
+  "summary": "",
+  "constraints": {
+    "text": "n ≤ 1e5, m ≤ 2e5",
+    "verified": false
+  },
+  "answers": {
+    "subjects": [
+      {
+        "id": "graphs",
+        "role": "intended"
+      }
+    ],
+    "techniques": [
+      {
+        "id": "graphs.bipartite",
+        "role": "intended"
+      }
+    ]
+  },
+  "distractors": [
+    "graphs.dsu",
+    "graphs.2-sat"
+  ],
+  "explanation": "Two teams with friends on opposite sides is a 2-colouring; an odd cycle makes it impossible.",
+  "traps": [
+    "The graph may be disconnected: colour every component."
+  ],
+  "pairWith": [],
+  "extraLayers": [],
+  "deprecated": false
+}

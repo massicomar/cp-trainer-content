@@ -1,0 +1,107 @@
+{
+  "$schema": "../../schema/problem.schema.json",
+  "schemaVersion": 1,
+  "id": "cses-1635",
+  "status": "draft",
+  "title": "Coin Combinations I",
+  "source": "CSES",
+  "url": "https://cses.fi/problemset/task/1635",
+  "difficulty": {
+    "tier": "easy",
+    "scale": "estimate",
+    "value": "E"
+  },
+  "summary": "",
+  "constraints": {
+    "text": "n ≤ 100 coins, x ≤ 1e6, ordered ways, mod 1e9+7",
+    "verified": false
+  },
+  "answers": {
+    "subjects": [
+      {
+        "id": "dp",
+        "role": "intended"
+      }
+    ],
+    "techniques": [
+      {
+        "id": "dp.coin-change",
+        "role": "intended"
+      }
+    ]
+  },
+  "distractors": [
+    "dp.knapsack-01",
+    "number-theory.binomial-mod"
+  ],
+  "explanation": "Ordered ways: for each sum, try every coin as the last one. Loop sums outside and coins inside.",
+  "traps": [
+    "Swapping the loop order silently counts combinations instead (that's Coin Combinations II)."
+  ],
+  "pairWith": [
+    "cses-1636"
+  ],
+  "extraLayers": [
+    {
+      "key": "dp-state",
+      "kind": "dp-state",
+      "prompt": "What should the DP state represent?",
+      "options": [
+        {
+          "id": "a",
+          "text": "dp[s] = number of ordered sequences of coins summing to s"
+        },
+        {
+          "id": "b",
+          "text": "dp[i][s] = number of ways using only the first i coin types",
+          "why": "That state counts unordered combinations; here 2+3 and 3+2 differ."
+        },
+        {
+          "id": "c",
+          "text": "dp[s] = minimum coins to make s",
+          "why": "Asks for a count, not a minimum."
+        },
+        {
+          "id": "d",
+          "text": "dp[s] = 1 if s is reachable",
+          "why": "Reachability loses the count."
+        }
+      ],
+      "accepted": [
+        "a"
+      ],
+      "explanation": "When order matters, you only need the sum: the last coin can be any coin."
+    },
+    {
+      "key": "dp-transition",
+      "kind": "dp-transition",
+      "prompt": "Given that state, which transition is right?",
+      "options": [
+        {
+          "id": "a",
+          "text": "for s in 1..x: for each coin c: dp[s] += dp[s − c]"
+        },
+        {
+          "id": "b",
+          "text": "for each coin c: for s in c..x: dp[s] += dp[s − c]",
+          "why": "Coins-outer counts each multiset once — that's Coin Combinations II."
+        },
+        {
+          "id": "c",
+          "text": "dp[s] = dp[s − 1] + 1",
+          "why": "Ignores the coin values."
+        },
+        {
+          "id": "d",
+          "text": "for each coin c: for s from x down to c: dp[s] += dp[s − c]",
+          "why": "Downward iteration makes each coin usable at most once (0/1 knapsack counting)."
+        }
+      ],
+      "accepted": [
+        "a"
+      ],
+      "explanation": "Sum-outer, coin-inner: any coin may be the last one, so different orders are counted separately."
+    }
+  ],
+  "deprecated": false
+}

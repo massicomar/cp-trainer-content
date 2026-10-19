@@ -1,0 +1,104 @@
+{
+  "$schema": "../../schema/problem.schema.json",
+  "schemaVersion": 1,
+  "id": "cf-1324e",
+  "status": "draft",
+  "title": "Sleeping Schedule",
+  "source": "Codeforces",
+  "url": "https://codeforces.com/problemset/problem/1324/E",
+  "difficulty": {
+    "tier": "medium",
+    "scale": "cf",
+    "value": "1700"
+  },
+  "summary": "",
+  "constraints": {
+    "text": "n ≤ 2000 sleeps, h ≤ 2000 hours per day",
+    "verified": true
+  },
+  "answers": {
+    "subjects": [
+      {
+        "id": "dp",
+        "role": "intended"
+      }
+    ],
+    "techniques": [
+      {
+        "id": "dp.linear",
+        "role": "intended"
+      }
+    ]
+  },
+  "distractors": [
+    "other.greedy",
+    "graphs.bfs"
+  ],
+  "explanation": "The state is (sleeps done, current hour); each sleep starts a_i or a_i − 1 hours later. n · h = 4e6 states.",
+  "traps": [],
+  "pairWith": [],
+  "extraLayers": [
+    {
+      "key": "dp-state",
+      "kind": "dp-state",
+      "prompt": "What should the DP state represent?",
+      "options": [
+        {
+          "id": "a",
+          "text": "dp[i][t] = max good sleeps among the first i, if the current time is hour t"
+        },
+        {
+          "id": "b",
+          "text": "dp[i][j] = max good sleeps among the first i, if exactly j of them started one hour early",
+          "why": "Also valid: the current hour is (prefix sum − j) mod h, so j determines t."
+        },
+        {
+          "id": "c",
+          "text": "dp[i] = max good sleeps among the first i",
+          "why": "Loses the current hour, which decides whether the next sleep is good."
+        },
+        {
+          "id": "d",
+          "text": "dp[t] = whether hour t is reachable",
+          "why": "Loses both the step and the count."
+        }
+      ],
+      "accepted": [
+        "a",
+        "b"
+      ],
+      "explanation": "The future depends on how many sleeps are done and what time it is now."
+    },
+    {
+      "key": "dp-transition",
+      "kind": "dp-transition",
+      "prompt": "Given that state, which transition is right?",
+      "options": [
+        {
+          "id": "a",
+          "text": "dp[i][t] = max over c ∈ {a_i, a_i − 1} of dp[i−1][(t − c) mod h] + [l ≤ t ≤ r]"
+        },
+        {
+          "id": "b",
+          "text": "dp[i][t] = dp[i−1][t] + [l ≤ t ≤ r]",
+          "why": "The hour must move forward by a_i or a_i − 1."
+        },
+        {
+          "id": "c",
+          "text": "dp[i][t] = max(dp[i−1][t − a_i], dp[i−1][t − a_i + 1])",
+          "why": "Forgets mod h and to count whether this sleep is good."
+        },
+        {
+          "id": "d",
+          "text": "Choose a_i − 1 whenever it lands in [l, r]",
+          "why": "Greedy; an early start now can ruin later sleeps."
+        }
+      ],
+      "accepted": [
+        "a"
+      ],
+      "explanation": "Come from the previous hour after waiting a_i or a_i − 1 hours, and add 1 if the new start time is good."
+    }
+  ],
+  "deprecated": false
+}

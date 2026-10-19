@@ -1,0 +1,106 @@
+{
+  "$schema": "../../schema/problem.schema.json",
+  "schemaVersion": 1,
+  "id": "cses-1639",
+  "status": "draft",
+  "title": "Edit Distance",
+  "source": "CSES",
+  "url": "https://cses.fi/problemset/task/1639",
+  "difficulty": {
+    "tier": "medium",
+    "scale": "estimate",
+    "value": "E/M"
+  },
+  "summary": "",
+  "constraints": {
+    "text": "string lengths n, m ≤ 5000",
+    "verified": true
+  },
+  "answers": {
+    "subjects": [
+      {
+        "id": "dp",
+        "role": "intended"
+      }
+    ],
+    "techniques": [
+      {
+        "id": "dp.lcs-edit",
+        "role": "intended"
+      }
+    ]
+  },
+  "distractors": [
+    "dp.interval",
+    "dp.lis",
+    "other.greedy"
+  ],
+  "explanation": "Levenshtein distance over prefixes: 25M states, so roll two rows to save memory.",
+  "traps": [
+    "A 5001 × 5001 int table is ~100 MB; keep only two rows."
+  ],
+  "pairWith": [],
+  "extraLayers": [
+    {
+      "key": "dp-state",
+      "kind": "dp-state",
+      "prompt": "What should the DP state represent?",
+      "options": [
+        {
+          "id": "a",
+          "text": "dp[i][j] = minimum edits to turn the first i chars of s into the first j chars of t"
+        },
+        {
+          "id": "b",
+          "text": "dp[l][r] = edits needed for substring s[l..r]",
+          "why": "Edit distance compares prefixes of two strings, not intervals of one."
+        },
+        {
+          "id": "c",
+          "text": "dp[i] = edits needed for the first i characters of both strings",
+          "why": "The two prefixes can have different lengths."
+        },
+        {
+          "id": "d",
+          "text": "dp[i][j] = length of the longest common subsequence of the prefixes",
+          "why": "Close relative (LCS), but with replacements it doesn't give edit distance directly."
+        }
+      ],
+      "accepted": [
+        "a"
+      ],
+      "explanation": "Two sequences → state is a pair of prefix lengths."
+    },
+    {
+      "key": "dp-transition",
+      "kind": "dp-transition",
+      "prompt": "Given that state, which transition is right?",
+      "options": [
+        {
+          "id": "a",
+          "text": "dp[i][j] = min(dp[i−1][j] + 1, dp[i][j−1] + 1, dp[i−1][j−1] + [s_i ≠ t_j])"
+        },
+        {
+          "id": "b",
+          "text": "dp[i][j] = dp[i−1][j−1] + [s_i ≠ t_j]",
+          "why": "Forgets insertions and deletions."
+        },
+        {
+          "id": "c",
+          "text": "dp[i][j] = max(dp[i−1][j], dp[i][j−1])",
+          "why": "That's the LCS skip step; edit distance minimizes."
+        },
+        {
+          "id": "d",
+          "text": "dp[i][j] = min(dp[i−1][j], dp[i][j−1]) + 1",
+          "why": "Forgets the free match / replace on the diagonal."
+        }
+      ],
+      "accepted": [
+        "a"
+      ],
+      "explanation": "Delete s_i, insert t_j, or match/replace the last characters."
+    }
+  ],
+  "deprecated": false
+}

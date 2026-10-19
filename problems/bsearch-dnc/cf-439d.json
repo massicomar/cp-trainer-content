@@ -1,0 +1,48 @@
+{
+  "$schema": "../../schema/problem.schema.json",
+  "schemaVersion": 1,
+  "id": "cf-439d",
+  "status": "draft",
+  "title": "Devu and his Brother",
+  "source": "Codeforces",
+  "url": "https://codeforces.com/problemset/problem/439/D",
+  "difficulty": {
+    "tier": "medium",
+    "scale": "cf",
+    "value": "1700"
+  },
+  "summary": "",
+  "constraints": {
+    "text": "n, m ≤ 1e5",
+    "verified": true
+  },
+  "answers": {
+    "subjects": [
+      {
+        "id": "bsearch-dnc",
+        "role": "intended"
+      }
+    ],
+    "techniques": [
+      {
+        "id": "bsearch-dnc.ternary",
+        "role": "intended"
+      },
+      {
+        "id": "bsearch-dnc.two-pointers",
+        "role": "accepted"
+      }
+    ]
+  },
+  "distractors": [
+    "bsearch-dnc.on-answer",
+    "other.greedy"
+  ],
+  "explanation": "Total operations as a function of the threshold T is convex: integer ternary search (or sort + two pointers).",
+  "traps": [
+    "Integer ternary: stop at r − l < 3 and check the rest by hand."
+  ],
+  "pairWith": [],
+  "extraLayers": [],
+  "deprecated": false
+}

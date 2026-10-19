@@ -1,0 +1,44 @@
+{
+  "$schema": "../../schema/problem.schema.json",
+  "schemaVersion": 1,
+  "id": "cf-585d",
+  "status": "draft",
+  "title": "Lizard Era: Beginning",
+  "source": "Codeforces",
+  "url": "https://codeforces.com/problemset/problem/585/D",
+  "difficulty": {
+    "tier": "hard",
+    "scale": "cf",
+    "value": "2300"
+  },
+  "summary": "",
+  "constraints": {
+    "text": "n ≤ 25 quests, 3 choices each",
+    "verified": true
+  },
+  "answers": {
+    "subjects": [
+      {
+        "id": "bsearch-dnc",
+        "role": "intended"
+      }
+    ],
+    "techniques": [
+      {
+        "id": "bsearch-dnc.meet-in-middle",
+        "role": "intended"
+      }
+    ]
+  },
+  "distractors": [
+    "dp.bitmask",
+    "dp.knapsack-01"
+  ],
+  "explanation": "3^25 is too many: 3^13 per half; match halves on the pair of differences (L − M, M − W) and maximize L.",
+  "traps": [
+    "Matching on raw sums instead of differences."
+  ],
+  "pairWith": [],
+  "extraLayers": [],
+  "deprecated": false
+}

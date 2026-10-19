@@ -1,0 +1,106 @@
+{
+  "$schema": "../../schema/problem.schema.json",
+  "schemaVersion": 1,
+  "id": "cses-1145",
+  "status": "draft",
+  "title": "Increasing Subsequence",
+  "source": "CSES",
+  "url": "https://cses.fi/problemset/task/1145",
+  "difficulty": {
+    "tier": "medium",
+    "scale": "estimate",
+    "value": "E/M"
+  },
+  "summary": "",
+  "constraints": {
+    "text": "n ≤ 2e5, values ≤ 1e9",
+    "verified": true
+  },
+  "answers": {
+    "subjects": [
+      {
+        "id": "dp",
+        "role": "intended"
+      }
+    ],
+    "techniques": [
+      {
+        "id": "dp.lis",
+        "role": "intended"
+      }
+    ]
+  },
+  "distractors": [
+    "dp.lcs-edit",
+    "segtree.fenwick",
+    "other.greedy"
+  ],
+  "explanation": "n = 2e5 kills the O(n²) LIS. Keep tails[k] = smallest possible last value of an increasing subsequence of length k and binary-search each element.",
+  "traps": [
+    "Strictly increasing → use lower_bound; upper_bound gives non-decreasing."
+  ],
+  "pairWith": [],
+  "extraLayers": [
+    {
+      "key": "dp-state",
+      "kind": "dp-state",
+      "prompt": "What should the DP state represent?",
+      "options": [
+        {
+          "id": "a",
+          "text": "tails[k] = smallest possible last value of a strictly increasing subsequence of length k"
+        },
+        {
+          "id": "b",
+          "text": "dp[i] = length of the longest increasing subsequence ending at i (checked against all j < i)",
+          "why": "Right recurrence, but O(n²) = 4e10 at n = 2e5."
+        },
+        {
+          "id": "c",
+          "text": "dp[i][j] = LIS using elements i..j",
+          "why": "n² states."
+        },
+        {
+          "id": "d",
+          "text": "dp[v] = longest subsequence ending with value v",
+          "why": "Needs value compression plus a max-Fenwick to be fast; as stated it's a 1e9 table."
+        }
+      ],
+      "accepted": [
+        "a"
+      ],
+      "explanation": "For each length, only the smallest possible ending value matters — a smaller tail can always be extended at least as well."
+    },
+    {
+      "key": "dp-transition",
+      "kind": "dp-transition",
+      "prompt": "Given that state, which transition is right?",
+      "options": [
+        {
+          "id": "a",
+          "text": "For each x: find the first k with tails[k] ≥ x (lower_bound) and set tails[k] = x, or append if none"
+        },
+        {
+          "id": "b",
+          "text": "For each x: find the first k with tails[k] > x (upper_bound) and replace it",
+          "why": "That builds non-decreasing subsequences, not strictly increasing ones."
+        },
+        {
+          "id": "c",
+          "text": "For each x: append it if it's bigger than the last tail, otherwise skip it",
+          "why": "Skipping loses better (smaller) tails for future elements."
+        },
+        {
+          "id": "d",
+          "text": "dp[i] = 1 + max over j < i with a_j < a_i of dp[j]",
+          "why": "Correct but quadratic."
+        }
+      ],
+      "accepted": [
+        "a"
+      ],
+      "explanation": "Each element improves the tail of exactly one length; tails stay sorted, so binary search finds it. Answer = number of tails."
+    }
+  ],
+  "deprecated": false
+}

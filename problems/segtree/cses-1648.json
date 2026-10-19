@@ -1,0 +1,50 @@
+{
+  "$schema": "../../schema/problem.schema.json",
+  "schemaVersion": 1,
+  "id": "cses-1648",
+  "status": "draft",
+  "title": "Dynamic Range Sum Queries",
+  "source": "CSES",
+  "url": "https://cses.fi/problemset/task/1648",
+  "difficulty": {
+    "tier": "easy",
+    "scale": "usaco",
+    "value": "E"
+  },
+  "summary": "",
+  "constraints": {
+    "text": "n, q ≤ 2e5, point updates",
+    "verified": false
+  },
+  "answers": {
+    "subjects": [
+      {
+        "id": "segtree",
+        "role": "intended"
+      }
+    ],
+    "techniques": [
+      {
+        "id": "segtree.fenwick",
+        "role": "intended"
+      },
+      {
+        "id": "segtree.segtree-point",
+        "role": "accepted"
+      }
+    ]
+  },
+  "distractors": [
+    "segtree.prefix-sums",
+    "segtree.segtree-lazy"
+  ],
+  "explanation": "Point updates + range sums: a Fenwick tree (or a segment tree).",
+  "traps": [
+    "Rebuilding prefix sums after each update is O(n·q)."
+  ],
+  "pairWith": [
+    "cses-1646"
+  ],
+  "extraLayers": [],
+  "deprecated": false
+}

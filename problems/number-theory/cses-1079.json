@@ -1,0 +1,48 @@
+{
+  "$schema": "../../schema/problem.schema.json",
+  "schemaVersion": 1,
+  "id": "cses-1079",
+  "status": "draft",
+  "title": "Binomial Coefficients",
+  "source": "CSES",
+  "url": "https://cses.fi/problemset/task/1079",
+  "difficulty": {
+    "tier": "easy",
+    "scale": "estimate",
+    "value": "E"
+  },
+  "summary": "",
+  "constraints": {
+    "text": "1e5 queries, a ≤ 1e6",
+    "verified": true
+  },
+  "answers": {
+    "subjects": [
+      {
+        "id": "number-theory",
+        "role": "intended"
+      }
+    ],
+    "techniques": [
+      {
+        "id": "number-theory.binomial-mod",
+        "role": "intended"
+      },
+      {
+        "id": "number-theory.mod-inverse",
+        "role": "accepted"
+      }
+    ]
+  },
+  "distractors": [
+    "number-theory.lucas",
+    "dp.grid"
+  ],
+  "explanation": "Precompute factorials and inverse factorials up to 1e6; each query is O(1).",
+  "traps": [
+    "Pascal's triangle needs 1e12 cells."
+  ],
+  "pairWith": [],
+  "extraLayers": [],
+  "deprecated": false
+}

@@ -1,0 +1,44 @@
+{
+  "$schema": "../../schema/problem.schema.json",
+  "schemaVersion": 1,
+  "id": "cf-7c",
+  "status": "draft",
+  "title": "Line",
+  "source": "Codeforces",
+  "url": "https://codeforces.com/problemset/problem/7/C",
+  "difficulty": {
+    "tier": "medium",
+    "scale": "cf",
+    "value": "1800"
+  },
+  "summary": "",
+  "constraints": {
+    "text": "|A|, |B|, |C| ≤ 2e9",
+    "verified": true
+  },
+  "answers": {
+    "subjects": [
+      {
+        "id": "number-theory",
+        "role": "intended"
+      }
+    ],
+    "techniques": [
+      {
+        "id": "number-theory.ext-euclid",
+        "role": "intended"
+      }
+    ]
+  },
+  "distractors": [
+    "number-theory.gcd-lcm",
+    "number-theory.crt"
+  ],
+  "explanation": "Integer point on Ax + By + C = 0: solvable iff gcd(A, B) divides C; scale the extended Euclid solution by −C/g.",
+  "traps": [
+    "Answers can reach ~5e18; watch signs and 64-bit overflow."
+  ],
+  "pairWith": [],
+  "extraLayers": [],
+  "deprecated": false
+}

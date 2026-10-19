@@ -1,0 +1,45 @@
+{
+  "$schema": "../../schema/problem.schema.json",
+  "schemaVersion": 1,
+  "id": "cses-1190",
+  "status": "draft",
+  "title": "Subarray Sum Queries",
+  "source": "CSES",
+  "url": "https://cses.fi/problemset/task/1190",
+  "difficulty": {
+    "tier": "medium",
+    "scale": "estimate",
+    "value": "M"
+  },
+  "summary": "",
+  "constraints": {
+    "text": "n, m ≤ 2e5, values in ±1e9, point updates",
+    "verified": true
+  },
+  "answers": {
+    "subjects": [
+      {
+        "id": "segtree",
+        "role": "intended"
+      }
+    ],
+    "techniques": [
+      {
+        "id": "segtree.segtree-merged-node",
+        "role": "intended"
+      }
+    ]
+  },
+  "distractors": [
+    "dp.linear",
+    "segtree.segtree-lazy"
+  ],
+  "explanation": "Each node stores (sum, best prefix, best suffix, best subarray); the root holds the answer after each update.",
+  "traps": [
+    "Re-running Kadane after every update is O(n·m).",
+    "64-bit sums."
+  ],
+  "pairWith": [],
+  "extraLayers": [],
+  "deprecated": false
+}

@@ -1,0 +1,44 @@
+{
+  "$schema": "../../schema/problem.schema.json",
+  "schemaVersion": 1,
+  "id": "cses-1085",
+  "status": "draft",
+  "title": "Array Division",
+  "source": "CSES",
+  "url": "https://cses.fi/problemset/task/1085",
+  "difficulty": {
+    "tier": "easy",
+    "scale": "usaco",
+    "value": "E"
+  },
+  "summary": "",
+  "constraints": {
+    "text": "n ≤ 2e5, x_i ≤ 1e9",
+    "verified": true
+  },
+  "answers": {
+    "subjects": [
+      {
+        "id": "bsearch-dnc",
+        "role": "intended"
+      }
+    ],
+    "techniques": [
+      {
+        "id": "bsearch-dnc.on-answer",
+        "role": "intended"
+      }
+    ]
+  },
+  "distractors": [
+    "dp.opt-dnc",
+    "other.greedy"
+  ],
+  "explanation": "Minimize the maximum part sum: binary search the cap S and check with greedy cuts.",
+  "traps": [
+    "The lower bound must be max(x_i)."
+  ],
+  "pairWith": [],
+  "extraLayers": [],
+  "deprecated": false
+}

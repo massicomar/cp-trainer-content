@@ -1,0 +1,46 @@
+{
+  "$schema": "../../schema/problem.schema.json",
+  "schemaVersion": 1,
+  "id": "cses-2195",
+  "status": "draft",
+  "title": "Convex Hull",
+  "source": "CSES",
+  "url": "https://cses.fi/problemset/task/2195",
+  "difficulty": {
+    "tier": "medium",
+    "scale": "estimate",
+    "value": "M"
+  },
+  "summary": "",
+  "constraints": {
+    "text": "n ≤ 2e5, |coordinates| ≤ 1e9",
+    "verified": true
+  },
+  "answers": {
+    "subjects": [
+      {
+        "id": "geometry",
+        "role": "intended"
+      }
+    ],
+    "techniques": [
+      {
+        "id": "geometry.convex-hull",
+        "role": "intended"
+      }
+    ]
+  },
+  "distractors": [
+    "geometry.polar-sort",
+    "geometry.rotating-calipers"
+  ],
+  "explanation": "Monotone chain, but this judge wants collinear boundary points kept: pop only on a strict right turn.",
+  "traps": [
+    "The collinear rule is the opposite of Kattis Convex Hull."
+  ],
+  "pairWith": [
+    "kattis-convexhull"
+  ],
+  "extraLayers": [],
+  "deprecated": false
+}

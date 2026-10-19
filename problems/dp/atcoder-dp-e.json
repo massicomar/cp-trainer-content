@@ -1,0 +1,108 @@
+{
+  "$schema": "../../schema/problem.schema.json",
+  "schemaVersion": 1,
+  "id": "atcoder-dp-e",
+  "status": "draft",
+  "title": "Knapsack 2",
+  "source": "AtCoder",
+  "url": "https://atcoder.jp/contests/dp/tasks/dp_e",
+  "difficulty": {
+    "tier": "medium",
+    "scale": "estimate",
+    "value": "M"
+  },
+  "summary": "",
+  "constraints": {
+    "text": "N ≤ 100, capacity W ≤ 1e9, each value ≤ 1e3",
+    "verified": true
+  },
+  "answers": {
+    "subjects": [
+      {
+        "id": "dp",
+        "role": "intended"
+      }
+    ],
+    "techniques": [
+      {
+        "id": "dp.knapsack-01",
+        "role": "intended"
+      }
+    ]
+  },
+  "distractors": [
+    "bsearch-dnc.meet-in-middle",
+    "other.greedy",
+    "dp.coin-change"
+  ],
+  "explanation": "Same story as Knapsack 1, but W is huge while total value ≤ 1e5. Swap the dimension: dp[v] = minimum weight to reach total value v.",
+  "traps": [
+    "A dp over capacity needs 1e9 cells."
+  ],
+  "pairWith": [
+    "cses-1158"
+  ],
+  "extraLayers": [
+    {
+      "key": "dp-state",
+      "kind": "dp-state",
+      "prompt": "What should the DP state represent?",
+      "options": [
+        {
+          "id": "a",
+          "text": "dp[v] = minimum total weight needed to get total value exactly v"
+        },
+        {
+          "id": "b",
+          "text": "dp[w] = maximum value with total weight ≤ w",
+          "why": "W ≤ 1e9, so this table is too big. That's Knapsack 1's state."
+        },
+        {
+          "id": "c",
+          "text": "dp[mask] = value of a subset",
+          "why": "2^100 subsets."
+        },
+        {
+          "id": "d",
+          "text": "dp[i] = best value using the first i items",
+          "why": "Loses the remaining capacity."
+        }
+      ],
+      "accepted": [
+        "a"
+      ],
+      "explanation": "Look at the constraints: Σ values ≤ 100 · 1e3 = 1e5 is small, weights are not. Put the small quantity in the index and the big one in the stored value."
+    },
+    {
+      "key": "dp-transition",
+      "kind": "dp-transition",
+      "prompt": "Given that state, which transition is right?",
+      "options": [
+        {
+          "id": "a",
+          "text": "dp[v] = min(dp[v], dp[v − v_i] + w_i), iterating v downward; answer = max v with dp[v] ≤ W"
+        },
+        {
+          "id": "b",
+          "text": "dp[w] = max(dp[w], dp[w − w_i] + v_i)",
+          "why": "That's the capacity formulation — infeasible here."
+        },
+        {
+          "id": "c",
+          "text": "dp[v] = min(dp[v], dp[v − v_i] + w_i), iterating v upward",
+          "why": "Upward lets item i be used several times."
+        },
+        {
+          "id": "d",
+          "text": "dp[v] = dp[v − v_i] + w_i",
+          "why": "Must keep the minimum of skipping vs taking."
+        }
+      ],
+      "accepted": [
+        "a"
+      ],
+      "explanation": "Take or skip each item, minimizing weight per value, then read the largest value that fits."
+    }
+  ],
+  "deprecated": false
+}

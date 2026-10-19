@@ -1,0 +1,44 @@
+{
+  "$schema": "../../schema/problem.schema.json",
+  "schemaVersion": 1,
+  "id": "cf-1142c",
+  "status": "draft",
+  "title": "U2",
+  "source": "Codeforces",
+  "url": "https://codeforces.com/problemset/problem/1142/C",
+  "difficulty": {
+    "tier": "hard",
+    "scale": "cf",
+    "value": "2400"
+  },
+  "summary": "",
+  "constraints": {
+    "text": "n ≤ 1e5",
+    "verified": true
+  },
+  "answers": {
+    "subjects": [
+      {
+        "id": "geometry",
+        "role": "intended"
+      }
+    ],
+    "techniques": [
+      {
+        "id": "geometry.convex-hull",
+        "role": "intended"
+      }
+    ]
+  },
+  "distractors": [
+    "geometry.polar-sort",
+    "dp.opt-cht"
+  ],
+  "explanation": "Disguised hull: map (x, y) → (x, y − x²) and parabolas become lines; count edges of the upper hull.",
+  "traps": [
+    "Points with equal x: keep only the highest."
+  ],
+  "pairWith": [],
+  "extraLayers": [],
+  "deprecated": false
+}

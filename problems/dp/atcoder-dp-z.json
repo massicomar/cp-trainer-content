@@ -1,0 +1,108 @@
+{
+  "$schema": "../../schema/problem.schema.json",
+  "schemaVersion": 1,
+  "id": "atcoder-dp-z",
+  "status": "draft",
+  "title": "Frog 3",
+  "source": "AtCoder",
+  "url": "https://atcoder.jp/contests/dp/tasks/dp_z",
+  "difficulty": {
+    "tier": "hard",
+    "scale": "estimate",
+    "value": "H"
+  },
+  "summary": "",
+  "constraints": {
+    "text": "N ≤ 2e5, heights strictly increasing, cost (h_j − h_i)² + C",
+    "verified": true
+  },
+  "answers": {
+    "subjects": [
+      {
+        "id": "dp",
+        "role": "intended"
+      }
+    ],
+    "techniques": [
+      {
+        "id": "dp.opt-cht",
+        "role": "intended"
+      }
+    ]
+  },
+  "distractors": [
+    "graphs.dijkstra",
+    "dp.opt-dnc",
+    "dp.linear"
+  ],
+  "explanation": "dp[i] = min over j < i of dp[j] + (h_i − h_j)² + C expands into lines in h_i. Slopes are monotone (heights increase), so a deque CHT gives O(N).",
+  "traps": [
+    "dp values reach ~1e17; the line-intersection comparison multiplies them by slope differences, so use 128-bit or a division-based check."
+  ],
+  "pairWith": [
+    "atcoder-dp-a"
+  ],
+  "extraLayers": [
+    {
+      "key": "dp-state",
+      "kind": "dp-state",
+      "prompt": "What should the DP state represent?",
+      "options": [
+        {
+          "id": "a",
+          "text": "dp[i] = minimum cost to reach stone i"
+        },
+        {
+          "id": "b",
+          "text": "dp[i][j] = minimum cost to go from i to j",
+          "why": "N² states."
+        },
+        {
+          "id": "c",
+          "text": "dp[h] = minimum cost to reach height h",
+          "why": "Heights go up to 1e6 and aren't the stones; index by stone."
+        },
+        {
+          "id": "d",
+          "text": "dp[i][k] = cost to reach i using k jumps",
+          "why": "The number of jumps doesn't matter."
+        }
+      ],
+      "accepted": [
+        "a"
+      ],
+      "explanation": "The state is easy — the hard part is the O(N²) transition."
+    },
+    {
+      "key": "dp-transition",
+      "kind": "dp-transition",
+      "prompt": "Given that state, which transition is right?",
+      "options": [
+        {
+          "id": "a",
+          "text": "dp[i] = h_i² + C + min over j of (−2h_j · h_i + dp[j] + h_j²): query a min of lines at x = h_i (convex hull trick)"
+        },
+        {
+          "id": "b",
+          "text": "dp[i] = min over all j < i of dp[j] + (h_i − h_j)² + C, by direct loop",
+          "why": "Correct recurrence, but 2e10 operations."
+        },
+        {
+          "id": "c",
+          "text": "dp[i] = dp[i−1] + (h_i − h_{i−1})² + C",
+          "why": "Jumps can skip stones; sometimes one long jump beats many short ones (C is large)."
+        },
+        {
+          "id": "d",
+          "text": "Only consider the 2 previous stones",
+          "why": "That's Frog 1; here any j < i is allowed."
+        }
+      ],
+      "accepted": [
+        "a"
+      ],
+      "explanation": "Each j contributes a line with slope −2h_j; slopes decrease and query points increase, so a monotone deque answers each query in amortized O(1)."
+    }
+  ],
+  "deprecated": false
+}

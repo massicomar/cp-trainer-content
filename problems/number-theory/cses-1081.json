@@ -1,0 +1,44 @@
+{
+  "$schema": "../../schema/problem.schema.json",
+  "schemaVersion": 1,
+  "id": "cses-1081",
+  "status": "draft",
+  "title": "Common Divisors",
+  "source": "CSES",
+  "url": "https://cses.fi/problemset/task/1081",
+  "difficulty": {
+    "tier": "medium",
+    "scale": "usaco",
+    "value": "M"
+  },
+  "summary": "",
+  "constraints": {
+    "text": "n ≤ 2e5, x ≤ 1e6",
+    "verified": true
+  },
+  "answers": {
+    "subjects": [
+      {
+        "id": "number-theory",
+        "role": "intended"
+      }
+    ],
+    "techniques": [
+      {
+        "id": "number-theory.harmonic-loop",
+        "role": "intended"
+      }
+    ]
+  },
+  "distractors": [
+    "number-theory.gcd-lcm",
+    "number-theory.sieve"
+  ],
+  "explanation": "For each d from large to small, count how many array values are multiples of d (harmonic loop, O(X log X)); the first d with ≥ 2 wins.",
+  "traps": [
+    "Pairwise gcds are 2e10 operations."
+  ],
+  "pairWith": [],
+  "extraLayers": [],
+  "deprecated": false
+}

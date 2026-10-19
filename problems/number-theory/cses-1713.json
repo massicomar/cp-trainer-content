@@ -1,0 +1,52 @@
+{
+  "$schema": "../../schema/problem.schema.json",
+  "schemaVersion": 1,
+  "id": "cses-1713",
+  "status": "draft",
+  "title": "Counting Divisors",
+  "source": "CSES",
+  "url": "https://cses.fi/problemset/task/1713",
+  "difficulty": {
+    "tier": "easy",
+    "scale": "estimate",
+    "value": "E"
+  },
+  "summary": "",
+  "constraints": {
+    "text": "1e5 queries, x ≤ 1e6",
+    "verified": true
+  },
+  "answers": {
+    "subjects": [
+      {
+        "id": "number-theory",
+        "role": "intended"
+      }
+    ],
+    "techniques": [
+      {
+        "id": "number-theory.divisor-functions",
+        "role": "intended"
+      },
+      {
+        "id": "number-theory.harmonic-loop",
+        "role": "accepted"
+      },
+      {
+        "id": "number-theory.spf-sieve",
+        "role": "accepted"
+      }
+    ]
+  },
+  "distractors": [
+    "number-theory.trial-division",
+    "number-theory.pollard-rho"
+  ],
+  "explanation": "Precompute d(x) for all x ≤ 1e6 with a harmonic loop over multiples (or factor with an SPF sieve).",
+  "traps": [
+    "√x trial division per query is fine-ish but slower; precomputing is cleaner."
+  ],
+  "pairWith": [],
+  "extraLayers": [],
+  "deprecated": false
+}

@@ -1,0 +1,44 @@
+{
+  "$schema": "../../schema/problem.schema.json",
+  "schemaVersion": 1,
+  "id": "cf-1063b",
+  "status": "draft",
+  "title": "Labyrinth",
+  "source": "Codeforces",
+  "url": "https://codeforces.com/problemset/problem/1063/B",
+  "difficulty": {
+    "tier": "medium",
+    "scale": "cf",
+    "value": "1800"
+  },
+  "summary": "",
+  "constraints": {
+    "text": "n, m ≤ 2000, left/right move limits up to 1e9",
+    "verified": true
+  },
+  "answers": {
+    "subjects": [
+      {
+        "id": "graphs",
+        "role": "intended"
+      }
+    ],
+    "techniques": [
+      {
+        "id": "graphs.01-bfs",
+        "role": "intended"
+      }
+    ]
+  },
+  "distractors": [
+    "graphs.bfs",
+    "graphs.dijkstra"
+  ],
+  "explanation": "Vertical moves are free and horizontal ones cost; minimizing left moves also fixes right moves. 0/1 costs → 0-1 BFS with a deque.",
+  "traps": [
+    "Plain BFS by distance finds cells with too many left moves first."
+  ],
+  "pairWith": [],
+  "extraLayers": [],
+  "deprecated": false
+}

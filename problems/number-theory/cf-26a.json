@@ -1,0 +1,42 @@
+{
+  "$schema": "../../schema/problem.schema.json",
+  "schemaVersion": 1,
+  "id": "cf-26a",
+  "status": "draft",
+  "title": "Almost Prime",
+  "source": "Codeforces",
+  "url": "https://codeforces.com/contest/26/problem/A",
+  "difficulty": {
+    "tier": "easy",
+    "scale": "cf",
+    "value": "900"
+  },
+  "summary": "",
+  "constraints": {
+    "text": "n ≤ 3000",
+    "verified": true
+  },
+  "answers": {
+    "subjects": [
+      {
+        "id": "number-theory",
+        "role": "intended"
+      }
+    ],
+    "techniques": [
+      {
+        "id": "number-theory.sieve",
+        "role": "intended"
+      }
+    ]
+  },
+  "distractors": [
+    "number-theory.trial-division",
+    "number-theory.miller-rabin"
+  ],
+  "explanation": "Sieve that counts distinct prime divisors of every number up to n.",
+  "traps": [],
+  "pairWith": [],
+  "extraLayers": [],
+  "deprecated": false
+}

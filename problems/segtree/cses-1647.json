@@ -1,0 +1,48 @@
+{
+  "$schema": "../../schema/problem.schema.json",
+  "schemaVersion": 1,
+  "id": "cses-1647",
+  "status": "draft",
+  "title": "Static Range Minimum Queries",
+  "source": "CSES",
+  "url": "https://cses.fi/problemset/task/1647",
+  "difficulty": {
+    "tier": "easy",
+    "scale": "usaco",
+    "value": "E"
+  },
+  "summary": "",
+  "constraints": {
+    "text": "n, q ≤ 2e5, no updates",
+    "verified": true
+  },
+  "answers": {
+    "subjects": [
+      {
+        "id": "segtree",
+        "role": "intended"
+      }
+    ],
+    "techniques": [
+      {
+        "id": "segtree.sparse-table",
+        "role": "intended"
+      },
+      {
+        "id": "segtree.segtree-point",
+        "role": "overkill"
+      }
+    ]
+  },
+  "distractors": [
+    "segtree.prefix-sums",
+    "segtree.fenwick"
+  ],
+  "explanation": "No updates and min is idempotent: sparse table, O(1) per query. Prefix 'mins' can't be subtracted.",
+  "traps": [],
+  "pairWith": [
+    "cses-1649"
+  ],
+  "extraLayers": [],
+  "deprecated": false
+}

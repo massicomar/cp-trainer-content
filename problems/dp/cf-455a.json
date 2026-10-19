@@ -1,0 +1,105 @@
+{
+  "$schema": "../../schema/problem.schema.json",
+  "schemaVersion": 1,
+  "id": "cf-455a",
+  "status": "draft",
+  "title": "Boredom",
+  "source": "Codeforces",
+  "url": "https://codeforces.com/problemset/problem/455/A",
+  "difficulty": {
+    "tier": "medium",
+    "scale": "cf",
+    "value": "1500"
+  },
+  "summary": "",
+  "constraints": {
+    "text": "n ≤ 1e5, a_i ≤ 1e5",
+    "verified": true
+  },
+  "answers": {
+    "subjects": [
+      {
+        "id": "dp",
+        "role": "intended"
+      }
+    ],
+    "techniques": [
+      {
+        "id": "dp.linear",
+        "role": "intended"
+      }
+    ]
+  },
+  "distractors": [
+    "other.greedy",
+    "dp.interval"
+  ],
+  "explanation": "Order in the array doesn't matter: group equal values. Taking value v earns v·cnt[v] and forbids v ± 1 — house robber over values.",
+  "traps": [
+    "The answer can exceed 32 bits (1e5 · 1e5)."
+  ],
+  "pairWith": [],
+  "extraLayers": [
+    {
+      "key": "dp-state",
+      "kind": "dp-state",
+      "prompt": "What should the DP state represent?",
+      "options": [
+        {
+          "id": "a",
+          "text": "dp[x] = max points using only values ≤ x"
+        },
+        {
+          "id": "b",
+          "text": "dp[i] = max points using the first i array elements",
+          "why": "Deleting a_k ± 1 removes elements anywhere in the array; index order is meaningless."
+        },
+        {
+          "id": "c",
+          "text": "dp[l][r] = max points from subarray l..r",
+          "why": "No interval structure here."
+        },
+        {
+          "id": "d",
+          "text": "dp[mask] = chosen values",
+          "why": "Up to 1e5 distinct values."
+        }
+      ],
+      "accepted": [
+        "a"
+      ],
+      "explanation": "Re-index by value: the conflict is between v and v ± 1, i.e. neighbours on the value line."
+    },
+    {
+      "key": "dp-transition",
+      "kind": "dp-transition",
+      "prompt": "Given that state, which transition is right?",
+      "options": [
+        {
+          "id": "a",
+          "text": "dp[x] = max(dp[x−1], dp[x−2] + x · cnt[x])"
+        },
+        {
+          "id": "b",
+          "text": "dp[x] = dp[x−1] + x · cnt[x]",
+          "why": "Takes both x and x−1, which conflict."
+        },
+        {
+          "id": "c",
+          "text": "dp[x] = max(dp[x−1], dp[x−2] + x)",
+          "why": "Taking x takes every copy of x: multiply by its count."
+        },
+        {
+          "id": "d",
+          "text": "Always take the largest remaining value",
+          "why": "Greedy fails: for {1, 2, 2, 2, 3}, taking 3 first deletes the 2s (total 4), while taking the 2s gives 6."
+        }
+      ],
+      "accepted": [
+        "a"
+      ],
+      "explanation": "Either skip value x, or take all copies of x and jump back over x−1."
+    }
+  ],
+  "deprecated": false
+}

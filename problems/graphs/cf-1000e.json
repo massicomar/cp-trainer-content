@@ -1,0 +1,48 @@
+{
+  "$schema": "../../schema/problem.schema.json",
+  "schemaVersion": 1,
+  "id": "cf-1000e",
+  "status": "draft",
+  "title": "We Need More Bosses",
+  "source": "Codeforces",
+  "url": "https://codeforces.com/problemset/problem/1000/E",
+  "difficulty": {
+    "tier": "hard",
+    "scale": "cf",
+    "value": "2100"
+  },
+  "summary": "",
+  "constraints": {
+    "text": "n, m ≤ 3e5",
+    "verified": true
+  },
+  "answers": {
+    "subjects": [
+      {
+        "id": "graphs",
+        "role": "intended"
+      }
+    ],
+    "techniques": [
+      {
+        "id": "graphs.bridges-articulation",
+        "role": "intended"
+      },
+      {
+        "id": "graphs.tree-diameter",
+        "role": "accepted"
+      }
+    ]
+  },
+  "distractors": [
+    "graphs.scc",
+    "graphs.dijkstra"
+  ],
+  "explanation": "Only bridges are unavoidable. Contract 2-edge-connected components into a bridge tree; the answer is that tree's diameter.",
+  "traps": [
+    "Recursive DFS at n = 3e5 can overflow the stack."
+  ],
+  "pairWith": [],
+  "extraLayers": [],
+  "deprecated": false
+}

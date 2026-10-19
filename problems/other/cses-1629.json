@@ -1,0 +1,46 @@
+{
+  "$schema": "../../schema/problem.schema.json",
+  "schemaVersion": 1,
+  "id": "cses-1629",
+  "status": "draft",
+  "title": "Movie Festival",
+  "source": "CSES",
+  "url": "https://cses.fi/problemset/task/1629",
+  "difficulty": {
+    "tier": "easy",
+    "scale": "estimate",
+    "value": "E"
+  },
+  "summary": "",
+  "constraints": {
+    "text": "n ≤ 2e5 movies with start/end times",
+    "verified": false
+  },
+  "answers": {
+    "subjects": [
+      {
+        "id": "other",
+        "role": "intended"
+      }
+    ],
+    "techniques": [
+      {
+        "id": "other.greedy",
+        "role": "intended"
+      }
+    ]
+  },
+  "appearsIn": [
+    "dp"
+  ],
+  "distractors": [
+    "dp.dag",
+    "dp.linear",
+    "graphs.toposort"
+  ],
+  "explanation": "Maximize the number of non-overlapping intervals (unweighted): sort by end time and take greedily. Adding weights would make it DP.",
+  "traps": [],
+  "pairWith": [],
+  "extraLayers": [],
+  "deprecated": false
+}

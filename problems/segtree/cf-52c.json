@@ -1,0 +1,44 @@
+{
+  "$schema": "../../schema/problem.schema.json",
+  "schemaVersion": 1,
+  "id": "cf-52c",
+  "status": "draft",
+  "title": "Circular RMQ",
+  "source": "Codeforces",
+  "url": "https://codeforces.com/problemset/problem/52/C",
+  "difficulty": {
+    "tier": "hard",
+    "scale": "cf",
+    "value": "2200"
+  },
+  "summary": "",
+  "constraints": {
+    "text": "n, m ≤ 2e5, range add + range min on a circle",
+    "verified": true
+  },
+  "answers": {
+    "subjects": [
+      {
+        "id": "segtree",
+        "role": "intended"
+      }
+    ],
+    "techniques": [
+      {
+        "id": "segtree.segtree-lazy",
+        "role": "intended"
+      }
+    ]
+  },
+  "distractors": [
+    "segtree.fenwick-difference",
+    "segtree.sparse-table"
+  ],
+  "explanation": "Lazy add + min segment tree; a wrapped range [l, r] with l > r splits into two ranges.",
+  "traps": [
+    "Input parsing: the number of tokens tells add from query."
+  ],
+  "pairWith": [],
+  "extraLayers": [],
+  "deprecated": false
+}

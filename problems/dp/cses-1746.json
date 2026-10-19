@@ -1,0 +1,106 @@
+{
+  "$schema": "../../schema/problem.schema.json",
+  "schemaVersion": 1,
+  "id": "cses-1746",
+  "status": "draft",
+  "title": "Array Description",
+  "source": "CSES",
+  "url": "https://cses.fi/problemset/task/1746",
+  "difficulty": {
+    "tier": "easy",
+    "scale": "estimate",
+    "value": "E/M"
+  },
+  "summary": "",
+  "constraints": {
+    "text": "n ≤ 1e5, values in 1..m with m ≤ 100, some values unknown",
+    "verified": false
+  },
+  "answers": {
+    "subjects": [
+      {
+        "id": "dp",
+        "role": "intended"
+      }
+    ],
+    "techniques": [
+      {
+        "id": "dp.linear",
+        "role": "intended"
+      }
+    ]
+  },
+  "distractors": [
+    "number-theory.binomial-mod",
+    "dp.grid"
+  ],
+  "explanation": "Adjacent values differ by at most 1, so the state is (position, value at that position): dp[i][v] = sum of the three neighbouring values at i−1.",
+  "traps": [
+    "A known value forces dp[i][v] = 0 for every other v.",
+    "Clamp v−1 and v+1 to the range 1..m."
+  ],
+  "pairWith": [],
+  "extraLayers": [
+    {
+      "key": "dp-state",
+      "kind": "dp-state",
+      "prompt": "What should the DP state represent?",
+      "options": [
+        {
+          "id": "a",
+          "text": "dp[i][v] = number of valid ways to fill positions 1..i with position i equal to v"
+        },
+        {
+          "id": "b",
+          "text": "dp[i] = number of ways to fill positions 1..i",
+          "why": "Loses the last value, which the next position depends on."
+        },
+        {
+          "id": "c",
+          "text": "dp[v] = number of positions equal to v",
+          "why": "Doesn't describe arrays at all."
+        },
+        {
+          "id": "d",
+          "text": "dp[i][mask] = set of values used so far",
+          "why": "Only the previous value matters, and m = 100 makes masks impossible."
+        }
+      ],
+      "accepted": [
+        "a"
+      ],
+      "explanation": "The constraint links neighbours, so remember the value at the current position (m ≤ 100 choices)."
+    },
+    {
+      "key": "dp-transition",
+      "kind": "dp-transition",
+      "prompt": "Given that state, which transition is right?",
+      "options": [
+        {
+          "id": "a",
+          "text": "dp[i][v] = dp[i−1][v−1] + dp[i−1][v] + dp[i−1][v+1], and 0 if a_i is known and ≠ v"
+        },
+        {
+          "id": "b",
+          "text": "dp[i][v] = Σ over all u of dp[i−1][u]",
+          "why": "Ignores the 'differ by at most 1' rule."
+        },
+        {
+          "id": "c",
+          "text": "dp[i][v] = dp[i−1][v] · 3",
+          "why": "Neighbouring values each contribute their own count; you can't just multiply."
+        },
+        {
+          "id": "d",
+          "text": "dp[i][v] = max(dp[i−1][v−1], dp[i−1][v], dp[i−1][v+1])",
+          "why": "Asks for a count (sum), not a maximum."
+        }
+      ],
+      "accepted": [
+        "a"
+      ],
+      "explanation": "Position i with value v can follow v−1, v or v+1 at position i−1."
+    }
+  ],
+  "deprecated": false
+}

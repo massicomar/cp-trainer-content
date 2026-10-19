@@ -1,0 +1,47 @@
+{
+  "$schema": "../../schema/problem.schema.json",
+  "schemaVersion": 1,
+  "id": "kattis-convexhull",
+  "status": "draft",
+  "title": "Convex Hull",
+  "source": "Kattis",
+  "url": "https://open.kattis.com/problems/convexhull",
+  "difficulty": {
+    "tier": "easy",
+    "scale": "kattis",
+    "value": "2.3"
+  },
+  "summary": "",
+  "constraints": {
+    "text": "n ≤ 1e4 per test",
+    "verified": true
+  },
+  "answers": {
+    "subjects": [
+      {
+        "id": "geometry",
+        "role": "intended"
+      }
+    ],
+    "techniques": [
+      {
+        "id": "geometry.convex-hull",
+        "role": "intended"
+      }
+    ]
+  },
+  "distractors": [
+    "geometry.polar-sort",
+    "geometry.rotating-calipers"
+  ],
+  "explanation": "Monotone chain hull. This judge wants collinear points removed.",
+  "traps": [
+    "Duplicates and n ≤ 2.",
+    "Collinear points: this problem excludes them, CSES 2195 includes them."
+  ],
+  "pairWith": [
+    "cses-2195"
+  ],
+  "extraLayers": [],
+  "deprecated": false
+}

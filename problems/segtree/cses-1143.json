@@ -1,0 +1,44 @@
+{
+  "$schema": "../../schema/problem.schema.json",
+  "schemaVersion": 1,
+  "id": "cses-1143",
+  "status": "draft",
+  "title": "Hotel Queries",
+  "source": "CSES",
+  "url": "https://cses.fi/problemset/task/1143",
+  "difficulty": {
+    "tier": "medium",
+    "scale": "estimate",
+    "value": "E/M"
+  },
+  "summary": "",
+  "constraints": {
+    "text": "n, m ≤ 2e5",
+    "verified": true
+  },
+  "answers": {
+    "subjects": [
+      {
+        "id": "segtree",
+        "role": "intended"
+      }
+    ],
+    "techniques": [
+      {
+        "id": "segtree.segtree-descent",
+        "role": "intended"
+      }
+    ]
+  },
+  "distractors": [
+    "bsearch-dnc.sorted-array",
+    "segtree.fenwick"
+  ],
+  "explanation": "Max segment tree; descend to the first hotel with enough free rooms, then point-update it.",
+  "traps": [
+    "Scanning hotels left to right is O(n·m)."
+  ],
+  "pairWith": [],
+  "extraLayers": [],
+  "deprecated": false
+}

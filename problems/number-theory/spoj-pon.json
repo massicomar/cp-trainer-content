@@ -1,0 +1,45 @@
+{
+  "$schema": "../../schema/problem.schema.json",
+  "schemaVersion": 1,
+  "id": "spoj-pon",
+  "status": "draft",
+  "title": "Prime or Not",
+  "source": "SPOJ",
+  "url": "https://www.spoj.com/problems/PON/",
+  "difficulty": {
+    "tier": "hard",
+    "scale": "estimate",
+    "value": "M/H"
+  },
+  "summary": "",
+  "constraints": {
+    "text": "N ≤ 2^63 − 1",
+    "verified": true
+  },
+  "answers": {
+    "subjects": [
+      {
+        "id": "number-theory",
+        "role": "intended"
+      }
+    ],
+    "techniques": [
+      {
+        "id": "number-theory.miller-rabin",
+        "role": "intended"
+      }
+    ]
+  },
+  "distractors": [
+    "number-theory.trial-division",
+    "number-theory.sieve",
+    "number-theory.pollard-rho"
+  ],
+  "explanation": "√N ≈ 3e9 per test is too slow: deterministic Miller–Rabin with fixed bases.",
+  "traps": [
+    "a·b mod N overflows 64-bit; use __int128."
+  ],
+  "pairWith": [],
+  "extraLayers": [],
+  "deprecated": false
+}

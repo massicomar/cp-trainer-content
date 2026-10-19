@@ -1,0 +1,108 @@
+{
+  "$schema": "../../schema/problem.schema.json",
+  "schemaVersion": 1,
+  "id": "cses-1634",
+  "status": "draft",
+  "title": "Minimizing Coins",
+  "source": "CSES",
+  "url": "https://cses.fi/problemset/task/1634",
+  "difficulty": {
+    "tier": "easy",
+    "scale": "estimate",
+    "value": "E"
+  },
+  "summary": "",
+  "constraints": {
+    "text": "n ≤ 100 coin values, target x ≤ 1e6",
+    "verified": true
+  },
+  "answers": {
+    "subjects": [
+      {
+        "id": "dp",
+        "role": "intended"
+      }
+    ],
+    "techniques": [
+      {
+        "id": "dp.coin-change",
+        "role": "intended"
+      }
+    ]
+  },
+  "distractors": [
+    "other.greedy",
+    "dp.knapsack-01"
+  ],
+  "explanation": "Unbounded coins with arbitrary values: dp[s] = 1 + min dp[s − c]. Greedy fails for arbitrary coin systems.",
+  "traps": [
+    "Unreachable sums must stay at ∞, not 0.",
+    "Greedy (largest coin first) fails, e.g. coins {1, 3, 4}, x = 6."
+  ],
+  "pairWith": [
+    "cf-996a"
+  ],
+  "extraLayers": [
+    {
+      "key": "dp-state",
+      "kind": "dp-state",
+      "prompt": "What should the DP state represent?",
+      "options": [
+        {
+          "id": "a",
+          "text": "dp[s] = minimum number of coins whose values sum to exactly s"
+        },
+        {
+          "id": "b",
+          "text": "dp[i][s] = minimum coins using only coin i for sum s",
+          "why": "Coins can be mixed; restricting to one coin type is wrong."
+        },
+        {
+          "id": "c",
+          "text": "dp[s] = number of ways to make s",
+          "why": "Counts ways instead of minimizing the number of coins."
+        },
+        {
+          "id": "d",
+          "text": "dp[c] = how many times coin c is used",
+          "why": "That's an answer description, not a subproblem."
+        }
+      ],
+      "accepted": [
+        "a"
+      ],
+      "explanation": "Every sum s is a subproblem; the best way to pay s ends with some coin c."
+    },
+    {
+      "key": "dp-transition",
+      "kind": "dp-transition",
+      "prompt": "Given that state, which transition is right?",
+      "options": [
+        {
+          "id": "a",
+          "text": "dp[s] = 1 + min over coins c ≤ s of dp[s − c]; dp[0] = 0; unreachable = ∞"
+        },
+        {
+          "id": "b",
+          "text": "dp[s] = dp[s − largest coin ≤ s] + 1",
+          "why": "That's greedy; it fails for coin systems like {1, 3, 4}."
+        },
+        {
+          "id": "c",
+          "text": "dp[s] = Σ over coins c of dp[s − c]",
+          "why": "Sums ways; you want a minimum."
+        },
+        {
+          "id": "d",
+          "text": "dp[s] = min over coins c of dp[s − c]",
+          "why": "Forgets to count the coin you just used (+1)."
+        }
+      ],
+      "accepted": [
+        "a"
+      ],
+      "explanation": "Try every coin as the last one paid and keep the best."
+    }
+  ],
+  "deprecated": false
+}

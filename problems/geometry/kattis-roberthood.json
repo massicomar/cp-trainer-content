@@ -1,0 +1,48 @@
+{
+  "$schema": "../../schema/problem.schema.json",
+  "schemaVersion": 1,
+  "id": "kattis-roberthood",
+  "status": "draft",
+  "title": "Robert Hood",
+  "source": "Kattis",
+  "url": "https://open.kattis.com/problems/roberthood",
+  "difficulty": {
+    "tier": "medium",
+    "scale": "kattis",
+    "value": "3.0"
+  },
+  "summary": "",
+  "constraints": {
+    "text": "C ≤ 1e5 points, |coordinates| ≤ 1000",
+    "verified": true
+  },
+  "answers": {
+    "subjects": [
+      {
+        "id": "geometry",
+        "role": "intended"
+      }
+    ],
+    "techniques": [
+      {
+        "id": "geometry.rotating-calipers",
+        "role": "intended"
+      },
+      {
+        "id": "geometry.convex-hull",
+        "role": "accepted"
+      }
+    ]
+  },
+  "distractors": [
+    "geometry.closest-pair",
+    "geometry.manhattan-rotation"
+  ],
+  "explanation": "The farthest pair lies on the convex hull; rotating calipers walks antipodal pairs in O(h).",
+  "traps": [
+    "O(n²) over all points is 1e10."
+  ],
+  "pairWith": [],
+  "extraLayers": [],
+  "deprecated": false
+}

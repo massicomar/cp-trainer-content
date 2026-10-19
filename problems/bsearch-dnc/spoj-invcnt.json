@@ -1,0 +1,52 @@
+{
+  "$schema": "../../schema/problem.schema.json",
+  "schemaVersion": 1,
+  "id": "spoj-invcnt",
+  "status": "draft",
+  "title": "Inversion Count",
+  "source": "SPOJ",
+  "url": "https://www.spoj.com/problems/INVCNT/",
+  "difficulty": {
+    "tier": "medium",
+    "scale": "estimate",
+    "value": "M"
+  },
+  "summary": "",
+  "constraints": {
+    "text": "n ≤ 2e5",
+    "verified": true
+  },
+  "answers": {
+    "subjects": [
+      {
+        "id": "bsearch-dnc",
+        "role": "intended"
+      },
+      {
+        "id": "segtree",
+        "role": "accepted"
+      }
+    ],
+    "techniques": [
+      {
+        "id": "bsearch-dnc.merge-sort-inversions",
+        "role": "intended"
+      },
+      {
+        "id": "segtree.fenwick",
+        "role": "accepted"
+      }
+    ]
+  },
+  "distractors": [
+    "bsearch-dnc.sorted-array",
+    "segtree.prefix-sums"
+  ],
+  "explanation": "Count pairs i < j with a_i > a_j during merge sort (or with a BIT over compressed values).",
+  "traps": [
+    "The count needs 64-bit (up to ~2e10)."
+  ],
+  "pairWith": [],
+  "extraLayers": [],
+  "deprecated": false
+}

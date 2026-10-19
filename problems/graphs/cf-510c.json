@@ -1,0 +1,45 @@
+{
+  "$schema": "../../schema/problem.schema.json",
+  "schemaVersion": 1,
+  "id": "cf-510c",
+  "status": "draft",
+  "title": "Fox And Names",
+  "source": "Codeforces",
+  "url": "https://codeforces.com/problemset/problem/510/C",
+  "difficulty": {
+    "tier": "medium",
+    "scale": "cf",
+    "value": "1600"
+  },
+  "summary": "",
+  "constraints": {
+    "text": "≤ 100 names, length ≤ 100",
+    "verified": true
+  },
+  "answers": {
+    "subjects": [
+      {
+        "id": "graphs",
+        "role": "intended"
+      }
+    ],
+    "techniques": [
+      {
+        "id": "graphs.toposort",
+        "role": "intended"
+      }
+    ]
+  },
+  "distractors": [
+    "other.greedy",
+    "graphs.dfs-components"
+  ],
+  "explanation": "Disguised graph: the first differing letters of neighbouring names give 'a before b' edges; topologically sort the 26 letters.",
+  "traps": [
+    "A name followed by its own prefix is impossible.",
+    "A cycle among letters means impossible."
+  ],
+  "pairWith": [],
+  "extraLayers": [],
+  "deprecated": false
+}

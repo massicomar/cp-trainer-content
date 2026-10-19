@@ -1,0 +1,46 @@
+{
+  "$schema": "../../schema/problem.schema.json",
+  "schemaVersion": 1,
+  "id": "cses-1649",
+  "status": "draft",
+  "title": "Dynamic Range Minimum Queries",
+  "source": "CSES",
+  "url": "https://cses.fi/problemset/task/1649",
+  "difficulty": {
+    "tier": "easy",
+    "scale": "usaco",
+    "value": "E"
+  },
+  "summary": "",
+  "constraints": {
+    "text": "n, q ≤ 2e5, point updates",
+    "verified": false
+  },
+  "answers": {
+    "subjects": [
+      {
+        "id": "segtree",
+        "role": "intended"
+      }
+    ],
+    "techniques": [
+      {
+        "id": "segtree.segtree-point",
+        "role": "intended"
+      }
+    ]
+  },
+  "distractors": [
+    "segtree.fenwick",
+    "segtree.sparse-table"
+  ],
+  "explanation": "Point updates + range min: a segment tree. A BIT only answers prefix queries for invertible operations.",
+  "traps": [
+    "A sparse table can't be updated."
+  ],
+  "pairWith": [
+    "cses-1647"
+  ],
+  "extraLayers": [],
+  "deprecated": false
+}

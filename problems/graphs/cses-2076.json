@@ -1,0 +1,45 @@
+{
+  "$schema": "../../schema/problem.schema.json",
+  "schemaVersion": 1,
+  "id": "cses-2076",
+  "status": "draft",
+  "title": "Necessary Roads",
+  "source": "CSES",
+  "url": "https://cses.fi/problemset/task/2076",
+  "difficulty": {
+    "tier": "medium",
+    "scale": "estimate",
+    "value": "M"
+  },
+  "summary": "",
+  "constraints": {
+    "text": "n ≤ 1e5, m ≤ 2e5",
+    "verified": true
+  },
+  "answers": {
+    "subjects": [
+      {
+        "id": "graphs",
+        "role": "intended"
+      }
+    ],
+    "techniques": [
+      {
+        "id": "graphs.bridges-articulation",
+        "role": "intended"
+      }
+    ]
+  },
+  "distractors": [
+    "graphs.scc",
+    "graphs.dsu",
+    "graphs.mst"
+  ],
+  "explanation": "Edges whose removal disconnects the graph are bridges: DFS with low-link, low[child] > tin[v].",
+  "traps": [
+    "Removing each edge and re-running DFS is O(m·(n+m))."
+  ],
+  "pairWith": [],
+  "extraLayers": [],
+  "deprecated": false
+}

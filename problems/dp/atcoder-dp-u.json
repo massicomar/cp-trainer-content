@@ -1,0 +1,108 @@
+{
+  "$schema": "../../schema/problem.schema.json",
+  "schemaVersion": 1,
+  "id": "atcoder-dp-u",
+  "status": "draft",
+  "title": "Grouping",
+  "source": "AtCoder",
+  "url": "https://atcoder.jp/contests/dp/tasks/dp_u",
+  "difficulty": {
+    "tier": "hard",
+    "scale": "estimate",
+    "value": "M/H"
+  },
+  "summary": "",
+  "constraints": {
+    "text": "N ≤ 16 rabbits, pairwise scores",
+    "verified": true
+  },
+  "answers": {
+    "subjects": [
+      {
+        "id": "dp",
+        "role": "intended"
+      }
+    ],
+    "techniques": [
+      {
+        "id": "dp.submask",
+        "role": "intended"
+      },
+      {
+        "id": "dp.bitmask",
+        "role": "accepted"
+      }
+    ]
+  },
+  "distractors": [
+    "other.greedy",
+    "graphs.dsu",
+    "dp.sos"
+  ],
+  "explanation": "Partition into groups: precompute the score of every subset, then dp[mask] over submasks. Enumerating all submasks of all masks is 3^16 ≈ 4.3e7.",
+  "traps": [],
+  "pairWith": [],
+  "extraLayers": [
+    {
+      "key": "dp-state",
+      "kind": "dp-state",
+      "prompt": "What should the DP state represent?",
+      "options": [
+        {
+          "id": "a",
+          "text": "dp[mask] = best total score for splitting exactly the rabbits in mask into groups"
+        },
+        {
+          "id": "b",
+          "text": "dp[i][g] = best score placing the first i rabbits, rabbit i in group g",
+          "why": "Group scores depend on all members, not just the newest one."
+        },
+        {
+          "id": "c",
+          "text": "dp[mask][k] = best score using k groups",
+          "why": "The number of groups is free; the extra dimension doesn't help."
+        },
+        {
+          "id": "d",
+          "text": "dp[i] = best score for the first i rabbits",
+          "why": "Groups aren't contiguous in index order."
+        }
+      ],
+      "accepted": [
+        "a"
+      ],
+      "explanation": "N ≤ 16 and 'partition into groups' → submask DP on the set of rabbits already grouped."
+    },
+    {
+      "key": "dp-transition",
+      "kind": "dp-transition",
+      "prompt": "Given that state, which transition is right?",
+      "options": [
+        {
+          "id": "a",
+          "text": "dp[mask] = max over non-empty submasks s ⊆ mask of score[s] + dp[mask \\ s]"
+        },
+        {
+          "id": "b",
+          "text": "dp[mask] = max over i ∈ mask of dp[mask \\ {i}] + score[{i}]",
+          "why": "Only ever forms groups of size 1."
+        },
+        {
+          "id": "c",
+          "text": "dp[mask] = score[mask]",
+          "why": "Forces one big group."
+        },
+        {
+          "id": "d",
+          "text": "dp[mask] = Σ over submasks s of dp[s]",
+          "why": "Sum, not max, and it double-counts."
+        }
+      ],
+      "accepted": [
+        "a"
+      ],
+      "explanation": "Choose the group that will be formed last (a submask), add its precomputed score. Fixing its lowest bit avoids counting each partition many times."
+    }
+  ],
+  "deprecated": false
+}

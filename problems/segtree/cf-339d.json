@@ -1,0 +1,42 @@
+{
+  "$schema": "../../schema/problem.schema.json",
+  "schemaVersion": 1,
+  "id": "cf-339d",
+  "status": "draft",
+  "title": "Xenia and Bit Operations",
+  "source": "Codeforces",
+  "url": "https://codeforces.com/problemset/problem/339/D",
+  "difficulty": {
+    "tier": "medium",
+    "scale": "cf",
+    "value": "1700"
+  },
+  "summary": "",
+  "constraints": {
+    "text": "2^17 elements, m ≤ 1e5 point updates",
+    "verified": true
+  },
+  "answers": {
+    "subjects": [
+      {
+        "id": "segtree",
+        "role": "intended"
+      }
+    ],
+    "techniques": [
+      {
+        "id": "segtree.segtree-merged-node",
+        "role": "intended"
+      }
+    ]
+  },
+  "distractors": [
+    "segtree.fenwick",
+    "segtree.prefix-sums"
+  ],
+  "explanation": "The whole process is a segment tree whose merge alternates OR and XOR by level; point update, read the root.",
+  "traps": [],
+  "pairWith": [],
+  "extraLayers": [],
+  "deprecated": false
+}

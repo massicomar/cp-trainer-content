@@ -1,0 +1,52 @@
+{
+  "$schema": "../../schema/problem.schema.json",
+  "schemaVersion": 1,
+  "id": "cses-1734",
+  "status": "draft",
+  "title": "Distinct Values Queries",
+  "source": "CSES",
+  "url": "https://cses.fi/problemset/task/1734",
+  "difficulty": {
+    "tier": "medium",
+    "scale": "usaco",
+    "value": "M"
+  },
+  "summary": "",
+  "constraints": {
+    "text": "n, q ≤ 2e5",
+    "verified": true
+  },
+  "answers": {
+    "subjects": [
+      {
+        "id": "segtree",
+        "role": "intended"
+      }
+    ],
+    "techniques": [
+      {
+        "id": "segtree.offline-sweep-bit",
+        "role": "intended"
+      },
+      {
+        "id": "segtree.mo",
+        "role": "accepted"
+      },
+      {
+        "id": "segtree.persistent",
+        "role": "accepted"
+      }
+    ]
+  },
+  "distractors": [
+    "segtree.prefix-sums",
+    "segtree.segtree-merged-node"
+  ],
+  "explanation": "Sort queries by right end; keep a 1 only at each value's last occurrence in a BIT; answer = range sum.",
+  "traps": [
+    "Distinct counts don't merge from two halves."
+  ],
+  "pairWith": [],
+  "extraLayers": [],
+  "deprecated": false
+}

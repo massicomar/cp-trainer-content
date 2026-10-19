@@ -1,0 +1,44 @@
+{
+  "$schema": "../../schema/problem.schema.json",
+  "schemaVersion": 1,
+  "id": "cses-1620",
+  "status": "draft",
+  "title": "Factory Machines",
+  "source": "CSES",
+  "url": "https://cses.fi/problemset/task/1620",
+  "difficulty": {
+    "tier": "easy",
+    "scale": "usaco",
+    "value": "E"
+  },
+  "summary": "",
+  "constraints": {
+    "text": "n ≤ 2e5, t, k_i ≤ 1e9",
+    "verified": true
+  },
+  "answers": {
+    "subjects": [
+      {
+        "id": "bsearch-dnc",
+        "role": "intended"
+      }
+    ],
+    "techniques": [
+      {
+        "id": "bsearch-dnc.on-answer",
+        "role": "intended"
+      }
+    ]
+  },
+  "distractors": [
+    "other.greedy",
+    "bsearch-dnc.two-pointers"
+  ],
+  "explanation": "Products made by time T is Σ⌊T/k_i⌋, monotone in T: binary search the minimum time (up to 1e18).",
+  "traps": [
+    "The sum overflows 64-bit unless you cap it at t."
+  ],
+  "pairWith": [],
+  "extraLayers": [],
+  "deprecated": false
+}

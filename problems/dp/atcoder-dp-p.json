@@ -1,0 +1,106 @@
+{
+  "$schema": "../../schema/problem.schema.json",
+  "schemaVersion": 1,
+  "id": "atcoder-dp-p",
+  "status": "draft",
+  "title": "Independent Set",
+  "source": "AtCoder",
+  "url": "https://atcoder.jp/contests/dp/tasks/dp_p",
+  "difficulty": {
+    "tier": "medium",
+    "scale": "estimate",
+    "value": "E/M"
+  },
+  "summary": "",
+  "constraints": {
+    "text": "N ≤ 1e5 vertices (tree), count colourings mod 1e9+7",
+    "verified": true
+  },
+  "answers": {
+    "subjects": [
+      {
+        "id": "dp",
+        "role": "intended"
+      }
+    ],
+    "techniques": [
+      {
+        "id": "dp.tree",
+        "role": "intended"
+      }
+    ]
+  },
+  "distractors": [
+    "graphs.bipartite",
+    "dp.rerooting",
+    "dp.bitmask"
+  ],
+  "explanation": "Root the tree; for each vertex keep the count of colourings of its subtree for each of its two colours.",
+  "traps": [
+    "Recursion depth 1e5 can overflow the stack on a path-shaped tree."
+  ],
+  "pairWith": [],
+  "extraLayers": [
+    {
+      "key": "dp-state",
+      "kind": "dp-state",
+      "prompt": "What should the DP state represent?",
+      "options": [
+        {
+          "id": "a",
+          "text": "dp[v][c] = number of valid colourings of v's subtree with v coloured c (white/black)"
+        },
+        {
+          "id": "b",
+          "text": "dp[v] = number of valid colourings of v's subtree",
+          "why": "The parent needs to know whether v is black."
+        },
+        {
+          "id": "c",
+          "text": "dp[mask] = whether the black set mask is independent",
+          "why": "2^N."
+        },
+        {
+          "id": "d",
+          "text": "dp[d] = number of colourings of the vertices at depth d",
+          "why": "Edges connect parent/child, so depth layers aren't independent."
+        }
+      ],
+      "accepted": [
+        "a"
+      ],
+      "explanation": "The only interaction across an edge is 'not both black', so the parent needs v's colour."
+    },
+    {
+      "key": "dp-transition",
+      "kind": "dp-transition",
+      "prompt": "Given that state, which transition is right?",
+      "options": [
+        {
+          "id": "a",
+          "text": "dp[v][white] = Π (dp[u][white] + dp[u][black]); dp[v][black] = Π dp[u][white] over children u"
+        },
+        {
+          "id": "b",
+          "text": "dp[v][white] = Σ (dp[u][white] + dp[u][black]) over children",
+          "why": "Children's subtrees are independent: multiply, don't add."
+        },
+        {
+          "id": "c",
+          "text": "dp[v][black] = Π (dp[u][white] + dp[u][black])",
+          "why": "A black v forbids black children."
+        },
+        {
+          "id": "d",
+          "text": "dp[v] = 2 · Π dp[u]",
+          "why": "Ignores the adjacency rule."
+        }
+      ],
+      "accepted": [
+        "a"
+      ],
+      "explanation": "Independent subtrees multiply; a black vertex forces white children."
+    }
+  ],
+  "deprecated": false
+}

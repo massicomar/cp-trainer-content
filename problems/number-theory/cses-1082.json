@@ -1,0 +1,45 @@
+{
+  "$schema": "../../schema/problem.schema.json",
+  "schemaVersion": 1,
+  "id": "cses-1082",
+  "status": "draft",
+  "title": "Sum of Divisors",
+  "source": "CSES",
+  "url": "https://cses.fi/problemset/task/1082",
+  "difficulty": {
+    "tier": "hard",
+    "scale": "usaco",
+    "value": "H"
+  },
+  "summary": "",
+  "constraints": {
+    "text": "n ≤ 1e12",
+    "verified": true
+  },
+  "answers": {
+    "subjects": [
+      {
+        "id": "number-theory",
+        "role": "intended"
+      }
+    ],
+    "techniques": [
+      {
+        "id": "number-theory.floor-blocks",
+        "role": "intended"
+      }
+    ]
+  },
+  "distractors": [
+    "number-theory.harmonic-loop",
+    "number-theory.sieve"
+  ],
+  "explanation": "Σ σ(i) = Σ_d d·⌊n/d⌋, and ⌊n/d⌋ takes only O(√n) distinct values: sum arithmetic series per block.",
+  "traps": [
+    "Loops to n are 1e12.",
+    "Arithmetic-series sums need a modular inverse of 2 or careful halving."
+  ],
+  "pairWith": [],
+  "extraLayers": [],
+  "deprecated": false
+}

@@ -1,0 +1,52 @@
+{
+  "$schema": "../../schema/problem.schema.json",
+  "schemaVersion": 1,
+  "id": "cf-1679d",
+  "status": "draft",
+  "title": "Toss a Coin to Your Graph...",
+  "source": "Codeforces",
+  "url": "https://codeforces.com/problemset/problem/1679/D",
+  "difficulty": {
+    "tier": "hard",
+    "scale": "cf",
+    "value": "1900"
+  },
+  "summary": "",
+  "constraints": {
+    "text": "n, m ≤ 2e5, k ≤ 1e18",
+    "verified": true
+  },
+  "answers": {
+    "subjects": [
+      {
+        "id": "bsearch-dnc",
+        "role": "intended"
+      },
+      {
+        "id": "graphs",
+        "role": "accepted"
+      }
+    ],
+    "techniques": [
+      {
+        "id": "bsearch-dnc.on-answer",
+        "role": "intended"
+      },
+      {
+        "id": "graphs.toposort",
+        "role": "accepted"
+      }
+    ]
+  },
+  "distractors": [
+    "graphs.dijkstra",
+    "graphs.scc"
+  ],
+  "explanation": "Binary search the maximum value allowed; on the subgraph of allowed vertices, a cycle or a DAG longest path ≥ k makes it feasible.",
+  "traps": [
+    "k ≤ 1e18 but path lengths cap at n unless there's a cycle."
+  ],
+  "pairWith": [],
+  "extraLayers": [],
+  "deprecated": false
+}

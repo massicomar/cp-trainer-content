@@ -1,0 +1,44 @@
+{
+  "$schema": "../../schema/problem.schema.json",
+  "schemaVersion": 1,
+  "id": "cses-1694",
+  "status": "draft",
+  "title": "Download Speed",
+  "source": "CSES",
+  "url": "https://cses.fi/problemset/task/1694",
+  "difficulty": {
+    "tier": "hard",
+    "scale": "estimate",
+    "value": "M"
+  },
+  "summary": "",
+  "constraints": {
+    "text": "n ≤ 500, m ≤ 1000",
+    "verified": true
+  },
+  "answers": {
+    "subjects": [
+      {
+        "id": "graphs",
+        "role": "intended"
+      }
+    ],
+    "techniques": [
+      {
+        "id": "graphs.max-flow",
+        "role": "intended"
+      }
+    ]
+  },
+  "distractors": [
+    "graphs.dijkstra",
+    "graphs.mst"
+  ],
+  "explanation": "Maximum throughput from 1 to n through capacitated links: max flow (Edmonds-Karp or Dinic).",
+  "traps": [
+    "The widest single path isn't the answer — flow splits across paths."
+  ],
+  "pairWith": [],
+  "extraLayers": [],
+  "deprecated": false
+}

@@ -1,0 +1,48 @@
+{
+  "$schema": "../../schema/problem.schema.json",
+  "schemaVersion": 1,
+  "id": "cf-1366d",
+  "status": "draft",
+  "title": "Two Divisors",
+  "source": "Codeforces",
+  "url": "https://codeforces.com/problemset/problem/1366/D",
+  "difficulty": {
+    "tier": "hard",
+    "scale": "cf",
+    "value": "2000"
+  },
+  "summary": "",
+  "constraints": {
+    "text": "n ≤ 5e5 values, each ≤ 1e7",
+    "verified": true
+  },
+  "answers": {
+    "subjects": [
+      {
+        "id": "number-theory",
+        "role": "intended"
+      }
+    ],
+    "techniques": [
+      {
+        "id": "number-theory.spf-sieve",
+        "role": "intended"
+      },
+      {
+        "id": "number-theory.gcd-lcm",
+        "role": "accepted"
+      }
+    ]
+  },
+  "distractors": [
+    "number-theory.trial-division",
+    "number-theory.pollard-rho"
+  ],
+  "explanation": "Factor every value with an SPF sieve: take d1 = p^k for the smallest prime p, d2 = the rest; gcd(d1 + d2, a) = 1.",
+  "traps": [
+    "Trial division for 5e5 values is ~1.5e9 operations."
+  ],
+  "pairWith": [],
+  "extraLayers": [],
+  "deprecated": false
+}

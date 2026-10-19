@@ -1,0 +1,106 @@
+{
+  "$schema": "../../schema/problem.schema.json",
+  "schemaVersion": 1,
+  "id": "cf-1077f2",
+  "status": "draft",
+  "title": "Pictures with Kittens (hard version)",
+  "source": "Codeforces",
+  "url": "https://codeforces.com/problemset/problem/1077/F2",
+  "difficulty": {
+    "tier": "hard",
+    "scale": "cf",
+    "value": "2100"
+  },
+  "summary": "",
+  "constraints": {
+    "text": "k, x ≤ n ≤ 5000",
+    "verified": true
+  },
+  "answers": {
+    "subjects": [
+      {
+        "id": "dp",
+        "role": "intended"
+      }
+    ],
+    "techniques": [
+      {
+        "id": "dp.opt-deque",
+        "role": "intended"
+      }
+    ]
+  },
+  "distractors": [
+    "other.greedy",
+    "segtree.segtree-point",
+    "dp.opt-cht"
+  ],
+  "explanation": "dp over (reposts used, last reposted picture). The transition takes a max over a window of the previous layer → monotonic deque, O(n·x).",
+  "traps": [
+    "Unreachable states must be −∞, and the answer must take the last repost within the final k pictures."
+  ],
+  "pairWith": [],
+  "extraLayers": [
+    {
+      "key": "dp-state",
+      "kind": "dp-state",
+      "prompt": "What should the DP state represent?",
+      "options": [
+        {
+          "id": "a",
+          "text": "dp[j][i] = max beauty using exactly j reposts, the last one being picture i"
+        },
+        {
+          "id": "b",
+          "text": "dp[i] = max beauty for the first i pictures",
+          "why": "Loses how many reposts have been used (must be exactly x)."
+        },
+        {
+          "id": "c",
+          "text": "dp[j][i] = max beauty using j reposts among the first i pictures",
+          "why": "Loses where the last repost is, which the 'every k consecutive' rule needs."
+        },
+        {
+          "id": "d",
+          "text": "dp[mask] = chosen pictures",
+          "why": "n = 5000."
+        }
+      ],
+      "accepted": [
+        "a"
+      ],
+      "explanation": "The window rule only cares about the gap to the previous repost, so remember the last repost position."
+    },
+    {
+      "key": "dp-transition",
+      "kind": "dp-transition",
+      "prompt": "Given that state, which transition is right?",
+      "options": [
+        {
+          "id": "a",
+          "text": "dp[j][i] = a_i + max over p ∈ [i−k, i−1] of dp[j−1][p], with the window max maintained by a monotonic deque"
+        },
+        {
+          "id": "b",
+          "text": "dp[j][i] = a_i + max over all p < i of dp[j−1][p]",
+          "why": "Allows gaps of k or more pictures without a repost."
+        },
+        {
+          "id": "c",
+          "text": "dp[j][i] = a_i + dp[j−1][i−1]",
+          "why": "Forces reposts to be consecutive."
+        },
+        {
+          "id": "d",
+          "text": "Same window max, computed by a loop over the window",
+          "why": "Correct, but O(n²x) — that's the easy version F1."
+        }
+      ],
+      "accepted": [
+        "a"
+      ],
+      "explanation": "Sliding-window maximum of the previous layer turns O(n·k) per layer into O(n)."
+    }
+  ],
+  "deprecated": false
+}

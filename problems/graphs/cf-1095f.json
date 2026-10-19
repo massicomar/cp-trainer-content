@@ -1,0 +1,45 @@
+{
+  "$schema": "../../schema/problem.schema.json",
+  "schemaVersion": 1,
+  "id": "cf-1095f",
+  "status": "draft",
+  "title": "Make It Connected",
+  "source": "Codeforces",
+  "url": "https://codeforces.com/problemset/problem/1095/F",
+  "difficulty": {
+    "tier": "hard",
+    "scale": "cf",
+    "value": "1900"
+  },
+  "summary": "",
+  "constraints": {
+    "text": "n, m ≤ 2e5, costs up to 1e12",
+    "verified": true
+  },
+  "answers": {
+    "subjects": [
+      {
+        "id": "graphs",
+        "role": "intended"
+      }
+    ],
+    "techniques": [
+      {
+        "id": "graphs.mst",
+        "role": "intended"
+      }
+    ]
+  },
+  "distractors": [
+    "graphs.dijkstra",
+    "other.greedy"
+  ],
+  "explanation": "The implicit complete graph has n² edges, but every useful implicit edge goes through the cheapest vertex: n − 1 star edges + the m offers, then Kruskal.",
+  "traps": [
+    "Building all n² edges.",
+    "Costs need 64-bit."
+  ],
+  "pairWith": [],
+  "extraLayers": [],
+  "deprecated": false
+}

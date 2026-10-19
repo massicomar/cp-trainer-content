@@ -1,0 +1,44 @@
+{
+  "$schema": "../../schema/problem.schema.json",
+  "schemaVersion": 1,
+  "id": "cf-706b",
+  "status": "draft",
+  "title": "Interesting drink",
+  "source": "Codeforces",
+  "url": "https://codeforces.com/problemset/problem/706/B",
+  "difficulty": {
+    "tier": "easy",
+    "scale": "cf",
+    "value": "1100"
+  },
+  "summary": "",
+  "constraints": {
+    "text": "n, q ≤ 1e5",
+    "verified": true
+  },
+  "answers": {
+    "subjects": [
+      {
+        "id": "bsearch-dnc",
+        "role": "intended"
+      }
+    ],
+    "techniques": [
+      {
+        "id": "bsearch-dnc.sorted-array",
+        "role": "intended"
+      }
+    ]
+  },
+  "distractors": [
+    "bsearch-dnc.two-pointers",
+    "segtree.fenwick"
+  ],
+  "explanation": "Sort prices once; each query is an upper_bound.",
+  "traps": [
+    "Linear scan per query is 1e10."
+  ],
+  "pairWith": [],
+  "extraLayers": [],
+  "deprecated": false
+}

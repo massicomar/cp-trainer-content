@@ -1,0 +1,47 @@
+{
+  "$schema": "../../schema/problem.schema.json",
+  "schemaVersion": 1,
+  "id": "cf-996a",
+  "status": "draft",
+  "title": "Hit the Lottery",
+  "source": "Codeforces",
+  "url": "https://codeforces.com/problemset/problem/996/A",
+  "difficulty": {
+    "tier": "easy",
+    "scale": "cf",
+    "value": "800"
+  },
+  "summary": "",
+  "constraints": {
+    "text": "n ≤ 1e9, bills 1, 5, 10, 20, 100",
+    "verified": true
+  },
+  "answers": {
+    "subjects": [
+      {
+        "id": "other",
+        "role": "intended"
+      }
+    ],
+    "techniques": [
+      {
+        "id": "other.greedy",
+        "role": "intended"
+      }
+    ]
+  },
+  "appearsIn": [
+    "dp"
+  ],
+  "distractors": [
+    "dp.coin-change",
+    "dp.knapsack-01"
+  ],
+  "explanation": "Looks like Minimizing Coins, but n ≤ 1e9 rules out a table and this fixed bill set is canonical: largest bill first is optimal.",
+  "traps": [],
+  "pairWith": [
+    "cses-1634"
+  ],
+  "extraLayers": [],
+  "deprecated": false
+}

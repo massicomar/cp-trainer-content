@@ -1,0 +1,53 @@
+{
+  "$schema": "../../schema/problem.schema.json",
+  "schemaVersion": 1,
+  "id": "cf-1059d",
+  "status": "draft",
+  "title": "Nature Reserve",
+  "source": "Codeforces",
+  "url": "https://codeforces.com/problemset/problem/1059/D",
+  "difficulty": {
+    "tier": "hard",
+    "scale": "cf",
+    "value": "2200"
+  },
+  "summary": "",
+  "constraints": {
+    "text": "n ≤ 1e5, answer within 1e-6",
+    "verified": true
+  },
+  "answers": {
+    "subjects": [
+      {
+        "id": "geometry",
+        "role": "intended"
+      },
+      {
+        "id": "bsearch-dnc",
+        "role": "accepted"
+      }
+    ],
+    "techniques": [
+      {
+        "id": "geometry.circles",
+        "role": "intended"
+      },
+      {
+        "id": "bsearch-dnc.on-reals",
+        "role": "accepted"
+      }
+    ]
+  },
+  "distractors": [
+    "geometry.convex-hull",
+    "bsearch-dnc.ternary"
+  ],
+  "explanation": "Binary search the radius; each point allows an interval of centre positions; feasible iff the intervals intersect.",
+  "traps": [
+    "Points on both sides of the river make it impossible.",
+    "Catastrophic cancellation; rearrange the formula."
+  ],
+  "pairWith": [],
+  "extraLayers": [],
+  "deprecated": false
+}

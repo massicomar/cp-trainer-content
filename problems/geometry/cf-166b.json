@@ -1,0 +1,45 @@
+{
+  "$schema": "../../schema/problem.schema.json",
+  "schemaVersion": 1,
+  "id": "cf-166b",
+  "status": "draft",
+  "title": "Polygons",
+  "source": "Codeforces",
+  "url": "https://codeforces.com/problemset/problem/166/B",
+  "difficulty": {
+    "tier": "hard",
+    "scale": "cf",
+    "value": "2100"
+  },
+  "summary": "",
+  "constraints": {
+    "text": "convex polygon n ≤ 1e5, other polygon m ≤ 2e4",
+    "verified": true
+  },
+  "answers": {
+    "subjects": [
+      {
+        "id": "geometry",
+        "role": "intended"
+      }
+    ],
+    "techniques": [
+      {
+        "id": "geometry.point-in-convex-polygon",
+        "role": "intended"
+      }
+    ]
+  },
+  "distractors": [
+    "geometry.point-in-polygon",
+    "geometry.convex-hull"
+  ],
+  "explanation": "Check every vertex of B is strictly inside convex A: O(log n) fan binary search per point.",
+  "traps": [
+    "Touching the boundary counts as outside here.",
+    "Ray casting per point is O(n·m) = 2e9."
+  ],
+  "pairWith": [],
+  "extraLayers": [],
+  "deprecated": false
+}

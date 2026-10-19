@@ -1,0 +1,42 @@
+{
+  "$schema": "../../schema/problem.schema.json",
+  "schemaVersion": 1,
+  "id": "kattis-polygonarea",
+  "status": "draft",
+  "title": "Polygon Area",
+  "source": "Kattis",
+  "url": "https://open.kattis.com/problems/polygonarea",
+  "difficulty": {
+    "tier": "easy",
+    "scale": "kattis",
+    "value": "1.8"
+  },
+  "summary": "",
+  "constraints": {
+    "text": "n ≤ 1000 vertices",
+    "verified": true
+  },
+  "answers": {
+    "subjects": [
+      {
+        "id": "geometry",
+        "role": "intended"
+      }
+    ],
+    "techniques": [
+      {
+        "id": "geometry.shoelace-pick",
+        "role": "intended"
+      }
+    ]
+  },
+  "distractors": [
+    "geometry.convex-hull",
+    "geometry.point-in-polygon"
+  ],
+  "explanation": "Shoelace formula; the sign of the signed area gives clockwise vs counter-clockwise.",
+  "traps": [],
+  "pairWith": [],
+  "extraLayers": [],
+  "deprecated": false
+}
