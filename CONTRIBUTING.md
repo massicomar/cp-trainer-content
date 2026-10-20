@@ -43,8 +43,13 @@ To retire a problem, set `"deprecated": true`. CI fails if a file that exists on
 ## How the app turns a file into questions
 
 - **Layer 1, subject.** The options are the six subjects plus "None of these". It's only asked when the session includes more than one subject.
-- **Layer 2, technique.** The options are the intended technique, then your `distractors`, then the taxonomy's `confusableWith`, then other techniques of the same subject, up to four in total. `accepted` and `overkill` techniques are never marked wrong.
-- **Layers 3+** come from `extraLayers`. Each layer has:
+- **Layer 2, technique.** Up to four options: the intended technique plus three wrong ones, shuffled.
+  - The wrong ones come from your `distractors` first (any subject is fine), then the intended technique's `confusableWith`, then other techniques of the same subject.
+  - Greedy and ad hoc can show up as a wrong option on any problem, about a third of the time, because brute force or a greedy idea looks plausible whenever the limits are small.
+  - Each `overkill` technique takes one of the wrong-option slots about half the time.
+  - `accepted` and `overkill` techniques are never marked wrong.
+  - If the player picks an `accepted` subject in layer 1 and the file lists a technique for that subject, layer 2 asks about that subject instead.
+- **Layers 3+** come from `extraLayers`. They're asked when the session includes the problem's intended subject; a session that only reached the problem through an `accepted` subject skips them. Each layer has:
   - `key`: unique within the file, e.g. `dp-state`. `subject` and `technique` are reserved for layers 1 and 2.
   - `kind`: one of `dp-state`, `dp-transition`, `complexity`, `observation`, `node-stores`, `trap`, `custom`.
   - `prompt`: the question shown to the player.
