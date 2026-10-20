@@ -3,6 +3,8 @@
   "schemaVersion": 1,
   "id": "cses-1673",
   "status": "draft",
+  "author": "massicomar",
+  "collection": "official",
   "title": "High Score",
   "source": "CSES",
   "url": "https://cses.fi/problemset/task/1673",
@@ -11,7 +13,7 @@
     "scale": "estimate",
     "value": "M"
   },
-  "summary": "",
+  "summary": "You play a game consisting of $n$ rooms and $m$ tunnels. Your initial score is $0$, and each tunnel increases your score by $x$ where $x$ may be both positive or negative. You may go through a tunnel several times.\n\nYour task is to walk from room $1$ to room $n$. What is the maximum score you can get?\n\nInput\n\nThe first input line has two integers $n$ and $m$: the number of rooms and tunnels. The rooms are numbered $1,2,\\dots,n$.\n\nThen, there are $m$ lines describing the tunnels. Each line has three integers $a$, $b$ and $x$: the tunnel starts at room $a$, ends at room $b$, and it increases your score by $x$. All tunnels are one-way tunnels.\n\nYou can assume that it is possible to get from room $1$ to room $n$.\n\nOutput\n\nPrint one integer: the maximum score you can get. However, if you can get an arbitrarily large score, print $-1$.",
   "constraints": {
     "text": "n ≤ 2500, m ≤ 5000, weights in [−1e9, 1e9]",
     "verified": true

@@ -3,6 +3,8 @@
   "schemaVersion": 1,
   "id": "cses-1712",
   "status": "draft",
+  "author": "massicomar",
+  "collection": "official",
   "title": "Exponentiation II",
   "source": "CSES",
   "url": "https://cses.fi/problemset/task/1712",
@@ -11,7 +13,7 @@
     "scale": "estimate",
     "value": "E/M"
   },
-  "summary": "",
+  "summary": "Your task is to efficiently calculate values $a^{b^c}$ modulo $10^9+7$.\n\nNote that in this task we assume that $0^0=1$.\n\nInput\n\nThe first input line has an integer $n$: the number of calculations.\n\nAfter this, there are $n$ lines, each containing three integers $a$, $b$ and $c$.\n\nOutput\n\nPrint each value $a^{b^c}$ modulo $10^9+7$.",
   "constraints": {
     "text": "a, b, c ≤ 1e9, compute a^(b^c) mod 1e9+7",
     "verified": true

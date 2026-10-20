@@ -3,6 +3,8 @@
   "schemaVersion": 1,
   "id": "cses-2194",
   "status": "draft",
+  "author": "massicomar",
+  "collection": "official",
   "title": "Minimum Euclidean Distance",
   "source": "CSES",
   "url": "https://cses.fi/problemset/task/2194",
@@ -11,7 +13,7 @@
     "scale": "estimate",
     "value": "M"
   },
-  "summary": "",
+  "summary": "Given a set of points in the two-dimensional plane, your task is to find the minimum Euclidean distance between two distinct points.\n\nThe Euclidean distance of points $(x_1,y_1)$ and $(x_2,y_2)$ is $\\sqrt{(x_1-x_2)^2+(y_1-y_2)^2}$.\n\nInput\n\nThe first input line has an integer $n$: the number of points.\n\nAfter this, there are $n$ lines that describe the points. Each line has two integers $x$ and $y$. You may assume that each point is distinct.\n\nOutput\n\nPrint one integer: $d^2$ where $d$ is the minimum Euclidean distance (this ensures that the result is an integer).",
   "constraints": {
     "text": "n ≤ 2e5, |coordinates| ≤ 1e9",
     "verified": true

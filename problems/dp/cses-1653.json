@@ -3,6 +3,8 @@
   "schemaVersion": 1,
   "id": "cses-1653",
   "status": "draft",
+  "author": "massicomar",
+  "collection": "official",
   "title": "Elevator Rides",
   "source": "CSES",
   "url": "https://cses.fi/problemset/task/1653",
@@ -11,7 +13,7 @@
     "scale": "estimate",
     "value": "M"
   },
-  "summary": "",
+  "summary": "There are $n$ people who want to get to the top of a building which has only one elevator. You know the weight of each person and the maximum allowed weight in the elevator. What is the minimum number of elevator rides?\n\nInput\n\nThe first input line has two integers $n$ and $x$: the number of people and the maximum allowed weight in the elevator.\n\nThe second line has $n$ integers $w_1,w_2,\\dots,w_n$: the weight of each person.\n\nOutput\n\nPrint one integer: the minimum number of rides.",
   "constraints": {
     "text": "n ≤ 20 people, weights and capacity x ≤ 1e9",
     "verified": true

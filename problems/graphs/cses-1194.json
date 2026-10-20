@@ -3,6 +3,8 @@
   "schemaVersion": 1,
   "id": "cses-1194",
   "status": "draft",
+  "author": "massicomar",
+  "collection": "official",
   "title": "Monsters",
   "source": "CSES",
   "url": "https://cses.fi/problemset/task/1194",
@@ -11,7 +13,7 @@
     "scale": "estimate",
     "value": "M"
   },
-  "summary": "",
+  "summary": "You and some monsters are in a labyrinth. When taking a step to some direction in the labyrinth, each monster may simultaneously take one as well. Your goal is to reach one of the boundary squares without ever sharing a square with a monster.\n\nYour task is to find out if your goal is possible, and if it is, print a path that you can follow. Your plan has to work in any situation; even if the monsters know your path beforehand.\n\nInput\n\nThe first input line has two integers $n$ and $m$: the height and width of the map.\n\nAfter this there are $n$ lines of $m$ characters describing the map. Each character is . (floor), # (wall), A (start), or M (monster). There is exactly one A in the input.\n\nOutput\n\nFirst print \"YES\" if your goal is possible, and \"NO\" otherwise.\n\nIf your goal is possible, also print an example of a valid path (the length of the path and its description using characters D, U, L, and R). You can print any path, as long as its length is at most $n \\cdot m$ steps.",
   "constraints": {
     "text": "grid n, m ≤ 1000",
     "verified": true

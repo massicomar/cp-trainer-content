@@ -3,6 +3,8 @@
   "schemaVersion": 1,
   "id": "atcoder-dp-z",
   "status": "draft",
+  "author": "massicomar",
+  "collection": "official",
   "title": "Frog 3",
   "source": "AtCoder",
   "url": "https://atcoder.jp/contests/dp/tasks/dp_z",
@@ -11,7 +13,7 @@
     "scale": "estimate",
     "value": "H"
   },
-  "summary": "",
+  "summary": "There are $N$ stones, numbered $1, 2, \\ldots, N$. For each $i$ ($1 \\leq i \\leq N$), the height of Stone $i$ is $h_i$. Here, $h_1 < h_2 < \\cdots < h_N$ holds.\n\nThere is a frog who is initially on Stone $1$. He will repeat the following action some number of times to reach Stone $N$:\n\n- If the frog is currently on Stone $i$, jump to one of the following: Stone $i + 1, i + 2, \\ldots, N$. Here, a cost of $(h_j - h_i)^2 + C$ is incurred, where $j$ is the stone to land on.\n\nFind the minimum possible total cost incurred before the frog reaches Stone $N$.\n\nInput\n\nInput is given from Standard Input in the following format:\n\n$N$ $C$\r\n$h_1$ $h_2$ $\\ldots$ $h_N$\n\nOutput\n\nPrint the minimum possible total cost incurred.",
   "constraints": {
     "text": "N ≤ 2e5, heights strictly increasing, cost (h_j − h_i)² + C",
     "verified": true

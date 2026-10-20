@@ -3,6 +3,8 @@
   "schemaVersion": 1,
   "id": "cf-782b",
   "status": "draft",
+  "author": "massicomar",
+  "collection": "official",
   "title": "The Meeting Place Cannot Be Changed",
   "source": "Codeforces",
   "url": "https://codeforces.com/problemset/problem/782/B",
@@ -11,7 +13,7 @@
     "scale": "cf",
     "value": "1600"
   },
-  "summary": "",
+  "summary": "The main road in Bytecity is a straight line from south to north. Conveniently, there are coordinates measured in meters from the southernmost building in north direction.\n\nAt some points on the road there are n friends, and i-th of them is standing at the point xi meters and can move with any speed no greater than vi meters per second in any of the two directions along the road: south or north.\n\nYou are to compute the minimum time needed to gather all the n friends at some point on the road. Note that the point they meet at doesn't need to have integer coordinate.\n\nInput\n\nThe first line contains single integer n (2 ≤ n ≤ 60 000) — the number of friends.\n\nThe second line contains n integers x1, x2, ..., xn (1 ≤ xi ≤ 109) — the current coordinates of the friends, in meters.\n\nThe third line contains n integers v1, v2, ..., vn (1 ≤ vi ≤ 109) — the maximum speeds of the friends, in meters per second.\n\nOutput\n\nPrint the minimum time (in seconds) needed for all the n friends to meet at some point on the road.\n\nYour answer will be considered correct, if its absolute or relative error isn't greater than 10 - 6. Formally, let your answer be a, while jury's answer be b. Your answer will be considered correct if [image] holds.",
   "constraints": {
     "text": "n ≤ 6e4, answer within 1e-6",
     "verified": true

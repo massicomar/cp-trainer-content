@@ -3,6 +3,8 @@
   "schemaVersion": 1,
   "id": "cf-1324e",
   "status": "draft",
+  "author": "massicomar",
+  "collection": "official",
   "title": "Sleeping Schedule",
   "source": "Codeforces",
   "url": "https://codeforces.com/problemset/problem/1324/E",
@@ -11,7 +13,7 @@
     "scale": "cf",
     "value": "1700"
   },
-  "summary": "",
+  "summary": "Vova had a pretty weird sleeping schedule. There are $h$ hours in a day. Vova will sleep exactly $n$ times. The $i$-th time he will sleep exactly after $a_i$ hours from the time he woke up. You can assume that Vova woke up exactly at the beginning of this story (the initial time is $0$). Each time Vova sleeps exactly one day (in other words, $h$ hours).\n\nVova thinks that the $i$-th sleeping time is good if he starts to sleep between hours $l$ and $r$ inclusive.\n\nVova can control himself and before the $i$-th time can choose between two options: go to sleep after $a_i$ hours or after $a_i - 1$ hours.\n\nYour task is to say the maximum number of good sleeping times Vova can obtain if he acts optimally.\n\nInput\n\nThe first line of the input contains four integers $n, h, l$ and $r$ ($1 \\le n \\le 2000, 3 \\le h \\le 2000, 0 \\le l \\le r \\lt h$) — the number of times Vova goes to sleep, the number of hours in a day and the segment of the good sleeping time.\n\nThe second line of the input contains $n$ integers $a_1, a_2, \\dots, a_n$ ($1 \\le a_i \\lt h$), where $a_i$ is the number of hours after which Vova goes to sleep the $i$-th time.\n\nOutput\n\nPrint one integer — the maximum number of good sleeping times Vova can obtain if he acts optimally.",
   "constraints": {
     "text": "n ≤ 2000 sleeps, h ≤ 2000 hours per day",
     "verified": true

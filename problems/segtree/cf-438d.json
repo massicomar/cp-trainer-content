@@ -3,6 +3,8 @@
   "schemaVersion": 1,
   "id": "cf-438d",
   "status": "draft",
+  "author": "massicomar",
+  "collection": "official",
   "title": "The Child and Sequence",
   "source": "Codeforces",
   "url": "https://codeforces.com/problemset/problem/438/D",
@@ -11,7 +13,7 @@
     "scale": "cf",
     "value": "2300"
   },
-  "summary": "",
+  "summary": "At the children's day, the child came to Picks's house, and messed his house up. Picks was angry at him. A lot of important things were lost, in particular the favorite sequence of Picks.\n\nFortunately, Picks remembers how to repair the sequence. Initially he should create an integer array a[1], a[2], ..., a[n]. Then he should perform a sequence of m operations. An operation can be one of the following:\n\n1. Print operation l, r. Picks should write down the value of [image].\n2. Modulo operation l, r, x. Picks should perform assignment a[i] = a[i] mod x for each i (l ≤ i ≤ r).\n3. Set operation k, x. Picks should set the value of a[k] to x (in other words perform an assignment a[k] = x).\n\nCan you help Picks to perform the whole sequence of operations?\n\nInput\n\nThe first line of input contains two integer: n, m (1 ≤ n, m ≤ 105). The second line contains n integers, separated by space: a[1], a[2], ..., a[n] (1 ≤ a[i] ≤ 109) — initial value of array elements.\n\nEach of the next m lines begins with a number type [image].\n\n- If type = 1, there will be two integers more in the line: l, r (1 ≤ l ≤ r ≤ n), which correspond the operation 1.\n- If type = 2, there will be three integers more in the line: l, r, x (1 ≤ l ≤ r ≤ n; 1 ≤ x ≤ 109), which correspond the operation 2.\n- If type = 3, there will be two integers more in the line: k, x (1 ≤ k ≤ n; 1 ≤ x ≤ 109), which correspond the operation 3.\n\nOutput\n\nFor each operation 1, please print a line containing the answer. Notice that the answer may exceed the 32-bit integer.",
   "constraints": {
     "text": "n, m ≤ 1e5, range mod, point assign, range sum",
     "verified": true

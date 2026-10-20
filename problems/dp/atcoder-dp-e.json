@@ -3,6 +3,8 @@
   "schemaVersion": 1,
   "id": "atcoder-dp-e",
   "status": "draft",
+  "author": "massicomar",
+  "collection": "official",
   "title": "Knapsack 2",
   "source": "AtCoder",
   "url": "https://atcoder.jp/contests/dp/tasks/dp_e",
@@ -11,7 +13,7 @@
     "scale": "estimate",
     "value": "M"
   },
-  "summary": "",
+  "summary": "There are $N$ items, numbered $1, 2, \\ldots, N$. For each $i$ ($1 \\leq i \\leq N$), Item $i$ has a weight of $w_i$ and a value of $v_i$.\n\nTaro has decided to choose some of the $N$ items and carry them home in a knapsack. The capacity of the knapsack is $W$, which means that the sum of the weights of items taken must be at most $W$.\n\nFind the maximum possible sum of the values of items that Taro takes home.\n\nInput\n\nInput is given from Standard Input in the following format:\n\n$N$ $W$\r\n$w_1$ $v_1$\r\n$w_2$ $v_2$\r\n$:$\r\n$w_N$ $v_N$\n\nOutput\n\nPrint the maximum possible sum of the values of items that Taro takes home.",
   "constraints": {
     "text": "N ≤ 100, capacity W ≤ 1e9, each value ≤ 1e3",
     "verified": true

@@ -3,6 +3,8 @@
   "schemaVersion": 1,
   "id": "cses-2220",
   "status": "draft",
+  "author": "massicomar",
+  "collection": "official",
   "title": "Counting Numbers",
   "source": "CSES",
   "url": "https://cses.fi/problemset/task/2220",
@@ -11,7 +13,7 @@
     "scale": "estimate",
     "value": "M"
   },
-  "summary": "",
+  "summary": "Your task is to count the number of integers between $a$ and $b$ where no two adjacent digits are the same.\n\nInput\n\nThe only input line has two integers $a$ and $b$.\n\nOutput\n\nPrint one integer: the answer to the problem.",
   "constraints": {
     "text": "0 ≤ a ≤ b ≤ 1e18",
     "verified": true

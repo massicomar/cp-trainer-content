@@ -3,6 +3,8 @@
   "schemaVersion": 1,
   "id": "atcoder-dp-j",
   "status": "draft",
+  "author": "massicomar",
+  "collection": "official",
   "title": "Sushi",
   "source": "AtCoder",
   "url": "https://atcoder.jp/contests/dp/tasks/dp_j",
@@ -11,7 +13,7 @@
     "scale": "estimate",
     "value": "M/H"
   },
-  "summary": "",
+  "summary": "There are $N$ dishes, numbered $1, 2, \\ldots, N$. Initially, for each $i$ ($1 \\leq i \\leq N$), Dish $i$ has $a_i$ ($1 \\leq a_i \\leq 3$) pieces of sushi on it.\n\nTaro will perform the following operation repeatedly until all the pieces of sushi are eaten:\n\n- Roll a die that shows the numbers $1, 2, \\ldots, N$ with equal probabilities, and let $i$ be the outcome. If there are some pieces of sushi on Dish $i$, eat one of them; if there is none, do nothing.\n\nFind the expected number of times the operation is performed before all the pieces of sushi are eaten.\n\nInput\n\nInput is given from Standard Input in the following format:\n\n$N$\r\n$a_1$ $a_2$ $\\ldots$ $a_N$\n\nOutput\n\nPrint the expected number of times the operation is performed before all the pieces of sushi are eaten. The output is considered correct when the relative difference is not greater than $10^{-9}$.",
   "constraints": {
     "text": "N ≤ 300 dishes, each with 1, 2 or 3 pieces",
     "verified": true

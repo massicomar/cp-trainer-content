@@ -3,6 +3,8 @@
   "schemaVersion": 1,
   "id": "cses-2190",
   "status": "draft",
+  "author": "massicomar",
+  "collection": "official",
   "title": "Line Segment Intersection",
   "source": "CSES",
   "url": "https://cses.fi/problemset/task/2190",
@@ -11,7 +13,7 @@
     "scale": "usaco",
     "value": "M"
   },
-  "summary": "",
+  "summary": "There are two line segments: the first goes through the points $(x_1,y_1)$ and $(x_2,y_2)$, and the second goes through the points $(x_3,y_3)$ and $(x_4,y_4)$.\n\nYour task is to determine if the line segments intersect, i.e., they have at least one common point.\n\nInput\n\nThe first input line has an integer $t$: the number of tests.\n\nAfter this, there are $t$ lines that describe the tests. Each line has eight integers $x_1$, $y_1$, $x_2$, $y_2$, $x_3$, $y_3$, $x_4$ and $y_4$.\n\nOutput\n\nFor each test, print \"YES\" if the line segments intersect and \"NO\" otherwise.",
   "constraints": {
     "text": "t ≤ 1e5 tests, |coordinates| ≤ 1e9",
     "verified": true

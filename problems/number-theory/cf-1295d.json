@@ -3,6 +3,8 @@
   "schemaVersion": 1,
   "id": "cf-1295d",
   "status": "draft",
+  "author": "massicomar",
+  "collection": "official",
   "title": "Same GCDs",
   "source": "Codeforces",
   "url": "https://codeforces.com/problemset/problem/1295/D",
@@ -11,7 +13,7 @@
     "scale": "cf",
     "value": "1800"
   },
-  "summary": "",
+  "summary": "You are given two integers $a$ and $m$. Calculate the number of integers $x$ such that $0 \\le x \\lt m$ and $\\gcd(a, m) = \\gcd(a + x, m)$.\n\nNote: $\\gcd(a, b)$ is the greatest common divisor of $a$ and $b$.\n\nInput\n\nThe first line contains the single integer $T$ ($1 \\le T \\le 50$) — the number of test cases.\n\nNext $T$ lines contain test cases — one per line. Each line contains two integers $a$ and $m$ ($1 \\le a \\lt m \\le 10^{10}$).\n\nOutput\n\nPrint $T$ integers — one per test case. For each test case print the number of appropriate $x$-s.",
   "constraints": {
     "text": "m ≤ 1e10",
     "verified": true

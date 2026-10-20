@@ -3,6 +3,8 @@
   "schemaVersion": 1,
   "id": "cses-1741",
   "status": "draft",
+  "author": "massicomar",
+  "collection": "official",
   "title": "Area of Rectangles",
   "source": "CSES",
   "url": "https://cses.fi/problemset/task/1741",
@@ -11,7 +13,7 @@
     "scale": "estimate",
     "value": "M/H"
   },
-  "summary": "",
+  "summary": "Given $n$ rectangles, your task is to determine the total area of their union.\n\nInput\n\nThe first line has an integer $n$: the number of rectangles.\n\nAfter that, there are $n$ lines describing the rectangles. Each line has four integers $x_1$, $y_1$, $x_2$ and $y_2$: a rectangle begins at point $(x_1,y_1)$ and ends at point $(x_2,y_2)$.\n\nOutput\n\nPrint the total area covered by the rectangles.",
   "constraints": {
     "text": "n ≤ 1e5 rectangles, |coordinates| ≤ 1e6",
     "verified": true

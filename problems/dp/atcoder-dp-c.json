@@ -3,6 +3,8 @@
   "schemaVersion": 1,
   "id": "atcoder-dp-c",
   "status": "draft",
+  "author": "massicomar",
+  "collection": "official",
   "title": "Vacation",
   "source": "AtCoder",
   "url": "https://atcoder.jp/contests/dp/tasks/dp_c",
@@ -11,7 +13,7 @@
     "scale": "estimate",
     "value": "E"
   },
-  "summary": "",
+  "summary": "Taro's summer vacation starts tomorrow, and he has decided to make plans for it now.\n\nThe vacation consists of $N$ days. For each $i$ ($1 \\leq i \\leq N$), Taro will choose one of the following activities and do it on the $i$-th day:\n\n- A: Swim in the sea. Gain $a_i$ points of happiness.\n- B: Catch bugs in the mountains. Gain $b_i$ points of happiness.\n- C: Do homework at home. Gain $c_i$ points of happiness.\n\nAs Taro gets bored easily, he cannot do the same activities for two or more consecutive days.\n\nFind the maximum possible total points of happiness that Taro gains.\n\nInput\n\nInput is given from Standard Input in the following format:\n\n$N$\r\n$a_1$ $b_1$ $c_1$\r\n$a_2$ $b_2$ $c_2$\r\n$:$\r\n$a_N$ $b_N$ $c_N$\n\nOutput\n\nPrint the maximum possible total points of happiness that Taro gains.",
   "constraints": {
     "text": "N ≤ 1e5, three activities per day, no activity two days in a row",
     "verified": false

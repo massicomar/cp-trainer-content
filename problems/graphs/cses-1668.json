@@ -3,6 +3,8 @@
   "schemaVersion": 1,
   "id": "cses-1668",
   "status": "draft",
+  "author": "massicomar",
+  "collection": "official",
   "title": "Building Teams",
   "source": "CSES",
   "url": "https://cses.fi/problemset/task/1668",
@@ -11,7 +13,7 @@
     "scale": "estimate",
     "value": "E"
   },
-  "summary": "",
+  "summary": "There are $n$ pupils in Uolevi's class, and $m$ friendships between them. Your task is to divide the pupils into two teams in such a way that no two pupils in a team are friends. You can freely choose the sizes of the teams.\n\nInput\n\nThe first input line has two integers $n$ and $m$: the number of pupils and friendships. The pupils are numbered $1,2,\\dots,n$.\n\nThen, there are $m$ lines describing the friendships. Each line has two integers $a$ and $b$: pupils $a$ and $b$ are friends.\n\nEvery friendship is between two different pupils. You can assume that there is at most one friendship between any two pupils.\n\nOutput\n\nPrint an example of how to build the teams. For each pupil, print \"1\" or \"2\" depending on to which team the pupil will be assigned. You can print any valid team.\n\nIf there are no solutions, print \"IMPOSSIBLE\".",
   "constraints": {
     "text": "n ≤ 1e5, m ≤ 2e5",
     "verified": false

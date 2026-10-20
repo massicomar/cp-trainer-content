@@ -3,6 +3,8 @@
   "schemaVersion": 1,
   "id": "atcoder-abc178-e",
   "status": "draft",
+  "author": "massicomar",
+  "collection": "official",
   "title": "Dist Max",
   "source": "AtCoder",
   "url": "https://atcoder.jp/contests/abc178/tasks/abc178_e",
@@ -11,7 +13,7 @@
     "scale": "estimate",
     "value": "E"
   },
-  "summary": "",
+  "summary": "There are $N$ points on the 2D plane, $i$-th of which is located on $(x_i, y_i)$. There can be multiple points that share the same coordinate. What is the maximum possible Manhattan distance between two distinct points?\n\nHere, the Manhattan distance between two points $(x_i, y_i)$ and $(x_j, y_j)$ is defined by $|x_i-x_j| + |y_i-y_j|$.\n\nInput\n\nInput is given from Standard Input in the following format:\n\n$N$\r\n$x_1$ $y_1$\r\n$x_2$ $y_2$\r\n$:$\r\n$x_N$ $y_N$\n\nOutput\n\nPrint the answer.",
   "constraints": {
     "text": "N ≤ 2e5, coordinates ≤ 1e9",
     "verified": true

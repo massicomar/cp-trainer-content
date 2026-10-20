@@ -2,7 +2,9 @@
   "$schema": "../../schema/problem.schema.json",
   "schemaVersion": 1,
   "id": "atcoder-dp-a",
-  "status": "draft",
+  "status": "ready",
+  "author": "massicomar",
+  "collection": "official",
   "title": "Frog 1",
   "source": "AtCoder",
   "url": "https://atcoder.jp/contests/dp/tasks/dp_a",
@@ -11,10 +13,10 @@
     "scale": "estimate",
     "value": "E"
   },
-  "summary": "",
+  "summary": "There are $N$ stones, numbered $1, 2, \\ldots, N$. For each $i$ ($1 \\leq i \\leq N$), the height of Stone $i$ is $h_i$.\n\nThere is a frog who is initially on Stone $1$. He will repeat the following action some number of times to reach Stone $N$:\n\n- If the frog is currently on Stone $i$, jump to Stone $i + 1$ or Stone $i + 2$. Here, a cost of $|h_i - h_j|$ is incurred, where $j$ is the stone to land on.\n\nFind the minimum possible total cost incurred before the frog reaches Stone $N$.\n\nInput\n\nInput is given from Standard Input in the following format:\n\n$N$\r\n$h_1$ $h_2$ $\\ldots$ $h_N$\n\nOutput\n\nPrint the minimum possible total cost incurred.",
   "constraints": {
     "text": "N ≤ 1e5, heights ≤ 1e4, jumps of +1 or +2",
-    "verified": false
+    "verified": true
   },
   "answers": {
     "subjects": [

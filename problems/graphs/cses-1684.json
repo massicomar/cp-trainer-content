@@ -3,6 +3,8 @@
   "schemaVersion": 1,
   "id": "cses-1684",
   "status": "draft",
+  "author": "massicomar",
+  "collection": "official",
   "title": "Giant Pizza",
   "source": "CSES",
   "url": "https://cses.fi/problemset/task/1684",
@@ -11,7 +13,7 @@
     "scale": "estimate",
     "value": "M/H"
   },
-  "summary": "",
+  "summary": "Uolevi's family is going to order a large pizza and eat it together. A total of $n$ family members will join the order, and there are $m$ possible toppings. The pizza may have any number of toppings.\n\nEach family member gives two wishes concerning the toppings of the pizza. The wishes are of the form \"topping $x$ is good/bad\". Your task is to choose the toppings so that at least one wish from everybody becomes true (a good topping is included in the pizza or a bad topping is not included).\n\nInput\n\nThe first input line has two integers $n$ and $m$: the number of family members and toppings. The toppings are numbered $1,2,\\dots,m$.\n\nAfter this, there are $n$ lines describing the wishes. Each line has two wishes of the form \"+ $x$\" (topping $x$ is good) or \"- $x$\" (topping $x$ is bad).\n\nOutput\n\nPrint a line with $m$ symbols: for each topping \"+\" if it is included and \"-\" if it is not included. You can print any valid solution.\n\nIf there are no valid solutions, print \"IMPOSSIBLE\".",
   "constraints": {
     "text": "n, m ≤ 1e5",
     "verified": true

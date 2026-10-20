@@ -3,6 +3,8 @@
   "schemaVersion": 1,
   "id": "cses-1620",
   "status": "draft",
+  "author": "massicomar",
+  "collection": "official",
   "title": "Factory Machines",
   "source": "CSES",
   "url": "https://cses.fi/problemset/task/1620",
@@ -11,7 +13,7 @@
     "scale": "usaco",
     "value": "E"
   },
-  "summary": "",
+  "summary": "A factory has $n$ machines which can be used to make products. Your goal is to make a total of $t$ products.\n\nFor each machine, you know the number of seconds it needs to make a single product. The machines can work simultaneously, and you can freely decide their schedule.\n\nWhat is the shortest time needed to make $t$ products?\n\nInput\n\nThe first input line has two integers $n$ and $t$: the number of machines and products.\n\nThe next line has $n$ integers $k_1,k_2,\\dots,k_n$: the time needed to make a product using each machine.\n\nOutput\n\nPrint one integer: the minimum time needed to make $t$ products.",
   "constraints": {
     "text": "n ≤ 2e5, t, k_i ≤ 1e9",
     "verified": true

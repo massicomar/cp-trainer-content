@@ -3,6 +3,8 @@
   "schemaVersion": 1,
   "id": "cf-1294c",
   "status": "draft",
+  "author": "massicomar",
+  "collection": "official",
   "title": "Product of Three Numbers",
   "source": "Codeforces",
   "url": "https://codeforces.com/problemset/problem/1294/C",
@@ -11,7 +13,7 @@
     "scale": "cf",
     "value": "1300"
   },
-  "summary": "",
+  "summary": "You are given one integer number $n$. Find three distinct integers $a, b, c$ such that $2 \\le a, b, c$ and $a \\cdot b \\cdot c = n$ or say that it is impossible to do it.\n\nIf there are several answers, you can print any.\n\nYou have to answer $t$ independent test cases.\n\nInput\n\nThe first line of the input contains one integer $t$ ($1 \\le t \\le 100$) — the number of test cases.\n\nThe next $n$ lines describe test cases. The $i$-th test case is given on a new line as one integer $n$ ($2 \\le n \\le 10^9$).\n\nOutput\n\nFor each test case, print the answer on it. Print \"NO\" if it is impossible to represent $n$ as $a \\cdot b \\cdot c$ for some distinct integers $a, b, c$ such that $2 \\le a, b, c$.\n\nOtherwise, print \"YES\" and any possible such representation.",
   "constraints": {
     "text": "n ≤ 1e9, t ≤ 100",
     "verified": true

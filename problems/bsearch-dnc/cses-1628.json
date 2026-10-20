@@ -3,6 +3,8 @@
   "schemaVersion": 1,
   "id": "cses-1628",
   "status": "draft",
+  "author": "massicomar",
+  "collection": "official",
   "title": "Meet in the Middle",
   "source": "CSES",
   "url": "https://cses.fi/problemset/task/1628",
@@ -11,7 +13,7 @@
     "scale": "usaco",
     "value": "E"
   },
-  "summary": "",
+  "summary": "You are given an array of $n$ numbers. In how many ways can you choose a subset of the numbers with sum $x$?\n\nInput\n\nThe first input line has two numbers $n$ and $x$: the array size and the required sum.\n\nThe second line has $n$ integers $t_1,t_2,\\dots,t_n$: the numbers in the array.\n\nOutput\n\nPrint the number of ways you can create the sum $x$.",
   "constraints": {
     "text": "n ≤ 40, target x ≤ 1e9",
     "verified": true

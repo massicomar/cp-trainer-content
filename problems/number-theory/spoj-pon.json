@@ -3,6 +3,8 @@
   "schemaVersion": 1,
   "id": "spoj-pon",
   "status": "draft",
+  "author": "massicomar",
+  "collection": "official",
   "title": "Prime or Not",
   "source": "SPOJ",
   "url": "https://www.spoj.com/problems/PON/",
@@ -11,7 +13,7 @@
     "scale": "estimate",
     "value": "M/H"
   },
-  "summary": "",
+  "summary": "Given the number, you are to answer the question: \"Is it prime?\"\n\nSolutions to this problem can be submitted in C, C++, Pascal, Perl, Python, Ruby, Lisp, Hask, Ocaml, Prolog, Whitespace, Brainf**k and Intercal only.\n\nInput\n\nt – the number of test cases, then t test cases follows. [t ≤ 500]\nEach line contains one integer: N [2 ≤ N ≤ 263-1]\n\nOutput\n\nFor each test case output string \"YES\" if given number is prime and \"NO\" otherwise.",
   "constraints": {
     "text": "N ≤ 2^63 − 1",
     "verified": true

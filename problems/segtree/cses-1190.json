@@ -3,6 +3,8 @@
   "schemaVersion": 1,
   "id": "cses-1190",
   "status": "draft",
+  "author": "massicomar",
+  "collection": "official",
   "title": "Subarray Sum Queries",
   "source": "CSES",
   "url": "https://cses.fi/problemset/task/1190",
@@ -11,7 +13,7 @@
     "scale": "estimate",
     "value": "M"
   },
-  "summary": "",
+  "summary": "There is an array consisting of $n$ integers. Some values of the array will be updated, and after each update, your task is to report the maximum subarray sum in the array.\n\nInput\n\nThe first input line contains integers $n$ and $m$: the size of the array and the number of updates. The array is indexed $1,2,\\ldots,n$.\n\nThe next line has $n$ integers: $x_1,x_2,\\ldots,x_n$: the initial contents of the array.\n\nThen there are $m$ lines describing the changes. Each line has two integers $k$ and $x$: the value at position $k$ becomes $x$.\n\nOutput\n\nAfter each update, print the maximum subarray sum. Empty subarrays (with sum $0$) are allowed.",
   "constraints": {
     "text": "n, m ≤ 2e5, values in ±1e9, point updates",
     "verified": true

@@ -3,6 +3,8 @@
   "schemaVersion": 1,
   "id": "cses-1694",
   "status": "draft",
+  "author": "massicomar",
+  "collection": "official",
   "title": "Download Speed",
   "source": "CSES",
   "url": "https://cses.fi/problemset/task/1694",
@@ -11,7 +13,7 @@
     "scale": "estimate",
     "value": "M"
   },
-  "summary": "",
+  "summary": "Consider a network consisting of $n$ computers and $m$ connections. Each connection specifies how fast a computer can send data to another computer.\n\nKotivalo wants to download some data from a server. What is the maximum speed he can do this, using the connections in the network?\n\nInput\n\nThe first input line has two integers $n$ and $m$: the number of computers and connections. The computers are numbered $1,2,\\dots,n$. Computer $1$ is the server and computer $n$ is Kotivalo's computer.\n\nAfter this, there are $m$ lines describing the connections. Each line has three integers $a$, $b$ and $c$: computer $a$ can send data to computer $b$ at speed $c$.\n\nOutput\n\nPrint one integer: the maximum speed Kotivalo can download data.",
   "constraints": {
     "text": "n ≤ 500, m ≤ 1000",
     "verified": true

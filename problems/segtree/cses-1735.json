@@ -3,6 +3,8 @@
   "schemaVersion": 1,
   "id": "cses-1735",
   "status": "draft",
+  "author": "massicomar",
+  "collection": "official",
   "title": "Range Updates and Sums",
   "source": "CSES",
   "url": "https://cses.fi/problemset/task/1735",
@@ -11,7 +13,7 @@
     "scale": "estimate",
     "value": "M"
   },
-  "summary": "",
+  "summary": "Your task is to maintain an array of $n$ values and efficiently process the following types of queries:\n\n1. Increase each value in range $[a,b]$ by $x$.\n2. Set each value in range $[a,b]$ to $x$.\n3. Calculate the sum of values in range $[a,b]$.\n\nInput\n\nThe first input line has two integers $n$ and $q$: the array size and the number of queries.\n\nThe next line has $n$ values $t_1,t_2,\\dots,t_n$: the initial contents of the array.\n\nFinally, there are $q$ lines describing the queries. The format of each line is one of the following: \"1 $a$ $b$ $x$\", \"2 $a$ $b$ $x$\", or \"3 $a$ $b$\".\n\nOutput\n\nPrint the answer to each sum query.",
   "constraints": {
     "text": "n, q ≤ 2e5, range add, range assign, range sum",
     "verified": true

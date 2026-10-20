@@ -5,8 +5,11 @@ Each problem is one JSON file: `problems/<intended subject>/<id>.json`. Start fr
 ## Workflow for a new or draft problem
 
 1. **Pick an id**: `<source>-<code>` in lowercase, e.g. `cses-1158`, `cf-166b`, `atcoder-dp-e`. Ids are permanent: never rename or reuse one.
+   - **Set `author`** to your GitHub username.
+   - **Set `collection`** to `"community"`. Maintainers can promote a problem to `"official"` after review. Players choose whether community problems appear in their sessions.
+   - **Shortcut:** the app's **Contribute** page (`/contribute`) has a form that writes the whole file for you, with dropdowns for subjects and techniques and the same checks CI runs.
 2. **Read the original statement** on the judge.
-3. **Write `summary` in your own words**: 2–4 sentences on what's given and what's asked. Never paste the statement, and never name the technique. The validator rejects words like "DP", "Dijkstra" and "segment tree" in ready summaries.
+3. **Copy the statement into `summary`, exactly as the judge shows it** (or run `npm run statements -- --only <id>` to fetch it; Codeforces and SPOJ need `--snippet`, see the script's header) (the app is for private use). Leave out the title, the samples and the limits section; the limits go in `constraints`. Keep the judge's LaTeX (`$N$`, `\leq`) as it is rather than the rendered symbols. The validator warns if the statement contains technique words like "DP" or "segment tree", since that gives the answer away.
 4. **Copy the limits into `constraints.text`.** The limits are the main clue, so be exact. Set `verified: true` once you've checked them on the judge page.
 5. **Fill `answers`**: exactly one `intended` subject and one `intended` technique inside it. Add any other correct approach as `accepted`, and approaches that work but are heavier than needed as `overkill`.
 6. **Add `distractors`**: the techniques someone would plausibly but wrongly pick. These become the wrong options.
@@ -23,11 +26,13 @@ To retire a problem, set `"deprecated": true`. CI fails if a file that exists on
 | `schemaVersion` | yes | Always `1` for now |
 | `id` | yes | Must match the file name |
 | `status` | yes | `draft` or `ready`. A `ready` problem needs a summary (≥ 20 characters) |
+| `author` | yes | Your GitHub username; shown as "Added by @author" |
+| `collection` | yes | `community` for new problems; maintainers promote them to `official` |
 | `title` | yes | Original title; the app hides it until the problem is finished |
 | `source`, `url` | yes | The URL host must be on the allowlist in `scripts/validate.ts` |
 | `difficulty.tier` | yes | `easy` / `medium` / `hard`: what sessions filter on |
 | `difficulty.scale`, `.value` | yes | The original rating: `cf` + `"1700"`, `usaco` + `"E"`, `kattis` + `"3.6"`, or `estimate` + `"M"` when the judge has no rating |
-| `summary` | yes | Your paraphrase. May be `""` while the problem is a draft |
+| `summary` | yes | The original statement, copied exactly. May be `""` while the problem is a draft |
 | `constraints.text`, `.verified` | yes | |
 | `answers.subjects` | yes | `[{ "id": "dp", "role": "intended" }, …]` |
 | `answers.techniques` | yes | Technique ids from `taxonomy.json`. Each one must belong to a subject listed in `answers.subjects` |

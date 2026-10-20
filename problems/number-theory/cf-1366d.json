@@ -3,6 +3,8 @@
   "schemaVersion": 1,
   "id": "cf-1366d",
   "status": "draft",
+  "author": "massicomar",
+  "collection": "official",
   "title": "Two Divisors",
   "source": "Codeforces",
   "url": "https://codeforces.com/problemset/problem/1366/D",
@@ -11,7 +13,7 @@
     "scale": "cf",
     "value": "2000"
   },
-  "summary": "",
+  "summary": "You are given $n$ integers $a_1, a_2, \\dots, a_n$.\n\nFor each $a_i$ find its two divisors $d_1 \\gt 1$ and $d_2 \\gt 1$ such that $\\gcd(d_1 + d_2, a_i) = 1$ (where $\\gcd(a, b)$ is the greatest common divisor of $a$ and $b$) or say that there is no such pair.\n\nInput\n\nThe first line contains single integer $n$ ($1 \\le n \\le 5 \\cdot 10^5$) — the size of the array $a$.\n\nThe second line contains $n$ integers $a_1, a_2, \\dots, a_n$ ($2 \\le a_i \\le 10^7$) — the array $a$.\n\nOutput\n\nTo speed up the output, print two lines with $n$ integers in each line.\n\nThe $i$-th integers in the first and second lines should be corresponding divisors $d_1 \\gt 1$ and $d_2 \\gt 1$ such that $\\gcd(d_1 + d_2, a_i) = 1$ or $-1$ and $-1$ if there is no such pair. If there are multiple answers, print any of them.",
   "constraints": {
     "text": "n ≤ 5e5 values, each ≤ 1e7",
     "verified": true

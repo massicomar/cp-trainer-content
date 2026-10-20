@@ -3,6 +3,8 @@
   "schemaVersion": 1,
   "id": "cses-1097",
   "status": "draft",
+  "author": "massicomar",
+  "collection": "official",
   "title": "Removal Game",
   "source": "CSES",
   "url": "https://cses.fi/problemset/task/1097",
@@ -11,7 +13,7 @@
     "scale": "estimate",
     "value": "E/M"
   },
-  "summary": "",
+  "summary": "There is a list of $n$ numbers and two players who move alternately. On each move, a player removes either the first or last number from the list, and their score increases by that number. Both players try to maximize their scores.\n\nWhat is the maximum possible score for the first player when both players play optimally?\n\nInput\n\nThe first input line contains an integer $n$: the size of the list.\n\nThe next line has $n$ integers $x_1,x_2,\\ldots,x_n$: the contents of the list.\n\nOutput\n\nPrint the maximum possible score for the first player.",
   "constraints": {
     "text": "n ≤ 5000 numbers; players alternately take the first or last",
     "verified": true

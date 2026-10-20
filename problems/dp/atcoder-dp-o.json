@@ -3,6 +3,8 @@
   "schemaVersion": 1,
   "id": "atcoder-dp-o",
   "status": "draft",
+  "author": "massicomar",
+  "collection": "official",
   "title": "Matching",
   "source": "AtCoder",
   "url": "https://atcoder.jp/contests/dp/tasks/dp_o",
@@ -11,7 +13,7 @@
     "scale": "estimate",
     "value": "M"
   },
-  "summary": "",
+  "summary": "There are $N$ men and $N$ women, both numbered $1, 2, \\ldots, N$.\n\nFor each $i, j$ ($1 \\leq i, j \\leq N$), the compatibility of Man $i$ and Woman $j$ is given as an integer $a_{i, j}$. If $a_{i, j} = 1$, Man $i$ and Woman $j$ are compatible; if $a_{i, j} = 0$, they are not.\n\nTaro is trying to make $N$ pairs, each consisting of a man and a woman who are compatible. Here, each man and each woman must belong to exactly one pair.\n\nFind the number of ways in which Taro can make $N$ pairs, modulo $10^9 + 7$.\n\nInput\n\nInput is given from Standard Input in the following format:\n\n$N$\r\n$a_{1, 1}$ $\\ldots$ $a_{1, N}$\r\n$:$\r\n$a_{N, 1}$ $\\ldots$ $a_{N, N}$\n\nOutput\n\nPrint the number of ways in which Taro can make $N$ pairs, modulo $10^9 + 7$.",
   "constraints": {
     "text": "N ≤ 21 men and women, compatibility matrix",
     "verified": true

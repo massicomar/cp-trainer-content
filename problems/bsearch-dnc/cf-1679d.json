@@ -3,6 +3,8 @@
   "schemaVersion": 1,
   "id": "cf-1679d",
   "status": "draft",
+  "author": "massicomar",
+  "collection": "official",
   "title": "Toss a Coin to Your Graph...",
   "source": "Codeforces",
   "url": "https://codeforces.com/problemset/problem/1679/D",
@@ -11,7 +13,7 @@
     "scale": "cf",
     "value": "1900"
   },
-  "summary": "",
+  "summary": "One day Masha was walking in the park and found a graph under a tree... Surprised? Did you think that this problem would have some logical and reasoned story? No way! So, the problem...\n\nMasha has an oriented graph which $i$-th vertex contains some positive integer $a_i$. Initially Masha can put a coin at some vertex. In one operation she can move a coin placed in some vertex $u$ to any other vertex $v$ such that there is an oriented edge $u \\to v$ in the graph. Each time when the coin is placed in some vertex $i$, Masha write down an integer $a_i$ in her notebook (in particular, when Masha initially puts a coin at some vertex, she writes an integer written at this vertex in her notebook). Masha wants to make exactly $k - 1$ operations in such way that the maximum number written in her notebook is as small as possible.\n\nInput\n\nThe first line contains three integers $n$, $m$ and $k$ ($1 \\le n \\le 2 \\cdot 10^5$, $0 \\le m \\le 2 \\cdot 10^5$, $1 \\le k \\le 10^{18}$) — the number of vertices and edges in the graph, and the number of operation that Masha should make.\n\nThe second line contains $n$ integers $a_i$ ($1 \\le a_i \\le 10^9$) — the numbers written in graph vertices.\n\nEach of the following $m$ lines contains two integers $u$ and $v$ ($1 \\le u \\ne v \\le n$) — it means that there is an edge $u \\to v$ in the graph.\n\nIt's guaranteed that graph doesn't contain self-loops and multi-edges.\n\nOutput\n\nPrint one integer — the minimum value of the maximum number that Masha wrote in her notebook during optimal coin movements.\n\nIf Masha won't be able to perform $k - 1$ operations, print $-1$.",
   "constraints": {
     "text": "n, m ≤ 2e5, k ≤ 1e18",
     "verified": true

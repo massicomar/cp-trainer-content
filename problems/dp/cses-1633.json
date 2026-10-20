@@ -3,6 +3,8 @@
   "schemaVersion": 1,
   "id": "cses-1633",
   "status": "draft",
+  "author": "massicomar",
+  "collection": "official",
   "title": "Dice Combinations",
   "source": "CSES",
   "url": "https://cses.fi/problemset/task/1633",
@@ -11,7 +13,7 @@
     "scale": "estimate",
     "value": "E"
   },
-  "summary": "",
+  "summary": "Your task is to count the number of ways to construct sum $n$ by throwing a dice one or more times. Each throw produces an outcome between $1$ and $6$.\n\nFor example, if $n=3$, there are $4$ ways:\n\n- $1+1+1$\n- $1+2$\n- $2+1$\n- $3$\n\nInput\n\nThe only input line has an integer $n$.\n\nOutput\n\nPrint the number of ways modulo $10^9+7$.",
   "constraints": {
     "text": "n ≤ 1e6, count ordered dice sequences, mod 1e9+7",
     "verified": false

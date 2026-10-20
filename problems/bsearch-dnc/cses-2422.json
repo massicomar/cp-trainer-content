@@ -3,6 +3,8 @@
   "schemaVersion": 1,
   "id": "cses-2422",
   "status": "draft",
+  "author": "massicomar",
+  "collection": "official",
   "title": "Multiplication Table",
   "source": "CSES",
   "url": "https://cses.fi/problemset/task/2422",
@@ -11,7 +13,7 @@
     "scale": "usaco",
     "value": "M"
   },
-  "summary": "",
+  "summary": "Find the middle element when the numbers in an $n \\times n$ multiplication table are sorted in increasing order. It is assumed that $n$ is odd.\n\nFor example, the $3 \\times 3$ multiplication table is as follows: $$\n\\begin{matrix}\n1 & 2 & 3 \\\\\n2 & 4 & 6 \\\\\n3 & 6 & 9 \\\\\n\\end{matrix}\n$$ The numbers in increasing order are $[1,2,2,3,3,4,6,6,9]$, so the answer is $3$.\n\nInput\n\nThe only input line has an integer $n$.\n\nOutput\n\nPrint one integer: the answer to the task.",
   "constraints": {
     "text": "n < 1e6 (n × n table, n odd)",
     "verified": true

@@ -3,6 +3,8 @@
   "schemaVersion": 1,
   "id": "cses-1079",
   "status": "draft",
+  "author": "massicomar",
+  "collection": "official",
   "title": "Binomial Coefficients",
   "source": "CSES",
   "url": "https://cses.fi/problemset/task/1079",
@@ -11,7 +13,7 @@
     "scale": "estimate",
     "value": "E"
   },
-  "summary": "",
+  "summary": "Your task is to calculate $n$ binomial coefficients modulo $10^9+7$.\n\nA binomial coefficient ${a \\choose b}$ can be calculated using the formula $\\frac{a!}{b!(a-b)!}$. We assume that $a$ and $b$ are integers and $0 \\le b \\le a$.\n\nInput\n\nThe first input line contains an integer $n$: the number of calculations.\n\nAfter this, there are $n$ lines, each of which contains two integers $a$ and $b$.\n\nOutput\n\nPrint each binomial coefficient modulo $10^9+7$.",
   "constraints": {
     "text": "1e5 queries, a ≤ 1e6",
     "verified": true

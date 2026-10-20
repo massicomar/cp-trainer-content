@@ -3,6 +3,8 @@
   "schemaVersion": 1,
   "id": "cses-1639",
   "status": "draft",
+  "author": "massicomar",
+  "collection": "official",
   "title": "Edit Distance",
   "source": "CSES",
   "url": "https://cses.fi/problemset/task/1639",
@@ -11,7 +13,7 @@
     "scale": "estimate",
     "value": "E/M"
   },
-  "summary": "",
+  "summary": "The edit distance between two strings is the minimum number of operations required to transform one string into the other.\n\nThe allowed operations are:\n\n- Add one character to the string.\n- Remove one character from the string.\n- Replace one character in the string.\n\nFor example, the edit distance between LOVE and MOVIE is 2, because you can first replace L with M, and then add I.\n\nYour task is to calculate the edit distance between two strings.\n\nInput\n\nThe first input line has a string that contains $n$ characters between A–Z.\n\nThe second input line has a string that contains $m$ characters between A–Z.\n\nOutput\n\nPrint one integer: the edit distance between the strings.",
   "constraints": {
     "text": "string lengths n, m ≤ 5000",
     "verified": true

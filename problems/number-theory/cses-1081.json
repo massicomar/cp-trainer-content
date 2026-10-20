@@ -3,6 +3,8 @@
   "schemaVersion": 1,
   "id": "cses-1081",
   "status": "draft",
+  "author": "massicomar",
+  "collection": "official",
   "title": "Common Divisors",
   "source": "CSES",
   "url": "https://cses.fi/problemset/task/1081",
@@ -11,7 +13,7 @@
     "scale": "usaco",
     "value": "M"
   },
-  "summary": "",
+  "summary": "You are given an array of $n$ positive integers. Your task is to find two integers such that their greatest common divisor is as large as possible.\n\nInput\n\nThe first input line has an integer $n$: the size of the array.\n\nThe second line has $n$ integers $x_1,x_2,\\ldots,x_n$: the contents of the array.\n\nOutput\n\nPrint the maximum greatest common divisor.",
   "constraints": {
     "text": "n ≤ 2e5, x ≤ 1e6",
     "verified": true

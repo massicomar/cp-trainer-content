@@ -3,6 +3,8 @@
   "schemaVersion": 1,
   "id": "cses-1734",
   "status": "draft",
+  "author": "massicomar",
+  "collection": "official",
   "title": "Distinct Values Queries",
   "source": "CSES",
   "url": "https://cses.fi/problemset/task/1734",
@@ -11,7 +13,7 @@
     "scale": "usaco",
     "value": "M"
   },
-  "summary": "",
+  "summary": "You are given an array of $n$ integers and $q$ queries of the form: how many distinct values are there in a range $[a,b]$?\n\nInput\n\nThe first input line has two integers $n$ and $q$: the array size and number of queries.\n\nThe next line has $n$ integers $x_1,x_2,\\dots,x_n$: the array values.\n\nFinally, there are $q$ lines describing the queries. Each line has two integers $a$ and $b$.\n\nOutput\n\nFor each query, print the number of distinct values in the range.",
   "constraints": {
     "text": "n, q ≤ 2e5",
     "verified": true

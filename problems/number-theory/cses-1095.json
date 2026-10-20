@@ -3,6 +3,8 @@
   "schemaVersion": 1,
   "id": "cses-1095",
   "status": "draft",
+  "author": "massicomar",
+  "collection": "official",
   "title": "Exponentiation",
   "source": "CSES",
   "url": "https://cses.fi/problemset/task/1095",
@@ -11,7 +13,7 @@
     "scale": "estimate",
     "value": "E"
   },
-  "summary": "",
+  "summary": "Your task is to efficiently calculate values $a^b$ modulo $10^9+7$.\n\nNote that in this task we assume that $0^0=1$.\n\nInput\n\nThe first input line contains an integer $n$: the number of calculations.\n\nAfter this, there are $n$ lines, each containing two integers $a$ and $b$.\n\nOutput\n\nPrint each value $a^b$ modulo $10^9+7$.",
   "constraints": {
     "text": "n ≤ 2e5 queries, a, b ≤ 1e9",
     "verified": true

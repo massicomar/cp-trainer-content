@@ -3,6 +3,8 @@
   "schemaVersion": 1,
   "id": "cses-1634",
   "status": "draft",
+  "author": "massicomar",
+  "collection": "official",
   "title": "Minimizing Coins",
   "source": "CSES",
   "url": "https://cses.fi/problemset/task/1634",
@@ -11,7 +13,7 @@
     "scale": "estimate",
     "value": "E"
   },
-  "summary": "",
+  "summary": "Consider a money system consisting of $n$ coins. Each coin has a positive integer value. Your task is to produce a sum of money $x$ using the available coins in such a way that the number of coins is minimal.\n\nFor example, if the coins are $\\{1,5,7\\}$ and the desired sum is $11$, an optimal solution is $5+5+1$ which requires $3$ coins.\n\nInput\n\nThe first input line has two integers $n$ and $x$: the number of coins and the desired sum of money.\n\nThe second line has $n$ distinct integers $c_1,c_2,\\dots,c_n$: the value of each coin.\n\nOutput\n\nPrint one integer: the minimum number of coins. If it is not possible to produce the desired sum, print $-1$.",
   "constraints": {
     "text": "n ≤ 100 coin values, target x ≤ 1e6",
     "verified": true

@@ -1,0 +1,39 @@
+# Opened from the app's "Report a problem" link, which pre-fills `problem`
+# and `layer` through the URL (field ids must stay the same).
+name: Problem report
+description: Something in a problem is wrong, unclear or gives the answer away.
+title: 'Report: '
+labels: ['report']
+body:
+  - type: input
+    id: problem
+    attributes:
+      label: Problem id
+      description: Filled in by the app.
+      placeholder: cses-1158
+    validations:
+      required: true
+  - type: input
+    id: layer
+    attributes:
+      label: Question
+      description: subject, technique, dp-state, dp-transition, … (empty means the whole problem).
+  - type: dropdown
+    id: category
+    attributes:
+      label: What's wrong?
+      options:
+        - The summary is unclear
+        - The marked answer is wrong
+        - An option is ambiguous
+        - It gives the answer away
+        - Something else
+    validations:
+      required: true
+  - type: textarea
+    id: details
+    attributes:
+      label: Details
+      description: What did you expect, and why? Mention the option if it's about one.
+    validations:
+      required: true

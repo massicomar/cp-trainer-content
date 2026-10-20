@@ -3,6 +3,8 @@
   "schemaVersion": 1,
   "id": "source-code",
   "status": "draft",
+  "author": "your-github-username",
+  "collection": "community",
   "title": "Original problem title",
   "source": "CSES",
   "url": "https://cses.fi/problemset/task/0000",
@@ -11,21 +13,33 @@
     "scale": "estimate",
     "value": "M"
   },
-  "summary": "Two to four sentences in YOUR OWN words describing what is given and what is asked. Don't copy the statement and don't name the technique (no 'use DP', 'shortest path', 'segment tree').",
+  "summary": "The original statement, copied exactly from the judge. Leave out the title, the samples and the limits (those go in constraints). Keep the judge's LaTeX ($N$, \\leq) as it is.",
   "constraints": {
     "text": "n ≤ 2e5, values ≤ 1e9",
     "verified": false
   },
   "answers": {
     "subjects": [
-      { "id": "dp", "role": "intended" }
+      {
+        "id": "dp",
+        "role": "intended"
+      }
     ],
     "techniques": [
-      { "id": "dp.knapsack-01", "role": "intended" },
-      { "id": "dp.bitmask", "role": "overkill" }
+      {
+        "id": "dp.knapsack-01",
+        "role": "intended"
+      },
+      {
+        "id": "dp.bitmask",
+        "role": "overkill"
+      }
     ]
   },
-  "distractors": ["dp.coin-change", "other.greedy"],
+  "distractors": [
+    "dp.coin-change",
+    "other.greedy"
+  ],
   "explanation": "Why the intended technique fits, pointing at the constraint or property that gives it away.",
   "traps": [
     "A common bug or wrong idea for this problem."
@@ -37,12 +51,29 @@
       "kind": "dp-state",
       "prompt": "What should the DP state represent?",
       "options": [
-        { "id": "a", "text": "The correct state" },
-        { "id": "b", "text": "A plausible wrong state", "why": "Why it fails (too big, loses information, wrong objective…)" },
-        { "id": "c", "text": "Another wrong state", "why": "Why it fails" },
-        { "id": "d", "text": "Another wrong state", "why": "Why it fails" }
+        {
+          "id": "a",
+          "text": "The correct state"
+        },
+        {
+          "id": "b",
+          "text": "A plausible wrong state",
+          "why": "Why it fails (too big, loses information, wrong objective…)"
+        },
+        {
+          "id": "c",
+          "text": "Another wrong state",
+          "why": "Why it fails"
+        },
+        {
+          "id": "d",
+          "text": "Another wrong state",
+          "why": "Why it fails"
+        }
       ],
-      "accepted": ["a"],
+      "accepted": [
+        "a"
+      ],
       "explanation": "What information the future needs, and why this state captures exactly that."
     },
     {
@@ -50,12 +81,29 @@
       "kind": "dp-transition",
       "prompt": "Given that state, which transition is right?",
       "options": [
-        { "id": "a", "text": "The correct recurrence" },
-        { "id": "b", "text": "A recurrence with a classic bug", "why": "What the bug does" },
-        { "id": "c", "text": "A correct but too-slow recurrence", "why": "Its complexity vs the limits" },
-        { "id": "d", "text": "A greedy shortcut", "why": "A counterexample" }
+        {
+          "id": "a",
+          "text": "The correct recurrence"
+        },
+        {
+          "id": "b",
+          "text": "A recurrence with a classic bug",
+          "why": "What the bug does"
+        },
+        {
+          "id": "c",
+          "text": "A correct but too-slow recurrence",
+          "why": "Its complexity vs the limits"
+        },
+        {
+          "id": "d",
+          "text": "A greedy shortcut",
+          "why": "A counterexample"
+        }
       ],
-      "accepted": ["a"],
+      "accepted": [
+        "a"
+      ],
       "explanation": "The decision made at the last step, and how it reduces to smaller states."
     }
   ],

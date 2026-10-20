@@ -3,6 +3,8 @@
   "schemaVersion": 1,
   "id": "cses-2193",
   "status": "draft",
+  "author": "massicomar",
+  "collection": "official",
   "title": "Polygon Lattice Points",
   "source": "CSES",
   "url": "https://cses.fi/problemset/task/2193",
@@ -11,7 +13,7 @@
     "scale": "estimate",
     "value": "M"
   },
-  "summary": "",
+  "summary": "Given a polygon, your task is to calculate the number of lattice points inside the polygon and on its boundary. A lattice point is a point whose coordinates are integers.\n\nThe polygon consists of $n$ vertices $(x_1,y_1),(x_2,y_2),\\dots,(x_n,y_n)$. The vertices $(x_i,y_i)$ and $(x_{i+1},y_{i+1})$ are adjacent for $i=1,2,\\dots,n-1$, and the vertices $(x_1,y_1)$ and $(x_n,y_n)$ are also adjacent.\n\nInput\n\nThe first input line has an integer $n$: the number of vertices.\n\nAfter this, there are $n$ lines that describe the vertices. The $i$th such line has two integers $x_i$ and $y_i$.\n\nYou may assume that the polygon is simple, i.e., it does not intersect itself.\n\nOutput\n\nPrint two integers: the number of lattice points inside the polygon and on its boundary.",
   "constraints": {
     "text": "n ≤ 1e5, |coordinates| ≤ 1e9",
     "verified": true

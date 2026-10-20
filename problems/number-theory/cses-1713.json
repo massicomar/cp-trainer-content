@@ -3,6 +3,8 @@
   "schemaVersion": 1,
   "id": "cses-1713",
   "status": "draft",
+  "author": "massicomar",
+  "collection": "official",
   "title": "Counting Divisors",
   "source": "CSES",
   "url": "https://cses.fi/problemset/task/1713",
@@ -11,7 +13,7 @@
     "scale": "estimate",
     "value": "E"
   },
-  "summary": "",
+  "summary": "Given $n$ integers, your task is to report for each integer the number of its divisors.\n\nFor example, if $x=18$, the correct answer is $6$ because its divisors are $1,2,3,6,9,18$.\n\nInput\n\nThe first input line has an integer $n$: the number of integers.\n\nAfter this, there are $n$ lines, each containing an integer $x$.\n\nOutput\n\nFor each integer, print the number of its divisors.",
   "constraints": {
     "text": "1e5 queries, x ≤ 1e6",
     "verified": true

@@ -3,6 +3,8 @@
   "schemaVersion": 1,
   "id": "cses-2185",
   "status": "draft",
+  "author": "massicomar",
+  "collection": "official",
   "title": "Prime Multiples",
   "source": "CSES",
   "url": "https://cses.fi/problemset/task/2185",
@@ -11,7 +13,7 @@
     "scale": "estimate",
     "value": "M"
   },
-  "summary": "",
+  "summary": "You are given $k$ distinct prime numbers $a_1,a_2,\\ldots,a_k$ and an integer $n$.\n\nYour task is to calculate how many of the first $n$ positive integers are divisible by at least one of the given prime numbers.\n\nInput\n\nThe first input line has two integers $n$ and $k$.\n\nThe second line has $k$ prime numbers $a_1,a_2,\\ldots,a_k$.\n\nOutput\n\nPrint one integer: the number integers within the interval $1,2,\\ldots,n$ that are divisible by at least one of the prime numbers.",
   "constraints": {
     "text": "n ≤ 1e18, k ≤ 20 primes",
     "verified": true

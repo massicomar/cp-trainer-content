@@ -3,6 +3,8 @@
   "schemaVersion": 1,
   "id": "cses-2086",
   "status": "draft",
+  "author": "massicomar",
+  "collection": "official",
   "title": "Subarray Squares",
   "source": "CSES",
   "url": "https://cses.fi/problemset/task/2086",
@@ -11,7 +13,7 @@
     "scale": "estimate",
     "value": "M/H"
   },
-  "summary": "",
+  "summary": "Given an array of $n$ elements, your task is to divide into $k$ subarrays. The cost of each subarray is the square of the sum of the values in the subarray. What is the minimum total cost if you act optimally?\n\nInput\n\nThe first input line has two integers $n$ and $k$: the array elements and the number of subarrays. The array elements are numbered $1,2,\\dots,n$.\n\nThe second line has $n$ integers $x_1,x_2,\\dots,x_n$: the contents of the array.\n\nOutput\n\nPrint one integer: the minimum total cost.",
   "constraints": {
     "text": "k ≤ n ≤ 3000",
     "verified": true

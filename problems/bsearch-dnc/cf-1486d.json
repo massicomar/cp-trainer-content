@@ -3,6 +3,8 @@
   "schemaVersion": 1,
   "id": "cf-1486d",
   "status": "draft",
+  "author": "massicomar",
+  "collection": "official",
   "title": "Max Median",
   "source": "Codeforces",
   "url": "https://codeforces.com/problemset/problem/1486/D",
@@ -11,7 +13,7 @@
     "scale": "cf",
     "value": "2100"
   },
-  "summary": "",
+  "summary": "You are a given an array $a$ of length $n$. Find a subarray $a[l..r]$ with length at least $k$ with the largest median.\n\nA median in an array of length $n$ is an element which occupies position number $\\lfloor \\frac{n + 1}{2} \\rfloor$ after we sort the elements in non-decreasing order. For example: $median([1, 2, 3, 4]) = 2$, $median([3, 2, 1]) = 2$, $median([2, 1, 2, 1]) = 1$.\n\nSubarray $a[l..r]$ is a contiguous part of the array $a$, i. e. the array $a_l,a_{l+1},\\ldots,a_r$ for some $1 \\leq l \\leq r \\leq n$, its length is $r - l + 1$.\n\nInput\n\nThe first line contains two integers $n$ and $k$ ($1 \\leq k \\leq n \\leq 2 \\cdot 10^5$).\n\nThe second line contains $n$ integers $a_1, a_2, \\ldots, a_n$ ($1 \\leq a_i \\leq n$).\n\nOutput\n\nOutput one integer $m$ — the maximum median you can get.",
   "constraints": {
     "text": "n ≤ 2e5",
     "verified": true

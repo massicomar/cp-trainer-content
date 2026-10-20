@@ -3,6 +3,8 @@
   "schemaVersion": 1,
   "id": "cf-1132f",
   "status": "draft",
+  "author": "massicomar",
+  "collection": "official",
   "title": "Clear the String",
   "source": "Codeforces",
   "url": "https://codeforces.com/problemset/problem/1132/F",
@@ -11,7 +13,7 @@
     "scale": "cf",
     "value": "2000"
   },
-  "summary": "",
+  "summary": "You are given a string $s$ of length $n$ consisting of lowercase Latin letters. You may apply some operations to this string: in one operation you can delete some contiguous substring of this string, if all letters in the substring you delete are equal. For example, after deleting substring bbbb from string abbbbaccdd we get the string aaccdd.\n\nCalculate the minimum number of operations to delete the whole string $s$.\n\nInput\n\nThe first line contains one integer $n$ ($1 \\le n \\le 500$) — the length of string $s$.\n\nThe second line contains the string $s$ ($|s| = n$) consisting of lowercase Latin letters.\n\nOutput\n\nOutput a single integer — the minimal number of operation to delete string $s$.",
   "constraints": {
     "text": "n ≤ 500",
     "verified": true

@@ -3,6 +3,8 @@
   "schemaVersion": 1,
   "id": "atcoder-dp-u",
   "status": "draft",
+  "author": "massicomar",
+  "collection": "official",
   "title": "Grouping",
   "source": "AtCoder",
   "url": "https://atcoder.jp/contests/dp/tasks/dp_u",
@@ -11,7 +13,7 @@
     "scale": "estimate",
     "value": "M/H"
   },
-  "summary": "",
+  "summary": "There are $N$ rabbits, numbered $1, 2, \\ldots, N$.\n\nFor each $i, j$ ($1 \\leq i, j \\leq N$), the compatibility of Rabbit $i$ and $j$ is described by an integer $a_{i, j}$. Here, $a_{i, i} = 0$ for each $i$ ($1 \\leq i \\leq N$), and $a_{i, j} = a_{j, i}$ for each $i$ and $j$ ($1 \\leq i, j \\leq N$).\n\nTaro is dividing the $N$ rabbits into some number of groups. Here, each rabbit must belong to exactly one group. After grouping, for each $i$ and $j$ ($1 \\leq i < j \\leq N$), Taro earns $a_{i, j}$ points if Rabbit $i$ and $j$ belong to the same group.\n\nFind Taro's maximum possible total score.\n\nInput\n\nInput is given from Standard Input in the following format:\n\n$N$\r\n$a_{1, 1}$ $\\ldots$ $a_{1, N}$\r\n$:$\r\n$a_{N, 1}$ $\\ldots$ $a_{N, N}$\n\nOutput\n\nPrint Taro's maximum possible total score.",
   "constraints": {
     "text": "N ≤ 16 rabbits, pairwise scores",
     "verified": true

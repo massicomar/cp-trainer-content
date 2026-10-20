@@ -9,7 +9,7 @@
  *  4. every referenced subject / technique / pairWith id exists
  *  5. extra layers: unique keys, unique option ids, accepted ⊆ options
  *  6. url host is on the allowlist
- *  7. ready problems have a summary that doesn't leak the technique
+ *  7. warns when a ready summary (the original statement) names the technique
  *  8. (optional) no problem id that exists on BASE_REF has been deleted
  *
  * Exit code 1 on any error. Warnings (e.g. drafts, unverified constraints) don't fail the run.
@@ -189,7 +189,7 @@ for (const path of files) {
     const text = p.summary.toLowerCase()
     for (const w of LEAK_WORDS) {
       const re = new RegExp(`(^|[^a-z0-9])${w.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}([^a-z0-9]|$)`)
-      if (re.test(text)) err(file, `summary gives the technique away ("${w}")`)
+      if (re.test(text)) warn(file, `summary gives the technique away ("${w}")`)
     }
     if (!p.constraints.verified) warn(file, 'ready, but constraints are not verified')
   }

@@ -3,6 +3,8 @@
   "schemaVersion": 1,
   "id": "cses-2417",
   "status": "draft",
+  "author": "massicomar",
+  "collection": "official",
   "title": "Counting Coprime Pairs",
   "source": "CSES",
   "url": "https://cses.fi/problemset/task/2417",
@@ -11,7 +13,7 @@
     "scale": "estimate",
     "value": "M/H"
   },
-  "summary": "",
+  "summary": "Given a list of $n$ positive integers, your task is to count the number of pairs of integers that are coprime (i.e., their greatest common divisor is one).\n\nInput\n\nThe first input line has an integer $n$: the number of elements.\n\nThe next line has $n$ integers $x_1,x_2,\\dots,x_n$: the contents of the list.\n\nOutput\n\nPrint one integer: the answer for the task.",
   "constraints": {
     "text": "n ≤ 1e5, x ≤ 1e6",
     "verified": true

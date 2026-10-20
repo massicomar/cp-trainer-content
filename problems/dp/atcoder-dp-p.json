@@ -3,6 +3,8 @@
   "schemaVersion": 1,
   "id": "atcoder-dp-p",
   "status": "draft",
+  "author": "massicomar",
+  "collection": "official",
   "title": "Independent Set",
   "source": "AtCoder",
   "url": "https://atcoder.jp/contests/dp/tasks/dp_p",
@@ -11,7 +13,7 @@
     "scale": "estimate",
     "value": "E/M"
   },
-  "summary": "",
+  "summary": "There is a tree with $N$ vertices, numbered $1, 2, \\ldots, N$. For each $i$ ($1 \\leq i \\leq N - 1$), the $i$-th edge connects Vertex $x_i$ and $y_i$.\n\nTaro has decided to paint each vertex in white or black. Here, it is not allowed to paint two adjacent vertices both in black.\n\nFind the number of ways in which the vertices can be painted, modulo $10^9 + 7$.\n\nInput\n\nInput is given from Standard Input in the following format:\n\n$N$\r\n$x_1$ $y_1$\r\n$x_2$ $y_2$\r\n$:$\r\n$x_{N - 1}$ $y_{N - 1}$\n\nOutput\n\nPrint the number of ways in which the vertices can be painted, modulo $10^9 + 7$.",
   "constraints": {
     "text": "N ≤ 1e5 vertices (tree), count colourings mod 1e9+7",
     "verified": true

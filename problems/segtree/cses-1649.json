@@ -3,6 +3,8 @@
   "schemaVersion": 1,
   "id": "cses-1649",
   "status": "draft",
+  "author": "massicomar",
+  "collection": "official",
   "title": "Dynamic Range Minimum Queries",
   "source": "CSES",
   "url": "https://cses.fi/problemset/task/1649",
@@ -11,7 +13,7 @@
     "scale": "usaco",
     "value": "E"
   },
-  "summary": "",
+  "summary": "Given an array of $n$ integers, your task is to process $q$ queries of the following types:\n\n1. update the value at position $k$ to $u$\n2. what is the minimum value in range $[a,b]$?\n\nInput\n\nThe first input line has two integers $n$ and $q$: the number of values and queries.\n\nThe second line has $n$ integers $x_1,x_2,\\dots,x_n$: the array values.\n\nFinally, there are $q$ lines describing the queries. Each line has three integers: either \"$1$ $k$ $u$\" or \"$2$ $a$ $b$\".\n\nOutput\n\nPrint the result of each query of type 2.",
   "constraints": {
     "text": "n, q ≤ 2e5, point updates",
     "verified": false

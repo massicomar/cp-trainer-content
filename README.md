@@ -19,7 +19,7 @@ The starter set has 107 problems, all `draft`:
 | Graphs, Geometry, Number Theory, Binary Search / D&C, Segment Tree | 5 each | 5 each | 5 each | none |
 | Distractors (greedy, shown in DP sessions) | 2 | – | – | none |
 
-Every problem still needs a summary written in your own words, and 14 need their limits re-checked on the judge page. See `CONTRIBUTING.md` for how to do both.
+Every problem still needs its statement copied from the judge into `summary`, and 14 need their limits re-checked on the judge page. See `CONTRIBUTING.md` for how to do both.
 
 ```bash
 npm ci
