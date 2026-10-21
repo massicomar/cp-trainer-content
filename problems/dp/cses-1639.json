@@ -104,5 +104,29 @@
       "explanation": "Delete s_i, insert t_j, or match/replace the last characters."
     }
   ],
-  "deprecated": false
+  "deprecated": false,
+  "es": {
+    "explanation": "Distancia de Levenshtein sobre prefijos: 25M estados, así que recicla dos filas para ahorrar memoria.",
+    "traps": [
+      "Una tabla de ints de 5001 × 5001 ocupa ~100 MB; guarda solo dos filas."
+    ],
+    "layers": {
+      "dp-state": {
+        "explanation": "Dos secuencias → el estado es un par de largos de prefijo.",
+        "why": {
+          "b": "La distancia de edición compara prefijos de dos strings, no intervalos de uno.",
+          "c": "Los dos prefijos pueden tener largos distintos.",
+          "d": "Pariente cercano (LCS), pero con reemplazos no da directamente la distancia de edición."
+        }
+      },
+      "dp-transition": {
+        "explanation": "Borrar s_i, insertar t_j, o hacer coincidir/reemplazar los últimos caracteres.",
+        "why": {
+          "b": "Se olvida de las inserciones y los borrados.",
+          "c": "Ese es el paso del LCS que descarta un carácter; la distancia de edición minimiza.",
+          "d": "Se olvida de la coincidencia gratis / el reemplazo en la diagonal."
+        }
+      }
+    }
+  }
 }

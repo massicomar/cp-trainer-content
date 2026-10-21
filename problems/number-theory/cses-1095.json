@@ -45,5 +45,12 @@
     "cses-1712"
   ],
   "extraLayers": [],
-  "deprecated": false
+  "deprecated": false,
+  "es": {
+    "explanation": "a^b mod p con b hasta 1e9: exponenciación binaria, O(log b) por consulta.",
+    "traps": [
+      "Acá 0^0 = 1.",
+      "Multiplica en 64 bits antes de tomar el módulo."
+    ]
+  }
 }

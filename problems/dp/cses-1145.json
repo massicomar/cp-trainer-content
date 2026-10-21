@@ -104,5 +104,29 @@
       "explanation": "Each element improves the tail of exactly one length; tails stay sorted, so binary search finds it. Answer = number of tails."
     }
   ],
-  "deprecated": false
+  "deprecated": false,
+  "es": {
+    "explanation": "n = 2e5 mata al LIS O(n²). Guarda tails[k] = el menor último valor posible de una subsecuencia creciente de largo k, y haz búsqueda binaria para cada elemento.",
+    "traps": [
+      "Estrictamente creciente → usa lower_bound; upper_bound da no decreciente."
+    ],
+    "layers": {
+      "dp-state": {
+        "explanation": "Para cada largo solo importa el menor valor final posible: una cola más chica siempre se puede extender al menos igual de bien.",
+        "why": {
+          "b": "La recurrencia es correcta, pero O(n²) = 4e10 con n = 2e5.",
+          "c": "n² estados.",
+          "d": "Para que sea rápido necesita compresión de valores y un Fenwick de máximos; así como está es una tabla de 1e9."
+        }
+      },
+      "dp-transition": {
+        "explanation": "Cada elemento mejora la cola de exactamente un largo; las colas quedan ordenadas, así que la búsqueda binaria la encuentra. Respuesta = cantidad de colas.",
+        "why": {
+          "b": "Eso arma subsecuencias no decrecientes, no estrictamente crecientes.",
+          "c": "Omitirlo pierde colas mejores (más chicas) para los elementos que vienen.",
+          "d": "Correcto, pero cuadrático."
+        }
+      }
+    }
+  }
 }

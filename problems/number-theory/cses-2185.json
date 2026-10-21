@@ -42,5 +42,11 @@
   ],
   "pairWith": [],
   "extraLayers": [],
-  "deprecated": false
+  "deprecated": false,
+  "es": {
+    "explanation": "Contar los números ≤ n divisibles por al menos uno de los primos: inclusión–exclusión sobre los 2^k subconjuntos de primos.",
+    "traps": [
+      "Los productos de primos se pasan de 1e18: corta cuando el producto supera n."
+    ]
+  }
 }

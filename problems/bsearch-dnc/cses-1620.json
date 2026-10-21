@@ -42,5 +42,11 @@
   ],
   "pairWith": [],
   "extraLayers": [],
-  "deprecated": false
+  "deprecated": false,
+  "es": {
+    "explanation": "Los productos hechos hasta el tiempo T son Σ⌊T/k_i⌋, monótono en T: búsqueda binaria sobre el tiempo mínimo (hasta 1e18).",
+    "traps": [
+      "La suma desborda 64 bits salvo que la topes en t."
+    ]
+  }
 }

@@ -106,5 +106,29 @@
       "explanation": "Each j contributes a line with slope −2h_j; slopes decrease and query points increase, so a monotone deque answers each query in amortized O(1)."
     }
   ],
-  "deprecated": false
+  "deprecated": false,
+  "es": {
+    "explanation": "dp[i] = mín sobre j < i de dp[j] + (h_i − h_j)² + C se desarrolla en rectas en h_i. Las pendientes son monótonas (las alturas crecen), así que un CHT con deque da O(N).",
+    "traps": [
+      "Los valores de dp llegan a ~1e17; la comparación de intersecciones de rectas los multiplica por diferencias de pendientes, así que usa 128 bits o un chequeo con divisiones."
+    ],
+    "layers": {
+      "dp-state": {
+        "explanation": "El estado es fácil: lo difícil es la transición O(N²).",
+        "why": {
+          "b": "N² estados.",
+          "c": "Las alturas llegan a 1e6 y no son las piedras; indexa por piedra.",
+          "d": "La cantidad de saltos no importa."
+        }
+      },
+      "dp-transition": {
+        "explanation": "Cada j aporta una recta de pendiente −2h_j; las pendientes decrecen y los puntos de consulta crecen, así que un deque monótono responde cada consulta en O(1) amortizado.",
+        "why": {
+          "b": "La recurrencia es correcta, pero son 2e10 operaciones.",
+          "c": "Los saltos pueden saltarse piedras; a veces un salto largo le gana a muchos cortos (C es grande).",
+          "d": "Ese es Frog 1; acá se permite cualquier j < i."
+        }
+      }
+    }
+  }
 }

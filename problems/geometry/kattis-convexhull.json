@@ -45,5 +45,12 @@
     "cses-2195"
   ],
   "extraLayers": [],
-  "deprecated": false
+  "deprecated": false,
+  "es": {
+    "explanation": "Envolvente con monotone chain. Este juez quiere que se saquen los puntos colineales.",
+    "traps": [
+      "Duplicados y n ≤ 2.",
+      "Puntos colineales: este problema los excluye, CSES 2195 los incluye."
+    ]
+  }
 }

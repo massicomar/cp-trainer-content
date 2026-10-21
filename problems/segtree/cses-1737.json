@@ -42,5 +42,11 @@
   ],
   "pairWith": [],
   "extraLayers": [],
-  "deprecated": false
+  "deprecated": false,
+  "es": {
+    "explanation": "“Hacer una copia del arreglo k” → segment tree persistente: cada actualización crea O(log n) nodos nuevos y cada copia es un puntero a una raíz.",
+    "traps": [
+      "Copiar el arreglo en cada consulta es O(n·q)."
+    ]
+  }
 }

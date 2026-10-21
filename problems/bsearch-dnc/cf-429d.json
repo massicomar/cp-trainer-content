@@ -50,5 +50,11 @@
   ],
   "pairWith": [],
   "extraLayers": [],
-  "deprecated": false
+  "deprecated": false,
+  "es": {
+    "explanation": "f(i, j) = (i − j)² + (prefix_i − prefix_j)² es una distancia al cuadrado entre los puntos (i, prefix_i): par más cercano con divide y vencerás.",
+    "traps": [
+      "O(n²) es 1e10."
+    ]
+  }
 }

@@ -1,0 +1,79 @@
+{
+  "$schema": "../schema/subject-drills.schema.json",
+  "schemaVersion": 1,
+  "subject": "geometry",
+  "algorithms": [
+    {
+      "id": "monotone-chain",
+      "name": "Convex hull with Andrew's monotone chain",
+      "complexity": "O(n \\log n)",
+      "wrong": ["O(n)", "O(n^2)", "O(n \\cdot h)"],
+      "explanation": "Sorting the points dominates; building the two chains afterwards is linear.",
+      "es": { "explanation": "Lo que domina es ordenar los puntos; armar las dos cadenas después es lineal." }
+    },
+    {
+      "id": "jarvis-march",
+      "name": "Convex hull with gift wrapping (Jarvis march), h points on the hull",
+      "complexity": "O(n \\cdot h)",
+      "wrong": ["O(n \\log n)", "O(h \\log n)", "O(n^2 \\log n)"],
+      "explanation": "Each of the h hull points is found by scanning all n points.",
+      "es": { "explanation": "Cada uno de los h puntos de la envolvente se encuentra recorriendo los n puntos." }
+    },
+    {
+      "id": "shoelace",
+      "name": "Area of a simple polygon with the shoelace formula",
+      "complexity": "O(n)",
+      "wrong": ["O(n \\log n)", "O(n^2)", "O(1)"],
+      "explanation": "One cross product per edge.",
+      "es": { "explanation": "Un producto cruz por arista." }
+    },
+    {
+      "id": "ray-casting",
+      "name": "Point in a (possibly non-convex) polygon by ray casting, one query",
+      "complexity": "O(n)",
+      "wrong": ["O(\\log n)", "O(n \\log n)", "O(1)"],
+      "explanation": "The ray is tested against every edge.",
+      "es": { "explanation": "El rayo se prueba contra todas las aristas." }
+    },
+    {
+      "id": "point-in-convex",
+      "name": "Point in a convex polygon by binary search over the fan from one vertex, one query",
+      "complexity": "O(\\log n)",
+      "wrong": ["O(n)", "O(1)", "O(\\sqrt{n})"],
+      "explanation": "Binary search finds the wedge that contains the point; then one orientation test decides.",
+      "es": { "explanation": "La búsqueda binaria encuentra la cuña que contiene al punto; después decide un test de orientación." }
+    },
+    {
+      "id": "closest-pair",
+      "name": "Closest pair of points by divide and conquer",
+      "complexity": "O(n \\log n)",
+      "wrong": ["O(n^2)", "O(n)", "O(n \\sqrt{n})"],
+      "explanation": "Two halves, plus a strip in which each point is compared with a constant number of neighbours.",
+      "es": { "explanation": "Dos mitades, más una franja en la que cada punto se compara con una cantidad constante de vecinos." }
+    },
+    {
+      "id": "all-pairs-intersection",
+      "name": "Testing every pair of n segments for an intersection",
+      "complexity": "O(n^2)",
+      "wrong": ["O(n \\log n)", "O(n)", "O(n^3)"],
+      "explanation": "There are n(n − 1)/2 pairs, and each test is a constant number of orientation checks.",
+      "es": { "explanation": "Hay n(n − 1)/2 pares, y cada prueba es una cantidad constante de chequeos de orientación." }
+    },
+    {
+      "id": "rotating-calipers",
+      "name": "Diameter of a convex polygon with rotating calipers (h vertices)",
+      "complexity": "O(h)",
+      "wrong": ["O(h^2)", "O(h \\log h)", "O(1)"],
+      "explanation": "Each caliper goes around the polygon once.",
+      "es": { "explanation": "Cada calibre da una sola vuelta al polígono." }
+    },
+    {
+      "id": "union-of-rectangles",
+      "name": "Area of the union of n rectangles with a sweep line and a segment tree",
+      "complexity": "O(n \\log n)",
+      "wrong": ["O(n^2)", "O(n^2 \\log n)", "O(n)"],
+      "explanation": "2n events, each updating the segment tree over y in O(log n).",
+      "es": { "explanation": "2n eventos, y cada uno actualiza el segment tree sobre y en O(log n)." }
+    }
+  ]
+}

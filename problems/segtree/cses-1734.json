@@ -50,5 +50,11 @@
   ],
   "pairWith": [],
   "extraLayers": [],
-  "deprecated": false
+  "deprecated": false,
+  "es": {
+    "explanation": "Ordena las consultas por extremo derecho; en un BIT, deja un 1 solo en la última aparición de cada valor; respuesta = suma en el rango.",
+    "traps": [
+      "Las cantidades de distintos no se combinan desde dos mitades."
+    ]
+  }
 }

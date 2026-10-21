@@ -50,5 +50,11 @@
   ],
   "pairWith": [],
   "extraLayers": [],
-  "deprecated": false
+  "deprecated": false,
+  "es": {
+    "explanation": "Precalcula d(x) para todo x ≤ 1e6 con un loop armónico sobre los múltiplos (o factoriza con una criba de SPF).",
+    "traps": [
+      "Probar divisores hasta √x por consulta más o menos entra, pero es más lento; precalcular es más limpio."
+    ]
+  }
 }

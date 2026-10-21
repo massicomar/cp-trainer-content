@@ -103,5 +103,29 @@
       "explanation": "Write E = 1 + (c0/N)·E + Σ (c_k/N)·E', then solve for E. Iterate c3, then c2, then c1 in increasing order."
     }
   ],
-  "deprecated": false
+  "deprecated": false,
+  "es": {
+    "explanation": "No importa qué plato tiene cuántas piezas, solo cuántos platos tienen 1, 2 o 3. Resuelve el autoloop (cuando sale un plato vacío) despejando algebraicamente.",
+    "traps": [
+      "El estado puede quedar igual cuando sale un plato vacío; despeja E en vez de recursar para siempre."
+    ],
+    "layers": {
+      "dp-state": {
+        "explanation": "Por simetría solo importan las cantidades de platos por número de piezas: 301³ / 6 estados.",
+        "why": {
+          "b": "2^300; los platos con la misma cantidad son intercambiables.",
+          "c": "Distribuciones distintas con el mismo total se comportan distinto.",
+          "d": "La cantidad de pasos no está acotada; lo que buscas es una esperanza."
+        }
+      },
+      "dp-transition": {
+        "explanation": "Escribe E = 1 + (c0/N)·E + Σ (c_k/N)·E' y despeja E. Itera c3, después c2 y después c1 en orden creciente.",
+        "why": {
+          "b": "Ignora la probabilidad de elegir un plato vacío (el autoloop).",
+          "c": "Suma esperanzas sin probabilidades.",
+          "d": "El primer término está bien, pero el estado siguiente depende de qué tipo de plato salió."
+        }
+      }
+    }
+  }
 }

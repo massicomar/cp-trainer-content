@@ -104,5 +104,29 @@
       "explanation": "Sliding-window maximum of the previous layer turns O(n·k) per layer into O(n)."
     }
   ],
-  "deprecated": false
+  "deprecated": false,
+  "es": {
+    "explanation": "dp sobre (reposts usados, última imagen reposteada). La transición toma un máximo sobre una ventana de la capa anterior → deque monótono, O(n·x).",
+    "traps": [
+      "Los estados inalcanzables tienen que valer −∞, y la respuesta tiene que tomar el último repost dentro de las últimas k imágenes."
+    ],
+    "layers": {
+      "dp-state": {
+        "explanation": "La regla de la ventana solo mira la distancia al repost anterior, así que recuerda la posición del último repost.",
+        "why": {
+          "b": "Pierde cuántos reposts se usaron (tienen que ser exactamente x).",
+          "c": "Pierde dónde está el último repost, que la regla de “cada k consecutivas” necesita.",
+          "d": "n = 5000."
+        }
+      },
+      "dp-transition": {
+        "explanation": "El máximo en ventana deslizante de la capa anterior convierte O(n·k) por capa en O(n).",
+        "why": {
+          "b": "Permite huecos de k o más imágenes sin repost.",
+          "c": "Obliga a que los reposts sean consecutivos.",
+          "d": "Es correcto, pero O(n²x): esa es la versión fácil, F1."
+        }
+      }
+    }
+  }
 }

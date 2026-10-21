@@ -104,5 +104,30 @@
       "explanation": "Position i with value v can follow v−1, v or v+1 at position i−1."
     }
   ],
-  "deprecated": false
+  "deprecated": false,
+  "es": {
+    "explanation": "Los valores vecinos difieren a lo sumo en 1, así que el estado es (posición, valor en esa posición): dp[i][v] = suma de los tres valores vecinos en i−1.",
+    "traps": [
+      "Un valor conocido fuerza dp[i][v] = 0 para cualquier otro v.",
+      "Limita v−1 y v+1 al rango 1..m."
+    ],
+    "layers": {
+      "dp-state": {
+        "explanation": "La restricción une a los vecinos, así que recuerda el valor en la posición actual (m ≤ 100 opciones).",
+        "why": {
+          "b": "Pierde el último valor, del que depende la posición siguiente.",
+          "c": "No describe arreglos para nada.",
+          "d": "Solo importa el valor anterior, y m = 100 hace imposibles las máscaras."
+        }
+      },
+      "dp-transition": {
+        "explanation": "La posición i con valor v puede seguir a v−1, v o v+1 en la posición i−1.",
+        "why": {
+          "b": "Ignora la regla de “difieren a lo sumo en 1”.",
+          "c": "Cada valor vecino aporta su propia cuenta; no se puede multiplicar sin más.",
+          "d": "Se pide una cantidad (suma), no un máximo."
+        }
+      }
+    }
+  }
 }

@@ -41,5 +41,11 @@
   ],
   "pairWith": [],
   "extraLayers": [],
-  "deprecated": false
+  "deprecated": false,
+  "es": {
+    "explanation": "Izquierda, derecha o sobre la recta es el signo de un producto cruz.",
+    "traps": [
+      "Los productos cruz llegan a ~8e18: hacen falta 64 bits; los doubles pierden precisión."
+    ]
+  }
 }

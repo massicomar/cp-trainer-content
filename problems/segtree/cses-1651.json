@@ -44,5 +44,8 @@
   "traps": [],
   "pairWith": [],
   "extraLayers": [],
-  "deprecated": false
+  "deprecated": false,
+  "es": {
+    "explanation": "Suma en rango con lecturas solo puntuales: un BIT sobre el arreglo de diferencias, sin necesidad de lazy propagation."
+  }
 }

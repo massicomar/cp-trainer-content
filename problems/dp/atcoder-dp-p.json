@@ -104,5 +104,29 @@
       "explanation": "Independent subtrees multiply; a black vertex forces white children."
     }
   ],
-  "deprecated": false
+  "deprecated": false,
+  "es": {
+    "explanation": "Enraíza el árbol; para cada vértice guarda la cantidad de coloreos de su subárbol para cada uno de sus dos colores.",
+    "traps": [
+      "Una recursión de profundidad 1e5 puede desbordar la pila si el árbol es un camino."
+    ],
+    "layers": {
+      "dp-state": {
+        "explanation": "Lo único que pasa de un lado a otro de una arista es “no las dos negras”, así que el padre necesita el color de v.",
+        "why": {
+          "b": "El padre necesita saber si v es negro.",
+          "c": "2^N.",
+          "d": "Las aristas unen padre e hijo, así que los niveles de profundidad no son independientes."
+        }
+      },
+      "dp-transition": {
+        "explanation": "Los subárboles independientes se multiplican; un vértice negro obliga a que sus hijos sean blancos.",
+        "why": {
+          "b": "Los subárboles de los hijos son independientes: se multiplica, no se suma.",
+          "c": "Si v es negro, sus hijos no pueden ser negros.",
+          "d": "Ignora la regla de adyacencia."
+        }
+      }
+    }
+  }
 }

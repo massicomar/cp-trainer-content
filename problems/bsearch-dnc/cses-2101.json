@@ -54,5 +54,11 @@
   ],
   "pairWith": [],
   "extraLayers": [],
-  "deprecated": false
+  "deprecated": false,
+  "es": {
+    "explanation": "Para cada consulta, el primer día en que dos ciudades quedan conectadas: búsqueda binaria paralela reconstruyendo el DSU (o el máximo sobre el camino del MST con LCA).",
+    "traps": [
+      "Hacer búsqueda binaria por separado para cada consulta reconstruye el DSU O(q log m) veces."
+    ]
+  }
 }

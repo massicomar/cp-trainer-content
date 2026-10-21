@@ -106,5 +106,29 @@
       "explanation": "Binary exponentiation of the companion matrix: 6³ · 60 multiplications."
     }
   ],
-  "deprecated": false
+  "deprecated": false,
+  "es": {
+    "explanation": "La misma recurrencia que Dice Combinations, pero n ≤ 1e18 descarta una tabla: eleva la matriz compañera de 6×6 a la n, O(6³ log n).",
+    "traps": [
+      "La versión con tabla necesita 1e18 celdas."
+    ],
+    "layers": {
+      "dp-state": {
+        "explanation": "Una recurrencia lineal de orden 6 solo necesita una ventana de 6 valores, y mover esa ventana es una multiplicación de matrices.",
+        "why": {
+          "b": "Eso son 1e18 entradas.",
+          "c": "La recurrencia necesita seis sumas anteriores distintas, no restos.",
+          "d": "Contar composiciones con partes de 1 a 6 no tiene una fórmula cerrada simple."
+        }
+      },
+      "dp-transition": {
+        "explanation": "Exponenciación binaria de la matriz compañera: 6³ · 60 multiplicaciones.",
+        "why": {
+          "b": "Correcto, pero son 1e18 iteraciones.",
+          "c": "Cuenta todas las secuencias de n tiradas, no las que suman n.",
+          "d": "Las recurrencias no se parten así; la potencia de la matriz lo hace bien."
+        }
+      }
+    }
+  }
 }

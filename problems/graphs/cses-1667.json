@@ -42,5 +42,11 @@
   ],
   "pairWith": [],
   "extraLayers": [],
-  "deprecated": false
+  "deprecated": false,
+  "es": {
+    "explanation": "La menor cantidad de saltos en un grafo sin pesos es BFS; guarda punteros al padre para imprimir el camino.",
+    "traps": [
+      "DFS encuentra un camino, no el más corto."
+    ]
+  }
 }

@@ -117,5 +117,29 @@
       "explanation": "Evaluate a vertex only after all its successors — exactly what topological order guarantees."
     }
   ],
-  "deprecated": false
+  "deprecated": false,
+  "es": {
+    "explanation": "El camino más largo es NP-difícil en general, pero fácil en un DAG: procesa los vértices en orden topológico (o con un DFS memoizado).",
+    "traps": [
+      "Correr Dijkstra con los pesos negados está mal (aristas negativas)."
+    ],
+    "layers": {
+      "dp-state": {
+        "explanation": "Como no hay ciclos, el mejor camino desde v solo depende de los mejores caminos desde sus vecinos de salida. (Terminar en v también sirve.)",
+        "why": {
+          "b": "Eso es para grafos generales (tipo hamiltoniano); un DAG no lo necesita, y N = 1e5.",
+          "c": "Pierde dónde está el camino.",
+          "d": "Se pide el camino más largo entre todos los inicios, no un camino mínimo."
+        }
+      },
+      "dp-transition": {
+        "explanation": "Evalúa un vértice recién después de todos sus sucesores: justo lo que garantiza el orden topológico.",
+        "why": {
+          "b": "Los números de los vértices no son un orden topológico.",
+          "c": "El invariante de Dijkstra se rompe con pesos de “más largo” (negativos).",
+          "d": "Cuenta el grado, no el largo del camino."
+        }
+      }
+    }
+  }
 }

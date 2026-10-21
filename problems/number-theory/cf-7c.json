@@ -42,5 +42,11 @@
   ],
   "pairWith": [],
   "extraLayers": [],
-  "deprecated": false
+  "deprecated": false,
+  "es": {
+    "explanation": "Punto entero sobre Ax + By + C = 0: tiene solución si y solo si gcd(A, B) divide a C; escala la solución de Euclides extendido por −C/g.",
+    "traps": [
+      "Las respuestas pueden llegar a ~5e18; cuidado con los signos y el overflow de 64 bits."
+    ]
+  }
 }

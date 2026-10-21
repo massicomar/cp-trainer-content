@@ -105,5 +105,30 @@
       "explanation": "Take an end, then the opponent faces the smaller interval and maximizes their own difference — subtract it."
     }
   ],
-  "deprecated": false
+  "deprecated": false,
+  "es": {
+    "explanation": "Lo que queda de la lista siempre es un intervalo contiguo. Guarda la mejor diferencia (jugador actual − rival) por intervalo: O(n²).",
+    "traps": [
+      "Tomar con greedy el extremo más grande no es óptimo.",
+      "Usa sumas de 64 bits."
+    ],
+    "layers": {
+      "dp-state": {
+        "explanation": "Se haya tomado lo que se haya tomado, lo que queda es un intervalo; el truco de la diferencia hace que el estado sea simétrico para los dos jugadores.",
+        "why": {
+          "b": "Después de i jugadas no sabes qué extremos se tomaron.",
+          "c": "Funciona, pero la formulación con la “diferencia” elimina la dimensión del turno.",
+          "d": "2^5000; además, lo tomado siempre es un prefijo + un sufijo."
+        }
+      },
+      "dp-transition": {
+        "explanation": "Toma un extremo; después el rival se enfrenta al intervalo más chico y maximiza su propia diferencia: réstala.",
+        "why": {
+          "b": "Trata al rival como si te ayudara; ignora sus jugadas.",
+          "c": "Esa es la elección greedy.",
+          "d": "Las jugadas solo sacan un extremo; no hay punto de corte."
+        }
+      }
+    }
+  }
 }

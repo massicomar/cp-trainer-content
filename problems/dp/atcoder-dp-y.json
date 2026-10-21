@@ -111,5 +111,29 @@
       "explanation": "Classify bad paths by the first wall they hit — each bad path is subtracted exactly once."
     }
   ],
-  "deprecated": false
+  "deprecated": false,
+  "es": {
+    "explanation": "La grilla tiene 1e10 celdas, pero solo 3000 paredes. Ordena las paredes; dp[i] = caminos hasta la pared i que no tocan ninguna pared anterior = todos los caminos menos los que pasan por una primera pared anterior.",
+    "traps": [
+      "Precalcula factoriales hasta H + W para C(a + b, a) mod p."
+    ],
+    "layers": {
+      "dp-state": {
+        "explanation": "Cuando la grilla es enorme pero los puntos especiales son pocos, haz que los puntos especiales sean los estados y cuenta los caminos libres entre ellos con binomiales.",
+        "why": {
+          "b": "1e10 celdas: ese es el estado de Grid 1.",
+          "c": "Los caminos que pasan por varias paredes se cuentan varias veces.",
+          "d": "2^3000."
+        }
+      },
+      "dp-transition": {
+        "explanation": "Clasifica los caminos malos según la primera pared que tocan: así cada camino malo se resta exactamente una vez.",
+        "why": {
+          "b": "Resta los caminos por cada pared anterior, y resta dos veces los que tocan varias.",
+          "c": "DP de grilla sobre 1e10 celdas.",
+          "d": "Cada pared bloquea muchos caminos, no uno."
+        }
+      }
+    }
+  }
 }

@@ -103,5 +103,29 @@
       "explanation": "Today's best with activity a = today's gain + yesterday's best with any different activity."
     }
   ],
-  "deprecated": false
+  "deprecated": false,
+  "es": {
+    "explanation": "Agrega al estado la actividad de ayer: dp sobre los días con 3 columnas, una por actividad.",
+    "traps": [
+      "Elegir con greedy la mejor actividad de cada día rompe la regla de “no repetir” en los días siguientes."
+    ],
+    "layers": {
+      "dp-state": {
+        "explanation": "La restricción solo mira un día para atrás, así que alcanza con recordar la última actividad (3 opciones).",
+        "why": {
+          "b": "Pierde qué actividad se hizo el día i, así que no puedes prohibir repetirla.",
+          "c": "La regla es sobre días consecutivos, no sobre qué actividades se usaron alguna vez.",
+          "d": "Las cantidades no importan; solo importa lo que se eligió ayer."
+        }
+      },
+      "dp-transition": {
+        "explanation": "Lo mejor de hoy con la actividad a = la ganancia de hoy + lo mejor de ayer con cualquier actividad distinta.",
+        "why": {
+          "b": "Permite b = a, o sea, la misma actividad dos días seguidos.",
+          "c": "Nunca suma las ganancias de un día a otro.",
+          "d": "Eso obliga a hacer la misma actividad todos los días, que es justo lo prohibido."
+        }
+      }
+    }
+  }
 }

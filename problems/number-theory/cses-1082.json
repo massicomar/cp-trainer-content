@@ -43,5 +43,12 @@
   ],
   "pairWith": [],
   "extraLayers": [],
-  "deprecated": false
+  "deprecated": false,
+  "es": {
+    "explanation": "Σ σ(i) = Σ_d d·⌊n/d⌋, y ⌊n/d⌋ toma solo O(√n) valores distintos: suma una serie aritmética por bloque.",
+    "traps": [
+      "Los loops hasta n son 1e12.",
+      "Las sumas de series aritméticas necesitan el inverso modular de 2 o dividir por 2 con cuidado."
+    ]
+  }
 }

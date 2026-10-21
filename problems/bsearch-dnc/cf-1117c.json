@@ -42,5 +42,11 @@
   ],
   "pairWith": [],
   "extraLayers": [],
-  "deprecated": false
+  "deprecated": false,
+  "es": {
+    "explanation": "Después de d días, el viento te desplaza una cantidad que se puede calcular; puedes llegar al objetivo si y solo si la distancia Manhattan es ≤ d. Es monótono en d → búsqueda binaria (d hasta ~2e14).",
+    "traps": [
+      "Una cota superior demasiado chica; la respuesta puede pasar 1e9."
+    ]
+  }
 }

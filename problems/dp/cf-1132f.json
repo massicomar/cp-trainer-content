@@ -102,5 +102,26 @@
       "explanation": "Either s[l] is deleted on its own, or it rides along with the next copy of the same letter once the gap is cleared."
     }
   ],
-  "deprecated": false
+  "deprecated": false,
+  "es": {
+    "explanation": "DP de intervalos: s[l] se borra solo, o se borra junto con un carácter igual más adelante, s[k], después de limpiar todo lo que hay entre los dos.",
+    "layers": {
+      "dp-state": {
+        "explanation": "Los borrados ocurren dentro de pedazos contiguos, y n ≤ 500 permite O(n³): DP de intervalos clásica.",
+        "why": {
+          "b": "Borrar el medio puede juntar caracteres que estaban lejos; los prefijos no pueden expresar eso.",
+          "c": "Dimensión extra innecesaria; se puede hacer con dp[l][r] a secas.",
+          "d": "Eso es una cota superior; juntar bloques después de borrar el medio puede dar algo mejor."
+        }
+      },
+      "dp-transition": {
+        "explanation": "O s[l] se borra solo, o se va junto con la siguiente copia de la misma letra una vez que se limpió lo del medio.",
+        "why": {
+          "b": "Partir a secas nunca deja que s[l] y s[k] desaparezcan en la misma operación.",
+          "c": "Solo sirve para emparejamientos tipo palíndromo; este problema deja que se junte cualquier letra igual.",
+          "d": "Siempre borra s[l] solo; nunca junta."
+        }
+      }
+    }
+  }
 }

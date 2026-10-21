@@ -42,5 +42,11 @@
   ],
   "pairWith": [],
   "extraLayers": [],
-  "deprecated": false
+  "deprecated": false,
+  "es": {
+    "explanation": "Ordena los precios una vez; cada consulta es un upper_bound.",
+    "traps": [
+      "Un recorrido lineal por consulta es 1e10."
+    ]
+  }
 }

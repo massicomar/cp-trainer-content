@@ -51,5 +51,12 @@
   ],
   "pairWith": [],
   "extraLayers": [],
-  "deprecated": false
+  "deprecated": false,
+  "es": {
+    "explanation": "Búsqueda binaria sobre el radio; cada punto permite un intervalo de posiciones para el centro; es factible si y solo si los intervalos se intersecan.",
+    "traps": [
+      "Si hay puntos de los dos lados del río, es imposible.",
+      "Cancelación catastrófica: reacomoda la fórmula."
+    ]
+  }
 }

@@ -46,5 +46,11 @@
   ],
   "pairWith": [],
   "extraLayers": [],
-  "deprecated": false
+  "deprecated": false,
+  "es": {
+    "explanation": "Precalcula factoriales y factoriales inversos hasta 1e6; cada consulta es O(1).",
+    "traps": [
+      "El triángulo de Pascal necesita 1e12 celdas."
+    ]
+  }
 }

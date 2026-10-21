@@ -42,5 +42,11 @@
   ],
   "pairWith": [],
   "extraLayers": [],
-  "deprecated": false
+  "deprecated": false,
+  "es": {
+    "explanation": "gcd(a + x, m) = gcd(a, m) = g significa que (a + x)/g es coprimo con m/g a lo largo de un período completo: la respuesta es φ(m/g), probando divisores.",
+    "traps": [
+      "Iterar sobre x hasta 1e10."
+    ]
+  }
 }

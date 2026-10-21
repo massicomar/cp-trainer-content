@@ -43,5 +43,12 @@
   ],
   "pairWith": [],
   "extraLayers": [],
-  "deprecated": false
+  "deprecated": false,
+  "es": {
+    "explanation": "Comprueba que cada vértice de B esté estrictamente adentro del convexo A: búsqueda binaria en abanico, O(log n) por punto.",
+    "traps": [
+      "Acá tocar el borde cuenta como afuera.",
+      "Ray casting por punto es O(n·m) = 2e9."
+    ]
+  }
 }

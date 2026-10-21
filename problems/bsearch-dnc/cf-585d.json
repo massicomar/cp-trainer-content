@@ -42,5 +42,11 @@
   ],
   "pairWith": [],
   "extraLayers": [],
-  "deprecated": false
+  "deprecated": false,
+  "es": {
+    "explanation": "3^25 es demasiado: 3^13 por mitad; empareja las mitades por el par de diferencias (L − M, M − W) y maximiza L.",
+    "traps": [
+      "Emparejar por las sumas crudas en vez de por las diferencias."
+    ]
+  }
 }

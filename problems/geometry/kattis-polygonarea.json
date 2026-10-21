@@ -40,5 +40,8 @@
   "traps": [],
   "pairWith": [],
   "extraLayers": [],
-  "deprecated": false
+  "deprecated": false,
+  "es": {
+    "explanation": "Fórmula del shoelace (de Gauss); el signo del área con signo dice si es horario o antihorario."
+  }
 }

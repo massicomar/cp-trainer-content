@@ -103,5 +103,29 @@
       "explanation": "You arrive at i from i−1 or i−2; take the cheaper of the two."
     }
   ],
-  "deprecated": false
+  "deprecated": false,
+  "es": {
+    "explanation": "El costo de llegar a la piedra i solo depende de cómo llegaste a la piedra i−1 o i−2, así que alcanza con una tabla 1D sobre las piedras.",
+    "traps": [
+      "Tomar con greedy el salto siguiente más barato no es óptimo."
+    ],
+    "layers": {
+      "dp-state": {
+        "explanation": "Lo único que el futuro necesita saber es el mejor costo para estar parado en la piedra i.",
+        "why": {
+          "b": "N² estados (1e10), y siempre arrancas desde la piedra 1.",
+          "c": "Las alturas no identifican a las piedras, y el orden de las piedras importa.",
+          "d": "Eso cuenta caminos; el problema pide un costo mínimo."
+        }
+      },
+      "dp-transition": {
+        "explanation": "Llegas a i desde i−1 o desde i−2; quédate con el más barato de los dos.",
+        "why": {
+          "b": "Esa es la recurrencia de conteo (Fibonacci), no un costo mínimo.",
+          "c": "Eso permite saltos de cualquier largo (es Frog 2 con K = N); acá solo se permiten +1 y +2.",
+          "d": "Mezcla dos predecesores distintos: el salto de +2 no sale de la piedra i−1."
+        }
+      }
+    }
+  }
 }

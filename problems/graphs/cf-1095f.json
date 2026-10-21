@@ -43,5 +43,12 @@
   ],
   "pairWith": [],
   "extraLayers": [],
-  "deprecated": false
+  "deprecated": false,
+  "es": {
+    "explanation": "El grafo completo implícito tiene n² aristas, pero toda arista implícita útil pasa por el vértice más barato: n − 1 aristas en estrella + las m ofertas, y después Kruskal.",
+    "traps": [
+      "Construir las n² aristas.",
+      "Los costos necesitan 64 bits."
+    ]
+  }
 }

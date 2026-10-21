@@ -44,5 +44,8 @@
   "traps": [],
   "pairWith": [],
   "extraLayers": [],
-  "deprecated": false
+  "deprecated": false,
+  "es": {
+    "explanation": "Maximizar la cantidad de intervalos que no se superponen (sin pesos): ordena por tiempo de fin y toma con greedy. Si se agregaran pesos, sería DP."
+  }
 }

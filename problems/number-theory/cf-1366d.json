@@ -46,5 +46,11 @@
   ],
   "pairWith": [],
   "extraLayers": [],
-  "deprecated": false
+  "deprecated": false,
+  "es": {
+    "explanation": "Factoriza cada valor con una criba de SPF: toma d1 = p^k para el primo más chico p y d2 = el resto; gcd(d1 + d2, a) = 1.",
+    "traps": [
+      "Probar divisores para 5e5 valores son ~1.5e9 operaciones."
+    ]
+  }
 }

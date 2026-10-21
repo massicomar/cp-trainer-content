@@ -50,5 +50,11 @@
   ],
   "pairWith": [],
   "extraLayers": [],
-  "deprecated": false
+  "deprecated": false,
+  "es": {
+    "explanation": "Cuenta los pares i < j con a_i > a_j durante el merge sort (o con un BIT sobre valores comprimidos).",
+    "traps": [
+      "La cuenta necesita 64 bits (hasta ~2e10)."
+    ]
+  }
 }

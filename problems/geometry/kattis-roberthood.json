@@ -46,5 +46,11 @@
   ],
   "pairWith": [],
   "extraLayers": [],
-  "deprecated": false
+  "deprecated": false,
+  "es": {
+    "explanation": "El par más lejano está sobre la envolvente convexa; rotating calipers recorre los pares antipodales en O(h).",
+    "traps": [
+      "O(n²) sobre todos los puntos es 1e10."
+    ]
+  }
 }

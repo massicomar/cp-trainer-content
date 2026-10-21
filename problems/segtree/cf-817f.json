@@ -50,5 +50,11 @@
   ],
   "pairWith": [],
   "extraLayers": [],
-  "deprecated": false
+  "deprecated": false,
+  "es": {
+    "explanation": "Comprime los extremos (l, r + 1 y 1); asignación + inversión lazy; baja hasta el primer cero para el MEX.",
+    "traps": [
+      "Olvidarse de agregar r + 1 y 1 a las coordenadas comprimidas."
+    ]
+  }
 }

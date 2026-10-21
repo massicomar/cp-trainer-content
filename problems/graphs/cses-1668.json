@@ -42,5 +42,11 @@
   ],
   "pairWith": [],
   "extraLayers": [],
-  "deprecated": false
+  "deprecated": false,
+  "es": {
+    "explanation": "Dos equipos con los amigos en lados opuestos es un 2-coloreo; un ciclo impar lo hace imposible.",
+    "traps": [
+      "El grafo puede no ser conexo: colorea todas las componentes."
+    ]
+  }
 }

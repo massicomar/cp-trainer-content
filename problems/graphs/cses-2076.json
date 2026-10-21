@@ -43,5 +43,11 @@
   ],
   "pairWith": [],
   "extraLayers": [],
-  "deprecated": false
+  "deprecated": false,
+  "es": {
+    "explanation": "Las aristas cuya eliminación desconecta el grafo son puentes: DFS con low-link, low[hijo] > tin[v].",
+    "traps": [
+      "Sacar cada arista y volver a correr el DFS es O(m·(n+m))."
+    ]
+  }
 }

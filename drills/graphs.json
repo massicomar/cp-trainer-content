@@ -1,0 +1,87 @@
+{
+  "$schema": "../schema/subject-drills.schema.json",
+  "schemaVersion": 1,
+  "subject": "graphs",
+  "algorithms": [
+    {
+      "id": "bfs",
+      "name": "BFS on an adjacency list (n vertices, m edges)",
+      "complexity": "O(n + m)",
+      "wrong": ["O(n \\cdot m)", "O(m \\log n)", "O(n^2)"],
+      "explanation": "Each vertex is queued once and each edge is looked at once from each end.",
+      "es": { "explanation": "Cada vértice entra una vez a la cola y cada arista se mira una vez desde cada extremo." }
+    },
+    {
+      "id": "dijkstra-heap",
+      "name": "Dijkstra with a binary heap",
+      "complexity": "O((n + m) \\log n)",
+      "wrong": ["O(n \\cdot m)", "O(n + m)", "O(n^2 \\log n)"],
+      "explanation": "Each edge can push one heap entry, and each heap operation costs O(log n).",
+      "es": { "explanation": "Cada arista puede agregar una entrada al heap, y cada operación del heap cuesta O(log n)." }
+    },
+    {
+      "id": "bellman-ford",
+      "name": "Bellman–Ford",
+      "complexity": "O(n \\cdot m)",
+      "wrong": ["O((n + m) \\log n)", "O(n^3)", "O(m \\log m)"],
+      "explanation": "n − 1 rounds, each relaxing every edge.",
+      "es": { "explanation": "n − 1 rondas, y en cada una se relajan todas las aristas." }
+    },
+    {
+      "id": "floyd-warshall",
+      "name": "Floyd–Warshall",
+      "complexity": "O(n^3)",
+      "wrong": ["O(n^2 \\log n)", "O(n \\cdot m)", "O(n^2)"],
+      "explanation": "Three nested loops over the vertices: k, then i, then j.",
+      "es": { "explanation": "Tres loops anidados sobre los vértices: k, después i, después j." }
+    },
+    {
+      "id": "kruskal",
+      "name": "Kruskal's minimum spanning tree with a DSU",
+      "complexity": "O(m \\log m)",
+      "wrong": ["O(n \\cdot m)", "O(m \\cdot \\alpha(n))", "O(n^2)"],
+      "explanation": "Sorting the edges dominates; the DSU operations after that are almost O(1) each.",
+      "es": { "explanation": "Lo que domina es ordenar las aristas; después, las operaciones del DSU son casi O(1) cada una." }
+    },
+    {
+      "id": "topological-sort",
+      "name": "Topological sort with Kahn's algorithm",
+      "complexity": "O(n + m)",
+      "wrong": ["O(n \\log n + m)", "O(n \\cdot m)", "O(n^2)"],
+      "explanation": "Every vertex enters the queue once, and every edge lowers one in-degree once.",
+      "es": { "explanation": "Cada vértice entra una vez a la cola, y cada arista baja un grado de entrada una vez." }
+    },
+    {
+      "id": "scc",
+      "name": "Strongly connected components (Tarjan or Kosaraju)",
+      "complexity": "O(n + m)",
+      "wrong": ["O(n \\cdot (n + m))", "O(m \\log n)", "O(n^2)"],
+      "explanation": "One or two DFS passes over the whole graph.",
+      "es": { "explanation": "Una o dos pasadas de DFS sobre todo el grafo." }
+    },
+    {
+      "id": "dinic",
+      "name": "Dinic's maximum flow",
+      "complexity": "O(n^2 \\cdot m)",
+      "wrong": ["O(n \\cdot m)", "O(m \\log n)", "O(n \\cdot m^2)"],
+      "explanation": "At most n phases, each finding a blocking flow in O(n·m). (O(n·m²) is Edmonds–Karp's bound.)",
+      "es": { "explanation": "A lo sumo n fases, y cada una encuentra un flujo bloqueante en O(n·m). (O(n·m²) es la cota de Edmonds–Karp.)" }
+    },
+    {
+      "id": "lca-binary-lifting",
+      "name": "LCA with binary lifting: preprocessing plus q queries",
+      "complexity": "O((n + q) \\log n)",
+      "wrong": ["O(n \\cdot q)", "O(n + q)", "O(n^2 + q)"],
+      "explanation": "The table stores log n ancestors per vertex, and each query makes O(log n) jumps.",
+      "es": { "explanation": "La tabla guarda log n ancestros por vértice, y cada consulta hace O(log n) saltos." }
+    },
+    {
+      "id": "bipartite-check",
+      "name": "Checking whether a graph is bipartite (2-colouring by BFS or DFS)",
+      "complexity": "O(n + m)",
+      "wrong": ["O(2^n)", "O(n \\cdot m)", "O(n^2)"],
+      "explanation": "One traversal colours every vertex; an edge between two equal colours means an odd cycle.",
+      "es": { "explanation": "Un recorrido colorea todos los vértices; una arista entre dos colores iguales significa un ciclo impar." }
+    }
+  ]
+}

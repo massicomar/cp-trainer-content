@@ -50,5 +50,11 @@
   ],
   "pairWith": [],
   "extraLayers": [],
-  "deprecated": false
+  "deprecated": false,
+  "es": {
+    "explanation": "Par más cercano: divide y vencerás o un barrido con franja ordenada, O(n log n). Imprime d² en enteros.",
+    "traps": [
+      "d² puede llegar a ~8e18, así que un INF de 1e18 es demasiado chico."
+    ]
+  }
 }

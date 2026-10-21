@@ -42,5 +42,11 @@
   ],
   "pairWith": [],
   "extraLayers": [],
-  "deprecated": false
+  "deprecated": false,
+  "es": {
+    "explanation": "Para cada d, de grande a chico, cuenta cuántos valores del arreglo son múltiplos de d (loop armónico, O(X log X)); gana el primer d con ≥ 2.",
+    "traps": [
+      "Los gcd de todos los pares son 2e10 operaciones."
+    ]
+  }
 }

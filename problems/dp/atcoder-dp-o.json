@@ -104,5 +104,29 @@
       "explanation": "The last man placed took some compatible woman w; remove her and count the rest."
     }
   ],
-  "deprecated": false
+  "deprecated": false,
+  "es": {
+    "explanation": "N ≤ 21 pide a gritos bitmask. Empareja a los hombres en orden; el conjunto de mujeres usadas determina qué hombre sigue (popcount).",
+    "traps": [
+      "Agregar el índice del hombre como dimensión extra multiplica el trabajo por 21 sin ganar nada."
+    ],
+    "layers": {
+      "dp-state": {
+        "explanation": "Procesa a los hombres en un orden fijo; el conjunto de mujeres usadas es todo lo que necesitas, y te dice qué hombre sigue.",
+        "why": {
+          "b": "Correcto pero redundante: i = popcount(mask), y N·2^N·N ≈ 9e8 es demasiado lento.",
+          "c": "Las parejas no son independientes; las mujeres no se pueden reusar.",
+          "d": "Un matching encuentra un emparejamiento perfecto; acá se pregunta cuántos hay."
+        }
+      },
+      "dp-transition": {
+        "explanation": "El último hombre ubicado se quedó con alguna mujer compatible w; sácala y cuenta el resto.",
+        "why": {
+          "b": "Se olvida de chequear la compatibilidad.",
+          "c": "Es contar, no maximizar.",
+          "d": "Los productos no cuentan asignaciones."
+        }
+      }
+    }
+  }
 }

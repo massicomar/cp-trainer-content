@@ -44,5 +44,11 @@
     "cses-1095"
   ],
   "extraLayers": [],
-  "deprecated": false
+  "deprecated": false,
+  "es": {
+    "explanation": "Por Fermat, reduce el exponente interno b^c módulo p − 1 = 1e9+6, y después potencia rápida.",
+    "traps": [
+      "Reducir el exponente mod 1e9+7 en vez de 1e9+6."
+    ]
+  }
 }

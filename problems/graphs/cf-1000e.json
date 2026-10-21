@@ -46,5 +46,11 @@
   ],
   "pairWith": [],
   "extraLayers": [],
-  "deprecated": false
+  "deprecated": false,
+  "es": {
+    "explanation": "Solo los puentes son inevitables. Contrae las componentes 2-arista-conexas en un árbol de puentes; la respuesta es el diámetro de ese árbol.",
+    "traps": [
+      "Un DFS recursivo con n = 3e5 puede desbordar la pila."
+    ]
+  }
 }

@@ -103,5 +103,29 @@
       "explanation": "The last move into (i,j) was either down from above or right from the left."
     }
   ],
-  "deprecated": false
+  "deprecated": false,
+  "es": {
+    "explanation": "Los caminos a una celda vienen de la celda de arriba o de la de la izquierda; las celdas con trampa valen 0.",
+    "traps": [
+      "Si la celda de inicio es una trampa, la respuesta es 0."
+    ],
+    "layers": {
+      "dp-state": {
+        "explanation": "Cada celda es un subproblema: ¿de cuántas formas se puede llegar acá?",
+        "why": {
+          "b": "Todos los caminos de derecha/abajo tienen el mismo largo; necesitas una cantidad.",
+          "c": "Todos los caminos tienen largo 2n−2; importa la celda, no el largo.",
+          "d": "Pierde la columna, que decide dónde están las trampas."
+        }
+      },
+      "dp-transition": {
+        "explanation": "El último movimiento hacia (i,j) fue hacia abajo desde arriba o hacia la derecha desde la izquierda.",
+        "why": {
+          "b": "Eso maximiza el largo; necesitas una cantidad.",
+          "c": "El binomial ignora las trampas.",
+          "d": "No se permiten movimientos en diagonal."
+        }
+      }
+    }
+  }
 }

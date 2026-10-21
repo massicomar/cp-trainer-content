@@ -46,5 +46,11 @@
   ],
   "pairWith": [],
   "extraLayers": [],
-  "deprecated": false
+  "deprecated": false,
+  "es": {
+    "explanation": "Búsqueda binaria sobre el tiempo T: todos se pueden encontrar si y solo si sus intervalos alcanzables se intersecan. Usa ~100 iteraciones fijas.",
+    "traps": [
+      "Un loop while (r − l > eps) puede quedar girando para siempre con doubles."
+    ]
+  }
 }

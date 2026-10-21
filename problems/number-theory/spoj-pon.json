@@ -43,5 +43,11 @@
   ],
   "pairWith": [],
   "extraLayers": [],
-  "deprecated": false
+  "deprecated": false,
+  "es": {
+    "explanation": "√N ≈ 3e9 por caso es demasiado lento: Miller–Rabin determinístico con bases fijas.",
+    "traps": [
+      "a·b mod N desborda 64 bits; usa __int128."
+    ]
+  }
 }

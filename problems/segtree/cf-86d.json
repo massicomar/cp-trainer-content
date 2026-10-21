@@ -43,5 +43,12 @@
   ],
   "pairWith": [],
   "extraLayers": [],
-  "deprecated": false
+  "deprecated": false,
+  "es": {
+    "explanation": "Consultas offline de Σ cnt_s² · s: fácil de actualizar al agregar/sacar un elemento, imposible de combinar desde dos mitades → algoritmo de Mo.",
+    "traps": [
+      "Las respuestas necesitan 64 bits.",
+      "El orden de los bloques importa para la velocidad."
+    ]
+  }
 }

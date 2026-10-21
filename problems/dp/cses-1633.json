@@ -107,5 +107,26 @@
       "explanation": "The last die shows some face f in 1..6; the rest of the sequence sums to s − f."
     }
   ],
-  "deprecated": false
+  "deprecated": false,
+  "es": {
+    "explanation": "Condiciona por la última cara del dado: ways(s) = Σ ways(s − f) para f = 1..6. El orden importa, así que es la recurrencia de conteo “ordenada”.",
+    "layers": {
+      "dp-state": {
+        "explanation": "Para el futuro solo importa la suma que falta; cuántos dados tiraste no.",
+        "why": {
+          "b": "Correcto, pero con una dimensión extra inútil: n × n = 1e12 estados.",
+          "c": "Acá 1+2 y 2+1 son secuencias distintas, así que el orden importa.",
+          "d": "No lleva la cuenta de la suma."
+        }
+      },
+      "dp-transition": {
+        "explanation": "El último dado muestra alguna cara f entre 1 y 6; el resto de la secuencia suma s − f.",
+        "why": {
+          "b": "Cada tirada multiplicaría la cuenta por 6 solo si la suma no importara.",
+          "c": "Esa es la cantidad mínima/máxima de dados, no la cantidad de formas.",
+          "d": "Con las caras en el loop de afuera cuentas cada multiconjunto una vez: esa es la versión sin orden."
+        }
+      }
+    }
+  }
 }

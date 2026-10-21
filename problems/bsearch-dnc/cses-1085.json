@@ -42,5 +42,11 @@
   ],
   "pairWith": [],
   "extraLayers": [],
-  "deprecated": false
+  "deprecated": false,
+  "es": {
+    "explanation": "Minimizar la máxima suma de una parte: búsqueda binaria sobre el tope S, y chequeo con cortes greedy.",
+    "traps": [
+      "La cota inferior tiene que ser max(x_i)."
+    ]
+  }
 }

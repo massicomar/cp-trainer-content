@@ -108,5 +108,29 @@
       "explanation": "The split point for i+1 is never left of the split point for i, so solve the middle i first and recurse on halves with a narrowed range."
     }
   ],
-  "deprecated": false
+  "deprecated": false,
+  "es": {
+    "explanation": "Partir en k partes minimizando Σ(suma de la parte)². dp[j][i] con un mínimo O(n) por estado es O(k·n²) = 2.7e10. El mejor punto de corte es monótono en i → DP con divide y vencerás (o CHT).",
+    "traps": [
+      "Las sumas de las partes al cuadrado se hacen grandes; usa enteros de 64 bits."
+    ],
+    "layers": {
+      "dp-state": {
+        "explanation": "Partir en exactamente k grupos contiguos → (grupos usados, largo del prefijo).",
+        "why": {
+          "b": "También necesitas cuántas partes se usaron; y O(n³) es demasiado lento.",
+          "c": "Pierde la cantidad de partes usadas (tienen que ser exactamente k).",
+          "d": "Las sumas de cuadrados son enormes y no es eso lo que se pregunta."
+        }
+      },
+      "dp-transition": {
+        "explanation": "El punto de corte de i+1 nunca queda a la izquierda del de i, así que resuelve primero el i del medio y haz recursión sobre las mitades con el rango achicado.",
+        "why": {
+          "b": "Correcto, pero O(k·n²) = 2.7e10.",
+          "c": "Eso resuelve “minimizar la parte más grande”, que es otro objetivo.",
+          "d": "Solo permite partes de largo 1."
+        }
+      }
+    }
+  }
 }

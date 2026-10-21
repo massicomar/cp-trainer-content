@@ -104,5 +104,29 @@
       "explanation": "Add one person at a time to the last ride, or start a new ride. O(n · 2^n)."
     }
   ],
-  "deprecated": false
+  "deprecated": false,
+  "es": {
+    "explanation": "n ≤ 20 → bitmask. Los pesos son demasiado grandes para una mochila. Guarda un par por máscara: (viajes usados, peso en el último viaje), minimizado lexicográficamente.",
+    "traps": [
+      "Guardar solo la cantidad de viajes pierde si la próxima persona entra en el viaje actual."
+    ],
+    "layers": {
+      "dp-state": {
+        "explanation": "Primero la menor cantidad de viajes, después el último viaje más vacío: ese par es todo lo que el futuro necesita.",
+        "why": {
+          "b": "No alcanza: dos formas con los mismos viajes difieren en qué tan lleno está el último.",
+          "c": "Pesos de hasta 1e9; además ignora a quién ya se llevó.",
+          "d": "El orden dentro de un viaje no importa; la dimensión extra no captura la carga."
+        }
+      },
+      "dp-transition": {
+        "explanation": "Agrega una persona por vez al último viaje, o empieza un viaje nuevo. O(n · 2^n).",
+        "why": {
+          "b": "Abre un viaje nuevo para cada persona.",
+          "c": "El greedy de bin packing no es óptimo.",
+          "d": "Correcto, pero O(3^20) ≈ 3.5e9: demasiado lento."
+        }
+      }
+    }
+  }
 }

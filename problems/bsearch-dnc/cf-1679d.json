@@ -50,5 +50,11 @@
   ],
   "pairWith": [],
   "extraLayers": [],
-  "deprecated": false
+  "deprecated": false,
+  "es": {
+    "explanation": "Búsqueda binaria sobre el valor máximo permitido; en el subgrafo de vértices permitidos, un ciclo o un camino más largo de DAG ≥ k lo hace factible.",
+    "traps": [
+      "k ≤ 1e18, pero los largos de camino se topan en n salvo que haya un ciclo."
+    ]
+  }
 }

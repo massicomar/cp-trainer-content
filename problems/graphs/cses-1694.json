@@ -42,5 +42,11 @@
   ],
   "pairWith": [],
   "extraLayers": [],
-  "deprecated": false
+  "deprecated": false,
+  "es": {
+    "explanation": "El máximo caudal de 1 a n por enlaces con capacidad: flujo máximo (Edmonds-Karp o Dinic).",
+    "traps": [
+      "El camino individual más ancho no es la respuesta: el flujo se reparte entre caminos."
+    ]
+  }
 }

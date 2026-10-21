@@ -40,5 +40,8 @@
   "traps": [],
   "pairWith": [],
   "extraLayers": [],
-  "deprecated": false
+  "deprecated": false,
+  "es": {
+    "explanation": "Todo el proceso es un segment tree cuyo merge alterna OR y XOR según el nivel; actualización puntual y lees la raíz."
+  }
 }

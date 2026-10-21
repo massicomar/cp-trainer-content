@@ -45,5 +45,8 @@
     "cses-1634"
   ],
   "extraLayers": [],
-  "deprecated": false
+  "deprecated": false,
+  "es": {
+    "explanation": "Parece Minimizing Coins, pero n ≤ 1e9 descarta una tabla, y este conjunto fijo de billetes es canónico: el billete más grande primero es óptimo."
+  }
 }

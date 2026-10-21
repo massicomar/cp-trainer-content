@@ -46,5 +46,11 @@
   ],
   "pairWith": [],
   "extraLayers": [],
-  "deprecated": false
+  "deprecated": false,
+  "es": {
+    "explanation": "La ventana más larga con suma ≤ t y todos los tiempos positivos: una ventana deslizante. La búsqueda binaria sobre sumas de prefijos también funciona, pero no hace falta.",
+    "traps": [
+      "Con valores negativos la ventana no sería monótona."
+    ]
+  }
 }

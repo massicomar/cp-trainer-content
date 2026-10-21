@@ -1,0 +1,79 @@
+{
+  "$schema": "../schema/subject-drills.schema.json",
+  "schemaVersion": 1,
+  "subject": "bsearch-dnc",
+  "algorithms": [
+    {
+      "id": "binary-search",
+      "name": "Binary search in a sorted array",
+      "complexity": "O(\\log n)",
+      "wrong": ["O(n)", "O(\\sqrt{n})", "O(1)"],
+      "explanation": "Each comparison halves the range.",
+      "es": { "explanation": "Cada comparación parte el rango a la mitad." }
+    },
+    {
+      "id": "binary-search-answer",
+      "name": "Binary search on the answer over [0, R], with an O(n) check",
+      "complexity": "O(n \\log R)",
+      "wrong": ["O(n \\cdot R)", "O(n + \\log R)", "O(n \\log n)"],
+      "explanation": "log R rounds, each running the check once.",
+      "es": { "explanation": "log R rondas, y en cada una se corre el chequeo una vez." }
+    },
+    {
+      "id": "merge-sort",
+      "name": "Merge sort",
+      "complexity": "O(n \\log n)",
+      "wrong": ["O(n^2)", "O(n)", "O(n \\log^2 n)"],
+      "explanation": "log n levels of halving, and merging one whole level costs O(n).",
+      "es": { "explanation": "log n niveles de partir a la mitad, y mezclar un nivel entero cuesta O(n)." }
+    },
+    {
+      "id": "quickselect",
+      "name": "Quickselect for the k-th smallest element (expected time)",
+      "complexity": "O(n)",
+      "wrong": ["O(n \\log n)", "O(\\log n)", "O(k \\cdot n)"],
+      "explanation": "Each round keeps one side of a random pivot, so the expected work is n + n/2 + n/4 + … = O(n).",
+      "es": { "explanation": "Cada ronda se queda con un lado de un pivote aleatorio, así que el trabajo esperado es n + n/2 + n/4 + … = O(n)." }
+    },
+    {
+      "id": "ternary-search",
+      "name": "Ternary search for the minimum of a convex function over n integers, O(1) per evaluation",
+      "complexity": "O(\\log n)",
+      "wrong": ["O(n)", "O(\\sqrt{n})", "O(\\log^2 n)"],
+      "explanation": "Each step drops a third of the range, which still means O(log n) steps.",
+      "es": { "explanation": "Cada paso descarta un tercio del rango, lo que igual da O(log n) pasos." }
+    },
+    {
+      "id": "meet-in-the-middle",
+      "name": "Subset sum by meet in the middle (sort one half's sums, binary search from the other)",
+      "complexity": "O(2^{n/2} \\cdot n)",
+      "wrong": ["O(2^n)", "O(n \\cdot 2^n)", "O(n^2)"],
+      "explanation": "Each half has 2^(n/2) sums; sorting them costs 2^(n/2) · log 2^(n/2) = O(2^(n/2) · n).",
+      "es": { "explanation": "Cada mitad tiene 2^(n/2) sumas; ordenarlas cuesta 2^(n/2) · log 2^(n/2) = O(2^(n/2) · n)." }
+    },
+    {
+      "id": "two-pointers",
+      "name": "Two pointers over an already sorted array (e.g. pairs with sum ≤ x)",
+      "complexity": "O(n)",
+      "wrong": ["O(n \\log n)", "O(n^2)", "O(\\log n)"],
+      "explanation": "Each pointer only moves in one direction, so there are at most 2n moves.",
+      "es": { "explanation": "Cada puntero se mueve en una sola dirección, así que hay a lo sumo 2n movimientos." }
+    },
+    {
+      "id": "parallel-binary-search",
+      "name": "Parallel binary search: q queries over m updates, replaying the updates once per round",
+      "complexity": "O((m + q) \\log m)",
+      "wrong": ["O(q \\cdot m)", "O(q \\cdot m \\log m)", "O(m + q)"],
+      "explanation": "log m rounds; each round replays the m updates once and checks every query once.",
+      "es": { "explanation": "log m rondas; en cada una se repiten las m actualizaciones una vez y se chequea cada consulta una vez." }
+    },
+    {
+      "id": "karatsuba",
+      "name": "Karatsuba multiplication of two n-digit numbers",
+      "complexity": "O(n^{\\log_2 3})",
+      "wrong": ["O(n^2)", "O(n \\log n)", "O(n^{1.5})"],
+      "explanation": "Three half-size multiplications instead of four: T(n) = 3T(n/2) + O(n).",
+      "es": { "explanation": "Tres multiplicaciones de la mitad de tamaño en vez de cuatro: T(n) = 3T(n/2) + O(n)." }
+    }
+  ]
+}

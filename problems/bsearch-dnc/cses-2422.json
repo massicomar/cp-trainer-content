@@ -42,5 +42,11 @@
   ],
   "pairWith": [],
   "extraLayers": [],
-  "deprecated": false
+  "deprecated": false,
+  "es": {
+    "explanation": "Mediana de una tabla implícita de n²: búsqueda binaria sobre el valor v y cuenta las entradas ≤ v con Σ min(n, ⌊v/i⌋).",
+    "traps": [
+      "Armar la tabla son 1e12 entradas."
+    ]
+  }
 }

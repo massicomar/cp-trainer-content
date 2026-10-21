@@ -42,5 +42,11 @@
   ],
   "pairWith": [],
   "extraLayers": [],
-  "deprecated": false
+  "deprecated": false,
+  "es": {
+    "explanation": "Probar divisores hasta √n encuentra los dos divisores distintos más chicos; el tercero es lo que queda.",
+    "traps": [
+      "El tercer factor tiene que ser distinto de los otros dos y ≥ 2."
+    ]
+  }
 }

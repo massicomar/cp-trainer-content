@@ -43,5 +43,12 @@
   ],
   "pairWith": [],
   "extraLayers": [],
-  "deprecated": false
+  "deprecated": false,
+  "es": {
+    "explanation": "Cada segundo puedes moverte hasta k celdas: sigue siendo un BFS de tiempo unitario. Deja de recorrer una dirección cuando chocas con una pared o con una celda a la que ya se llegó antes.",
+    "traps": [
+      "Tratarlo como un grafo con pesos y usar Dijkstra.",
+      "Recorrer las k celdas por dirección sin podar es O(n·m·k)."
+    ]
+  }
 }

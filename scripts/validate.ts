@@ -8,9 +8,13 @@
  *     accepted/overkill techniques belong to a listed subject
  *  4. every referenced subject / technique / pairWith id exists
  *  5. extra layers: unique keys, unique option ids, accepted ⊆ options
+ *  5b. the Spanish block (es): its layer keys and option ids exist, traps has as many entries as the English list
  *  6. url host is on the allowlist
  *  7. warns when a ready summary (the original statement) names the technique
  *  8. (optional) no problem id that exists on BASE_REF has been deleted
+ *  9. drills/: big-o.json and drills/<subject>.json match their schemas; complexity thresholds
+ *     don't grow with the complexity; algorithm ids unique; 3 wrong options, none equal to the
+ *     right one; the subject exists and is visible
  *
  * Exit code 1 on any error. Warnings (e.g. drafts, unverified constraints) don't fail the run.
  */
@@ -41,8 +45,23 @@ interface Problem {
   appearsIn?: string[]
   distractors?: string[]
   pairWith?: string[]
+  traps?: string[]
   extraLayers?: Layer[]
   deprecated: boolean
+  es?: {
+    explanation?: string
+    traps?: string[]
+    layers?: Record<string, { explanation?: string; why?: Record<string, string> }>
+  }
+}
+interface BigO {
+  opsPerSecond: number
+  complexities: { id: string; label: string; maxN: number }[]
+  nValues: number[]
+}
+interface SubjectDrills {
+  subject: string
+  algorithms: { id: string; name: string; complexity: string; wrong: string[]; explanation: string }[]
 }
 interface Taxonomy {
   subjects: { id: string; name: string; hidden?: boolean; techniques: { id: string; name: string; confusableWith?: string[] }[] }[]
@@ -89,6 +108,8 @@ const ajv = new Ajv2020({ allErrors: true, strict: true })
 addFormats(ajv)
 const validateProblem = ajv.compile(readJson(join(ROOT, 'schema/problem.schema.json')))
 const validateTaxonomy = ajv.compile(readJson(join(ROOT, 'schema/taxonomy.schema.json')))
+const validateBigO = ajv.compile(readJson(join(ROOT, 'schema/big-o.schema.json')))
+const validateSubjectDrills = ajv.compile(readJson(join(ROOT, 'schema/subject-drills.schema.json')))
 
 // 1. taxonomy
 const taxonomy = readJson<Taxonomy>(join(ROOT, 'taxonomy.json'))
@@ -176,6 +197,23 @@ for (const path of files) {
     if (l.key === 'subject' || l.key === 'technique') err(file, `layer key "${l.key}" is reserved`)
   }
 
+  // Spanish block: it can only translate what exists in English
+  if (p.es) {
+    if (p.es.traps && p.es.traps.length !== (p.traps ?? []).length) {
+      err(file, `es.traps has ${p.es.traps.length} entries, traps has ${(p.traps ?? []).length}`)
+    }
+    for (const [key, layer] of Object.entries(p.es.layers ?? {})) {
+      const english = p.extraLayers?.find((l) => l.key === key)
+      if (!english) {
+        err(file, `es.layers: no extra layer with key ${key}`)
+        continue
+      }
+      for (const id of Object.keys(layer.why ?? {})) {
+        if (!english.options.some((o) => o.id === id)) err(file, `es.layers.${key}.why: no option ${id}`)
+      }
+    }
+  }
+
   // url
   try {
     const host = new URL(p.url).host
@@ -203,6 +241,58 @@ for (const { file, p } of problems.values()) {
   }
 }
 
+// 9. drills
+const drillsDir = join(ROOT, 'drills')
+let algorithmCount = 0
+let drillFiles: string[] = []
+try {
+  drillFiles = readdirSync(drillsDir).filter((name) => name.endsWith('.json')).sort()
+} catch {
+  // no drills yet
+}
+const sameLatex = (a: string, b: string) => a.replace(/\s+/g, '') === b.replace(/\s+/g, '')
+for (const name of drillFiles) {
+  const file = `drills/${name}`
+  let data: unknown
+  try {
+    data = readJson(join(drillsDir, name))
+  } catch (e) {
+    err(file, `invalid JSON: ${(e as Error).message}`)
+    continue
+  }
+  if (name === 'big-o.json') {
+    if (!validateBigO(data)) {
+      for (const e of validateBigO.errors ?? []) err(file, `schema ${e.instancePath || '/'} ${e.message}`)
+      continue
+    }
+    const table = data as BigO
+    const ids = table.complexities.map((c) => c.id)
+    if (new Set(ids).size !== ids.length) err(file, 'duplicate complexity id')
+    table.complexities.forEach((c, i) => {
+      const prev = table.complexities[i - 1]
+      if (prev && c.maxN > prev.maxN) err(file, `${c.id}: maxN ${c.maxN} is larger than ${prev.id}'s (${prev.maxN}), which grows slower`)
+    })
+    continue
+  }
+  if (!validateSubjectDrills(data)) {
+    for (const e of validateSubjectDrills.errors ?? []) err(file, `schema ${e.instancePath || '/'} ${e.message}`)
+    continue
+  }
+  const drills = data as SubjectDrills
+  const subject = taxonomy.subjects.find((s) => s.id === drills.subject)
+  if (name !== `${drills.subject}.json`) err(file, `file name must be ${drills.subject}.json`)
+  if (!subject) err(file, `unknown subject ${drills.subject}`)
+  else if (subject.hidden) err(file, `subject ${drills.subject} is hidden, so its drills would never be asked`)
+  const seen = new Set<string>()
+  for (const a of drills.algorithms) {
+    if (seen.has(a.id)) err(file, `duplicate algorithm id ${a.id}`)
+    seen.add(a.id)
+    if (a.wrong.some((w) => sameLatex(w, a.complexity))) err(file, `${a.id}: a wrong option equals the right complexity`)
+    if (new Set(a.wrong.map((w) => w.replace(/\s+/g, ''))).size !== a.wrong.length) err(file, `${a.id}: two wrong options are the same`)
+  }
+  algorithmCount += drills.algorithms.length
+}
+
 // 8. deleted ids
 const baseRef = process.env.BASE_REF
 if (baseRef) {
@@ -222,6 +312,7 @@ const all = [...problems.values()].map((x) => x.p)
 const drafts = all.filter((p) => p.status === 'draft').length
 const unverified = all.filter((p) => !p.constraints.verified).length
 console.log(`${all.length} problems (${all.length - drafts} ready, ${drafts} draft, ${unverified} with unverified constraints)`)
+console.log(`${algorithmCount} algorithm drills in ${drillFiles.filter((f) => f !== 'big-o.json').length} subject files${drillFiles.includes('big-o.json') ? ', plus the Big O table' : ''}`)
 if (process.argv.includes('--verbose')) for (const w of warnings) console.log(`warning  ${w}`)
 else if (warnings.length) console.log(`${warnings.length} warnings (run with --verbose to list)`)
 for (const e of errors) console.error(`error    ${e}`)

@@ -42,5 +42,11 @@
   ],
   "pairWith": [],
   "extraLayers": [],
-  "deprecated": false
+  "deprecated": false,
+  "es": {
+    "explanation": "Un BFS desde todos los monstruos a la vez da el primer momento en que cada celda es peligrosa; después, un BFS del héroe por las celdas a las que llega estrictamente antes.",
+    "traps": [
+      "Correr un BFS por monstruo es O(k·n·m)."
+    ]
+  }
 }

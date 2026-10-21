@@ -43,5 +43,12 @@
   ],
   "pairWith": [],
   "extraLayers": [],
-  "deprecated": false
+  "deprecated": false,
+  "es": {
+    "explanation": "n · m es chiquito: ray casting (o número de vueltas) por consulta, chequeando primero “sobre el borde”.",
+    "traps": [
+      "El polígono no tiene por qué ser convexo.",
+      "Los rayos que pasan por un vértice necesitan una regla semiabierta."
+    ]
+  }
 }

@@ -50,5 +50,11 @@
   ],
   "pairWith": [],
   "extraLayers": [],
-  "deprecated": false
+  "deprecated": false,
+  "es": {
+    "explanation": "Puntos en el borde = Σ gcd(|dx|, |dy|); los puntos interiores salen del teorema de Pick con el entero 2·Área.",
+    "traps": [
+      "Calcular la fórmula de Pick en punto flotante."
+    ]
+  }
 }

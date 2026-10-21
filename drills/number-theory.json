@@ -1,0 +1,87 @@
+{
+  "$schema": "../schema/subject-drills.schema.json",
+  "schemaVersion": 1,
+  "subject": "number-theory",
+  "algorithms": [
+    {
+      "id": "sieve",
+      "name": "Sieve of Eratosthenes up to n",
+      "complexity": "O(n \\log \\log n)",
+      "wrong": ["O(n \\sqrt{n})", "O(n^2)", "O(\\sqrt{n})"],
+      "explanation": "Each prime p crosses out n/p numbers, and the sum of 1/p over the primes up to n is about log log n.",
+      "es": { "explanation": "Cada primo p tacha n/p números, y la suma de 1/p sobre los primos hasta n es aproximadamente log log n." }
+    },
+    {
+      "id": "trial-division",
+      "name": "Primality test by trial division",
+      "complexity": "O(\\sqrt{n})",
+      "wrong": ["O(n)", "O(\\log n)", "O(n \\log n)"],
+      "explanation": "A composite n has a divisor ≤ √n, so that's as far as you need to try.",
+      "es": { "explanation": "Un n compuesto tiene un divisor ≤ √n, así que no hace falta probar más allá." }
+    },
+    {
+      "id": "euclid",
+      "name": "Euclid's algorithm for gcd(a, b)",
+      "complexity": "O(\\log \\min(a, b))",
+      "wrong": ["O(\\min(a, b))", "O(\\sqrt{\\min(a, b)})", "O(a \\cdot b)"],
+      "explanation": "Every two steps, the smaller number at least halves.",
+      "es": { "explanation": "Cada dos pasos, el número más chico se reduce al menos a la mitad." }
+    },
+    {
+      "id": "fast-power",
+      "name": "a^b mod m by repeated squaring",
+      "complexity": "O(\\log b)",
+      "wrong": ["O(b)", "O(\\sqrt{b})", "O(1)"],
+      "explanation": "One squaring (and at most one extra multiplication) per bit of b.",
+      "es": { "explanation": "Una elevación al cuadrado (y a lo sumo una multiplicación extra) por cada bit de b." }
+    },
+    {
+      "id": "spf-factorization",
+      "name": "Factoring one number with a precomputed smallest-prime-factor sieve",
+      "complexity": "O(\\log n)",
+      "wrong": ["O(\\sqrt{n})", "O(n)", "O(\\log \\log n)"],
+      "explanation": "Each step divides by a prime ≥ 2, so there are at most log₂ n steps.",
+      "es": { "explanation": "Cada paso divide por un primo ≥ 2, así que hay a lo sumo log₂ n pasos." }
+    },
+    {
+      "id": "harmonic-divisors",
+      "name": "Divisor counts of every number up to n, looping over the multiples of each d",
+      "complexity": "O(n \\log n)",
+      "wrong": ["O(n \\sqrt{n})", "O(n)", "O(n^2)"],
+      "explanation": "Each d visits n/d multiples, and the sum of n/d is n times the harmonic series.",
+      "es": { "explanation": "Cada d visita n/d múltiplos, y la suma de n/d es n por la serie armónica." }
+    },
+    {
+      "id": "extended-euclid",
+      "name": "Extended Euclid (x, y with ax + by = gcd(a, b))",
+      "complexity": "O(\\log \\min(a, b))",
+      "wrong": ["O(\\min(a, b))", "O(a \\cdot b)", "O(\\sqrt{a + b})"],
+      "explanation": "The same steps as Euclid's algorithm, plus O(1) work per step to carry the coefficients back.",
+      "es": { "explanation": "Los mismos pasos que el algoritmo de Euclides, más O(1) de trabajo por paso para arrastrar los coeficientes." }
+    },
+    {
+      "id": "binomial-queries",
+      "name": "q queries of C(n, k) mod p with n ≤ N, after precomputing factorials and inverse factorials",
+      "complexity": "O(N + q)",
+      "wrong": ["O(N \\cdot q)", "O(N^2 + q)", "O(q \\cdot N \\log N)"],
+      "explanation": "The tables take O(N) to fill (one modular inverse, then going backwards); each query is two multiplications.",
+      "es": { "explanation": "Llenar las tablas cuesta O(N) (un inverso modular y después hacia atrás); cada consulta son dos multiplicaciones." }
+    },
+    {
+      "id": "miller-rabin",
+      "name": "Deterministic Miller–Rabin with k fixed bases",
+      "complexity": "O(k \\log n)",
+      "wrong": ["O(\\sqrt{n})", "O(k \\cdot n)", "O(n^{1/4})"],
+      "explanation": "Each base costs one modular exponentiation, which is O(log n) multiplications.",
+      "es": { "explanation": "Cada base cuesta una exponenciación modular, que son O(log n) multiplicaciones." }
+    },
+    {
+      "id": "inclusion-exclusion",
+      "name": "Counting numbers ≤ n divisible by at least one of k primes, by inclusion–exclusion",
+      "complexity": "O(2^k \\cdot k)",
+      "wrong": ["O(n)", "O(k \\cdot n)", "O(k^2)"],
+      "explanation": "2ᵏ subsets of the primes, each multiplying up to k of them; n only appears inside the division.",
+      "es": { "explanation": "2ᵏ subconjuntos de primos, y cada uno multiplica hasta k de ellos; n solo aparece dentro de la división." }
+    }
+  ]
+}

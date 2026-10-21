@@ -5,13 +5,15 @@ The problem bank for CP Trainer, a Duolingo-style app for practicing *recognizin
 ```
 taxonomy.json                  subjects → techniques
 problems/<subject>/<id>.json   one file per problem
+drills/big-o.json              the time table quick questions are generated from
+drills/<subject>.json          algorithms of a subject with their complexity
 schema/                        JSON Schemas (the contract with the app)
 templates/                     copy this to add a problem
 scripts/validate.ts            CI checks (npm run validate)
 SELECTION.md                   overview of the starter set (contains answers!)
 ```
 
-The starter set has 107 problems, all `draft`:
+The starter set has 107 problems:
 
 | Subject | Easy | Medium | Hard | Extra layers |
 |---|---|---|---|---|
@@ -19,7 +21,9 @@ The starter set has 107 problems, all `draft`:
 | Graphs, Geometry, Number Theory, Binary Search / D&C, Segment Tree | 5 each | 5 each | 5 each | none |
 | Distractors (greedy, shown in DP sessions) | 2 | – | – | none |
 
-Every problem still needs its statement copied from the judge into `summary`, and 14 need their limits re-checked on the judge page. See `CONTRIBUTING.md` for how to do both.
+Every problem has its statement in `summary`, copied from the judge, and a Spanish `es` block with its explanations (drafts to review). Some still need their limits re-checked on the judge page (`constraints.verified: false`); see `CONTRIBUTING.md`.
+
+`drills/` has the Big O table plus 58 algorithms across the six subjects (about 10 each).
 
 ```bash
 npm ci

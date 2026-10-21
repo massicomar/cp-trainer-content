@@ -103,5 +103,29 @@
       "explanation": "Either skip value x, or take all copies of x and jump back over x−1."
     }
   ],
-  "deprecated": false
+  "deprecated": false,
+  "es": {
+    "explanation": "El orden en el arreglo no importa: agrupa los valores iguales. Tomar el valor v suma v·cnt[v] y prohíbe v ± 1: es house robber sobre los valores.",
+    "traps": [
+      "La respuesta puede pasarse de 32 bits (1e5 · 1e5)."
+    ],
+    "layers": {
+      "dp-state": {
+        "explanation": "Reindexa por valor: el conflicto es entre v y v ± 1, o sea, vecinos en la recta de valores.",
+        "why": {
+          "b": "Borrar a_k ± 1 elimina elementos en cualquier parte del arreglo; el orden de los índices no significa nada.",
+          "c": "Acá no hay estructura de intervalos.",
+          "d": "Hay hasta 1e5 valores distintos."
+        }
+      },
+      "dp-transition": {
+        "explanation": "O bien omites el valor x, o tomas todas las copias de x y saltas por encima de x−1.",
+        "why": {
+          "b": "Toma x y x−1 a la vez, y esos están en conflicto.",
+          "c": "Tomar x es tomar todas las copias de x: multiplica por su cantidad.",
+          "d": "Greedy falla: con {1, 2, 2, 2, 3}, tomar primero el 3 borra los 2 (total 4), mientras que tomar los 2 da 6."
+        }
+      }
+    }
+  }
 }

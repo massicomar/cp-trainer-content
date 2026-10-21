@@ -42,5 +42,11 @@
   ],
   "pairWith": [],
   "extraLayers": [],
-  "deprecated": false
+  "deprecated": false,
+  "es": {
+    "explanation": "Segment tree de máximo; baja hasta el primer hotel con suficientes habitaciones libres y después actualízalo puntualmente.",
+    "traps": [
+      "Recorrer los hoteles de izquierda a derecha es O(n·m)."
+    ]
+  }
 }

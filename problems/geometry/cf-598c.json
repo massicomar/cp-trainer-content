@@ -43,5 +43,12 @@
   ],
   "pairWith": [],
   "extraLayers": [],
-  "deprecated": false
+  "deprecated": false,
+  "es": {
+    "explanation": "Ordena por ángulo; el ángulo más chico está entre vecinos, incluido el par último–primero.",
+    "traps": [
+      "Precisión: atan2 con double común puede fallar; usa long double o comparaciones exactas.",
+      "Olvidarse del par que da la vuelta."
+    ]
+  }
 }

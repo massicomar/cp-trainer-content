@@ -105,5 +105,29 @@
       "explanation": "dp[i][s] = dp[i−1][s] + dp[i][s − c_i]: either never use coin i, or use it at least once more."
     }
   ],
-  "deprecated": false
+  "deprecated": false,
+  "es": {
+    "explanation": "Formas sin orden: procesa los tipos de moneda de a uno, así cada multiconjunto se arma en un orden fijo y se cuenta una vez.",
+    "traps": [
+      "Con las sumas en el loop de afuera se cuentan permutaciones (Coin Combinations I)."
+    ],
+    "layers": {
+      "dp-state": {
+        "explanation": "Fijar el orden en que se consideran los tipos de moneda hace que cada multiconjunto aparezca exactamente una vez.",
+        "why": {
+          "b": "Cuenta 2+3 y 3+2 por separado: eso es Coin Combinations I.",
+          "c": "Solo funciona si además fuerzas orden no decreciente; es mucho más grande de lo necesario.",
+          "d": "No es una cantidad de combinaciones."
+        }
+      },
+      "dp-transition": {
+        "explanation": "dp[i][s] = dp[i−1][s] + dp[i][s − c_i]: o nunca usas la moneda i, o la usas al menos una vez más.",
+        "why": {
+          "b": "Con las sumas afuera se cuentan los órdenes por separado.",
+          "c": "Recorrer hacia abajo permite cada tipo de moneda a lo sumo una vez.",
+          "d": "Dividir no saca bien los órdenes repetidos."
+        }
+      }
+    }
+  }
 }

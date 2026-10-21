@@ -44,5 +44,11 @@
     "kattis-convexhull"
   ],
   "extraLayers": [],
-  "deprecated": false
+  "deprecated": false,
+  "es": {
+    "explanation": "Monotone chain, pero este juez quiere que se conserven los puntos colineales del borde: saca solo ante un giro a la derecha estricto.",
+    "traps": [
+      "La regla de los colineales es la opuesta a la de Kattis Convex Hull."
+    ]
+  }
 }

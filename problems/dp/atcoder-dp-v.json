@@ -107,5 +107,29 @@
       "explanation": "Each child is either cut off (1) or connected (down[c] ways); the outside part works the same way through the parent."
     }
   ],
-  "deprecated": false
+  "deprecated": false,
+  "es": {
+    "explanation": "Para cada vértice v, cuenta los conjuntos negros conexos que contienen a v. Rerooting: una pasada hacia abajo para los subárboles y otra hacia arriba para “todo lo de afuera”, con productos de prefijos y sufijos porque M puede no ser primo.",
+    "traps": [
+      "No puedes dividir por (down[c] + 1) para excluir a un hijo: M no es primo y el valor puede ser 0 mod M."
+    ],
+    "layers": {
+      "dp-state": {
+        "explanation": "“La respuesta para cada raíz” es la señal de rerooting: una DP para adentro del subárbol y otra para afuera.",
+        "why": {
+          "b": "La DP es la correcta, pero N raíces × O(N) = 1e10.",
+          "c": "2^N.",
+          "d": "Ese es el estado de Independent Set; este problema necesita conexión con v."
+        }
+      },
+      "dp-transition": {
+        "explanation": "Cada hijo queda cortado (1) o conectado (down[c] formas); la parte de afuera funciona igual, a través del padre.",
+        "why": {
+          "b": "Dividir no es seguro: M no es primo.",
+          "c": "Las elecciones en subárboles de hijos distintos se multiplican.",
+          "d": "Da la misma respuesta para todos los vértices: ignora que tiene que contener a v."
+        }
+      }
+    }
+  }
 }

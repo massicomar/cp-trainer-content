@@ -106,5 +106,30 @@
       "explanation": "Try every coin as the last one paid and keep the best."
     }
   ],
-  "deprecated": false
+  "deprecated": false,
+  "es": {
+    "explanation": "Monedas ilimitadas con valores arbitrarios: dp[s] = 1 + mín dp[s − c]. Greedy falla para sistemas de monedas arbitrarios.",
+    "traps": [
+      "Las sumas inalcanzables tienen que quedar en ∞, no en 0.",
+      "Greedy (la moneda más grande primero) falla, por ejemplo con monedas {1, 3, 4} y x = 6."
+    ],
+    "layers": {
+      "dp-state": {
+        "explanation": "Cada suma s es un subproblema; la mejor forma de pagar s termina con alguna moneda c.",
+        "why": {
+          "b": "Las monedas se pueden mezclar; restringirse a un solo tipo de moneda está mal.",
+          "c": "Cuenta formas en vez de minimizar la cantidad de monedas.",
+          "d": "Eso describe la respuesta, no es un subproblema."
+        }
+      },
+      "dp-transition": {
+        "explanation": "Prueba cada moneda como la última que se paga y quédate con la mejor.",
+        "why": {
+          "b": "Eso es greedy; falla para sistemas de monedas como {1, 3, 4}.",
+          "c": "Suma formas; lo que quieres es un mínimo.",
+          "d": "Se olvida de contar la moneda que acabas de usar (+1)."
+        }
+      }
+    }
+  }
 }

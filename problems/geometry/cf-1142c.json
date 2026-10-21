@@ -42,5 +42,11 @@
   ],
   "pairWith": [],
   "extraLayers": [],
-  "deprecated": false
+  "deprecated": false,
+  "es": {
+    "explanation": "Envolvente disfrazada: mapea (x, y) → (x, y − x²) y las parábolas se vuelven rectas; cuenta las aristas de la envolvente superior.",
+    "traps": [
+      "Puntos con el mismo x: quédate solo con el más alto."
+    ]
+  }
 }

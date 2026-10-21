@@ -51,5 +51,11 @@
     "cses-1648"
   ],
   "extraLayers": [],
-  "deprecated": false
+  "deprecated": false,
+  "es": {
+    "explanation": "Sin actualizaciones y con la suma invertible: sumas de prefijos, O(1) por consulta.",
+    "traps": [
+      "Las sumas superan los 32 bits."
+    ]
+  }
 }

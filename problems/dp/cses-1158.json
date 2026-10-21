@@ -106,5 +106,29 @@
       "explanation": "Book i is either skipped or bought once, using the previous row so it can't be reused."
     }
   ],
-  "deprecated": false
+  "deprecated": false,
+  "es": {
+    "explanation": "Cada libro una sola vez y un presupuesto chico: mochila 0/1 sobre la capacidad. n·x = 1e8 entra con un arreglo 1D reciclado que se recorre hacia abajo.",
+    "traps": [
+      "Recorrer la capacidad hacia arriba en el arreglo reciclado la convierte en mochila no acotada (libros reusados)."
+    ],
+    "layers": {
+      "dp-state": {
+        "explanation": "Indexa por la dimensión chica (presupuesto ≤ 1e5) y recuerda qué libros siguen disponibles (el prefijo i).",
+        "why": {
+          "b": "Los libros no se pueden comprar dos veces; eso es mochila no acotada.",
+          "c": "2^1000 subconjuntos.",
+          "d": "La idea sirve solo cuando el total de páginas es chico; acá las páginas suman hasta 1e6 y el precio es la dimensión chica."
+        }
+      },
+      "dp-transition": {
+        "explanation": "El libro i se omite o se compra una vez, usando la fila anterior para que no se pueda reusar.",
+        "why": {
+          "b": "Usar dp[i] a la derecha deja comprar el libro i otra vez (no acotada).",
+          "c": "Permite reusar el mismo libro.",
+          "d": "El greedy de la mochila fraccionaria está mal para objetos 0/1."
+        }
+      }
+    }
+  }
 }

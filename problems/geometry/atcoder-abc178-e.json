@@ -42,5 +42,11 @@
   ],
   "pairWith": [],
   "extraLayers": [],
-  "deprecated": false
+  "deprecated": false,
+  "es": {
+    "explanation": "Distancia Manhattan máxima = el máximo de (máx − mín) sobre x + y y sobre x − y: rota 45°, O(N).",
+    "traps": [
+      "Los O(N²) pares son 4e10."
+    ]
+  }
 }

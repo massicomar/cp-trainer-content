@@ -43,5 +43,12 @@
   ],
   "pairWith": [],
   "extraLayers": [],
-  "deprecated": false
+  "deprecated": false,
+  "es": {
+    "explanation": "Cada nodo guarda (suma, mejor prefijo, mejor sufijo, mejor subarreglo); la raíz tiene la respuesta después de cada actualización.",
+    "traps": [
+      "Volver a correr Kadane después de cada actualización es O(n·m).",
+      "Sumas de 64 bits."
+    ]
+  }
 }

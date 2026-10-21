@@ -44,5 +44,11 @@
     "cses-1647"
   ],
   "extraLayers": [],
-  "deprecated": false
+  "deprecated": false,
+  "es": {
+    "explanation": "Actualizaciones puntuales + mínimo en rango: un segment tree. Un BIT solo responde consultas de prefijo para operaciones invertibles.",
+    "traps": [
+      "Una sparse table no se puede actualizar."
+    ]
+  }
 }

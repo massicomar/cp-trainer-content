@@ -42,5 +42,11 @@
   ],
   "pairWith": [],
   "extraLayers": [],
-  "deprecated": false
+  "deprecated": false,
+  "es": {
+    "explanation": "Segment tree de mínimo con suma lazy; un rango circular [l, r] con l > r se parte en dos rangos.",
+    "traps": [
+      "Lectura de la entrada: la cantidad de tokens dice si es una suma o una consulta."
+    ]
+  }
 }

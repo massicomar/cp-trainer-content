@@ -108,5 +108,29 @@
       "explanation": "Answer = dp[m][0]: everything covered and nothing sticking out of the grid."
     }
   ],
-  "deprecated": false
+  "deprecated": false,
+  "es": {
+    "explanation": "Un lado es ≤ 10: barre el lado largo y guarda una bitmask de qué celdas de la columna actual ya están cubiertas por fichas que sobresalen de la columna anterior.",
+    "traps": [
+      "2^10 máscaras × 2^10 transiciones por columna × 1000 da ~1e9 si se hace de forma ingenua; genera las transiciones con un DFS sobre la columna (o ve celda por celda)."
+    ],
+    "layers": {
+      "dp-state": {
+        "explanation": "Lado corto ≤ 10 → la “frontera” entre columnas entra en una bitmask: eso es DP de perfil.",
+        "why": {
+          "b": "Los subrectángulos no se combinan: las fichas cruzan cualquier corte que elijas.",
+          "c": "2^10000.",
+          "d": "Las fichas horizontales sobresalen del borde de la columna; tienes que recordar qué celdas cubren."
+        }
+      },
+      "dp-transition": {
+        "explanation": "Respuesta = dp[m][0]: todo cubierto y nada sobresaliendo de la grilla.",
+        "why": {
+          "b": "Las fichas que se pueden poner dependen de qué celdas están libres.",
+          "c": "La mayoría de los pares no son compatibles; tienes que chequear que la columna se pueda llenar.",
+          "d": "En principio vale, pero 1024³ por multiplicación es mucho más lento que el barrido directo para m ≤ 1000."
+        }
+      }
+    }
+  }
 }

@@ -46,5 +46,11 @@
   ],
   "pairWith": [],
   "extraLayers": [],
-  "deprecated": false
+  "deprecated": false,
+  "es": {
+    "explanation": "Pares coprimos = Σ_d μ(d) · C(cnt_d, 2), donde cnt_d cuenta los valores divisibles por d (loop armónico).",
+    "traps": [
+      "n² gcds son 1e10."
+    ]
+  }
 }

@@ -106,5 +106,26 @@
       "explanation": "Choose the group that will be formed last (a submask), add its precomputed score. Fixing its lowest bit avoids counting each partition many times."
     }
   ],
-  "deprecated": false
+  "deprecated": false,
+  "es": {
+    "explanation": "Partición en grupos: precalcula el puntaje de cada subconjunto y después haz dp[mask] sobre submáscaras. Recorrer todas las submáscaras de todas las máscaras cuesta 3^16 ≈ 4.3e7.",
+    "layers": {
+      "dp-state": {
+        "explanation": "N ≤ 16 y “partir en grupos” → DP sobre submáscaras del conjunto de conejos ya agrupados.",
+        "why": {
+          "b": "El puntaje de un grupo depende de todos sus miembros, no solo del último.",
+          "c": "La cantidad de grupos es libre; la dimensión extra no ayuda.",
+          "d": "Los grupos no son contiguos en el orden de los índices."
+        }
+      },
+      "dp-transition": {
+        "explanation": "Elige el grupo que se forma último (una submáscara) y suma su puntaje precalculado. Fijar su bit más bajo evita contar cada partición muchas veces.",
+        "why": {
+          "b": "Solo forma grupos de tamaño 1.",
+          "c": "Obliga a formar un único grupo grande.",
+          "d": "Es una suma, no un máximo, y cuenta dos veces."
+        }
+      }
+    }
+  }
 }

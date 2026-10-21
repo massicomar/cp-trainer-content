@@ -102,5 +102,26 @@
       "explanation": "Come from the previous hour after waiting a_i or a_i − 1 hours, and add 1 if the new start time is good."
     }
   ],
-  "deprecated": false
+  "deprecated": false,
+  "es": {
+    "explanation": "El estado es (sueños hechos, hora actual); cada sueño empieza a_i o a_i − 1 horas después. n · h = 4e6 estados.",
+    "layers": {
+      "dp-state": {
+        "explanation": "El futuro depende de cuántos sueños se hicieron y de qué hora es ahora.",
+        "why": {
+          "b": "También vale: la hora actual es (suma de prefijo − j) mod h, así que j determina t.",
+          "c": "Pierde la hora actual, que decide si el próximo sueño es bueno.",
+          "d": "Pierde tanto el paso como la cuenta."
+        }
+      },
+      "dp-transition": {
+        "explanation": "Vienes de la hora anterior después de esperar a_i o a_i − 1 horas, y sumas 1 si la nueva hora de inicio es buena.",
+        "why": {
+          "b": "La hora tiene que avanzar a_i o a_i − 1.",
+          "c": "Se olvida del mod h y de contar si este sueño es bueno.",
+          "d": "Es greedy; empezar temprano ahora puede arruinar los sueños siguientes."
+        }
+      }
+    }
+  }
 }

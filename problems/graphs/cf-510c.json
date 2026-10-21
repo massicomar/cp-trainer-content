@@ -43,5 +43,12 @@
   ],
   "pairWith": [],
   "extraLayers": [],
-  "deprecated": false
+  "deprecated": false,
+  "es": {
+    "explanation": "Un grafo disfrazado: las primeras letras distintas de nombres vecinos dan aristas “a antes que b”; ordena topológicamente las 26 letras.",
+    "traps": [
+      "Un nombre seguido por un prefijo propio es imposible.",
+      "Un ciclo entre letras significa que es imposible."
+    ]
+  }
 }

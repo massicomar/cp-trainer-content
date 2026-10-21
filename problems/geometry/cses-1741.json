@@ -51,5 +51,12 @@
   ],
   "pairWith": [],
   "extraLayers": [],
-  "deprecated": false
+  "deprecated": false,
+  "es": {
+    "explanation": "Barre a lo largo de x; un segment tree sobre y guarda las cuentas de cobertura y el largo cubierto.",
+    "traps": [
+      "Una grilla de 2e6 × 2e6 es imposible.",
+      "El área necesita 64 bits."
+    ]
+  }
 }

@@ -46,5 +46,8 @@
     "cses-1649"
   ],
   "extraLayers": [],
-  "deprecated": false
+  "deprecated": false,
+  "es": {
+    "explanation": "Sin actualizaciones y con el mínimo idempotente: sparse table, O(1) por consulta. Los “mínimos” de prefijos no se pueden restar."
+  }
 }

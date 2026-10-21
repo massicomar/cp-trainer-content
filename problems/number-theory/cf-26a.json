@@ -40,5 +40,8 @@
   "traps": [],
   "pairWith": [],
   "extraLayers": [],
-  "deprecated": false
+  "deprecated": false,
+  "es": {
+    "explanation": "Una criba que cuenta los divisores primos distintos de cada número hasta n."
+  }
 }

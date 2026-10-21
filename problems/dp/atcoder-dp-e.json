@@ -106,5 +106,29 @@
       "explanation": "Take or skip each item, minimizing weight per value, then read the largest value that fits."
     }
   ],
-  "deprecated": false
+  "deprecated": false,
+  "es": {
+    "explanation": "La misma historia que Knapsack 1, pero W es enorme y el valor total es ≤ 1e5. Cambia la dimensión: dp[v] = peso mínimo para llegar a un valor total v.",
+    "traps": [
+      "Una dp sobre la capacidad necesita 1e9 celdas."
+    ],
+    "layers": {
+      "dp-state": {
+        "explanation": "Mira las cotas: Σ valores ≤ 100 · 1e3 = 1e5 es chico, los pesos no. Pon la cantidad chica en el índice y la grande en el valor guardado.",
+        "why": {
+          "b": "W ≤ 1e9, así que esta tabla es demasiado grande. Ese es el estado de Knapsack 1.",
+          "c": "2^100 subconjuntos.",
+          "d": "Pierde la capacidad que queda."
+        }
+      },
+      "dp-transition": {
+        "explanation": "Toma u omite cada objeto minimizando el peso para cada valor, y después lee el valor más grande que entra.",
+        "why": {
+          "b": "Esa es la formulación por capacidad: acá no es viable.",
+          "c": "Iterar hacia arriba deja usar el objeto i varias veces.",
+          "d": "Hay que quedarse con el mínimo entre omitirlo y tomarlo."
+        }
+      }
+    }
+  }
 }

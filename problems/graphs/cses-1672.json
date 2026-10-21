@@ -45,5 +45,12 @@
     "cses-1671"
   ],
   "extraLayers": [],
-  "deprecated": false
+  "deprecated": false,
+  "es": {
+    "explanation": "Muchas consultas entre pares arbitrarios con n ≤ 500: corre Floyd-Warshall una vez (1.25e8) y responde cada consulta en O(1).",
+    "traps": [
+      "Quédate con la más barata de las aristas paralelas.",
+      "El orden de los loops tiene que ser k, i, j."
+    ]
+  }
 }

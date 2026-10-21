@@ -43,5 +43,11 @@
   ],
   "pairWith": [],
   "extraLayers": [],
-  "deprecated": false
+  "deprecated": false,
+  "es": {
+    "explanation": "Cada deseo es “a o b”: implicaciones ¬a→b y ¬b→a, y después SCCs; si x y ¬x están en la misma SCC, es imposible.",
+    "traps": [
+      "Asigna los valores según el orden topológico de las SCCs, no arbitrariamente."
+    ]
+  }
 }

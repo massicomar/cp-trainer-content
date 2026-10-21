@@ -105,5 +105,30 @@
       "explanation": "Answer = f(b) − f(a − 1), where f is the digit DP over the decimal string of the bound."
     }
   ],
-  "deprecated": false
+  "deprecated": false,
+  "es": {
+    "explanation": "Cuenta los números sin dos dígitos vecinos iguales en [0, b] menos [0, a−1]. Digit DP sobre (posición, dígito anterior, tight, empezado).",
+    "traps": [
+      "Los ceros a la izquierda no son “dígitos vecinos iguales” (00 al principio).",
+      "f(a − 1) con a = 0."
+    ],
+    "layers": {
+      "dp-state": {
+        "explanation": "Arma el número dígito por dígito desde arriba; la regla necesita el dígito anterior, la cota necesita “tight” y los ceros a la izquierda necesitan “empezado”.",
+        "why": {
+          "b": "b ≤ 1e18.",
+          "c": "Sin “tight” cuentas números mayores que b; sin “empezado” los ceros a la izquierda rompen la regla.",
+          "d": "La regla es sobre dígitos vecinos, no sobre su suma."
+        }
+      },
+      "dp-transition": {
+        "explanation": "Respuesta = f(b) − f(a − 1), donde f es la digit DP sobre el string decimal de la cota.",
+        "why": {
+          "b": "Ignora la cota superior b.",
+          "c": "Correcto para los largos completos, pero la cota b recorta el último largo: eso es lo que maneja la digit DP.",
+          "d": "Hasta 1e18 iteraciones."
+        }
+      }
+    }
+  }
 }

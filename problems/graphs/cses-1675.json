@@ -42,5 +42,11 @@
   ],
   "pairWith": [],
   "extraLayers": [],
-  "deprecated": false
+  "deprecated": false,
+  "es": {
+    "explanation": "Conectar todas las ciudades con costo total mínimo: Kruskal con DSU; si se aceptan menos de n − 1 aristas, es imposible.",
+    "traps": [
+      "Árbol de caminos mínimos ≠ árbol generador mínimo."
+    ]
+  }
 }

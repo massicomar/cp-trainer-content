@@ -46,5 +46,11 @@
   ],
   "pairWith": [],
   "extraLayers": [],
-  "deprecated": false
+  "deprecated": false,
+  "es": {
+    "explanation": "Tener entre 3 y 5 divisores significa p², p³, p⁴ o p·q. Detecta raíces exactas; para p·q, los gcd de a pares con los otros números revelan los primos compartidos. Pollard funciona, pero es demasiado.",
+    "traps": [
+      "Las raíces en punto flotante cerca de 2e18 se equivocan por uno; corrígelas con chequeos enteros."
+    ]
+  }
 }

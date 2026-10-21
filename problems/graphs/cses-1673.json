@@ -43,5 +43,11 @@
   ],
   "pairWith": [],
   "extraLayers": [],
-  "deprecated": false
+  "deprecated": false,
+  "es": {
+    "explanation": "Camino más largo con posibles ciclos positivos = camino más corto con los pesos negados: Bellman-Ford. Un ciclo solo importa si es alcanzable desde 1 y puede llegar a n.",
+    "traps": [
+      "Responder −1 ante cualquier ciclo negativo, aunque no pueda llegar a n."
+    ]
+  }
 }

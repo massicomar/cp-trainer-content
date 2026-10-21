@@ -1,0 +1,87 @@
+{
+  "$schema": "../schema/subject-drills.schema.json",
+  "schemaVersion": 1,
+  "subject": "segtree",
+  "algorithms": [
+    {
+      "id": "build",
+      "name": "Building a segment tree over n values",
+      "complexity": "O(n)",
+      "wrong": ["O(n \\log n)", "O(\\log n)", "O(n^2)"],
+      "explanation": "About 2n nodes, each computed once from its two children.",
+      "es": { "explanation": "Unos 2n nodos, y cada uno se calcula una vez a partir de sus dos hijos." }
+    },
+    {
+      "id": "range-query",
+      "name": "One range query on a segment tree",
+      "complexity": "O(\\log n)",
+      "wrong": ["O(n)", "O(\\log^2 n)", "O(1)"],
+      "explanation": "The range splits into O(log n) nodes, at most two per level.",
+      "es": { "explanation": "El rango se parte en O(log n) nodos, a lo sumo dos por nivel." }
+    },
+    {
+      "id": "lazy-range-update",
+      "name": "One range update with lazy propagation",
+      "complexity": "O(\\log n)",
+      "wrong": ["O(n)", "O((r - l + 1) \\log n)", "O(\\sqrt{n})"],
+      "explanation": "It touches the same O(log n) nodes as a query; the rest of the update waits in the lazy tags.",
+      "es": { "explanation": "Toca los mismos O(log n) nodos que una consulta; el resto de la actualización espera en los tags lazy." }
+    },
+    {
+      "id": "fenwick-prefix",
+      "name": "Prefix sum on a Fenwick tree (BIT)",
+      "complexity": "O(\\log n)",
+      "wrong": ["O(1)", "O(n)", "O(\\log^2 n)"],
+      "explanation": "Each step removes the lowest set bit of the index.",
+      "es": { "explanation": "Cada paso saca el bit encendido más bajo del índice." }
+    },
+    {
+      "id": "sparse-table-build",
+      "name": "Building a sparse table for range minimum",
+      "complexity": "O(n \\log n)",
+      "wrong": ["O(n)", "O(n^2)", "O(n \\log^2 n)"],
+      "explanation": "log n levels of n entries, each computed from two entries of the level below.",
+      "es": { "explanation": "log n niveles de n entradas, y cada una se calcula a partir de dos entradas del nivel de abajo." }
+    },
+    {
+      "id": "sparse-table-query",
+      "name": "One range-minimum query on a sparse table",
+      "complexity": "O(1)",
+      "wrong": ["O(\\log n)", "O(\\log \\log n)", "O(\\sqrt{n})"],
+      "explanation": "Two overlapping power-of-two blocks cover the range, and the minimum doesn't mind the overlap.",
+      "es": { "explanation": "Dos bloques de potencia de dos que se superponen cubren el rango, y al mínimo no le molesta la superposición." }
+    },
+    {
+      "id": "mo",
+      "name": "Mo's algorithm: q offline range queries on n elements, O(1) per add or remove",
+      "complexity": "O((n + q) \\sqrt{n})",
+      "wrong": ["O(n \\cdot q)", "O((n + q) \\log n)", "O(q \\sqrt{n})"],
+      "explanation": "With blocks of √n, the left end moves O(√n) per query and the right end O(n) per block.",
+      "es": { "explanation": "Con bloques de √n, el extremo izquierdo se mueve O(√n) por consulta y el derecho O(n) por bloque." }
+    },
+    {
+      "id": "persistent-update",
+      "name": "One point update in a persistent segment tree",
+      "complexity": "O(\\log n)",
+      "wrong": ["O(n)", "O(1)", "O(\\log^2 n)"],
+      "explanation": "Only the nodes on the root-to-leaf path are copied, and there are O(log n) of them.",
+      "es": { "explanation": "Solo se copian los nodos del camino de la raíz a la hoja, y son O(log n)." }
+    },
+    {
+      "id": "descend-first",
+      "name": "First position with a value ≥ x, by descending a max segment tree",
+      "complexity": "O(\\log n)",
+      "wrong": ["O(\\log^2 n)", "O(n)", "O(\\sqrt{n})"],
+      "explanation": "One walk down from the root, going left whenever the left child's maximum is ≥ x. Binary search with a query at each step would be O(log² n).",
+      "es": { "explanation": "Una sola bajada desde la raíz, yendo a la izquierda cada vez que el máximo del hijo izquierdo es ≥ x. Búsqueda binaria con una consulta por paso sería O(log² n)." }
+    },
+    {
+      "id": "merge-sort-tree",
+      "name": "Counting values ≤ x in a range with a merge sort tree",
+      "complexity": "O(\\log^2 n)",
+      "wrong": ["O(\\log n)", "O(n)", "O(\\sqrt{n} \\log n)"],
+      "explanation": "O(log n) nodes cover the range, and each needs a binary search in its sorted list.",
+      "es": { "explanation": "O(log n) nodos cubren el rango, y cada uno necesita una búsqueda binaria en su lista ordenada." }
+    }
+  ]
+}

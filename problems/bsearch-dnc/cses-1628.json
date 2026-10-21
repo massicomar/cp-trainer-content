@@ -42,5 +42,11 @@
   ],
   "pairWith": [],
   "extraLayers": [],
-  "deprecated": false
+  "deprecated": false,
+  "es": {
+    "explanation": "2^40 subconjuntos son demasiados, y los valores son muy grandes para una mochila: enumera las 2^20 sumas de cada mitad y cuenta los complementos.",
+    "traps": [
+      "Los hash maps pueden ser lentos; mejor ordenar + dos punteros o búsqueda binaria."
+    ]
+  }
 }

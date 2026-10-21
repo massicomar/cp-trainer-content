@@ -42,5 +42,11 @@
   ],
   "pairWith": [],
   "extraLayers": [],
-  "deprecated": false
+  "deprecated": false,
+  "es": {
+    "explanation": "Lo deciden cuatro signos de orientación; si todo es colineal, comprueba que las proyecciones se superpongan.",
+    "traps": [
+      "Segmentos colineales pero disjuntos pasan el test de signos."
+    ]
+  }
 }

@@ -42,5 +42,11 @@
   ],
   "pairWith": [],
   "extraLayers": [],
-  "deprecated": false
+  "deprecated": false,
+  "es": {
+    "explanation": "Búsqueda binaria sobre x: mapea los valores a +1 (≥ x) / −1 (< x); existe un subarreglo de largo ≥ k con suma positiva si y solo si la mediana puede ser ≥ x.",
+    "traps": [
+      "Medianas de largo par: fíjate a qué elemento el problema le dice mediana."
+    ]
+  }
 }

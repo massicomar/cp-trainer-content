@@ -48,5 +48,11 @@
     "cses-1646"
   ],
   "extraLayers": [],
-  "deprecated": false
+  "deprecated": false,
+  "es": {
+    "explanation": "Actualizaciones puntuales + sumas en rango: un Fenwick tree (o un segment tree).",
+    "traps": [
+      "Reconstruir las sumas de prefijos después de cada actualización es O(n·q)."
+    ]
+  }
 }

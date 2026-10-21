@@ -46,5 +46,11 @@
   ],
   "pairWith": [],
   "extraLayers": [],
-  "deprecated": false
+  "deprecated": false,
+  "es": {
+    "explanation": "El total de operaciones en función del umbral T es convexo: búsqueda ternaria entera (u ordenar + dos punteros).",
+    "traps": [
+      "Ternaria entera: corta cuando r − l < 3 y comprueba el resto a mano."
+    ]
+  }
 }

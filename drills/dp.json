@@ -1,0 +1,87 @@
+{
+  "$schema": "../schema/subject-drills.schema.json",
+  "schemaVersion": 1,
+  "subject": "dp",
+  "algorithms": [
+    {
+      "id": "knapsack-01",
+      "name": "0/1 knapsack over the capacity (n items, capacity W)",
+      "complexity": "O(n \\cdot W)",
+      "wrong": ["O(2^n)", "O(n \\log W)", "O(n + W)"],
+      "explanation": "One cell per (item, capacity) pair, each filled in O(1) from the previous row.",
+      "es": { "explanation": "Una celda por par (objeto, capacidad), y cada una se llena en O(1) desde la fila anterior." }
+    },
+    {
+      "id": "lis-quadratic",
+      "name": "Longest increasing subsequence with dp[i] = 1 + max dp[j] over j < i",
+      "complexity": "O(n^2)",
+      "wrong": ["O(n \\log n)", "O(n)", "O(2^n)"],
+      "explanation": "Each of the n states scans every earlier position.",
+      "es": { "explanation": "Cada uno de los n estados recorre todas las posiciones anteriores." }
+    },
+    {
+      "id": "lis-binary-search",
+      "name": "Longest increasing subsequence with binary search over the smallest tails",
+      "complexity": "O(n \\log n)",
+      "wrong": ["O(n^2)", "O(n)", "O(n \\log^2 n)"],
+      "explanation": "Each element does one binary search over the sorted array of tails.",
+      "es": { "explanation": "Cada elemento hace una búsqueda binaria sobre el arreglo ordenado de colas." }
+    },
+    {
+      "id": "edit-distance",
+      "name": "Edit distance between strings of lengths n and m",
+      "complexity": "O(n \\cdot m)",
+      "wrong": ["O(n + m)", "O(2^{n + m})", "O(n \\cdot m \\cdot \\min(n, m))"],
+      "explanation": "One cell per pair of prefixes, each computed from three neighbours in O(1).",
+      "es": { "explanation": "Una celda por par de prefijos, y cada una se calcula en O(1) a partir de tres vecinas." }
+    },
+    {
+      "id": "interval-dp",
+      "name": "Interval DP that tries every split point (e.g. matrix chain multiplication)",
+      "complexity": "O(n^3)",
+      "wrong": ["O(n^2)", "O(n^2 \\log n)", "O(2^n)"],
+      "explanation": "About n² intervals, each trying up to n split points.",
+      "es": { "explanation": "Unos n² intervalos, y cada uno prueba hasta n puntos de corte." }
+    },
+    {
+      "id": "bitmask-tsp",
+      "name": "Travelling salesman with bitmask DP (Held–Karp)",
+      "complexity": "O(2^n \\cdot n^2)",
+      "wrong": ["O(n!)", "O(2^n \\cdot n)", "O(n^3)"],
+      "explanation": "2ⁿ·n states (visited set, current city), each trying the n possible next cities.",
+      "es": { "explanation": "2ⁿ·n estados (conjunto visitado, ciudad actual), y cada uno prueba las n ciudades siguientes posibles." }
+    },
+    {
+      "id": "sos-dp",
+      "name": "Sum over subsets DP over n bits (for every mask, the sum over its submasks)",
+      "complexity": "O(n \\cdot 2^n)",
+      "wrong": ["O(3^n)", "O(4^n)", "O(2^n)"],
+      "explanation": "One pass over the 2ⁿ masks per bit. Enumerating every submask of every mask instead costs 3ⁿ.",
+      "es": { "explanation": "Una pasada sobre las 2ⁿ máscaras por cada bit. Recorrer todas las submáscaras de cada máscara, en cambio, cuesta 3ⁿ." }
+    },
+    {
+      "id": "coin-combinations",
+      "name": "Counting coin combinations (n coin types, target x)",
+      "complexity": "O(n \\cdot x)",
+      "wrong": ["O(x \\log n)", "O(n + x)", "O(n^x)"],
+      "explanation": "Each coin type makes one pass over all the sums up to x.",
+      "es": { "explanation": "Cada tipo de moneda hace una pasada sobre todas las sumas hasta x." }
+    },
+    {
+      "id": "digit-dp",
+      "name": "Digit DP over the d digits of N, remembering the previous digit",
+      "complexity": "O(d \\cdot 10^2)",
+      "wrong": ["O(N)", "O(10^d)", "O(\\sqrt{N})"],
+      "explanation": "d positions × 10 previous digits × 10 choices for the next one (plus two flags). It's linear in the number of digits, not in N.",
+      "es": { "explanation": "d posiciones × 10 dígitos anteriores × 10 opciones para el siguiente (más dos flags). Es lineal en la cantidad de dígitos, no en N." }
+    },
+    {
+      "id": "matrix-power",
+      "name": "n-th term of a linear recurrence of order k by matrix exponentiation",
+      "complexity": "O(k^3 \\log n)",
+      "wrong": ["O(k \\cdot n)", "O(k^3 \\cdot n)", "O(k^2)"],
+      "explanation": "log n squarings of a k×k matrix, each costing k³.",
+      "es": { "explanation": "log n elevaciones al cuadrado de una matriz de k×k, y cada una cuesta k³." }
+    }
+  ]
+}

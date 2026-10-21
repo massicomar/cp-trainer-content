@@ -105,5 +105,29 @@
       "explanation": "Sum-outer, coin-inner: any coin may be the last one, so different orders are counted separately."
     }
   ],
-  "deprecated": false
+  "deprecated": false,
+  "es": {
+    "explanation": "Formas ordenadas: para cada suma, prueba cada moneda como la última. Loop de sumas afuera y de monedas adentro.",
+    "traps": [
+      "Invertir el orden de los loops cuenta, sin avisar, combinaciones (eso es Coin Combinations II)."
+    ],
+    "layers": {
+      "dp-state": {
+        "explanation": "Cuando el orden importa, solo necesitas la suma: la última moneda puede ser cualquiera.",
+        "why": {
+          "b": "Ese estado cuenta combinaciones sin orden; acá 2+3 y 3+2 son distintas.",
+          "c": "Se pide una cantidad, no un mínimo.",
+          "d": "La alcanzabilidad pierde la cuenta."
+        }
+      },
+      "dp-transition": {
+        "explanation": "Sumas afuera, monedas adentro: cualquier moneda puede ser la última, así que los distintos órdenes se cuentan por separado.",
+        "why": {
+          "b": "Con las monedas afuera se cuenta cada multiconjunto una vez: eso es Coin Combinations II.",
+          "c": "Ignora los valores de las monedas.",
+          "d": "Recorrer hacia abajo deja usar cada moneda a lo sumo una vez (conteo de mochila 0/1)."
+        }
+      }
+    }
+  }
 }

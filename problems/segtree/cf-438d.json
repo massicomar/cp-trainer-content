@@ -42,5 +42,11 @@
   ],
   "pairWith": [],
   "extraLayers": [],
-  "deprecated": false
+  "deprecated": false,
+  "es": {
+    "explanation": "a_i mod x en un rango: omite un nodo si su máximo es < x; si no, haz recursión. Cada mod que hace efecto al menos parte un valor a la mitad, así que se amortiza.",
+    "traps": [
+      "Intentar que el “mod” sea un tag lazy."
+    ]
+  }
 }

@@ -46,5 +46,12 @@
     "cses-1672"
   ],
   "extraLayers": [],
-  "deprecated": false
+  "deprecated": false,
+  "es": {
+    "explanation": "Un solo origen, pesos no negativos, n grande: Dijkstra con heap y distancias de 64 bits.",
+    "traps": [
+      "Las distancias desbordan 32 bits.",
+      "Omite las entradas viejas del heap o puede empeorar mucho."
+    ]
+  }
 }
