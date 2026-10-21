@@ -37,5 +37,5 @@ jobs:
           DEPLOY_USER: ${{ secrets.DEPLOY_USER }}
           DEPLOY_PATH: ${{ vars.DEPLOY_PATH }} # the app checkout on the VPS
         run: |
-          : "${DEPLOY_PATH:?Set the DEPLOY_PATH repository variable (see the app repo's docs/deploy.md)}"
+          : "${DEPLOY_PATH:?Set the DEPLOY_PATH repository variable (see docs/deploy.md in the app repo)}"
           ssh -i ~/.ssh/deploy_key "$DEPLOY_USER@$DEPLOY_HOST" "$DEPLOY_PATH/scripts/sync-content.sh"
