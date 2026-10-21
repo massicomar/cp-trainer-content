@@ -13,7 +13,7 @@
     "scale": "estimate",
     "value": "M"
   },
-  "summary": "Given a set of $n$ points in the two-dimensional plane, your task is to determine the convex hull of the points.\n\nInput\n\nThe first input line has an integer $n$: the number of points.\n\nAfter this, there are $n$ lines that describe the points. Each line has two integers $x$ and $y$: the coordinates of a point.\n\nYou may assume that each point is distinct, and the area of the hull is positive.\n\nOutput\n\nFirst print an integer $k$: the number of points in the convex hull.\n\nAfter this, print $k$ lines that describe the points. You can print the points in any order. Print all points that lie on the convex hull.",
+  "summary": "Given a set of $n$ points in the two-dimensional plane, your task is to determine the smallest convex poligon enclosing all of the points.\n\nInput\n\nThe first input line has an integer $n$: the number of points.\n\nAfter this, there are $n$ lines that describe the points. Each line has two integers $x$ and $y$: the coordinates of a point.\n\nYou may assume that each point is distinct, and the area of the hull is positive.\n\nOutput\n\nFirst print an integer $k$: the number of points in the convex hull.\n\nAfter this, print $k$ lines that describe the points. You can print the points in any order. Print all points that lie on the polygon.",
   "constraints": {
     "text": "n ≤ 2e5, |coordinates| ≤ 1e9",
     "verified": true
