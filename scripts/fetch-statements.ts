@@ -73,10 +73,12 @@ function inline(node: Node, pre = false): string {
   const name = tag(node)
   if (name === 'br') return '\n'
   if (name === 'img') return '[image]'
-  if (name === 'var') return `$${node.text}$` // AtCoder
-  if (hasClass(node, 'math-inline')) return `$${node.text}$` // CSES
-  if (hasClass(node, 'math-display')) return `$$${node.text}$$` // CSES
-  if (hasClass(node, 'tex2jax_process')) return node.text // Kattis: already $…$
+  // Math is always one line: HTML sources sometimes wrap inside a formula.
+  const math = () => node.text.replace(/\s+/g, ' ').trim()
+  if (name === 'var') return `$${math()}$` // AtCoder
+  if (hasClass(node, 'math-inline')) return `$${math()}$` // CSES
+  if (hasClass(node, 'math-display')) return `$$${math()}$$` // CSES
+  if (hasClass(node, 'tex2jax_process')) return math() // Kattis: already $…$
   return node.childNodes.map((child) => inline(child, pre)).join('')
 }
 

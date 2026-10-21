@@ -2,7 +2,7 @@
   "$schema": "../../schema/problem.schema.json",
   "schemaVersion": 1,
   "id": "kattis-polygonarea",
-  "status": "draft",
+  "status": "ready",
   "author": "massicomar",
   "collection": "official",
   "title": "Polygon Area",
@@ -13,7 +13,7 @@
     "scale": "kattis",
     "value": "1.8"
   },
-  "summary": "Compute the area of a simple polygon, and the direction (clockwise or counterclockwise) in which its vertices are given.\n\nInput\n\nInput contains up to $25$ test cases. Each test case begins with an integer $n$ ($3 \\leq n \\leq 1\\, 000$). Then follow the $n$ vertices of a simple polygon, one per line, each of the form $x\\ y$. The points may be given in either clockwise or counterclockwise order. Coordinates are integers with absolute value bounded by $10\\, 000$. The input is terminated by a case beginning with $0$.\n\nOutput\n\nFor each test case, output a line $D\\ A$, where $D$ is one of “CW” or “CCW”, indicating whether the polygon was given in clockwise or counterclockwise order, respectively. $A$ is the area of the polygon, given with exactly one digit after the decimal point.",
+  "summary": "Compute the area of a simple polygon, and the direction in which its vertices are given.\n\nInput\n\nInput contains up to $25$ test cases. Each test case begins with an integer $n$ ($3 \\leq n \\leq 1\\, 000$). Then follow the $n$ vertices of a simple polygon, one per line, each of the form $x\\ y$. The points may be given in either clockwise or counterclockwise order. Coordinates are integers with absolute value bounded by $10\\, 000$. The input is terminated by a case beginning with $0$.\n\nOutput\n\nFor each test case, output a line $D\\ A$, where $D$ is one of “CW” or “CCW”, indicating whether the polygon was given in clockwise or counterclockwise order, respectively. $A$ is the area of the polygon, given with exactly one digit after the decimal point.",
   "constraints": {
     "text": "n ≤ 1000 vertices",
     "verified": true

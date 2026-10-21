@@ -2,7 +2,7 @@
   "$schema": "../../schema/problem.schema.json",
   "schemaVersion": 1,
   "id": "cf-510c",
-  "status": "draft",
+  "status": "ready",
   "author": "massicomar",
   "collection": "official",
   "title": "Fox And Names",

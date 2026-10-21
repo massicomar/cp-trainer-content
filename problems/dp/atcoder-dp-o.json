@@ -2,7 +2,7 @@
   "$schema": "../../schema/problem.schema.json",
   "schemaVersion": 1,
   "id": "atcoder-dp-o",
-  "status": "draft",
+  "status": "ready",
   "author": "massicomar",
   "collection": "official",
   "title": "Matching",

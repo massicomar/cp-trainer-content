@@ -2,7 +2,7 @@
   "$schema": "../../schema/problem.schema.json",
   "schemaVersion": 1,
   "id": "cses-1634",
-  "status": "draft",
+  "status": "ready",
   "author": "massicomar",
   "collection": "official",
   "title": "Minimizing Coins",
