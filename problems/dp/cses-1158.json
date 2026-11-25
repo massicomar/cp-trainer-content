@@ -108,12 +108,20 @@
   ],
   "deprecated": false,
   "es": {
+    "summary": "Estás en una librería que vende $n$ libros distintos. Sabes el precio y la cantidad de páginas de cada libro.\n\nDecidiste que el precio total de tus compras va a ser a lo sumo $x$. ¿Cuál es la máxima cantidad de páginas que puedes comprar? Puedes comprar cada libro a lo sumo una vez.\n\nEntrada\n\nLa primera línea de la entrada contiene dos enteros $n$ y $x$: la cantidad de libros y el precio total máximo.\n\nLa siguiente línea contiene $n$ enteros $h_1,h_2,\\ldots,h_n$: el precio de cada libro.\n\nLa última línea contiene $n$ enteros $s_1,s_2,\\ldots,s_n$: la cantidad de páginas de cada libro.\n\nSalida\n\nImprime un entero: la máxima cantidad de páginas.",
     "explanation": "Cada libro una sola vez y un presupuesto chico: mochila 0/1 sobre la capacidad. n·x = 1e8 entra con un arreglo 1D reciclado que se recorre hacia abajo.",
     "traps": [
       "Recorrer la capacidad hacia arriba en el arreglo reciclado la convierte en mochila no acotada (libros reusados)."
     ],
     "layers": {
       "dp-state": {
+        "prompt": "¿Qué debería representar el estado de la DP?",
+        "options": {
+          "a": "dp[i][c] = máximo de páginas con un subconjunto de los primeros i libros de precio total ≤ c",
+          "b": "dp[c] = máximo de páginas con precio total ≤ c, repitiendo libros",
+          "c": "dp[mask] = páginas del subconjunto elegido",
+          "d": "dp[p] = precio mínimo para conseguir exactamente p páginas"
+        },
         "explanation": "Indexa por la dimensión chica (presupuesto ≤ 1e5) y recuerda qué libros siguen disponibles (el prefijo i).",
         "why": {
           "b": "Los libros no se pueden comprar dos veces; eso es mochila no acotada.",
@@ -122,6 +130,13 @@
         }
       },
       "dp-transition": {
+        "prompt": "Con ese estado, ¿qué transición es correcta?",
+        "options": {
+          "a": "dp[i][c] = max(dp[i−1][c], dp[i−1][c − precio_i] + páginas_i)",
+          "b": "dp[i][c] = max(dp[i−1][c], dp[i][c − precio_i] + páginas_i)",
+          "c": "dp[c] = max sobre los libros de dp[c − precio] + páginas, con c hacia arriba",
+          "d": "Ordenar por páginas/precio y tomar con greedy"
+        },
         "explanation": "El libro i se omite o se compra una vez, usando la fila anterior para que no se pueda reusar.",
         "why": {
           "b": "Usar dp[i] a la derecha deja comprar el libro i otra vez (no acotada).",

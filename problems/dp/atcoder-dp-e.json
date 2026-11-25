@@ -108,12 +108,20 @@
   ],
   "deprecated": false,
   "es": {
+    "summary": "Hay $N$ objetos, numerados $1, 2, \\ldots, N$. Para cada $i$ ($1 \\leq i \\leq N$), el objeto $i$ tiene un peso de $w_i$ y un valor de $v_i$.\n\nTaro decidió elegir algunos de los $N$ objetos y llevarlos a casa en una bolsa. La capacidad de la bolsa es $W$, lo que significa que la suma de los pesos de los objetos que lleva tiene que ser a lo sumo $W$.\n\nEncuentra la máxima suma posible de los valores de los objetos que Taro lleva a casa.\n\nEntrada\n\nLa entrada se da por la entrada estándar con el siguiente formato:\n\n$N$ $W$\r\n$w_1$ $v_1$\r\n$w_2$ $v_2$\r\n$:$\r\n$w_N$ $v_N$\n\nSalida\n\nImprime la máxima suma posible de los valores de los objetos que Taro lleva a casa.",
     "explanation": "La misma historia que Knapsack 1, pero W es enorme y el valor total es ≤ 1e5. Cambia la dimensión: dp[v] = peso mínimo para llegar a un valor total v.",
     "traps": [
       "Una dp sobre la capacidad necesita 1e9 celdas."
     ],
     "layers": {
       "dp-state": {
+        "prompt": "¿Qué debería representar el estado de la DP?",
+        "options": {
+          "a": "dp[v] = peso total mínimo necesario para conseguir un valor total de exactamente v",
+          "b": "dp[w] = valor máximo con peso total ≤ w",
+          "c": "dp[mask] = valor de un subconjunto",
+          "d": "dp[i] = mejor valor usando los primeros i objetos"
+        },
         "explanation": "Mira las cotas: Σ valores ≤ 100 · 1e3 = 1e5 es chico, los pesos no. Pon la cantidad chica en el índice y la grande en el valor guardado.",
         "why": {
           "b": "W ≤ 1e9, así que esta tabla es demasiado grande. Ese es el estado de Knapsack 1.",
@@ -122,6 +130,13 @@
         }
       },
       "dp-transition": {
+        "prompt": "Con ese estado, ¿qué transición es correcta?",
+        "options": {
+          "a": "dp[v] = min(dp[v], dp[v − v_i] + w_i), recorriendo v hacia abajo; respuesta = el mayor v con dp[v] ≤ W",
+          "b": "dp[w] = max(dp[w], dp[w − w_i] + v_i)",
+          "c": "dp[v] = min(dp[v], dp[v − v_i] + w_i), recorriendo v hacia arriba",
+          "d": "dp[v] = dp[v − v_i] + w_i"
+        },
         "explanation": "Toma u omite cada objeto minimizando el peso para cada valor, y después lee el valor más grande que entra.",
         "why": {
           "b": "Esa es la formulación por capacidad: acá no es viable.",

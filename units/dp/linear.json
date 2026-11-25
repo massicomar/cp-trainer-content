@@ -1,0 +1,331 @@
+{
+  "$schema": "../../schema/unit.schema.json",
+  "schemaVersion": 1,
+  "id": "dp.linear",
+  "techniques": [
+    "dp.linear"
+  ],
+  "status": "draft",
+  "author": "massicomar",
+  "notes": "First station of the DP line, so it also teaches what a DP is, following the TTPS 2026 cheatsheet: the recipe (state in words → transition → base cases → where the answer is), the DAG condition, top-down vs bottom-up, and its 'odd digits that differ by 2' example of adding to the state. Apply: Frog 1 is direct; Vacation needs the 'add what you need to remember' idea.",
+  "cards": [
+    {
+      "type": "idea",
+      "key": "what-is-dp",
+      "md": "**Dynamic programming (DP)** solves a problem by first solving smaller versions of it and storing their answers, so each one is computed only once.\n\nThe recipe:\n\n- **State, in words:** what `dp[i]` means, in one sentence. Here, `dp[i]` = the number of ways to climb to step `i`, taking 1 or 2 steps at a time.\n- **Transition:** how `dp[i]` comes from smaller states. Your last move into step `i` was 1 or 2 steps, so `dp[i] = dp[i−1] + dp[i−2]` (a negative index counts as 0).\n- **Base cases:** what you know without computing: `dp[0] = 1`, one way to be at the start.\n- **Where the answer is:** here, `dp[n]`. Sometimes it's the best over all the states.\n\nDP works when the states and their dependencies form a **DAG** (no cycles: no state depends on itself) and #states × the cost of a transition fits in time and memory. In **linear DP** the state is a position on a line (a step, a day, an index), and each state looks back a few positions.",
+      "es": "La **programación dinámica (DP)** resuelve un problema resolviendo primero versiones más pequeñas y guardando sus respuestas, para calcular cada una una sola vez.\n\nLa receta:\n\n- **Estado, en palabras:** qué significa `dp[i]`, en una frase. Aquí, `dp[i]` = la cantidad de formas de subir hasta el escalón `i`, avanzando 1 o 2 escalones a la vez.\n- **Transición:** cómo sale `dp[i]` de estados más pequeños. Tu último movimiento hasta el escalón `i` fue de 1 o de 2, así que `dp[i] = dp[i−1] + dp[i−2]` (un índice negativo vale 0).\n- **Casos base:** lo que sabes sin calcular: `dp[0] = 1`, una forma de estar en el inicio.\n- **Dónde está la respuesta:** aquí, `dp[n]`. A veces es el mejor entre todos los estados.\n\nLa DP funciona cuando los estados y sus dependencias forman un **DAG** (sin ciclos: ningún estado depende de sí mismo) y la cantidad de estados × el costo de una transición entra en tiempo y memoria. En la **DP lineal** el estado es una posición sobre una línea (un escalón, un día, un índice), y cada estado mira unas pocas posiciones hacia atrás."
+    },
+    {
+      "type": "diagram",
+      "key": "stairs",
+      "kind": "dp-1d",
+      "data": {
+        "size": 8,
+        "base": {
+          "0": 1
+        },
+        "recurrence": {
+          "op": "sum",
+          "offsets": [
+            1,
+            2
+          ]
+        }
+      },
+      "caption": "dp[i] = the number of ways to climb to step i, taking 1 or 2 steps at a time.",
+      "es": {
+        "caption": "dp[i] = la cantidad de formas de subir hasta el escalón i, avanzando 1 o 2 escalones a la vez."
+      }
+    },
+    {
+      "type": "idea",
+      "key": "two-ways",
+      "md": "**Two ways to write it:**\n\n- **Bottom-up:** loops from the base cases toward the answer. Fast, and it can keep only the rows it still needs, but you must know an order in which every state is ready before it's used (here, `i` from 1 upward).\n- **Top-down:** a recursive function plus a **memo** that stores each result the first time it's computed. Easier to write, and it only visits the states it reaches. Without the memo, the same states are computed again and again. If the recursion would go about 10⁶ levels deep, switch to bottom-up.\n\nEither way, **cost = #states × the cost of one transition**: n positions, each looking back k, is O(n·k).",
+      "es": "**Dos formas de escribirla:**\n\n- **Bottom-up:** loops desde los casos base hacia la respuesta. Es rápida y puede guardar solo las filas que todavía necesita, pero tienes que conocer un orden en el que cada estado esté listo antes de usarse (aquí, `i` de 1 hacia arriba).\n- **Top-down:** una función recursiva más un **memo** que guarda cada resultado la primera vez que se calcula. Es más fácil de escribir y solo visita los estados a los que llega. Sin el memo, los mismos estados se calculan una y otra vez. Si la recursión llegaría a unos 10⁶ niveles, pásate a bottom-up.\n\nDe cualquiera de las dos formas, **costo = cantidad de estados × costo de una transición**: n posiciones, cada una mirando k hacia atrás, es O(n·k)."
+    },
+    {
+      "type": "idea",
+      "key": "remember-more",
+      "md": "**When `dp[i]` isn't enough, add what you need to remember.** If the rule for the next choice depends on something the state doesn't know, put it in the state.\n\nExample: count the 8-digit numbers made only of odd digits, where consecutive digits differ by exactly 2. Knowing how many x-digit numbers there are doesn't tell you which digit may come next, so use `g[x][k]` = the number of x-digit numbers that **end in k**: `g[x][k] = g[x−1][k−2] + g[x−1][k+2]`. The answer is the sum of `g[8][k]` over every k. It's still a line, with a small second dimension.",
+      "es": "**Cuando `dp[i]` no es suficiente, agrega lo que necesitas recordar.** Si la regla para la próxima elección depende de algo que el estado no sabe, ponlo en el estado.\n\nEjemplo: contar los números de 8 cifras hechos solo con dígitos impares, en los que dos dígitos seguidos difieren exactamente en 2. Saber cuántos números de x cifras hay no te dice qué dígito puede venir después, así que usa `g[x][k]` = la cantidad de números de x cifras que **terminan en k**: `g[x][k] = g[x−1][k−2] + g[x−1][k+2]`. La respuesta es la suma de `g[8][k]` sobre todos los k. Sigue siendo una línea, con una segunda dimensión pequeña."
+    },
+    {
+      "type": "question",
+      "key": "trace-three-steps",
+      "prompt": "Now each move can be 1, 2 **or 3** steps: `dp[i] = dp[i−1] + dp[i−2] + dp[i−3]`, with `dp[0] = 1`. What is `dp[4]`?",
+      "options": [
+        {
+          "id": "a",
+          "text": "7"
+        },
+        {
+          "id": "b",
+          "text": "5",
+          "why": "That's the count with moves of 1 or 2 only. With 3 allowed: dp = 1, 1, 2, 4, 7."
+        },
+        {
+          "id": "c",
+          "text": "8",
+          "why": "8 counts every way to split 4 into parts, including a single move of 4, which isn't allowed."
+        },
+        {
+          "id": "d",
+          "text": "6",
+          "why": "Check dp[3]: 2 + 1 + 1 = 4. Then dp[4] = 4 + 2 + 1 = 7."
+        }
+      ],
+      "accepted": [
+        "a"
+      ],
+      "explanation": "dp[1] = 1, dp[2] = 1 + 1 = 2, dp[3] = 2 + 1 + 1 = 4, dp[4] = 4 + 2 + 1 = 7. Each value is the sum of the three before it.",
+      "es": {
+        "prompt": "Ahora cada movimiento puede ser de 1, 2 **o 3** escalones: `dp[i] = dp[i−1] + dp[i−2] + dp[i−3]`, con `dp[0] = 1`. ¿Cuánto vale `dp[4]`?",
+        "why": {
+          "b": "Esa es la cuenta con movimientos de 1 o 2 solamente. Con 3 permitido: dp = 1, 1, 2, 4, 7.",
+          "c": "8 cuenta todas las formas de partir 4 en partes, incluido un solo movimiento de 4, que no está permitido.",
+          "d": "Revisa dp[3]: 2 + 1 + 1 = 4. Entonces dp[4] = 4 + 2 + 1 = 7."
+        },
+        "explanation": "dp[1] = 1, dp[2] = 1 + 1 = 2, dp[3] = 2 + 1 + 1 = 4, dp[4] = 4 + 2 + 1 = 7. Cada valor es la suma de los tres anteriores."
+      }
+    },
+    {
+      "type": "question",
+      "key": "base-case",
+      "prompt": "To count the ways to climb n steps (1 or 2 at a time), a friend writes `dp[0] = 0`, `dp[1] = 1` and `dp[i] = dp[i−1] + dp[i−2]`. What goes wrong?",
+      "options": [
+        {
+          "id": "a",
+          "text": "dp[2] comes out 1; it should be 2"
+        },
+        {
+          "id": "b",
+          "text": "Nothing: zero steps take zero moves, so dp[0] = 0",
+          "why": "Standing still is one way to be on step 0, so dp[0] = 1. With 0, dp[2] = dp[1] + dp[0] = 1 misses the single 2-step."
+        },
+        {
+          "id": "c",
+          "text": "dp[1] is wrong; it should be 2",
+          "why": "There's exactly one way to climb one step."
+        },
+        {
+          "id": "d",
+          "text": "It's O(2ⁿ) instead of O(n)",
+          "why": "Filling the table left to right is O(n), whatever the base case."
+        }
+      ],
+      "accepted": [
+        "a"
+      ],
+      "explanation": "dp[0] = 1 means \"one way to stay where you are\". That's what makes the 2-step move from step 0 count. A wrong base case carries over to every value after it.",
+      "es": {
+        "prompt": "Para contar las formas de subir n escalones (de 1 o 2 a la vez), un amigo escribe `dp[0] = 0`, `dp[1] = 1` y `dp[i] = dp[i−1] + dp[i−2]`. ¿Qué sale mal?",
+        "options": {
+          "a": "dp[2] da 1; debería dar 2",
+          "b": "Nada: cero escalones son cero movimientos, así que dp[0] = 0",
+          "c": "dp[1] está mal; debería ser 2",
+          "d": "Es O(2ⁿ) en lugar de O(n)"
+        },
+        "why": {
+          "b": "Quedarte quieto es una forma de estar en el escalón 0, así que dp[0] = 1. Con 0, dp[2] = dp[1] + dp[0] = 1 y se pierde el movimiento de 2.",
+          "c": "Hay exactamente una forma de subir un escalón.",
+          "d": "Llenar la tabla de izquierda a derecha es O(n), sea cual sea el caso base."
+        },
+        "explanation": "dp[0] = 1 significa \"una forma de quedarte donde estás\". Eso es lo que hace que cuente el movimiento de 2 desde el escalón 0. Un caso base equivocado arrastra el error a todos los valores que vienen después."
+      }
+    },
+    {
+      "type": "question",
+      "key": "memo",
+      "prompt": "You write `fib(n) = fib(n−1) + fib(n−2)` as a plain recursion, with no memo, and call `fib(50)`. What happens?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Exponentially many calls; a memo makes it O(n)"
+        },
+        {
+          "id": "b",
+          "text": "O(n) calls, since the recursion is n levels deep",
+          "why": "Depth isn't the number of calls: fib(n−1) computes fib(n−2) all over again, and that repeats at every level."
+        },
+        {
+          "id": "c",
+          "text": "A stack overflow: the recursion is 2ⁿ levels deep",
+          "why": "The depth is only about 50; what's huge is the number of calls."
+        },
+        {
+          "id": "d",
+          "text": "Exponentially many calls; a memo makes it O(n²)",
+          "why": "Right about the calls, but with a memo each fib(i) is computed once, with O(1) work besides its two lookups: O(n)."
+        }
+      ],
+      "accepted": [
+        "a"
+      ],
+      "explanation": "Without a memo, fib(50) makes tens of billions of calls (the count grows like 1.6ⁿ). With a memo, the first call to each fib(i) stores its result and every later call returns it: n states × O(1) = O(n).",
+      "es": {
+        "prompt": "Escribes `fib(n) = fib(n−1) + fib(n−2)` como una recursión simple, sin memo, y llamas a `fib(50)`. ¿Qué pasa?",
+        "options": {
+          "a": "Una cantidad exponencial de llamadas; con memo queda O(n)",
+          "b": "O(n) llamadas, porque la recursión tiene n niveles",
+          "c": "Se desborda la pila: la recursión tiene 2ⁿ niveles",
+          "d": "Una cantidad exponencial de llamadas; con memo queda O(n²)"
+        },
+        "why": {
+          "b": "La profundidad no es la cantidad de llamadas: fib(n−1) vuelve a calcular fib(n−2) desde cero, y eso se repite en cada nivel.",
+          "c": "La profundidad es de unos 50 niveles; lo enorme es la cantidad de llamadas.",
+          "d": "Las llamadas sí son exponenciales, pero con memo cada fib(i) se calcula una vez, con O(1) de trabajo además de sus dos consultas: O(n)."
+        },
+        "explanation": "Sin memo, fib(50) hace decenas de miles de millones de llamadas (la cantidad crece como 1,6ⁿ). Con memo, la primera llamada a cada fib(i) guarda su resultado y las siguientes lo devuelven: n estados × O(1) = O(n)."
+      }
+    },
+    {
+      "type": "question",
+      "key": "cheapest-climb",
+      "prompt": "You start on step 0 and want to reach step 4, moving 1 or 2 steps at a time. Landing on step i costs `c[i]`, with `c = [0, 1, 10, 10, 1]`. What's the cheapest total?",
+      "options": [
+        {
+          "id": "a",
+          "text": "11"
+        },
+        {
+          "id": "b",
+          "text": "12",
+          "why": "That's the greedy walk: the cheapest next step first (1), and then you're stuck paying 10. 0 → 2 → 4 costs 11."
+        },
+        {
+          "id": "c",
+          "text": "2",
+          "why": "Steps 1 and 4 cost 1 each, but from step 1 you can't reach step 4: moves are 1 or 2 steps."
+        },
+        {
+          "id": "d",
+          "text": "10",
+          "why": "You also land on step 4, which costs 1: 10 + 1 = 11."
+        }
+      ],
+      "accepted": [
+        "a"
+      ],
+      "explanation": "dp[i] = c[i] + min(dp[i−1], dp[i−2]) gives dp = [0, 1, 10, 11, 11]. The cheap first step looks good on its own but leads to an expensive one; the DP compares both ways in.",
+      "es": {
+        "prompt": "Empiezas en el escalón 0 y quieres llegar al 4, avanzando 1 o 2 escalones a la vez. Pisar el escalón i cuesta `c[i]`, con `c = [0, 1, 10, 10, 1]`. ¿Cuál es el costo total mínimo?",
+        "why": {
+          "b": "Ese es el recorrido greedy: primero el siguiente escalón más barato (1), y después no queda otra que pagar 10. 0 → 2 → 4 cuesta 11.",
+          "c": "Los escalones 1 y 4 cuestan 1 cada uno, pero desde el 1 no llegas al 4: los movimientos son de 1 o 2 escalones.",
+          "d": "También pisas el escalón 4, que cuesta 1: 10 + 1 = 11."
+        },
+        "explanation": "dp[i] = c[i] + min(dp[i−1], dp[i−2]) da dp = [0, 1, 10, 11, 11]. El primer escalón barato parece bueno por sí solo, pero lleva a uno caro; la DP compara las dos formas de llegar."
+      }
+    },
+    {
+      "type": "question",
+      "key": "no-two-in-a-row",
+      "prompt": "Climb n steps, 1 or 2 at a time, but **never two 2-steps in a row**. Which state works?",
+      "options": [
+        {
+          "id": "a",
+          "text": "dp[i][m] = ways to reach step i whose last move was m"
+        },
+        {
+          "id": "b",
+          "text": "dp[i] = ways to reach step i, with dp[i] = dp[i−1] + dp[i−2]",
+          "why": "That also counts climbs with two 2-steps in a row: dp[i] doesn't know what the last move was."
+        },
+        {
+          "id": "c",
+          "text": "dp[i][k] = ways to reach step i in exactly k moves",
+          "why": "The number of moves doesn't say whether the last one was a 2."
+        },
+        {
+          "id": "d",
+          "text": "dp[i][m] = ways to reach step i whose first move was m",
+          "why": "The rule is about two moves in a row, so step i needs its last move: that decides whether a 2-step may come next. The first move says nothing about it."
+        }
+      ],
+      "accepted": [
+        "a"
+      ],
+      "explanation": "The rule looks at the previous move, so the state carries it: dp[i][1] = dp[i−1][1] + dp[i−1][2], and dp[i][2] = dp[i−2][1], since a 2-step can't follow another 2-step. Start with dp[0][1] = 1, as if the climb began after a 1-step.",
+      "es": {
+        "prompt": "Sube n escalones, de 1 o 2 a la vez, pero **nunca dos movimientos de 2 seguidos**. ¿Qué estado funciona?",
+        "options": {
+          "a": "dp[i][m] = formas de llegar al escalón i cuyo último movimiento fue m",
+          "b": "dp[i] = formas de llegar al escalón i, con dp[i] = dp[i−1] + dp[i−2]",
+          "c": "dp[i][k] = formas de llegar al escalón i en exactamente k movimientos",
+          "d": "dp[i][m] = formas de llegar al escalón i cuyo primer movimiento fue m"
+        },
+        "why": {
+          "b": "Eso también cuenta subidas con dos movimientos de 2 seguidos: dp[i] no sabe cuál fue el último movimiento.",
+          "c": "La cantidad de movimientos no dice si el último fue de 2.",
+          "d": "La regla es sobre dos movimientos seguidos, así que el escalón i necesita su último movimiento: decide si puede venir uno de 2. El primero no dice nada de eso."
+        },
+        "explanation": "La regla mira el movimiento anterior, así que el estado lo guarda: dp[i][1] = dp[i−1][1] + dp[i−1][2], y dp[i][2] = dp[i−2][1], porque un movimiento de 2 no puede seguir a otro de 2. Empieza con dp[0][1] = 1, como si la subida arrancara después de un movimiento de 1."
+      }
+    },
+    {
+      "type": "signals",
+      "key": "signals",
+      "md": "Think **linear DP** when:\n\n- It asks for a **max, min or number of ways** (often \"modulo 10⁹+7\"), and the solution is built **one decision at a time**.\n- The input is a sequence (days, stones, positions) and you decide something **at each position**.\n- A choice **limits the next ones** (no repeats, no two neighbours, jumps of a few sizes), so the locally best pick can be wrong.\n- n is up to about 10⁵–10⁶: one pass with a few operations per position.",
+      "es": "Piensa en **DP lineal** cuando:\n\n- Se pide un **máximo, mínimo o cantidad de formas** (muchas veces \"módulo 10⁹+7\"), y la solución se arma con **una decisión a la vez**.\n- La entrada es una secuencia (días, piedras, posiciones) y decides algo **en cada posición**.\n- Una elección **limita las siguientes** (sin repetir, sin dos vecinos, saltos de pocos tamaños), así que la mejor opción local puede estar mal.\n- n llega a 10⁵–10⁶: una pasada con pocas operaciones por posición."
+    },
+    {
+      "type": "question",
+      "key": "signals-pick",
+      "prompt": "Which of these is a linear DP?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Houses on a street each hold some money; rob the most, never two neighbours."
+        },
+        {
+          "id": "b",
+          "text": "Houses on a street each hold some money; rob the most, any houses you like.",
+          "why": "With no rule between houses, take every house that has money: one pass, nothing to compare."
+        },
+        {
+          "id": "c",
+          "text": "Meetings with start and end times: hold as many as you can in one room.",
+          "why": "Taking the meeting that ends first, again and again, is optimal: a greedy, no table needed."
+        },
+        {
+          "id": "d",
+          "text": "Cities joined by roads of different lengths: the shortest route between two.",
+          "why": "A shortest path with weights: that's Dijkstra, in Graphs."
+        }
+      ],
+      "accepted": [
+        "a"
+      ],
+      "explanation": "At each house you choose rob or skip, and robbing rules out the next one: dp[i] = max(dp[i−1], dp[i−2] + money[i]).",
+      "es": {
+        "prompt": "¿Cuál de estos es una DP lineal?",
+        "options": {
+          "a": "Cada casa de una calle guarda algo de dinero; roba lo máximo, nunca dos vecinas.",
+          "b": "Cada casa de una calle guarda algo de dinero; roba lo máximo, las casas que quieras.",
+          "c": "Reuniones con hora de inicio y de fin: haz la mayor cantidad posible en una sala.",
+          "d": "Ciudades unidas por rutas de distintos largos: el camino más corto entre dos."
+        },
+        "why": {
+          "b": "Sin ninguna regla entre casas, roba todas las que tienen dinero: una pasada, nada que comparar.",
+          "c": "Tomar una y otra vez la reunión que termina primero es óptimo: un greedy, sin tabla.",
+          "d": "Un camino más corto con pesos: eso es Dijkstra, en Grafos."
+        },
+        "explanation": "En cada casa eliges robar o no, y robar descarta la siguiente: dp[i] = max(dp[i−1], dp[i−2] + dinero[i])."
+      }
+    },
+    {
+      "type": "apply",
+      "key": "apply",
+      "problems": [
+        "atcoder-dp-a",
+        "atcoder-dp-c"
+      ]
+    },
+    {
+      "type": "recap",
+      "key": "recap",
+      "md": "- The recipe: **state in words → transition → base cases → where the answer is**. It works when the states form a DAG.\n- Bottom-up (loops in order) or top-down (recursion + memo). Cost = #states × the cost of a transition.\n- If the rule depends on your last choice, put it in the state: dp[i][last].",
+      "es": "- La receta: **estado en palabras → transición → casos base → dónde está la respuesta**. Funciona cuando los estados forman un DAG.\n- Bottom-up (loops en orden) o top-down (recursión + memo). Costo = cantidad de estados × costo de una transición.\n- Si la regla depende de tu última elección, ponla en el estado: dp[i][last]."
+    }
+  ]
+}

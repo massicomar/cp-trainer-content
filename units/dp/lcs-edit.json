@@ -1,0 +1,273 @@
+{
+  "$schema": "../../schema/unit.schema.json",
+  "schemaVersion": 1,
+  "id": "dp.lcs-edit",
+  "techniques": [
+    "dp.lcs-edit"
+  ],
+  "status": "draft",
+  "author": "massicomar",
+  "notes": "The diagram shows LCS; edit distance is taught on the same table and checked with traces. Only one problem (Edit Distance) for the apply step. The palindrome question and the disguises in the signals come from the TTPS 2026 cheatsheet.",
+  "cards": [
+    {
+      "type": "idea",
+      "key": "idea",
+      "md": "**Two sequences:** when a problem compares two strings or arrays a and b, the state is a **pair of prefixes**: `dp[i][j]` = the answer for the first i elements of a and the first j of b. Each step looks at the last two elements, a_i and b_j.\n\n**Longest common subsequence (LCS):** the longest sequence that appears in both, in order, with gaps allowed.\n\n- If a_i = b_j, use them both: `dp[i][j] = dp[i−1][j−1] + 1`.\n- Otherwise drop one of them: `dp[i][j] = max(dp[i−1][j], dp[i][j−1])`.\n\nAn empty prefix has nothing in common: `dp[0][j] = dp[i][0] = 0`. Lengths n and m give (n+1)·(m+1) cells: O(n·m).",
+      "es": "**Dos secuencias:** cuando un problema compara dos cadenas o arreglos a y b, el estado es un **par de prefijos**: `dp[i][j]` = la respuesta para los primeros i elementos de a y los primeros j de b. Cada paso mira los dos últimos elementos, a_i y b_j.\n\n**Subsecuencia común más larga (LCS):** la secuencia más larga que aparece en las dos, en orden, con huecos permitidos.\n\n- Si a_i = b_j, usa los dos: `dp[i][j] = dp[i−1][j−1] + 1`.\n- Si no, descarta uno de los dos: `dp[i][j] = max(dp[i−1][j], dp[i][j−1])`.\n\nUn prefijo vacío no tiene nada en común: `dp[0][j] = dp[i][0] = 0`. Con largos n y m hay (n+1)·(m+1) celdas: O(n·m)."
+    },
+    {
+      "type": "diagram",
+      "key": "lcs",
+      "kind": "dp-2d",
+      "data": {
+        "recurrence": "lcs",
+        "a": "TRAIN",
+        "b": "RATIO"
+      },
+      "caption": "LCS of TRAIN (down the side) and RATIO (across the top). A match takes the diagonal + 1; otherwise the larger of the cell above and the cell to the left.",
+      "es": {
+        "caption": "LCS de TRAIN (al costado) y RATIO (arriba). Una coincidencia toma la diagonal + 1; si no, el mayor entre la celda de arriba y la de la izquierda."
+      }
+    },
+    {
+      "type": "idea",
+      "key": "edit-distance",
+      "md": "**Edit distance:** the fewest insertions, deletions and replacements that turn a into b. Same table, now with a min: `dp[i][j]` = the fewest edits that turn the first i characters of a into the first j of b.\n\n- If a_i = b_j, nothing to do: `dp[i][j] = dp[i−1][j−1]`.\n- Otherwise `1 +` the best of three: **delete** a_i (`dp[i−1][j]`), **insert** b_j (`dp[i][j−1]`), or **replace** a_i with b_j (`dp[i−1][j−1]`).\n\nBase case: `dp[i][0] = i` (delete everything) and `dp[0][j] = j` (insert everything).",
+      "es": "**Distancia de edición:** la menor cantidad de inserciones, borrados y reemplazos que convierten a en b. La misma tabla, ahora con un mínimo: `dp[i][j]` = la menor cantidad de ediciones que convierten los primeros i caracteres de a en los primeros j de b.\n\n- Si a_i = b_j, no hay nada que hacer: `dp[i][j] = dp[i−1][j−1]`.\n- Si no, `1 +` la mejor de tres: **borrar** a_i (`dp[i−1][j]`), **insertar** b_j (`dp[i][j−1]`) o **reemplazar** a_i por b_j (`dp[i−1][j−1]`).\n\nCaso base: `dp[i][0] = i` (borrar todo) y `dp[0][j] = j` (insertar todo)."
+    },
+    {
+      "type": "question",
+      "key": "trace-lcs",
+      "prompt": "What's the length of the LCS of `ABCB` and `BCAB`?",
+      "options": [
+        {
+          "id": "a",
+          "text": "3"
+        },
+        {
+          "id": "b",
+          "text": "2",
+          "why": "BC is the longest common substring, with no gaps. A subsequence can skip letters: B, C, B is in both."
+        },
+        {
+          "id": "c",
+          "text": "4",
+          "why": "Both have length 4, so an LCS of 4 would mean they're equal."
+        },
+        {
+          "id": "d",
+          "text": "1",
+          "why": "B, C, B appears in both, in order: at least 3."
+        }
+      ],
+      "accepted": [
+        "a"
+      ],
+      "explanation": "B, C, B: in ABCB it's positions 2, 3, 4; in BCAB it's 1, 2, 4. The table's last cell is 3.",
+      "es": {
+        "prompt": "¿Cuál es el largo de la LCS de `ABCB` y `BCAB`?",
+        "why": {
+          "b": "BC es la subcadena común más larga, sin huecos. Una subsecuencia puede omitir letras: B, C, B está en las dos.",
+          "c": "Las dos tienen largo 4, así que una LCS de 4 querría decir que son iguales.",
+          "d": "B, C, B aparece en las dos, en orden: al menos 3."
+        },
+        "explanation": "B, C, B: en ABCB son las posiciones 2, 3, 4; en BCAB, la 1, 2, 4. La última celda de la tabla es 3."
+      }
+    },
+    {
+      "type": "question",
+      "key": "trace-edit",
+      "prompt": "What's the edit distance from `KITE` to `SITTER`?",
+      "options": [
+        {
+          "id": "a",
+          "text": "3"
+        },
+        {
+          "id": "b",
+          "text": "2",
+          "why": "The length goes from 4 to 6, so you need at least 2 insertions, and K → S is a third edit."
+        },
+        {
+          "id": "c",
+          "text": "6",
+          "why": "That's rewriting every letter of SITTER, but I, T and E can stay."
+        },
+        {
+          "id": "d",
+          "text": "4",
+          "why": "Replace K with S, then insert a T and an R: 3 edits."
+        }
+      ],
+      "accepted": [
+        "a"
+      ],
+      "explanation": "K → S (replace), insert a T after the T, insert an R at the end: KITE → SITE → SITTE → SITTER.",
+      "es": {
+        "prompt": "¿Cuál es la distancia de edición de `KITE` a `SITTER`?",
+        "why": {
+          "b": "El largo pasa de 4 a 6, así que hacen falta al menos 2 inserciones, y K → S es una tercera edición.",
+          "c": "Eso es reescribir cada letra de SITTER, pero I, T y E pueden quedarse.",
+          "d": "Reemplaza K por S, y después inserta una T y una R: 3 ediciones."
+        },
+        "explanation": "K → S (reemplazo), insertar una T después de la T, insertar una R al final: KITE → SITE → SITTE → SITTER."
+      }
+    },
+    {
+      "type": "question",
+      "key": "missing-replace",
+      "prompt": "A friend writes edit distance with `dp[i][j] = 1 + min(dp[i−1][j], dp[i][j−1])` when a_i ≠ b_j (and the diagonal when they're equal). Which pair shows the bug?",
+      "options": [
+        {
+          "id": "a",
+          "text": "AB and AC: it gives 2 instead of 1"
+        },
+        {
+          "id": "b",
+          "text": "AB and AB: it gives 1 instead of 0",
+          "why": "Equal last letters take dp[i−1][j−1] at no cost; the bug only shows when they differ."
+        },
+        {
+          "id": "c",
+          "text": "A and AB: it gives 2 instead of 1",
+          "why": "Here it's right: one insertion, dp[1][2] = 1 + dp[1][1] = 1."
+        },
+        {
+          "id": "d",
+          "text": "None: a replacement is a deletion plus an insertion",
+          "why": "It is, but that costs 2 edits; a replacement costs 1."
+        }
+      ],
+      "accepted": [
+        "a"
+      ],
+      "explanation": "Without 1 + dp[i−1][j−1] there's no replace move, so changing B into C costs a deletion plus an insertion: 2 instead of 1.",
+      "es": {
+        "prompt": "Un amigo escribe la distancia de edición con `dp[i][j] = 1 + min(dp[i−1][j], dp[i][j−1])` cuando a_i ≠ b_j (y la diagonal cuando son iguales). ¿Qué par muestra el error?",
+        "options": {
+          "a": "AB y AC: da 2 en lugar de 1",
+          "b": "AB y AB: da 1 en lugar de 0",
+          "c": "A y AB: da 2 en lugar de 1",
+          "d": "Ninguno: un reemplazo es un borrado más una inserción"
+        },
+        "why": {
+          "b": "Las últimas letras iguales toman dp[i−1][j−1] sin costo; el error solo aparece cuando son distintas.",
+          "c": "Aquí está bien: una inserción, dp[1][2] = 1 + dp[1][1] = 1.",
+          "d": "Lo es, pero eso cuesta 2 ediciones; un reemplazo cuesta 1."
+        },
+        "explanation": "Sin 1 + dp[i−1][j−1] no hay movimiento de reemplazo, así que cambiar B por C cuesta un borrado más una inserción: 2 en lugar de 1."
+      }
+    },
+    {
+      "type": "question",
+      "key": "palindrome",
+      "prompt": "The longest **palindromic subsequence** of a string s (it reads the same both ways; letters can be skipped). How do you get its length?",
+      "options": [
+        {
+          "id": "a",
+          "text": "LCS(s, reverse(s))"
+        },
+        {
+          "id": "b",
+          "text": "LCS(s, s)",
+          "why": "That's the whole string: every string is a common subsequence of itself."
+        },
+        {
+          "id": "c",
+          "text": "The longest palindromic substring, expanding around each center",
+          "why": "A substring is contiguous; a subsequence can skip letters, so it can be longer. In ABCA, ACA has length 3, but the longest palindromic substring has length 1."
+        },
+        {
+          "id": "d",
+          "text": "|s| − LCS(s, reverse(s))",
+          "why": "That's how many letters you'd delete to leave a palindrome, not the palindrome's length."
+        }
+      ],
+      "accepted": [
+        "a"
+      ],
+      "explanation": "A palindromic subsequence reads the same forwards and backwards, so it is a common subsequence of s and its reverse. Example: ABCA and ACBA have an LCS of 3 (ABA or ACA).",
+      "es": {
+        "prompt": "La **subsecuencia palíndroma** más larga de una cadena s (se lee igual en los dos sentidos; se pueden omitir letras). ¿Cómo obtienes su largo?",
+        "options": {
+          "c": "La subcadena palíndroma más larga, expandiendo alrededor de cada centro"
+        },
+        "why": {
+          "b": "Eso es la cadena entera: toda cadena es subsecuencia común de sí misma.",
+          "c": "Una subcadena es contigua; una subsecuencia puede omitir letras, así que puede ser más larga. En ABCA, ACA tiene largo 3, pero la subcadena palíndroma más larga tiene largo 1.",
+          "d": "Esa es la cantidad de letras que borrarías para dejar un palíndromo, no el largo del palíndromo."
+        },
+        "explanation": "Una subsecuencia palíndroma se lee igual de izquierda a derecha y al revés, así que es una subsecuencia común de s y de su reverso. Ejemplo: ABCA y ACBA tienen una LCS de 3 (ABA o ACA)."
+      }
+    },
+    {
+      "type": "drill",
+      "key": "drill",
+      "algorithm": "dp:edit-distance"
+    },
+    {
+      "type": "signals",
+      "key": "signals",
+      "md": "Think **two-sequence DP** when:\n\n- The input is **two strings or arrays**, and the question compares them: a common subsequence, edit distance, an alignment, an interleaving.\n- Elements can be **skipped** (a subsequence). For a common **substring** (contiguous), the same table takes diagonal + 1 on a match and 0 otherwise.\n- Classic disguises: the fewest deletions to make two strings equal (n + m − 2·LCS), the longest palindromic subsequence (LCS with the reverse), a diff between two files.\n- The lengths are up to a few thousand: n·m ≈ 10⁷ cells. With 5000 × 5000, keep only two rows to save memory.\n\nIf it's one sequence and its own pieces (`dp[l][r]`), it's interval DP instead.",
+      "es": "Piensa en **DP de dos secuencias** cuando:\n\n- La entrada son **dos cadenas o arreglos**, y la pregunta los compara: una subsecuencia común, la distancia de edición, una alineación, un intercalado.\n- Los elementos se pueden **omitir** (una subsecuencia). Para una **subcadena** común (contigua), la misma tabla toma diagonal + 1 si coinciden y 0 si no.\n- Disfraces clásicos: la menor cantidad de borrados para que dos cadenas queden iguales (n + m − 2·LCS), la subsecuencia palíndroma más larga (LCS con el reverso), un diff entre dos archivos.\n- Los largos llegan a unos pocos miles: n·m ≈ 10⁷ celdas. Con 5000 × 5000, guarda solo dos filas para ahorrar memoria.\n\nSi es una sola secuencia y sus propios tramos (`dp[l][r]`), es DP de intervalos."
+    },
+    {
+      "type": "question",
+      "key": "signals-pick",
+      "prompt": "Which of these is a two-sequence DP?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Two DNA strings: the fewest base changes, inserts or removals that turn one into the other."
+        },
+        {
+          "id": "b",
+          "text": "One DNA string: its longest palindromic substring, a block that reads the same both ways.",
+          "why": "One string and its own substrings: dp[l][r], or expanding around each center."
+        },
+        {
+          "id": "c",
+          "text": "Two DNA strings: does the shorter one appear as a contiguous block inside the longer one?",
+          "why": "Exact substring search: string matching (KMP, hashing), no table of prefixes needed."
+        },
+        {
+          "id": "d",
+          "text": "One array of n numbers: the longest subsequence whose values keep going up.",
+          "why": "One array, compared with itself: that's LIS, the next station."
+        }
+      ],
+      "accepted": [
+        "a"
+      ],
+      "explanation": "Two strings and three edit operations: it's edit distance on DNA.",
+      "es": {
+        "prompt": "¿Cuál de estos es una DP de dos secuencias?",
+        "options": {
+          "a": "Dos cadenas de ADN: el mínimo de cambios, inserciones o borrados de bases para pasar de una a la otra.",
+          "b": "Una cadena de ADN: su subcadena palíndroma más larga, un bloque que se lee igual en los dos sentidos.",
+          "c": "Dos cadenas de ADN: ¿aparece la más corta como un bloque contiguo dentro de la más larga?",
+          "d": "Un arreglo de n números: la subsecuencia más larga cuyos valores no dejan de subir."
+        },
+        "why": {
+          "b": "Una sola cadena y sus propias subcadenas: dp[l][r], o expandir alrededor de cada centro.",
+          "c": "Búsqueda exacta de una subcadena: string matching (KMP, hashing), sin tabla de prefijos.",
+          "d": "Un solo arreglo, comparado consigo mismo: eso es LIS, la próxima estación."
+        },
+        "explanation": "Dos cadenas y tres operaciones de edición: es distancia de edición sobre ADN."
+      }
+    },
+    {
+      "type": "apply",
+      "key": "apply",
+      "problems": [
+        "cses-1639"
+      ]
+    },
+    {
+      "type": "recap",
+      "key": "recap",
+      "md": "- Two sequences → dp[i][j] over a prefix of each; look at the last elements a_i and b_j. O(n·m).\n- LCS: equal → diagonal + 1; different → max(above, left). Row and column 0 are 0. Palindromic subsequence = LCS(s, reverse(s)).\n- Edit distance: equal → diagonal; different → 1 + min(delete, insert, replace). dp[i][0] = i, dp[0][j] = j.",
+      "es": "- Dos secuencias → dp[i][j] sobre un prefijo de cada una; mira los últimos elementos a_i y b_j. O(n·m).\n- LCS: iguales → diagonal + 1; distintos → max(arriba, izquierda). La fila y la columna 0 valen 0. Subsecuencia palíndroma = LCS(s, reverse(s)).\n- Distancia de edición: iguales → diagonal; distintos → 1 + min(borrar, insertar, reemplazar). dp[i][0] = i, dp[0][j] = j."
+    }
+  ]
+}

@@ -106,12 +106,20 @@
   ],
   "deprecated": false,
   "es": {
+    "summary": "La distancia de edición entre dos cadenas es la mínima cantidad de operaciones necesarias para transformar una cadena en la otra.\n\nLas operaciones permitidas son:\n\n- Agregar un carácter a la cadena.\n- Quitar un carácter de la cadena.\n- Reemplazar un carácter de la cadena.\n\nPor ejemplo, la distancia de edición entre LOVE y MOVIE es 2, porque primero puedes reemplazar L por M, y después agregar I.\n\nTu tarea es calcular la distancia de edición entre dos cadenas.\n\nEntrada\n\nLa primera línea de la entrada tiene una cadena de $n$ caracteres entre A–Z.\n\nLa segunda línea de la entrada tiene una cadena de $m$ caracteres entre A–Z.\n\nSalida\n\nImprime un entero: la distancia de edición entre las cadenas.",
     "explanation": "Distancia de Levenshtein sobre prefijos: 25M estados, así que recicla dos filas para ahorrar memoria.",
     "traps": [
       "Una tabla de ints de 5001 × 5001 ocupa ~100 MB; guarda solo dos filas."
     ],
     "layers": {
       "dp-state": {
+        "prompt": "¿Qué debería representar el estado de la DP?",
+        "options": {
+          "a": "dp[i][j] = mínima cantidad de ediciones para convertir los primeros i caracteres de s en los primeros j de t",
+          "b": "dp[l][r] = ediciones necesarias para la subcadena s[l..r]",
+          "c": "dp[i] = ediciones necesarias para los primeros i caracteres de las dos cadenas",
+          "d": "dp[i][j] = largo de la subsecuencia común más larga de los prefijos"
+        },
         "explanation": "Dos secuencias → el estado es un par de largos de prefijo.",
         "why": {
           "b": "La distancia de edición compara prefijos de dos strings, no intervalos de uno.",
@@ -120,6 +128,13 @@
         }
       },
       "dp-transition": {
+        "prompt": "Con ese estado, ¿qué transición es correcta?",
+        "options": {
+          "a": "dp[i][j] = min(dp[i−1][j] + 1, dp[i][j−1] + 1, dp[i−1][j−1] + [s_i ≠ t_j])",
+          "b": "dp[i][j] = dp[i−1][j−1] + [s_i ≠ t_j]",
+          "c": "dp[i][j] = max(dp[i−1][j], dp[i][j−1])",
+          "d": "dp[i][j] = min(dp[i−1][j], dp[i][j−1]) + 1"
+        },
         "explanation": "Borrar s_i, insertar t_j, o hacer coincidir/reemplazar los últimos caracteres.",
         "why": {
           "b": "Se olvida de las inserciones y los borrados.",

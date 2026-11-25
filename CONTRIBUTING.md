@@ -44,7 +44,7 @@ To retire a problem, set `"deprecated": true`. CI fails if a file that exists on
 | `extraLayers` | no | Layers 3+ (see below) |
 | `notes` | no | For authors only |
 | `deprecated` | yes | `false` unless the problem is retired |
-| `es` | no | Spanish versions of the explanations (see below). Keep it as the last key |
+| `es` | no | Spanish versions of the texts (see below). Keep it as the last key |
 
 ## How the app turns a file into questions
 
@@ -79,20 +79,23 @@ To retire a problem, set `"deprecated": true`. CI fails if a file that exists on
 
 ## Spanish (`es`)
 
-Players with the UI in Spanish see Spanish explanations where they exist and the English ones otherwise, field by field. Only the texts that explain are translated; statements, prompts, option texts and technique names stay in English.
+Players with the UI in Spanish see Spanish texts where they exist and the English ones otherwise, field by field. Usually only the texts that explain are translated. A problem used in a lesson's `apply` step also translates its statement (`summary`) and each layer's `prompt` and `options`; CI requires them once that lesson is `ready`. `constraints` and technique names stay in English.
 
 ```json
 "es": {
+  "summary": "…",
   "explanation": "…",
   "traps": ["…", ""],
-  "layers": { "dp-state": { "explanation": "…", "why": { "b": "…" } } }
+  "layers": { "dp-state": { "prompt": "…", "options": { "a": "…", "b": "…" }, "explanation": "…", "why": { "b": "…" } } }
 }
 ```
 
+- `summary` translates the statement: same sections (Entrada, Salida), same LaTeX, the input-format block as it is. Don't name the technique in it either: the validator warns about words like "mochila" or "programación dinámica".
+
 - `traps` has one entry per English trap, in the same order. An empty string means "use the English one".
-- `layers` is keyed by the extra layer's `key`, and `why` by option id. CI checks that both exist.
+- `layers` is keyed by the extra layer's `key`, and `options` and `why` by option id. CI checks that they exist.
 - Write in neutral Latin American Spanish with *tú*, like the app's UI ("prueba", "fíjate"). Keep the usual CP terms in English where Spanish-speaking competitors do (DP, greedy, bitmask, BFS, segment tree…), and leave math and problem names as they are.
-- `/contribute` has a Spanish box next to each explanation, trap and "why".
+- `/contribute` has a Spanish box next to the statement, each explanation, trap, layer prompt, option and "why".
 
 ## Drills
 
@@ -116,6 +119,31 @@ Drills are the short "quick questions" between problems. They live in `drills/`:
 - **`complexity` and `wrong`** are LaTeX without `$`. Wrong options should be mistakes people make: the naive version's complexity, a missing log factor, a related algorithm's bound (say which in the explanation). Never a bound that is also true for the named algorithm.
 - **`id`** is unique within the file. Removing an algorithm retires it in the app; nothing breaks.
 - CI checks the schema, unique ids, that the subject exists and isn't hidden, and that no wrong option equals the right one.
+
+## Lessons (Lecciones)
+
+Lessons teach one technique at a time. The app doesn't show them yet (that's L3); for now they're content only.
+
+- **`courses/<subject>.json`** orders a subject's lessons into sections (`basico`, later `intermedio`, `avanzado`). The order is a suggestion: nothing is ever locked. Every unit is in exactly one course.
+- **`units/<subject>/<name>.json`** is one lesson, with id `<subject>.<name>` (usually its technique id, e.g. `dp.coin-change`). It's a list of cards, in this order: `idea` (1–3, plus a `diagram`), 3–5 `question` or `drill` cards, `signals` and one question about them, `apply`, `recap`. A lesson takes 5–12 minutes.
+
+```json
+{ "type": "question", "key": "coins-outside",
+  "prompt": "With `for c in [2, 3]: …`, what is `dp[5]`?",
+  "options": [{ "id": "a", "text": "1" }, { "id": "b", "text": "2", "why": "…" }],
+  "accepted": ["a"], "explanation": "…",
+  "es": { "prompt": "…", "options": { "b": "…" }, "why": { "b": "…" }, "explanation": "…" } }
+```
+
+- **Card `key`s are permanent,** like problem ids: attempts refer to them. Every card has one.
+- **Questions make you use the idea, not repeat it.** Trace a small case, pick the state or the loop, spot a classic bug, recognize the idea in a different story, say the complexity. Not "what did the card say?". Every wrong option gets a `why`.
+- **Wrong options are near misses:** the right shape with one detail wrong. An offset off by one, the loop in the wrong direction, a wrong base case, min for max, the last move instead of the first, the same story with one rule changed. Keep the right option about as long as the others: if it's usually the longest, players learn to pick the longest. Shorten the right one rather than padding the wrong ones. Reviewers check this; CI doesn't.
+- **`drill`** asks one algorithm from `drills/<subject>.json`, as `"algorithm": "dp:coin-combinations"`.
+- **`apply`** lists 1–2 bank problems whose intended technique is the lesson's. They're played without the subject question, so the extra layers are what's left to ask. The technique question offers only the techniques learned on the line, and it's skipped when that leaves one. A Spanish lesson shows the problem in Spanish, so before a lesson is `ready` its apply problems need the full `es` block (see Spanish below).
+- **`diagram`** cards give the input and the app computes the steps: `dp-1d` (a recurrence over offsets, ≤ 12 cells), `dp-2d` (`paths`, `lcs`, `knapsack`, ≤ 6 × 6), or hand-written `frames` (≤ 3 rows × 12 cells) for what the generators don't cover. `schema/unit.schema.json` has the exact fields. Use your own inputs, not the apply problems' samples.
+- **Texts** take a small Markdown subset (paragraphs, **bold**, *italic*, `` `code` ``, lists, code blocks) and `$…$` for KaTeX. Options are one line.
+- **Spanish:** unlike problems, lessons are our own writing, so `es` translates everything: the card texts, prompts and options too. Same style as the problem `es` blocks.
+- CI checks the schemas, that every unit is in one course, unique card keys, real options in `accepted` and `es`, that drills and problems exist, that apply problems match the technique (and are ready and in Spanish if the unit is), and that diagram data fits its size.
 
 ## Taxonomy
 

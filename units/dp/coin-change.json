@@ -1,0 +1,281 @@
+{
+  "$schema": "../../schema/unit.schema.json",
+  "schemaVersion": 1,
+  "id": "dp.coin-change",
+  "techniques": [
+    "dp.coin-change"
+  ],
+  "status": "draft",
+  "author": "massicomar",
+  "notes": "The diagram uses coins 1, 5, 6 so it doesn't copy Minimizing Coins' own trap example (1, 3, 4). Apply: one min problem and the unordered count.",
+  "cards": [
+    {
+      "type": "idea",
+      "key": "idea",
+      "md": "**Coin change:** you have coin values, **unlimited copies of each**, and a target sum x. The state is the sum itself: `dp[s]` is the answer for sum s. The last coin can be any coin c ≤ s, so:\n\n- **Fewest coins:** `dp[s] = 1 + min over c of dp[s − c]`, with `dp[0] = 0`. Sums you can't make stay at ∞.\n- **Number of ways:** `dp[s] = Σ over c of dp[s − c]`, with `dp[0] = 1`.\n\nEach sum tries every coin: O(n·x) for n coin values.",
+      "es": "**Coin change (cambio de monedas):** tienes valores de monedas, **copias ilimitadas de cada una**, y una suma objetivo x. El estado es la suma misma: `dp[s]` es la respuesta para la suma s. La última moneda puede ser cualquier moneda c ≤ s, así que:\n\n- **Mínimo de monedas:** `dp[s] = 1 + min sobre c de dp[s − c]`, con `dp[0] = 0`. Las sumas que no se pueden formar quedan en ∞.\n- **Cantidad de formas:** `dp[s] = Σ sobre c de dp[s − c]`, con `dp[0] = 1`.\n\nCada suma prueba todas las monedas: O(n·x) para n valores de monedas."
+    },
+    {
+      "type": "diagram",
+      "key": "fewest-coins",
+      "kind": "dp-1d",
+      "data": {
+        "size": 11,
+        "base": {
+          "0": 0
+        },
+        "recurrence": {
+          "op": "min",
+          "offsets": [
+            1,
+            5,
+            6
+          ],
+          "cost": 1
+        }
+      },
+      "caption": "Coins 1, 5 and 6: dp[s] = the fewest coins that add up to s. Largest coin first would pay 10 as 6 + 1 + 1 + 1 + 1; the table finds 5 + 5.",
+      "es": {
+        "caption": "Monedas de 1, 5 y 6: dp[s] = la menor cantidad de monedas que suman s. Empezar por la más grande pagaría 10 como 6 + 1 + 1 + 1 + 1; la tabla encuentra 5 + 5."
+      }
+    },
+    {
+      "type": "idea",
+      "key": "order-matters",
+      "md": "**When counting, check whether order matters.**\n\n- **Sums outside, coins inside** (`for s: for c: dp[s] += dp[s − c]`): any coin can be the last one, so 1 + 2 and 2 + 1 count as two ways. That counts **ordered sequences**.\n- **Coins outside, sums inside** (`for c: for s from c to x: dp[s] += dp[s − c]`): coins are added in a fixed order, so each **combination** is counted once.\n\nSame state, same cost; only the loop order changes.",
+      "es": "**Al contar, fíjate si el orden importa.**\n\n- **Sumas afuera, monedas adentro** (`for s: for c: dp[s] += dp[s − c]`): cualquier moneda puede ser la última, así que 1 + 2 y 2 + 1 cuentan como dos formas. Eso cuenta **secuencias ordenadas**.\n- **Monedas afuera, sumas adentro** (`for c: for s from c to x: dp[s] += dp[s − c]`): las monedas se agregan en un orden fijo, así que cada **combinación** se cuenta una vez.\n\nEl mismo estado, el mismo costo; solo cambia el orden de los loops."
+    },
+    {
+      "type": "question",
+      "key": "trace-ordered",
+      "prompt": "Coins 1 and 2, counting **ordered** ways (1 + 2 and 2 + 1 are different), with `dp[0] = 1`. What is `dp[4]`?",
+      "options": [
+        {
+          "id": "a",
+          "text": "5"
+        },
+        {
+          "id": "b",
+          "text": "3",
+          "why": "3 is the number of combinations (1+1+1+1, 1+1+2, 2+2). In order, 1+1+2 alone shows up 3 times: 1+1+2, 1+2+1, 2+1+1."
+        },
+        {
+          "id": "c",
+          "text": "4",
+          "why": "Recount: dp[2] = 2 and dp[3] = 3, so dp[4] = 3 + 2 = 5."
+        },
+        {
+          "id": "d",
+          "text": "8",
+          "why": "8 counts every ordered split of 4 with parts of any size; here the parts can only be 1 or 2."
+        }
+      ],
+      "accepted": [
+        "a"
+      ],
+      "explanation": "dp[s] = dp[s−1] + dp[s−2]: 1, 1, 2, 3, 5. With coins 1 and 2, ordered coin change is the stairs DP from the first station.",
+      "es": {
+        "prompt": "Monedas de 1 y 2, contando formas **ordenadas** (1 + 2 y 2 + 1 son distintas), con `dp[0] = 1`. ¿Cuánto vale `dp[4]`?",
+        "why": {
+          "b": "3 es la cantidad de combinaciones (1+1+1+1, 1+1+2, 2+2). Con orden, solo 1+1+2 aparece 3 veces: 1+1+2, 1+2+1, 2+1+1.",
+          "c": "Vuelve a contar: dp[2] = 2 y dp[3] = 3, así que dp[4] = 3 + 2 = 5.",
+          "d": "8 cuenta todas las particiones ordenadas de 4 con partes de cualquier tamaño; aquí las partes solo pueden ser 1 o 2."
+        },
+        "explanation": "dp[s] = dp[s−1] + dp[s−2]: 1, 1, 2, 3, 5. Con monedas de 1 y 2, el coin change ordenado es la DP de los escalones de la primera estación."
+      }
+    },
+    {
+      "type": "question",
+      "key": "coins-outside",
+      "prompt": "With `for c in [2, 3]: for s from c to 5: dp[s] += dp[s − c]` and `dp[0] = 1`, what is `dp[5]`?",
+      "options": [
+        {
+          "id": "a",
+          "text": "1"
+        },
+        {
+          "id": "b",
+          "text": "2",
+          "why": "2 would count 2 + 3 and 3 + 2 separately, which is what the sums-outside loop does. With coins outside, each combination counts once."
+        },
+        {
+          "id": "c",
+          "text": "0",
+          "why": "2 + 3 = 5, so there's at least one way."
+        },
+        {
+          "id": "d",
+          "text": "3",
+          "why": "Trace it: after coin 2, dp = [1, 0, 1, 0, 1, 0]; coin 3 then adds dp[2] to dp[5]: 0 + 1 = 1."
+        }
+      ],
+      "accepted": [
+        "a"
+      ],
+      "explanation": "With coins outside, every 2 is placed before any 3, so 2 + 3 is built once and 3 + 2 never. dp after coin 2: [1, 0, 1, 0, 1, 0]; after coin 3: [1, 0, 1, 1, 1, 1].",
+      "es": {
+        "prompt": "Con `for c in [2, 3]: for s from c to 5: dp[s] += dp[s − c]` y `dp[0] = 1`, ¿cuánto vale `dp[5]`?",
+        "why": {
+          "b": "2 contaría 2 + 3 y 3 + 2 por separado, que es lo que hace el loop con las sumas afuera. Con las monedas afuera, cada combinación cuenta una vez.",
+          "c": "2 + 3 = 5, así que hay al menos una forma.",
+          "d": "Síguelo paso a paso: después de la moneda 2, dp = [1, 0, 1, 0, 1, 0]; luego la moneda 3 suma dp[2] a dp[5]: 0 + 1 = 1."
+        },
+        "explanation": "Con las monedas afuera, todos los 2 se ponen antes que cualquier 3, así que 2 + 3 se arma una vez y 3 + 2 nunca. dp después de la moneda 2: [1, 0, 1, 0, 1, 0]; después de la moneda 3: [1, 0, 1, 1, 1, 1]."
+      }
+    },
+    {
+      "type": "question",
+      "key": "greedy-fails",
+      "prompt": "Coins 1, 7 and 10; fewest coins for 14. Taking the largest coin first gives 10 + 1 + 1 + 1 + 1, 5 coins. What does the DP give?",
+      "options": [
+        {
+          "id": "a",
+          "text": "2"
+        },
+        {
+          "id": "b",
+          "text": "5",
+          "why": "That's the greedy answer. The DP also tries 7 as the last coin: dp[14] = 1 + dp[7] = 2."
+        },
+        {
+          "id": "c",
+          "text": "3",
+          "why": "7 + 7 uses only two coins."
+        },
+        {
+          "id": "d",
+          "text": "1",
+          "why": "No single coin is worth 14."
+        }
+      ],
+      "accepted": [
+        "a"
+      ],
+      "explanation": "dp[14] = 1 + min(dp[13], dp[7], dp[4]) = 1 + dp[7] = 2. Largest-first works for coins like 1, 5, 10, 25, but not for every set, so with arbitrary values you need the DP.",
+      "es": {
+        "prompt": "Monedas de 1, 7 y 10; mínimo de monedas para 14. Tomar primero la moneda más grande da 10 + 1 + 1 + 1 + 1, 5 monedas. ¿Qué da la DP?",
+        "why": {
+          "b": "Esa es la respuesta greedy. La DP también prueba el 7 como última moneda: dp[14] = 1 + dp[7] = 2.",
+          "c": "7 + 7 usa solo dos monedas.",
+          "d": "Ninguna moneda vale 14 por sí sola."
+        },
+        "explanation": "dp[14] = 1 + min(dp[13], dp[7], dp[4]) = 1 + dp[7] = 2. Empezar por la más grande funciona con monedas como 1, 5, 10, 25, pero no con cualquier conjunto, así que con valores arbitrarios necesitas la DP."
+      }
+    },
+    {
+      "type": "question",
+      "key": "unreachable",
+      "prompt": "Fewest coins with coins 4 and 6, target 7. At the start you fill every `dp[s]` with 0 instead of ∞ (and `dp[0] = 0`). What happens?",
+      "options": [
+        {
+          "id": "a",
+          "text": "It answers 1 for 7, which no coins can make"
+        },
+        {
+          "id": "b",
+          "text": "It still works: unreachable sums are never used",
+          "why": "They are: dp[7] = 1 + dp[3], and dp[3] stayed at 0 instead of ∞."
+        },
+        {
+          "id": "c",
+          "text": "It answers 0 for 7, as if 7 were free",
+          "why": "dp[7] = 1 + min(dp[3], dp[1]), and both stayed at 0, so it answers 1: one coin that doesn't exist."
+        },
+        {
+          "id": "d",
+          "text": "Only the running time changes",
+          "why": "It's still O(n·x); what changes are the answers."
+        }
+      ],
+      "accepted": [
+        "a"
+      ],
+      "explanation": "0 means \"free to make\". Unreachable sums have to stay at ∞ (or −1, checked before use), and the answer is \"impossible\" when dp[x] is still ∞.",
+      "es": {
+        "prompt": "Mínimo de monedas con monedas de 4 y 6, objetivo 7. Al inicio llenas todo `dp[s]` con 0 en lugar de ∞ (y `dp[0] = 0`). ¿Qué pasa?",
+        "options": {
+          "a": "Responde 1 para 7, que no se puede formar",
+          "b": "Sigue funcionando: las sumas inalcanzables nunca se usan",
+          "c": "Responde 0 para 7, como si fuera gratis",
+          "d": "Solo cambia el tiempo de ejecución"
+        },
+        "why": {
+          "b": "Sí se usan: dp[7] = 1 + dp[3], y dp[3] quedó en 0 en lugar de ∞.",
+          "c": "dp[7] = 1 + min(dp[3], dp[1]), y los dos quedaron en 0, así que responde 1: una moneda que no existe.",
+          "d": "Sigue siendo O(n·x); lo que cambian son las respuestas."
+        },
+        "explanation": "0 significa \"gratis de formar\". Las sumas inalcanzables tienen que quedar en ∞ (o en −1, revisado antes de usarlas), y la respuesta es \"imposible\" cuando dp[x] sigue en ∞."
+      }
+    },
+    {
+      "type": "drill",
+      "key": "drill",
+      "algorithm": "dp:coin-combinations"
+    },
+    {
+      "type": "signals",
+      "key": "signals",
+      "md": "Think **coin change** when:\n\n- You build a **target total** (an amount, a sum, a length) out of pieces, and **each piece can be used again and again**.\n- It asks for the **fewest pieces** or the **number of ways**.\n- The target fits as an array index: x up to about 10⁶, so n·x stays around 10⁸.\n- Read the wording for order: \"sequences\" or \"ordered\" means sums outside; \"combinations\" means coins outside.",
+      "es": "Piensa en **coin change** cuando:\n\n- Armas un **total objetivo** (un monto, una suma, un largo) con piezas, y **cada pieza se puede usar todas las veces que quieras**.\n- Se pide la **menor cantidad de piezas** o la **cantidad de formas**.\n- El objetivo entra como índice de un arreglo: x hasta unos 10⁶, así que n·x queda cerca de 10⁸.\n- Fíjate en la redacción para el orden: \"secuencias\" u \"ordenadas\" significa sumas afuera; \"combinaciones\" significa monedas afuera."
+    },
+    {
+      "type": "question",
+      "key": "signals-pick",
+      "prompt": "Which of these is coin change?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Cut a rod of length n into pieces of lengths 2, 3 or 7, as few pieces as possible."
+        },
+        {
+          "id": "b",
+          "text": "Pay exactly n with as few coins as possible from your purse, each coin used once.",
+          "why": "Each coin in the purse can be used only once: that's 0/1 knapsack, the next station."
+        },
+        {
+          "id": "c",
+          "text": "Find the longest strictly increasing subsequence of an array of n numbers.",
+          "why": "No target total and no reusable pieces: that's LIS, the last station of this section."
+        },
+        {
+          "id": "d",
+          "text": "Talks with start and end times: attend as many as you can without overlaps.",
+          "why": "A greedy by earliest end time solves it."
+        }
+      ],
+      "accepted": [
+        "a"
+      ],
+      "explanation": "The allowed lengths can be reused, and they build a target total with as few pieces as possible: dp[len] = 1 + min over pieces p of dp[len − p].",
+      "es": {
+        "prompt": "¿Cuál de estos es coin change?",
+        "options": {
+          "a": "Cortar una varilla de largo n en piezas de largo 2, 3 o 7, con la menor cantidad de piezas.",
+          "b": "Pagar exactamente n con la menor cantidad de monedas de tu bolsillo, cada moneda una vez.",
+          "c": "Encontrar la subsecuencia estrictamente creciente más larga de un arreglo de n números.",
+          "d": "Charlas con hora de inicio y de fin: asiste a la mayor cantidad posible sin que se superpongan."
+        },
+        "why": {
+          "b": "Cada moneda del bolsillo se usa una sola vez: eso es mochila 0/1, la próxima estación.",
+          "c": "No hay total objetivo ni piezas reutilizables: eso es LIS, la última estación de esta sección.",
+          "d": "Lo resuelve un greedy por hora de fin más temprana."
+        },
+        "explanation": "Los largos permitidos se pueden repetir y arman un total objetivo con la menor cantidad de piezas: dp[largo] = 1 + min sobre las piezas p de dp[largo − p]."
+      }
+    },
+    {
+      "type": "apply",
+      "key": "apply",
+      "problems": [
+        "cses-1634",
+        "cses-1636"
+      ]
+    },
+    {
+      "type": "recap",
+      "key": "recap",
+      "md": "- State = the sum: dp[s]. The last coin can be any coin, so dp[s] looks at dp[s − c] for every coin c. O(n·x).\n- Fewest coins: 1 + min, unreachable sums at ∞. Number of ways: Σ, with dp[0] = 1.\n- Ordered ways: sums outside. Combinations: coins outside. Largest coin first is wrong for arbitrary coins.",
+      "es": "- Estado = la suma: dp[s]. La última moneda puede ser cualquiera, así que dp[s] mira dp[s − c] para cada moneda c. O(n·x).\n- Mínimo de monedas: 1 + min, sumas inalcanzables en ∞. Cantidad de formas: Σ, con dp[0] = 1.\n- Formas ordenadas: sumas afuera. Combinaciones: monedas afuera. Empezar por la moneda más grande falla con monedas arbitrarias."
+    }
+  ]
+}

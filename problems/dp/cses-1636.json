@@ -107,12 +107,20 @@
   ],
   "deprecated": false,
   "es": {
+    "summary": "Considera un sistema monetario de $n$ monedas. Cada moneda tiene un valor entero positivo. Tu tarea es calcular la cantidad de formas ordenadas distintas en que puedes formar una suma de dinero $x$ con las monedas disponibles.\n\nPor ejemplo, si las monedas son $\\{2,3,5\\}$ y la suma deseada es $9$, hay $3$ formas:\n\n- $2+2+5$\n- $3+3+3$\n- $2+2+2+3$\n\nEntrada\n\nLa primera línea de la entrada tiene dos enteros $n$ y $x$: la cantidad de monedas y la suma de dinero deseada.\n\nLa segunda línea tiene $n$ enteros distintos $c_1,c_2,\\dots,c_n$: el valor de cada moneda.\n\nSalida\n\nImprime un entero: la cantidad de formas módulo $10^9+7$.",
     "explanation": "Formas sin orden: procesa los tipos de moneda de a uno, así cada multiconjunto se arma en un orden fijo y se cuenta una vez.",
     "traps": [
       "Con las sumas en el loop de afuera se cuentan permutaciones (Coin Combinations I)."
     ],
     "layers": {
       "dp-state": {
+        "prompt": "¿Qué debería representar el estado de la DP?",
+        "options": {
+          "a": "dp[i][s] = cantidad de formas de formar s usando solo los primeros i tipos de moneda (comprimido en dp[s])",
+          "b": "dp[s] = cantidad de secuencias ordenadas que suman s",
+          "c": "dp[s][last] = formas que terminan con la moneda 'last'",
+          "d": "dp[i][s] = 1 si la moneda i se usa en la suma s"
+        },
         "explanation": "Fijar el orden en que se consideran los tipos de moneda hace que cada multiconjunto aparezca exactamente una vez.",
         "why": {
           "b": "Cuenta 2+3 y 3+2 por separado: eso es Coin Combinations I.",
@@ -121,6 +129,13 @@
         }
       },
       "dp-transition": {
+        "prompt": "Con ese estado, ¿qué transición es correcta?",
+        "options": {
+          "a": "para cada moneda c (loop de afuera): para s de c a x: dp[s] += dp[s − c]",
+          "b": "para s de 1 a x (loop de afuera): para cada moneda c: dp[s] += dp[s − c]",
+          "c": "para cada moneda c: para s de x bajando hasta c: dp[s] += dp[s − c]",
+          "d": "dp[s] = Σ dp[s − c] / (cantidad de monedas)"
+        },
         "explanation": "dp[i][s] = dp[i−1][s] + dp[i][s − c_i]: o nunca usas la moneda i, o la usas al menos una vez más.",
         "why": {
           "b": "Con las sumas afuera se cuentan los órdenes por separado.",

@@ -108,6 +108,7 @@
   ],
   "deprecated": false,
   "es": {
+    "summary": "Considera un sistema monetario de $n$ monedas. Cada moneda tiene un valor entero positivo. Tu tarea es formar una suma de dinero $x$ con las monedas disponibles, de modo que la cantidad de monedas sea mínima.\n\nPor ejemplo, si las monedas son $\\{1,5,7\\}$ y la suma deseada es $11$, una solución óptima es $5+5+1$, que usa $3$ monedas.\n\nEntrada\n\nLa primera línea de la entrada tiene dos enteros $n$ y $x$: la cantidad de monedas y la suma de dinero deseada.\n\nLa segunda línea tiene $n$ enteros distintos $c_1,c_2,\\dots,c_n$: el valor de cada moneda.\n\nSalida\n\nImprime un entero: la cantidad mínima de monedas. Si no es posible formar la suma deseada, imprime $-1$.",
     "explanation": "Monedas ilimitadas con valores arbitrarios: dp[s] = 1 + mín dp[s − c]. Greedy falla para sistemas de monedas arbitrarios.",
     "traps": [
       "Las sumas inalcanzables tienen que quedar en ∞, no en 0.",
@@ -115,6 +116,13 @@
     ],
     "layers": {
       "dp-state": {
+        "prompt": "¿Qué debería representar el estado de la DP?",
+        "options": {
+          "a": "dp[s] = mínima cantidad de monedas cuyos valores suman exactamente s",
+          "b": "dp[i][s] = mínima cantidad de monedas usando solo la moneda i para la suma s",
+          "c": "dp[s] = cantidad de formas de formar s",
+          "d": "dp[c] = cuántas veces se usa la moneda c"
+        },
         "explanation": "Cada suma s es un subproblema; la mejor forma de pagar s termina con alguna moneda c.",
         "why": {
           "b": "Las monedas se pueden mezclar; restringirse a un solo tipo de moneda está mal.",
@@ -123,6 +131,13 @@
         }
       },
       "dp-transition": {
+        "prompt": "Con ese estado, ¿qué transición es correcta?",
+        "options": {
+          "a": "dp[s] = 1 + min sobre las monedas c ≤ s de dp[s − c]; dp[0] = 0; inalcanzable = ∞",
+          "b": "dp[s] = dp[s − la mayor moneda ≤ s] + 1",
+          "c": "dp[s] = Σ sobre las monedas c de dp[s − c]",
+          "d": "dp[s] = min sobre las monedas c de dp[s − c]"
+        },
         "explanation": "Prueba cada moneda como la última que se paga y quédate con la mejor.",
         "why": {
           "b": "Eso es greedy; falla para sistemas de monedas como {1, 3, 4}.",

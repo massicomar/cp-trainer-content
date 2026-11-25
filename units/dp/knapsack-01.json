@@ -1,0 +1,336 @@
+{
+  "$schema": "../../schema/unit.schema.json",
+  "schemaVersion": 1,
+  "id": "dp.knapsack-01",
+  "techniques": [
+    "dp.knapsack-01"
+  ],
+  "status": "draft",
+  "author": "massicomar",
+  "notes": "Contrasts with coin change (once vs reusable, down vs up). Follows the TTPS 2026 cheatsheet: 'exactly W' vs 'at most W' starts, the backwards loop, and 'the small dimension goes in the index'. The huge-capacity question sets up Knapsack 2 in the apply step.",
+  "cards": [
+    {
+      "type": "idea",
+      "key": "idea",
+      "md": "**0/1 knapsack:** n items, each with a weight and a value. Pick a subset with total weight ≤ W and the most value. **Each item is used at most once.**\n\nGo item by item and decide take or skip. The state needs how many items you've decided and how much capacity you have:\n\n`dp[i][c]` = the best value using only the first i items, with total weight ≤ c\n\n`dp[i][c] = max(dp[i−1][c], dp[i−1][c − w_i] + v_i)`, the second only if w_i ≤ c.\n\nBoth options read row i−1, from before item i: that's what stops it from being taken twice. n·W cells, O(1) each: O(n·W).",
+      "es": "**Mochila 0/1 (0/1 knapsack):** n objetos, cada uno con un peso y un valor. Elige un subconjunto con peso total ≤ W y el mayor valor. **Cada objeto se usa a lo sumo una vez.**\n\nRecorre los objetos uno por uno y decide si tomarlo o no. El estado necesita cuántos objetos ya decidiste y cuánta capacidad tienes:\n\n`dp[i][c]` = el mejor valor usando solo los primeros i objetos, con peso total ≤ c\n\n`dp[i][c] = max(dp[i−1][c], dp[i−1][c − w_i] + v_i)`, la segunda solo si w_i ≤ c.\n\nLas dos opciones leen la fila i−1, de antes del objeto i: eso es lo que impide tomarlo dos veces. n·W celdas, O(1) cada una: O(n·W)."
+    },
+    {
+      "type": "diagram",
+      "key": "table",
+      "kind": "dp-2d",
+      "data": {
+        "recurrence": "knapsack",
+        "items": [
+          {
+            "weight": 3,
+            "value": 5
+          },
+          {
+            "weight": 2,
+            "value": 3
+          },
+          {
+            "weight": 2,
+            "value": 3
+          }
+        ],
+        "capacity": 4
+      },
+      "caption": "Items (weight, value) = (3, 5), (2, 3), (2, 3), capacity 4. Row i uses the first i items; column c is the capacity. The best value per weight, (3, 5), isn't in the answer: the two (2, 3) are worth 6.",
+      "es": {
+        "caption": "Objetos (peso, valor) = (3, 5), (2, 3), (2, 3), capacidad 4. La fila i usa los primeros i objetos; la columna c es la capacidad. El de mejor valor por peso, (3, 5), no está en la respuesta: los dos (2, 3) valen 6."
+      }
+    },
+    {
+      "type": "idea",
+      "key": "one-row",
+      "md": "**One row is enough, if you go down.** Keep a single array and, for each item, run `for c from W down to w_i: dp[c] = max(dp[c], dp[c − w_i] + v_i)`. Going down, this item hasn't touched `dp[c − w_i]` yet, so it still means \"before item i\". Memory drops from n·W to W; the time stays O(n·W).",
+      "es": "**Basta con una fila, si vas hacia abajo** (de W hacia atrás). Guarda un solo arreglo y, para cada objeto, haz `for c from W down to w_i: dp[c] = max(dp[c], dp[c − w_i] + v_i)`. Yendo hacia abajo, este objeto todavía no tocó `dp[c − w_i]`, así que sigue significando \"antes del objeto i\". La memoria baja de n·W a W; el tiempo sigue siendo O(n·W)."
+    },
+    {
+      "type": "question",
+      "key": "trace-best",
+      "prompt": "Capacity 5; items (weight, value): (2, 3), (3, 4), (4, 6). What's the best total value?",
+      "options": [
+        {
+          "id": "a",
+          "text": "7"
+        },
+        {
+          "id": "b",
+          "text": "6",
+          "why": "That's taking the most valuable item first, (4, 6), after which nothing else fits. (2, 3) + (3, 4) weighs 5 and is worth 7."
+        },
+        {
+          "id": "c",
+          "text": "9",
+          "why": "(2, 3) + (4, 6) is worth 9 but weighs 6, over the capacity."
+        },
+        {
+          "id": "d",
+          "text": "13",
+          "why": "All three weigh 9: they don't fit."
+        }
+      ],
+      "accepted": [
+        "a"
+      ],
+      "explanation": "dp[3][5] = max(dp[2][5], dp[2][1] + 6) = max(7, 0 + 6) = 7: skipping the last item is better.",
+      "es": {
+        "prompt": "Capacidad 5; objetos (peso, valor): (2, 3), (3, 4), (4, 6). ¿Cuál es el mejor valor total?",
+        "why": {
+          "b": "Eso es tomar primero el objeto más valioso, (4, 6), y después no entra nada más. (2, 3) + (3, 4) pesa 5 y vale 7.",
+          "c": "(2, 3) + (4, 6) vale 9 pero pesa 6, más que la capacidad.",
+          "d": "Los tres pesan 9: no entran."
+        },
+        "explanation": "dp[3][5] = max(dp[2][5], dp[2][1] + 6) = max(7, 0 + 6) = 7: conviene no tomar el último objeto."
+      }
+    },
+    {
+      "type": "question",
+      "key": "upward-bug",
+      "prompt": "One array `dp[0..3]`, all 0, and a single item with weight 1 and value 2. You loop **upward**: `for c from 1 to 3: dp[c] = max(dp[c], dp[c − 1] + 2)`, and get `dp = [0, 2, 4, 6]`. What went wrong?",
+      "options": [
+        {
+          "id": "a",
+          "text": "The one item was taken three times"
+        },
+        {
+          "id": "b",
+          "text": "Nothing: 6 is right",
+          "why": "There's a single item worth 2; no subset is worth more than 2."
+        },
+        {
+          "id": "c",
+          "text": "The base case: dp[0] should be −∞",
+          "why": "dp[0] = 0 is right: an empty knapsack is worth 0."
+        },
+        {
+          "id": "d",
+          "text": "dp[3] should be 0, since the item doesn't fill the knapsack",
+          "why": "Weight ≤ capacity is enough; it doesn't have to be full. The right dp[3] is 2."
+        }
+      ],
+      "accepted": [
+        "a"
+      ],
+      "explanation": "Going up, dp[c − 1] was already updated with this item, so it gets added again. From W down to w, every dp[c − w] is still from before the item: dp = [0, 2, 2, 2]. The upward loop is unbounded knapsack, the coin change pattern.",
+      "es": {
+        "prompt": "Un arreglo `dp[0..3]`, todo en 0, y un solo objeto de peso 1 y valor 2. Recorres **hacia arriba**: `for c from 1 to 3: dp[c] = max(dp[c], dp[c − 1] + 2)`, y obtienes `dp = [0, 2, 4, 6]`. ¿Qué salió mal?",
+        "options": {
+          "a": "El único objeto se tomó tres veces",
+          "b": "Nada: 6 está bien",
+          "c": "El caso base: dp[0] debería ser −∞",
+          "d": "dp[3] debería ser 0, porque el objeto no llena la mochila"
+        },
+        "why": {
+          "b": "Hay un solo objeto, que vale 2; ningún subconjunto vale más de 2.",
+          "c": "dp[0] = 0 está bien: una mochila vacía vale 0.",
+          "d": "Basta con que el peso sea ≤ la capacidad; no tiene que llenarse. El dp[3] correcto es 2."
+        },
+        "explanation": "Yendo hacia arriba, dp[c − 1] ya se actualizó con este objeto, así que se vuelve a sumar. De W hacia abajo hasta w, cada dp[c − w] sigue siendo de antes del objeto: dp = [0, 2, 2, 2]. El loop hacia arriba es la mochila sin límite, el patrón de coin change."
+      }
+    },
+    {
+      "type": "question",
+      "key": "exactly-w",
+      "prompt": "Now the knapsack must weigh **exactly** W. How do you start the one-row `dp`, and where is the answer?",
+      "options": [
+        {
+          "id": "a",
+          "text": "dp[0] = 0 and every other cell −∞; the answer is dp[W]"
+        },
+        {
+          "id": "b",
+          "text": "Every cell 0; the answer is dp[W]",
+          "why": "With every cell at 0, dp[x] means \"weight at most x\", so dp[W] may leave capacity unused."
+        },
+        {
+          "id": "c",
+          "text": "Every cell −∞, dp[0] included; the answer is dp[W]",
+          "why": "Then nothing is ever reachable: the empty knapsack weighs exactly 0 and is worth 0."
+        },
+        {
+          "id": "d",
+          "text": "dp[0] = 0 and every other cell −∞; the answer is the max over all x",
+          "why": "That's the best for any weight up to W; the problem asks for exactly W."
+        }
+      ],
+      "accepted": [
+        "a"
+      ],
+      "explanation": "−∞ marks the weights you can't hit exactly, like ∞ for unreachable sums in coin change. With every cell at 0 instead, you get the \"at most W\" version, whose answer is dp[W] directly.",
+      "es": {
+        "prompt": "Ahora la mochila tiene que pesar **exactamente** W. ¿Cómo inicializas el `dp` de una fila, y dónde está la respuesta?",
+        "options": {
+          "a": "dp[0] = 0 y todas las demás celdas en −∞; la respuesta es dp[W]",
+          "b": "Todas las celdas en 0; la respuesta es dp[W]",
+          "c": "Todas las celdas en −∞, dp[0] incluida; la respuesta es dp[W]",
+          "d": "dp[0] = 0 y todas las demás celdas en −∞; la respuesta es el máximo sobre todos los x"
+        },
+        "why": {
+          "b": "Con todas las celdas en 0, dp[x] significa \"peso a lo sumo x\", así que dp[W] puede dejar capacidad sin usar.",
+          "c": "Entonces nunca se llega a nada: la mochila vacía pesa exactamente 0 y vale 0.",
+          "d": "Eso es lo mejor para cualquier peso hasta W; el problema pide exactamente W."
+        },
+        "explanation": "−∞ marca los pesos a los que no se puede llegar exactamente, como el ∞ de las sumas inalcanzables en coin change. Con todas las celdas en 0 obtienes la versión \"a lo sumo W\", cuya respuesta es directamente dp[W]."
+      }
+    },
+    {
+      "type": "question",
+      "key": "equal-split",
+      "prompt": "n ≤ 100 numbers, each ≤ 1000. Can you split them into two groups with the same sum? Which approach works?",
+      "options": [
+        {
+          "id": "a",
+          "text": "dp over sums, each number used once; check total / 2"
+        },
+        {
+          "id": "b",
+          "text": "dp over sums, each number reusable; check total / 2",
+          "why": "Each number goes into exactly one group, so it's used once, not again and again."
+        },
+        {
+          "id": "c",
+          "text": "Sort them, then put each into the lighter group",
+          "why": "Greedy fails: 3, 3, 2, 2, 2 ends 7 against 5, but {3, 3} and {2, 2, 2} both sum to 6."
+        },
+        {
+          "id": "d",
+          "text": "dp over sums, each number used once; check the total",
+          "why": "The total is always reachable: take every number. What you need is one group with half of it."
+        }
+      ],
+      "accepted": [
+        "a"
+      ],
+      "explanation": "Each number is an item whose weight is its value, and you only ask whether total / 2 is reachable. The total is ≤ 10⁵, so 100 × 5·10⁴ = 5·10⁶ steps.",
+      "es": {
+        "prompt": "n ≤ 100 números, cada uno ≤ 1000. ¿Se pueden separar en dos grupos con la misma suma? ¿Qué enfoque funciona?",
+        "options": {
+          "a": "dp sobre las sumas, cada número una vez; revisar total / 2",
+          "b": "dp sobre las sumas, cada número repetible; revisar total / 2",
+          "c": "Ordenarlos y poner cada uno en el grupo más liviano",
+          "d": "dp sobre las sumas, cada número una vez; revisar el total"
+        },
+        "why": {
+          "b": "Cada número va a exactamente un grupo, así que se usa una vez, no todas las veces que quieras.",
+          "c": "El greedy falla: 3, 3, 2, 2, 2 termina en 7 contra 5, pero {3, 3} y {2, 2, 2} suman 6 los dos.",
+          "d": "Al total siempre se llega: tomando todos los números. Lo que necesitas es un grupo con la mitad."
+        },
+        "explanation": "Cada número es un objeto cuyo peso es su valor, y solo preguntas si se llega a total / 2. El total es ≤ 10⁵, así que 100 × 5·10⁴ = 5·10⁶ pasos."
+      }
+    },
+    {
+      "type": "question",
+      "key": "huge-capacity",
+      "prompt": "n ≤ 100 items, capacity W ≤ 10⁹, each value ≤ 1000. A table over capacity would need 10¹¹ steps. Which state works instead?",
+      "options": [
+        {
+          "id": "a",
+          "text": "dp[v] = least weight for a total value of exactly v"
+        },
+        {
+          "id": "b",
+          "text": "dp[v] = greatest weight for a total value of exactly v",
+          "why": "You need to stay under W, so for each value keep the lightest way to reach it. The heaviest says nothing about fitting."
+        },
+        {
+          "id": "c",
+          "text": "dp[c] = best value at capacity c, in one row",
+          "why": "One row saves memory, not time: it's still n·W = 10¹¹ steps."
+        },
+        {
+          "id": "d",
+          "text": "Take items by value / weight, best first",
+          "why": "That greedy is only right when you can take fractions of an item."
+        }
+      ],
+      "accepted": [
+        "a"
+      ],
+      "explanation": "The total value is at most 100 · 1000 = 10⁵, so a table over values is small: 10⁷ steps. The answer is the largest v with dp[v] ≤ W.",
+      "es": {
+        "prompt": "n ≤ 100 objetos, capacidad W ≤ 10⁹, cada valor ≤ 1000. Una tabla sobre la capacidad necesitaría 10¹¹ pasos. ¿Qué estado funciona en su lugar?",
+        "options": {
+          "a": "dp[v] = el menor peso para un valor total de exactamente v",
+          "b": "dp[v] = el mayor peso para un valor total de exactamente v",
+          "c": "dp[c] = el mejor valor con capacidad c, en una sola fila",
+          "d": "Tomar los objetos por valor / peso, de mejor a peor"
+        },
+        "why": {
+          "b": "Tienes que quedar por debajo de W, así que para cada valor guardas la forma más liviana de llegar. La más pesada no dice nada de si entra.",
+          "c": "Una sola fila ahorra memoria, no tiempo: siguen siendo n·W = 10¹¹ pasos.",
+          "d": "Ese greedy solo es correcto cuando puedes tomar fracciones de un objeto."
+        },
+        "explanation": "El valor total es a lo sumo 100 · 1000 = 10⁵, así que una tabla sobre los valores es pequeña: 10⁷ pasos. La respuesta es el mayor v con dp[v] ≤ W."
+      }
+    },
+    {
+      "type": "signals",
+      "key": "signals",
+      "md": "Think **0/1 knapsack** when:\n\n- You choose a **subset**: each item is taken **once or not at all**.\n- There's a **budget** (weight, price, time) and you maximize a value, or ask whether a total is reachable (subset sum).\n- n·W fits: n up to about 1000 and W up to about 10⁵.\n- n is too big to try all 2ⁿ subsets (more than about 20).\n- Pick the dimension by the limits: **the small one goes in the index**. If W is huge but the values are small, the state is the value.",
+      "es": "Piensa en **mochila 0/1** cuando:\n\n- Eliges un **subconjunto**: cada objeto se toma **una vez o ninguna**.\n- Hay un **presupuesto** (peso, precio, tiempo) y maximizas un valor, o preguntas si se llega a un total (subset sum).\n- n·W entra: n hasta unos 1000 y W hasta unos 10⁵.\n- n es demasiado grande para probar los 2ⁿ subconjuntos (más de unos 20).\n- Elige la dimensión según los límites: **la pequeña va en el índice**. Si W es enorme pero los valores son pequeños, el estado es el valor."
+    },
+    {
+      "type": "question",
+      "key": "signals-pick",
+      "prompt": "Which of these is 0/1 knapsack?",
+      "options": [
+        {
+          "id": "a",
+          "text": "n ≤ 1000 topics with hours and points, 10⁴ hours in all: the most points, each topic all or nothing."
+        },
+        {
+          "id": "b",
+          "text": "Bags of 3, 5 and 7 kg, as many of each as you like: the fewest bags that weigh exactly n kg.",
+          "why": "Unlimited bags: each size can be reused, so it's coin change."
+        },
+        {
+          "id": "c",
+          "text": "n ≤ 15 cities with distances between them: the shortest route that visits every city.",
+          "why": "n ≤ 15 and \"visit all\" point to bitmask DP (n²·2ⁿ), a later station."
+        },
+        {
+          "id": "d",
+          "text": "n ≤ 1000 topics with hours and points, 10⁴ hours in all: the most points, where part of a topic earns part of its points.",
+          "why": "Partial topics earn partial points, so it's fractional knapsack: study the best points per hour first, a greedy."
+        }
+      ],
+      "accepted": [
+        "a"
+      ],
+      "explanation": "Each topic is studied fully or not at all, under a budget of hours: a dp over hours, n·H = 10⁷.",
+      "es": {
+        "prompt": "¿Cuál de estos es mochila 0/1?",
+        "options": {
+          "a": "n ≤ 1000 temas con horas y puntos, 10⁴ horas en total: la mayor cantidad de puntos, cada tema todo o nada.",
+          "b": "Bolsas de 3, 5 y 7 kg, todas las que quieras de cada una: la menor cantidad que pese exactamente n kg.",
+          "c": "n ≤ 15 ciudades con distancias entre ellas: la ruta más corta que pasa por todas.",
+          "d": "n ≤ 1000 temas con horas y puntos, 10⁴ horas en total: la mayor cantidad de puntos, y parte de un tema da parte de sus puntos."
+        },
+        "why": {
+          "b": "Bolsas ilimitadas: cada tamaño se puede repetir, así que es coin change.",
+          "c": "n ≤ 15 y \"pasar por todas\" apuntan a DP con bitmask (n²·2ⁿ), una estación posterior.",
+          "d": "Los temas a medias dan puntos a medias, así que es la mochila fraccionaria: primero lo de más puntos por hora, un greedy."
+        },
+        "explanation": "Cada tema se estudia entero o no se estudia, con un presupuesto de horas: una dp sobre las horas, n·H = 10⁷."
+      }
+    },
+    {
+      "type": "apply",
+      "key": "apply",
+      "problems": [
+        "cses-1158",
+        "atcoder-dp-e"
+      ]
+    },
+    {
+      "type": "recap",
+      "key": "recap",
+      "md": "- Each item once: dp[i][c] = max(skip, take), both read from row i−1. O(n·W).\n- One row works if c goes **down**; going up reuses items, which is coin change.\n- \"Exactly W\": start at −∞ except dp[0] = 0. W too big but values small? The small dimension goes in the index: dp[v] = the least weight for value v.",
+      "es": "- Cada objeto una vez: dp[i][c] = max(no tomarlo, tomarlo), las dos leídas de la fila i−1. O(n·W).\n- Una sola fila funciona si c va **hacia abajo**; hacia arriba reutiliza objetos, que es coin change.\n- \"Exactamente W\": empieza en −∞ salvo dp[0] = 0. ¿W demasiado grande pero valores pequeños? La dimensión pequeña va en el índice: dp[v] = el menor peso para el valor v."
+    }
+  ]
+}

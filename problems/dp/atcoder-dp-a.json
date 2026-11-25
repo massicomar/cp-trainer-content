@@ -105,12 +105,20 @@
   ],
   "deprecated": false,
   "es": {
+    "summary": "Hay $N$ piedras, numeradas $1, 2, \\ldots, N$. Para cada $i$ ($1 \\leq i \\leq N$), la altura de la piedra $i$ es $h_i$.\n\nHay una rana que al principio está en la piedra $1$. Va a repetir la siguiente acción algunas veces hasta llegar a la piedra $N$:\n\n- Si la rana está en la piedra $i$, salta a la piedra $i + 1$ o a la piedra $i + 2$. Esto tiene un costo de $|h_i - h_j|$, donde $j$ es la piedra en la que cae.\n\nEncuentra el mínimo costo total posible hasta que la rana llega a la piedra $N$.\n\nEntrada\n\nLa entrada se da por la entrada estándar con el siguiente formato:\n\n$N$\r\n$h_1$ $h_2$ $\\ldots$ $h_N$\n\nSalida\n\nImprime el mínimo costo total posible.",
     "explanation": "El costo de llegar a la piedra i solo depende de cómo llegaste a la piedra i−1 o i−2, así que alcanza con una tabla 1D sobre las piedras.",
     "traps": [
       "Tomar con greedy el salto siguiente más barato no es óptimo."
     ],
     "layers": {
       "dp-state": {
+        "prompt": "¿Qué debería representar el estado de la DP?",
+        "options": {
+          "a": "dp[i] = costo total mínimo para llegar a la piedra i",
+          "b": "dp[i][j] = costo mínimo para ir de la piedra i a la piedra j",
+          "c": "dp[h] = costo mínimo para llegar a una piedra de altura h",
+          "d": "dp[i] = cantidad de formas de llegar a la piedra i"
+        },
         "explanation": "Lo único que el futuro necesita saber es el mejor costo para estar parado en la piedra i.",
         "why": {
           "b": "N² estados (1e10), y siempre arrancas desde la piedra 1.",
@@ -119,6 +127,13 @@
         }
       },
       "dp-transition": {
+        "prompt": "Con ese estado, ¿qué transición es correcta?",
+        "options": {
+          "a": "dp[i] = min(dp[i−1] + |h_i − h_{i−1}|, dp[i−2] + |h_i − h_{i−2}|)",
+          "b": "dp[i] = dp[i−1] + dp[i−2]",
+          "c": "dp[i] = min sobre todos los j < i de dp[j] + |h_i − h_j|",
+          "d": "dp[i] = dp[i−1] + min(|h_i − h_{i−1}|, |h_i − h_{i−2}|)"
+        },
         "explanation": "Llegas a i desde i−1 o desde i−2; quédate con el más barato de los dos.",
         "why": {
           "b": "Esa es la recurrencia de conteo (Fibonacci), no un costo mínimo.",

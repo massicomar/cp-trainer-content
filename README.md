@@ -7,6 +7,8 @@ taxonomy.json                  subjects → techniques
 problems/<subject>/<id>.json   one file per problem
 drills/big-o.json              the time table quick questions are generated from
 drills/<subject>.json          algorithms of a subject with their complexity
+courses/<subject>.json         the order of a subject's lessons, in sections
+units/<subject>/<name>.json    one lesson (Lecciones): idea, questions, signals, apply, recap
 schema/                        JSON Schemas (the contract with the app)
 templates/                     copy this to add a problem
 scripts/validate.ts            CI checks (npm run validate)
@@ -24,6 +26,8 @@ The starter set has 107 problems:
 Every problem has its statement in `summary`, copied from the judge, and a Spanish `es` block with its explanations (drafts to review). Some still need their limits re-checked on the judge page (`constraints.verified: false`); see `CONTRIBUTING.md`.
 
 `drills/` has the Big O table plus 58 algorithms across the six subjects (about 10 each).
+
+`courses/dp.json` has the first section of lessons, DP básico: 6 units in `units/dp/`, all drafts to review. The app doesn't play lessons yet.
 
 ```bash
 npm ci

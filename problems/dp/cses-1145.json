@@ -106,12 +106,20 @@
   ],
   "deprecated": false,
   "es": {
+    "summary": "Te dan un arreglo de $n$ enteros. Tu tarea es determinar la subsecuencia creciente más larga del arreglo, es decir, la subsecuencia más larga en la que cada elemento es mayor que el anterior.\n\nUna subsecuencia es una secuencia que se puede obtener del arreglo borrando algunos elementos sin cambiar el orden de los que quedan.\n\nEntrada\n\nLa primera línea contiene un entero $n$: el tamaño del arreglo.\n\nDespués hay $n$ enteros $x_1,x_2,\\ldots,x_n$: el contenido del arreglo.\n\nSalida\n\nImprime el largo de la subsecuencia creciente más larga.",
     "explanation": "n = 2e5 mata al LIS O(n²). Guarda tails[k] = el menor último valor posible de una subsecuencia creciente de largo k, y haz búsqueda binaria para cada elemento.",
     "traps": [
       "Estrictamente creciente → usa lower_bound; upper_bound da no decreciente."
     ],
     "layers": {
       "dp-state": {
+        "prompt": "¿Qué debería representar el estado de la DP?",
+        "options": {
+          "a": "tails[k] = el menor último valor posible de una subsecuencia estrictamente creciente de largo k",
+          "b": "dp[i] = largo de la subsecuencia creciente más larga que termina en i (comparando con todos los j < i)",
+          "c": "dp[i][j] = LIS usando los elementos i..j",
+          "d": "dp[v] = subsecuencia más larga que termina con el valor v"
+        },
         "explanation": "Para cada largo solo importa el menor valor final posible: una cola más chica siempre se puede extender al menos igual de bien.",
         "why": {
           "b": "La recurrencia es correcta, pero O(n²) = 4e10 con n = 2e5.",
@@ -120,6 +128,13 @@
         }
       },
       "dp-transition": {
+        "prompt": "Con ese estado, ¿qué transición es correcta?",
+        "options": {
+          "a": "Para cada x: buscar el primer k con tails[k] ≥ x (lower_bound) y poner tails[k] = x, o agregarlo al final si no hay",
+          "b": "Para cada x: buscar el primer k con tails[k] > x (upper_bound) y reemplazarlo",
+          "c": "Para cada x: agregarlo si es mayor que la última cola; si no, omitirlo",
+          "d": "dp[i] = 1 + max sobre los j < i con a_j < a_i de dp[j]"
+        },
         "explanation": "Cada elemento mejora la cola de exactamente un largo; las colas quedan ordenadas, así que la búsqueda binaria la encuentra. Respuesta = cantidad de colas.",
         "why": {
           "b": "Eso arma subsecuencias no decrecientes, no estrictamente crecientes.",

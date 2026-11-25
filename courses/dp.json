@@ -1,0 +1,13 @@
+{
+  "$schema": "../schema/course.schema.json",
+  "schemaVersion": 1,
+  "subject": "dp",
+  "sections": [
+    {
+      "id": "basico",
+      "name": "Basics",
+      "nameEs": "Básico",
+      "units": ["dp.linear", "dp.coin-change", "dp.knapsack-01", "dp.grid", "dp.lcs-edit", "dp.lis"]
+    }
+  ]
+}

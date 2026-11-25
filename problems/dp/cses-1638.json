@@ -105,12 +105,20 @@
   ],
   "deprecated": false,
   "es": {
+    "summary": "Considera una grilla de $n \\times n$ cuyas casillas pueden tener trampas. No se permite moverse a una casilla con una trampa.\n\nTu tarea es calcular la cantidad de caminos desde la casilla superior izquierda hasta la casilla inferior derecha. Solo puedes moverte a la derecha o hacia abajo.\n\nEntrada\n\nLa primera línea de la entrada tiene un entero $n$: el tamaño de la grilla.\n\nDespués hay $n$ líneas que describen la grilla. Cada línea tiene $n$ caracteres: . indica una celda vacía, y * indica una trampa.\n\nSalida\n\nImprime la cantidad de caminos módulo $10^9+7$.",
     "explanation": "Los caminos a una celda vienen de la celda de arriba o de la de la izquierda; las celdas con trampa valen 0.",
     "traps": [
       "Si la celda de inicio es una trampa, la respuesta es 0."
     ],
     "layers": {
       "dp-state": {
+        "prompt": "¿Qué debería representar el estado de la DP?",
+        "options": {
+          "a": "dp[i][j] = cantidad de caminos de (1,1) a (i,j) que evitan las trampas",
+          "b": "dp[i][j] = distancia más corta de (1,1) a (i,j)",
+          "c": "dp[k] = cantidad de caminos de largo k",
+          "d": "dp[i] = cantidad de caminos que llegan a la fila i"
+        },
         "explanation": "Cada celda es un subproblema: ¿de cuántas formas se puede llegar acá?",
         "why": {
           "b": "Todos los caminos de derecha/abajo tienen el mismo largo; necesitas una cantidad.",
@@ -119,6 +127,13 @@
         }
       },
       "dp-transition": {
+        "prompt": "Con ese estado, ¿qué transición es correcta?",
+        "options": {
+          "a": "dp[i][j] = dp[i−1][j] + dp[i][j−1] (0 en las trampas)",
+          "b": "dp[i][j] = max(dp[i−1][j], dp[i][j−1]) + 1",
+          "c": "dp[i][j] = C(i + j − 2, i − 1)",
+          "d": "dp[i][j] = dp[i−1][j−1] + 1"
+        },
         "explanation": "El último movimiento hacia (i,j) fue hacia abajo desde arriba o hacia la derecha desde la izquierda.",
         "why": {
           "b": "Eso maximiza el largo; necesitas una cantidad.",

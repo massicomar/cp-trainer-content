@@ -1,0 +1,530 @@
+{
+  "$schema": "../../schema/unit.schema.json",
+  "schemaVersion": 1,
+  "id": "dp.lis",
+  "techniques": [
+    "dp.lis"
+  ],
+  "status": "draft",
+  "author": "massicomar",
+  "notes": "The tails method isn't a dp-1d recurrence, so its diagram is hand-written frames. The apply problem (n ≤ 2e5) needs tails, so the lesson teaches both methods. The nesting question (sort by one dimension, ties descending, LIS on the other) comes from the TTPS 2026 cheatsheet.",
+  "cards": [
+    {
+      "type": "idea",
+      "key": "idea",
+      "md": "**Longest increasing subsequence (LIS):** the longest subsequence (elements kept in order, gaps allowed) whose values strictly increase.\n\nThe direct DP: `dp[i]` = the length of the longest increasing subsequence that **ends at i**.\n\n`dp[i] = 1 + max(dp[j])` over the j < i with a_j < a_i, or 1 if there's none.\n\nThe answer is the largest dp[i], not dp[n]: the best subsequence can end anywhere. Each i scans every j before it: O(n²), fine up to n ≈ 5000.",
+      "es": "**Subsecuencia creciente más larga (LIS):** la subsecuencia más larga (elementos en su orden, con huecos permitidos) cuyos valores crecen estrictamente.\n\nLa DP directa: `dp[i]` = el largo de la subsecuencia creciente más larga que **termina en i**.\n\n`dp[i] = 1 + max(dp[j])` sobre los j < i con a_j < a_i, o 1 si no hay ninguno.\n\nLa respuesta es el mayor dp[i], no dp[n]: la mejor subsecuencia puede terminar en cualquier lugar. Cada i recorre todos los j anteriores: O(n²), sirve hasta n ≈ 5000."
+    },
+    {
+      "type": "idea",
+      "key": "tails",
+      "md": "**Faster: O(n log n).** Keep `tails`, where `tails[k]` is the smallest value that can end an increasing subsequence of length k + 1. tails is always sorted, so for each x you binary-search it:\n\n- If x is bigger than every tail, **append** it: there's now a longer subsequence.\n- Otherwise **replace the first tail ≥ x** with x: same length, a smaller ending, which leaves more room for what comes later.\n\nThe length of tails is the answer. tails itself isn't always a real subsequence; only its length counts.",
+      "es": "**Más rápido: O(n log n).** Guarda `tails`, donde `tails[k]` es el menor valor con el que puede terminar una subsecuencia creciente de largo k + 1. tails siempre está ordenado, así que para cada x lo buscas con búsqueda binaria:\n\n- Si x es mayor que todas las colas, **agrégalo al final**: ahora hay una subsecuencia más larga.\n- Si no, **reemplaza la primera cola ≥ x** por x: el mismo largo con un final más pequeño, que deja más lugar para lo que viene después.\n\nEl largo de tails es la respuesta. tails en sí no siempre es una subsecuencia real; solo cuenta su largo."
+    },
+    {
+      "type": "diagram",
+      "key": "tails-steps",
+      "kind": "frames",
+      "caption": "a = 3, 1, 4, 1, 5, 9, 2, 6. tails[k] = the smallest value that ends an increasing subsequence of length k + 1.",
+      "es": {
+        "caption": "a = 3, 1, 4, 1, 5, 9, 2, 6. tails[k] = el menor valor con el que termina una subsecuencia creciente de largo k + 1."
+      },
+      "data": {
+        "rows": [
+          "a",
+          "tails"
+        ],
+        "frames": [
+          {
+            "cells": [
+              [
+                3,
+                1,
+                4,
+                1,
+                5,
+                9,
+                2,
+                6
+              ],
+              [
+                3
+              ]
+            ],
+            "mark": [
+              [
+                0,
+                0
+              ],
+              [
+                1,
+                0
+              ]
+            ],
+            "text": "3: tails is empty, so append it. tails = [3].",
+            "es": "3: tails está vacío, así que se agrega. tails = [3]."
+          },
+          {
+            "cells": [
+              [
+                3,
+                1,
+                4,
+                1,
+                5,
+                9,
+                2,
+                6
+              ],
+              [
+                1
+              ]
+            ],
+            "mark": [
+              [
+                0,
+                1
+              ],
+              [
+                1,
+                0
+              ]
+            ],
+            "text": "1: the first tail ≥ 1 is 3; replace it. A subsequence of length 1 can now end in 1.",
+            "es": "1: la primera cola ≥ 1 es 3; se reemplaza. Ahora una subsecuencia de largo 1 puede terminar en 1."
+          },
+          {
+            "cells": [
+              [
+                3,
+                1,
+                4,
+                1,
+                5,
+                9,
+                2,
+                6
+              ],
+              [
+                1,
+                4
+              ]
+            ],
+            "mark": [
+              [
+                0,
+                2
+              ],
+              [
+                1,
+                1
+              ]
+            ],
+            "text": "4: bigger than every tail, so append it. tails = [1, 4]: length 2.",
+            "es": "4: mayor que todas las colas, así que se agrega al final. tails = [1, 4]: largo 2."
+          },
+          {
+            "cells": [
+              [
+                3,
+                1,
+                4,
+                1,
+                5,
+                9,
+                2,
+                6
+              ],
+              [
+                1,
+                4
+              ]
+            ],
+            "mark": [
+              [
+                0,
+                3
+              ],
+              [
+                1,
+                0
+              ]
+            ],
+            "text": "1: the first tail ≥ 1 is the 1 itself; replacing it changes nothing.",
+            "es": "1: la primera cola ≥ 1 es el mismo 1; reemplazarlo no cambia nada."
+          },
+          {
+            "cells": [
+              [
+                3,
+                1,
+                4,
+                1,
+                5,
+                9,
+                2,
+                6
+              ],
+              [
+                1,
+                4,
+                5
+              ]
+            ],
+            "mark": [
+              [
+                0,
+                4
+              ],
+              [
+                1,
+                2
+              ]
+            ],
+            "text": "5: append. tails = [1, 4, 5].",
+            "es": "5: se agrega al final. tails = [1, 4, 5]."
+          },
+          {
+            "cells": [
+              [
+                3,
+                1,
+                4,
+                1,
+                5,
+                9,
+                2,
+                6
+              ],
+              [
+                1,
+                4,
+                5,
+                9
+              ]
+            ],
+            "mark": [
+              [
+                0,
+                5
+              ],
+              [
+                1,
+                3
+              ]
+            ],
+            "text": "9: append. tails = [1, 4, 5, 9]: length 4.",
+            "es": "9: se agrega al final. tails = [1, 4, 5, 9]: largo 4."
+          },
+          {
+            "cells": [
+              [
+                3,
+                1,
+                4,
+                1,
+                5,
+                9,
+                2,
+                6
+              ],
+              [
+                1,
+                2,
+                5,
+                9
+              ]
+            ],
+            "mark": [
+              [
+                0,
+                6
+              ],
+              [
+                1,
+                1
+              ]
+            ],
+            "text": "2: the first tail ≥ 2 is 4; replace it. A subsequence of length 2 can now end in 2 (1, 2).",
+            "es": "2: la primera cola ≥ 2 es 4; se reemplaza. Ahora una subsecuencia de largo 2 puede terminar en 2 (1, 2)."
+          },
+          {
+            "cells": [
+              [
+                3,
+                1,
+                4,
+                1,
+                5,
+                9,
+                2,
+                6
+              ],
+              [
+                1,
+                2,
+                5,
+                6
+              ]
+            ],
+            "mark": [
+              [
+                0,
+                7
+              ],
+              [
+                1,
+                3
+              ]
+            ],
+            "text": "6: the first tail ≥ 6 is 9; replace it. The LIS has length 4, e.g. 1, 4, 5, 6, though tails reads 1, 2, 5, 6.",
+            "es": "6: la primera cola ≥ 6 es 9; se reemplaza. La LIS tiene largo 4, por ejemplo 1, 4, 5, 6, aunque tails diga 1, 2, 5, 6."
+          }
+        ]
+      }
+    },
+    {
+      "type": "question",
+      "key": "last-cell",
+      "prompt": "a = [1, 4, 5, 2], with dp[i] = the LIS ending at i. Your code prints dp[n], the last cell. What does it print?",
+      "options": [
+        {
+          "id": "a",
+          "text": "2, but the answer is 3"
+        },
+        {
+          "id": "b",
+          "text": "3, which is right",
+          "why": "dp at the last element, the 2, is the LIS ending in 2: just 1, 2. The best one, 1, 4, 5, ends earlier."
+        },
+        {
+          "id": "c",
+          "text": "4, which is right",
+          "why": "The whole array isn't increasing: 5 > 2."
+        },
+        {
+          "id": "d",
+          "text": "1, but the answer is 3",
+          "why": "The 2 can follow the 1, so the LIS ending at the 2 has length 2."
+        }
+      ],
+      "accepted": [
+        "a"
+      ],
+      "explanation": "dp = [1, 2, 3, 2]. The answer is max(dp) = 3; dp[n] only counts subsequences that end at the last element.",
+      "es": {
+        "prompt": "a = [1, 4, 5, 2], con dp[i] = la LIS que termina en i. Tu código imprime dp[n], la última celda. ¿Qué imprime?",
+        "options": {
+          "a": "2, pero la respuesta es 3",
+          "b": "3, que es correcto",
+          "c": "4, que es correcto",
+          "d": "1, pero la respuesta es 3"
+        },
+        "why": {
+          "b": "dp en el último elemento, el 2, es la LIS que termina en 2: solo 1, 2. La mejor, 1, 4, 5, termina antes.",
+          "c": "El arreglo completo no es creciente: 5 > 2.",
+          "d": "El 2 puede ir después del 1, así que la LIS que termina en el 2 tiene largo 2."
+        },
+        "explanation": "dp = [1, 2, 3, 2]. La respuesta es max(dp) = 3; dp[n] solo cuenta las subsecuencias que terminan en el último elemento."
+      }
+    },
+    {
+      "type": "question",
+      "key": "trace-tails",
+      "prompt": "Run tails on a = [4, 10, 4, 3, 8, 9]. What is tails at the end?",
+      "options": [
+        {
+          "id": "a",
+          "text": "[3, 8, 9]"
+        },
+        {
+          "id": "b",
+          "text": "[4, 8, 9]",
+          "why": "The 3 replaces the 4: it's the first tail ≥ 3."
+        },
+        {
+          "id": "c",
+          "text": "[3, 4, 8, 9]",
+          "why": "The second 4 doesn't add a tail: it replaces the first tail ≥ 4, which is the old 4."
+        },
+        {
+          "id": "d",
+          "text": "[4, 10, 8, 9]",
+          "why": "tails stays sorted: 8 replaces 10 instead of being appended."
+        }
+      ],
+      "accepted": [
+        "a"
+      ],
+      "explanation": "4 → [4]; 10 → [4, 10]; 4 → [4, 10]; 3 → [3, 10]; 8 → [3, 8]; 9 → [3, 8, 9]. The LIS has length 3, e.g. 4, 8, 9.",
+      "es": {
+        "prompt": "Aplica tails a a = [4, 10, 4, 3, 8, 9]. ¿Cómo queda tails al final?",
+        "why": {
+          "b": "El 3 reemplaza al 4: es la primera cola ≥ 3.",
+          "c": "El segundo 4 no agrega una cola: reemplaza la primera cola ≥ 4, que es el 4 anterior.",
+          "d": "tails siempre está ordenado: el 8 reemplaza al 10 en lugar de agregarse al final."
+        },
+        "explanation": "4 → [4]; 10 → [4, 10]; 4 → [4, 10]; 3 → [3, 10]; 8 → [3, 8]; 9 → [3, 8, 9]. La LIS tiene largo 3, por ejemplo 4, 8, 9."
+      }
+    },
+    {
+      "type": "question",
+      "key": "non-decreasing",
+      "prompt": "Now equal values may repeat: the longest **non-decreasing** subsequence (for a = [2, 2, 2] it's 3). What changes in tails?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Search for the first tail > x (upper_bound)"
+        },
+        {
+          "id": "b",
+          "text": "Search for the first tail ≥ x (lower_bound)",
+          "why": "That's the strict search, so nothing changes: each new 2 replaces the 2 already there, and the length stays 1."
+        },
+        {
+          "id": "c",
+          "text": "Also append x when it equals the last tail",
+          "why": "Equal values in the middle still get lost: in a = [2, 5, 2, 3] the second 2 only replaces the first, and tails ends [2, 3], but 2, 2, 3 has length 3."
+        },
+        {
+          "id": "d",
+          "text": "tails can't do it; use the O(n²) dp",
+          "why": "tails handles both; only the search changes."
+        }
+      ],
+      "accepted": [
+        "a"
+      ],
+      "explanation": "An x equal to a tail can now extend it, so it goes after the tails equal to it: search for the first tail > x (upper_bound). For strictly increasing, it's the first tail ≥ x (lower_bound).",
+      "es": {
+        "prompt": "Ahora los valores iguales pueden repetirse: la subsecuencia **no decreciente** más larga (para a = [2, 2, 2] es 3). ¿Qué cambia en tails?",
+        "options": {
+          "a": "Buscar la primera cola > x (upper_bound)",
+          "b": "Buscar la primera cola ≥ x (lower_bound)",
+          "c": "Agregar x también cuando es igual a la última cola",
+          "d": "tails no sirve; hay que usar la dp O(n²)"
+        },
+        "why": {
+          "b": "Esa es la búsqueda estricta, así que no cambia nada: cada 2 nuevo reemplaza al 2 que ya estaba, y el largo queda en 1.",
+          "c": "Los valores iguales en el medio se siguen perdiendo: en a = [2, 5, 2, 3] el segundo 2 solo reemplaza al primero y tails termina en [2, 3], pero 2, 2, 3 tiene largo 3.",
+          "d": "tails sirve para los dos casos; solo cambia la búsqueda."
+        },
+        "explanation": "Un x igual a una cola ahora puede extenderla, así que va después de las colas iguales a él: se busca la primera cola > x (upper_bound). Para estrictamente creciente, es la primera cola ≥ x (lower_bound)."
+      }
+    },
+    {
+      "type": "question",
+      "key": "envelopes",
+      "prompt": "Envelopes (w, h): one fits inside another only if both w and h are strictly smaller. You sort by w ascending and run a strict LIS on h. How do you order envelopes with the **same w**?",
+      "options": [
+        {
+          "id": "a",
+          "text": "By h descending"
+        },
+        {
+          "id": "b",
+          "text": "By h ascending",
+          "why": "Then (3, 4) and (3, 5) look increasing in h, and the LIS would put one inside the other although they have the same width."
+        },
+        {
+          "id": "c",
+          "text": "It doesn't matter",
+          "why": "It does: with equal widths in ascending h, the LIS can chain envelopes that don't fit inside each other."
+        },
+        {
+          "id": "d",
+          "text": "Keep only the tallest envelope of each width",
+          "why": "A shorter one of that width may be the one that fits the chain; with h descending, the LIS already takes at most one per width."
+        }
+      ],
+      "accepted": [
+        "a"
+      ],
+      "explanation": "Within one width h goes down, so an increasing run in h takes at most one envelope per width: both w and h strictly grow along it. The same idea nests boxes or Russian dolls.",
+      "es": {
+        "prompt": "Sobres (w, h): uno entra en otro solo si w y h son los dos estrictamente menores. Ordenas por w ascendente y haces una LIS estricta sobre h. ¿Cómo ordenas los sobres con el **mismo w**?",
+        "options": {
+          "a": "Por h descendente",
+          "b": "Por h ascendente",
+          "c": "No importa",
+          "d": "Quedarte solo con el sobre más alto de cada ancho"
+        },
+        "why": {
+          "b": "Entonces (3, 4) y (3, 5) se ven crecientes en h, y la LIS metería uno dentro del otro aunque tienen el mismo ancho.",
+          "c": "Sí importa: con anchos iguales en h ascendente, la LIS puede encadenar sobres que no entran uno en otro.",
+          "d": "Uno más bajo de ese ancho puede ser el que encaja en la cadena; con h descendente, la LIS ya toma a lo sumo uno por ancho."
+        },
+        "explanation": "Dentro de un mismo ancho h baja, así que una racha creciente en h toma a lo sumo un sobre por ancho: w y h crecen estrictamente a lo largo de ella. La misma idea sirve para anidar cajas o muñecas rusas."
+      }
+    },
+    {
+      "type": "drill",
+      "key": "drill",
+      "algorithm": "dp:lis-binary-search"
+    },
+    {
+      "type": "signals",
+      "key": "signals",
+      "md": "Think **LIS** when:\n\n- There's **one sequence**, and you keep a subsequence **in its order** that must **increase** (or never decrease): heights, dates, the numbers on arriving trains.\n- It asks for the fewest elements to **remove** so the rest is sorted: that's n − LIS.\n- Things that **nest** (boxes, envelopes, Russian dolls): sort by one dimension, then LIS on the other.\n- n ≤ 5000: the O(n²) dp is fine. n around 2·10⁵: you need tails with binary search.\n- Read the comparison: strictly increasing → first tail ≥ x; non-decreasing → first tail > x.",
+      "es": "Piensa en **LIS** cuando:\n\n- Hay **una sola secuencia** y te quedas con una subsecuencia **en su orden** que tiene que **crecer** (o no decrecer nunca): alturas, fechas, los números de los trenes que llegan.\n- Se pide la menor cantidad de elementos a **quitar** para que el resto quede ordenado: eso es n − LIS.\n- Cosas que se **anidan** (cajas, sobres, muñecas rusas): ordena por una dimensión y haz LIS sobre la otra.\n- n ≤ 5000: la dp O(n²) sirve. n cerca de 2·10⁵: necesitas tails con búsqueda binaria.\n- Fíjate en la comparación: estrictamente creciente → primera cola ≥ x; no decreciente → primera cola > x."
+    },
+    {
+      "type": "question",
+      "key": "signals-pick",
+      "prompt": "Which of these is LIS?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Trains arrive in a fixed order, each with a number. Keep the most trains, in order, with numbers going up."
+        },
+        {
+          "id": "b",
+          "text": "Two timetables list trains in order: the longest sequence of trains that appears in both.",
+          "why": "Two sequences: that's LCS, the previous station."
+        },
+        {
+          "id": "c",
+          "text": "Trains arrive in a fixed order, each with a number. The longest run of back-to-back trains with numbers going up.",
+          "why": "Back to back means contiguous: one pass counting the current run is enough."
+        },
+        {
+          "id": "d",
+          "text": "Sort the trains by number, swapping only neighbouring trains, with the fewest swaps.",
+          "why": "That's counting inversions, with merge sort or a Fenwick tree."
+        }
+      ],
+      "accepted": [
+        "a"
+      ],
+      "explanation": "Keep a subsequence in its order with increasing numbers, as long as possible: that's the LIS.",
+      "es": {
+        "prompt": "¿Cuál de estos es LIS?",
+        "options": {
+          "a": "Unos trenes llegan en un orden fijo, cada uno con un número. Quédate con la mayor cantidad, en su orden, con números que suben.",
+          "b": "Dos horarios listan trenes en orden: la secuencia de trenes más larga que aparece en los dos.",
+          "c": "Unos trenes llegan en un orden fijo, cada uno con un número. La racha más larga de trenes seguidos con números que suben.",
+          "d": "Ordenar los trenes por número, intercambiando solo trenes vecinos, con la menor cantidad de intercambios."
+        },
+        "why": {
+          "b": "Dos secuencias: eso es LCS, la estación anterior.",
+          "c": "Seguidos quiere decir contiguos: basta con una pasada contando la racha actual.",
+          "d": "Eso es contar inversiones, con merge sort o un Fenwick tree."
+        },
+        "explanation": "Quedarte con una subsecuencia en su orden con números crecientes, lo más larga posible: eso es la LIS."
+      }
+    },
+    {
+      "type": "apply",
+      "key": "apply",
+      "problems": [
+        "cses-1145"
+      ]
+    },
+    {
+      "type": "recap",
+      "key": "recap",
+      "md": "- dp[i] = the LIS ending at i = 1 + max dp[j] over earlier, smaller a_j. Answer = the max over all i. O(n²).\n- tails + binary search: replace the first tail ≥ x, or append. O(n log n). Non-decreasing: the first tail > x.\n- \"Fewest removals to leave it sorted\" = n − LIS. Nesting in 2D: sort by w (ties by h descending), then LIS on h.",
+      "es": "- dp[i] = la LIS que termina en i = 1 + max dp[j] sobre los a_j anteriores y menores. Respuesta = el máximo sobre todos los i. O(n²).\n- tails + búsqueda binaria: reemplaza la primera cola ≥ x, o agrega al final. O(n log n). No decreciente: la primera cola > x.\n- \"La menor cantidad de elementos a quitar para que quede ordenado\" = n − LIS. Anidar en 2D: ordena por w (empates por h descendente) y haz LIS sobre h."
+    }
+  ]
+}

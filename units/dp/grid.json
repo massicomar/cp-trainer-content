@@ -1,0 +1,276 @@
+{
+  "$schema": "../../schema/unit.schema.json",
+  "schemaVersion": 1,
+  "id": "dp.grid",
+  "techniques": [
+    "dp.grid"
+  ],
+  "status": "draft",
+  "author": "massicomar",
+  "notes": "The diagram's grid is our own, not Grid Paths' sample. The BFS contrast is the dp.grid ⇄ graphs.bfs interchange. Only one grid problem in the bank for the apply step. Aligned with the TTPS 2026 cheatsheet: \"four directions is no longer a DAG → BFS / Dijkstra\", and C(R+C−2, R−1) paths without obstacles.",
+  "cards": [
+    {
+      "type": "idea",
+      "key": "idea",
+      "md": "**Grid DP:** the state is a cell, `dp[i][j]`, and the moves only go one way (usually right and down), so you never come back to a cell. Every path into a cell then arrives from a cell that's already done:\n\n- **Number of paths:** `dp[i][j] = dp[i−1][j] + dp[i][j−1]` (from above + from the left).\n- **Cheapest path:** `dp[i][j] = cost[i][j] + min(dp[i−1][j], dp[i][j−1])`.\n\nBlocked cells hold 0 paths (or ∞ cost). Fill **row by row, left to right**, so the cell above and the cell to the left are ready. n·m cells, O(1) each: O(n·m).",
+      "es": "**DP en grilla:** el estado es una celda, `dp[i][j]`, y los movimientos van en un solo sentido (casi siempre a la derecha y hacia abajo), así que nunca vuelves a una celda. Entonces todo camino que entra a una celda viene de una celda ya calculada:\n\n- **Cantidad de caminos:** `dp[i][j] = dp[i−1][j] + dp[i][j−1]` (desde arriba + desde la izquierda).\n- **Camino más barato:** `dp[i][j] = costo[i][j] + min(dp[i−1][j], dp[i][j−1])`.\n\nLas celdas bloqueadas tienen 0 caminos (o costo ∞). Llena **fila por fila, de izquierda a derecha**, para que la celda de arriba y la de la izquierda estén listas. n·m celdas, O(1) cada una: O(n·m)."
+    },
+    {
+      "type": "diagram",
+      "key": "paths",
+      "kind": "dp-2d",
+      "data": {
+        "recurrence": "paths",
+        "grid": [
+          ".....",
+          "..*..",
+          ".*...",
+          "...*.",
+          "....."
+        ]
+      },
+      "caption": "Paths from the top-left corner moving right or down; * cells are blocked. Each cell adds the one above it and the one to its left.",
+      "es": {
+        "caption": "Caminos desde la esquina superior izquierda moviéndose a la derecha o hacia abajo; las celdas * están bloqueadas. Cada celda suma la de arriba y la de su izquierda."
+      }
+    },
+    {
+      "type": "idea",
+      "key": "not-a-graph",
+      "md": "**Why not BFS?** Grid DP works because the moves never come back: the cells form a **DAG** (no cycles), so one pass in the right order settles every cell. If you can move in **all four directions**, a cell can be reached from cells that come after it, and no fill order works. Then the grid is a graph: BFS for the fewest steps, Dijkstra if cells have costs.",
+      "es": "**¿Por qué no BFS?** La DP en grilla funciona porque los movimientos nunca vuelven: las celdas forman un **DAG** (sin ciclos), así que una pasada en el orden correcto resuelve cada celda. Si puedes moverte en **las cuatro direcciones**, a una celda se puede llegar desde celdas que vienen después, y ningún orden de llenado funciona. Entonces la grilla es un grafo: BFS para la menor cantidad de pasos, Dijkstra si las celdas tienen costo."
+    },
+    {
+      "type": "question",
+      "key": "trace-paths",
+      "prompt": "Count the right/down paths from the top-left to the bottom-right corner (`*` is blocked):\n\n```\n...\n.*.\n...\n```",
+      "options": [
+        {
+          "id": "a",
+          "text": "2"
+        },
+        {
+          "id": "b",
+          "text": "6",
+          "why": "6 = C(4, 2) is the count without the blocked cell; the 4 paths through the center are lost."
+        },
+        {
+          "id": "c",
+          "text": "4",
+          "why": "4 is how many paths would go through the center; the answer is the other 2."
+        },
+        {
+          "id": "d",
+          "text": "3",
+          "why": "Fill it: the middle row is 1, 0, 1 and the last row is 1, 1, 2."
+        }
+      ],
+      "accepted": [
+        "a"
+      ],
+      "explanation": "Table: 1 1 1 / 1 0 1 / 1 1 2. Only the paths along the border survive: all the way right then down, or all the way down then right.",
+      "es": {
+        "prompt": "Cuenta los caminos de derecha/abajo desde la esquina superior izquierda hasta la inferior derecha (`*` está bloqueada):\n\n```\n...\n.*.\n...\n```",
+        "why": {
+          "b": "6 = C(4, 2) es la cuenta sin la celda bloqueada; se pierden los 4 caminos que pasan por el centro.",
+          "c": "4 es cuántos caminos pasarían por el centro; la respuesta son los otros 2.",
+          "d": "Llena la tabla: la fila del medio es 1, 0, 1 y la última es 1, 1, 2."
+        },
+        "explanation": "Tabla: 1 1 1 / 1 0 1 / 1 1 2. Solo sobreviven los caminos por el borde: todo a la derecha y después abajo, o todo abajo y después a la derecha."
+      }
+    },
+    {
+      "type": "question",
+      "key": "fill-order",
+      "prompt": "You start at the **top-right** corner and may move **down or left**. In which order can you fill `dp[i][j]` = the number of paths from the start to (i, j)?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Rows from top to bottom, each row from right to left"
+        },
+        {
+          "id": "b",
+          "text": "Rows from top to bottom, each row from left to right",
+          "why": "A path into (i, j) can come from (i, j+1), on its right, which isn't filled yet in that row."
+        },
+        {
+          "id": "c",
+          "text": "Rows from bottom to top, each row from right to left",
+          "why": "Paths come from the row above, which isn't ready if you start at the bottom."
+        },
+        {
+          "id": "d",
+          "text": "Any order: each cell is computed once",
+          "why": "Each cell is computed once, but it's only right if its sources are done first."
+        }
+      ],
+      "accepted": [
+        "a"
+      ],
+      "explanation": "A path into (i, j) arrives from above (a down move) or from its right (a left move). So fill top to bottom, and each row right to left.",
+      "es": {
+        "prompt": "Empiezas en la esquina **superior derecha** y puedes moverte **hacia abajo o a la izquierda**. ¿En qué orden puedes llenar `dp[i][j]` = la cantidad de caminos desde el inicio hasta (i, j)?",
+        "options": {
+          "a": "Filas de arriba hacia abajo, cada fila de derecha a izquierda",
+          "b": "Filas de arriba hacia abajo, cada fila de izquierda a derecha",
+          "c": "Filas de abajo hacia arriba, cada fila de derecha a izquierda",
+          "d": "Cualquier orden: cada celda se calcula una vez"
+        },
+        "why": {
+          "b": "Un camino hacia (i, j) puede venir de (i, j+1), a su derecha, que todavía no se llenó en esa fila.",
+          "c": "Los caminos vienen de la fila de arriba, que no está lista si empiezas por abajo.",
+          "d": "Cada celda se calcula una vez, pero solo queda bien si sus orígenes ya están calculados."
+        },
+        "explanation": "Un camino hacia (i, j) llega desde arriba (un movimiento hacia abajo) o desde su derecha (un movimiento a la izquierda). Así que llena de arriba hacia abajo, y cada fila de derecha a izquierda."
+      }
+    },
+    {
+      "type": "question",
+      "key": "cheapest-path",
+      "prompt": "Cheapest path from the top-left to the bottom-right, moving right or down and paying every cell you enter, the first and last included:\n\n```\n1 3 1\n1 5 1\n4 2 1\n```",
+      "options": [
+        {
+          "id": "a",
+          "text": "7"
+        },
+        {
+          "id": "b",
+          "text": "9",
+          "why": "That's going down first: 1 + 1 + 4 + 2 + 1. Along the top row and then down costs 1 + 3 + 1 + 1 + 1 = 7."
+        },
+        {
+          "id": "c",
+          "text": "6",
+          "why": "6 is the cell above the corner; you still pay the corner's 1."
+        },
+        {
+          "id": "d",
+          "text": "5",
+          "why": "Every path enters 5 cells, but they don't all cost 1: the cheapest adds up to 7."
+        }
+      ],
+      "accepted": [
+        "a"
+      ],
+      "explanation": "dp[i][j] = cost[i][j] + min(above, left) gives 1 4 5 / 2 7 6 / 6 8 7.",
+      "es": {
+        "prompt": "Camino más barato desde la esquina superior izquierda hasta la inferior derecha, moviéndote a la derecha o hacia abajo y pagando cada celda en la que entras, incluidas la primera y la última:\n\n```\n1 3 1\n1 5 1\n4 2 1\n```",
+        "why": {
+          "b": "Eso es bajar primero: 1 + 1 + 4 + 2 + 1. Por la fila de arriba y después hacia abajo cuesta 1 + 3 + 1 + 1 + 1 = 7.",
+          "c": "6 es la celda de arriba de la esquina; todavía pagas el 1 de la esquina.",
+          "d": "Todo camino entra en 5 celdas, pero no todas cuestan 1: el más barato suma 7."
+        },
+        "explanation": "dp[i][j] = costo[i][j] + min(arriba, izquierda) da 1 4 5 / 2 7 6 / 6 8 7."
+      }
+    },
+    {
+      "type": "question",
+      "key": "which-moves",
+      "prompt": "Which set of moves still allows grid DP?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Right, down and down-right"
+        },
+        {
+          "id": "b",
+          "text": "Right, down and diagonally up-left",
+          "why": "Right, then down, then up-left is back where you started: a cycle, so no fill order works."
+        },
+        {
+          "id": "c",
+          "text": "Right, down and up",
+          "why": "Up undoes down: a cell can be reached from the one below it, which isn't filled yet."
+        },
+        {
+          "id": "d",
+          "text": "All four directions",
+          "why": "Up undoes down and left undoes right: cycles everywhere. That's BFS or Dijkstra."
+        }
+      ],
+      "accepted": [
+        "a"
+      ],
+      "explanation": "A diagonal step down-right still moves forward: dp[i][j] = dp[i−1][j] + dp[i][j−1] + dp[i−1][j−1], filled row by row. A set where some moves undo others makes a cycle: up undoes down, and up-left undoes a right plus a down.",
+      "es": {
+        "prompt": "¿Con qué conjunto de movimientos sigue funcionando la DP en grilla?",
+        "options": {
+          "a": "Derecha, abajo y abajo-derecha",
+          "b": "Derecha, abajo y en diagonal arriba-izquierda",
+          "c": "Derecha, abajo y arriba",
+          "d": "Las cuatro direcciones"
+        },
+        "why": {
+          "b": "Derecha, después abajo, después arriba-izquierda vuelve al punto de partida: un ciclo, así que ningún orden de llenado sirve.",
+          "c": "Arriba deshace abajo: a una celda se puede llegar desde la de abajo, que todavía no se llenó.",
+          "d": "Arriba deshace abajo e izquierda deshace derecha: ciclos por todos lados. Eso es BFS o Dijkstra."
+        },
+        "explanation": "Un paso en diagonal abajo-derecha sigue avanzando: dp[i][j] = dp[i−1][j] + dp[i][j−1] + dp[i−1][j−1], llenando fila por fila. Un conjunto en el que unos movimientos deshacen a otros forma un ciclo: arriba deshace abajo, y arriba-izquierda deshace una derecha más un abajo."
+      }
+    },
+    {
+      "type": "signals",
+      "key": "signals",
+      "md": "Think **grid DP** when:\n\n- The input is a grid (or any table of two indices) and the moves only go forward: **right and down**, or another set you can't undo.\n- It asks for the **number of paths** or the **best path** (least cost, most coins) from one corner to another.\n- Some cells are blocked: they just hold 0 paths.\n- n·m is up to about 10⁶–10⁷.\n\nIf the moves can go back (all four directions), it's a graph: BFS or Dijkstra.",
+      "es": "Piensa en **DP en grilla** cuando:\n\n- La entrada es una grilla (o cualquier tabla de dos índices) y los movimientos solo avanzan: **a la derecha y hacia abajo**, u otro conjunto que no se puede deshacer.\n- Se pide la **cantidad de caminos** o el **mejor camino** (menor costo, más monedas) de una esquina a otra.\n- Algunas celdas están bloqueadas: simplemente tienen 0 caminos.\n- n·m llega a unos 10⁶–10⁷.\n\nSi los movimientos pueden volver (las cuatro direcciones), es un grafo: BFS o Dijkstra."
+    },
+    {
+      "type": "question",
+      "key": "signals-pick",
+      "prompt": "Which of these is grid DP?",
+      "options": [
+        {
+          "id": "a",
+          "text": "A robot on an n × m board moves only right or down and picks up coins. The most it can collect?"
+        },
+        {
+          "id": "b",
+          "text": "A robot on an n × m board moves in all four directions and picks up coins. The most it can collect?",
+          "why": "Four directions let it come back, so it reaches every cell connected to the start: a DFS or BFS collects all their coins."
+        },
+        {
+          "id": "c",
+          "text": "A knight on a chessboard: the fewest moves from one square to another.",
+          "why": "A knight moves in every direction, so there are cycles: BFS over the squares."
+        },
+        {
+          "id": "d",
+          "text": "Count the islands (groups of connected land cells) on a map.",
+          "why": "Connected groups: a flood fill with DFS or BFS."
+        }
+      ],
+      "accepted": [
+        "a"
+      ],
+      "explanation": "Right or down only, best total along a path: dp[i][j] = coins[i][j] + max(above, left).",
+      "es": {
+        "prompt": "¿Cuál de estos es DP en grilla?",
+        "options": {
+          "a": "Un robot en un tablero de n × m se mueve solo a la derecha o hacia abajo y recoge monedas. ¿Cuántas junta como máximo?",
+          "b": "Un robot en un tablero de n × m se mueve en cualquiera de las cuatro direcciones y recoge monedas. ¿Cuántas junta como máximo?",
+          "c": "Un caballo en un tablero de ajedrez: la menor cantidad de movimientos de una casilla a otra.",
+          "d": "Contar las islas (grupos de celdas de tierra conectadas) de un mapa."
+        },
+        "why": {
+          "b": "Con cuatro direcciones puede volver, así que llega a todas las celdas conectadas con el inicio: un DFS o BFS junta todas sus monedas.",
+          "c": "El caballo se mueve en todas direcciones, así que hay ciclos: BFS sobre las casillas.",
+          "d": "Grupos conectados: un flood fill con DFS o BFS."
+        },
+        "explanation": "Solo derecha o abajo, el mejor total a lo largo de un camino: dp[i][j] = monedas[i][j] + max(arriba, izquierda)."
+      }
+    },
+    {
+      "type": "apply",
+      "key": "apply",
+      "problems": [
+        "cses-1638"
+      ]
+    },
+    {
+      "type": "recap",
+      "key": "recap",
+      "md": "- dp[i][j] for a cell. Moves that never come back (right / down) give a fill order: row by row.\n- Paths: above + left, blocked = 0. Cheapest: cost + min(above, left). O(n·m).\n- Moves that can go back make cycles: it's a graph, so BFS or Dijkstra.",
+      "es": "- dp[i][j] por celda. Los movimientos que nunca vuelven (derecha / abajo) dan un orden de llenado: fila por fila.\n- Caminos: arriba + izquierda, bloqueada = 0. Más barato: costo + min(arriba, izquierda). O(n·m).\n- Los movimientos que pueden volver forman ciclos: es un grafo, así que BFS o Dijkstra."
+    }
+  ]
+}
